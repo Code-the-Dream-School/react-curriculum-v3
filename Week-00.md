@@ -1,7 +1,7 @@
 ---
 title: Week-00
 filedUnder: unsorted
-dateModified: 2024-09-04
+dateModified: 2024-09-05
 dateCreated: 2024-08-27
 tags: [react]
 context: [ctd, freelance, personal, work]
@@ -57,7 +57,7 @@ One of the main requirements[^2] for graduation is that all weekly assignments m
 
 The materials for the course is further broken down into a full list of topics covered each week. Every section is titled with their topics so that they double as useful search terms when looking for external resources.
 
-> [!drafting note]
+> [!drafting note] #drafting-note
 > shared resource needs inlined when published
 
 ![[Code The Dream/Intro to React V3/Curriculum/Shared/Curriculum Outline|Curriculum Outline]]
