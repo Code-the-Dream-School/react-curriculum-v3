@@ -1,6 +1,6 @@
 ---
 title: Week-08
-dateModified: 2024-09-03
+dateModified: 2024-09-10
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -32,11 +32,20 @@ By the end of this lesson, we will:
 
 ## Discussion Topics
 
-### Topic 1
+### Sorting
 
-### Topic 2
+- array.sort
+- sorting on single property: `price` OR `popularity` with `<option>`
+- sort on 2 properties: `price`, `name`
 
-### Topic n
+### Filtering
+
+- array.filter
+- filter on single property: `availability` with `<checkbox>`
+- filter on multiple properties
+	- `availability` with `<checkbox>`
+
+Often times, a remote system will have many more entries than can be displayed comfortably on a single page. Sending everything on a request can take take a while or may even be impossible (think Google search results counts). Next week we will deal with sorting or searching of remote data with fetch requests.
 
 ## Weekly Assignment Instructions
 

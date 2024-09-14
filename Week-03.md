@@ -1,6 +1,6 @@
 ---
 title: Week-03
-dateModified: 2024-09-04
+dateModified: 2024-09-05
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -40,14 +40,53 @@ By the end of this lesson, we will:
 
 ## Discussion Topics
 
-> [!drafting note]
-> left off here 2024-09-04
-
 ### Props
+
+- importance of data to render content in the user interface
+- props is a tool to communicate with child components
+	- object containing key-value pairs that can be referenced in the component
+	- values can be anything, including callback functions covered in Week 4
+- passing values using JSX
+- `children`
+- reading values in component that takes props
+	- destructuring
+- setting default values
+- passing props to descendents
 
 ### Common Component Props
 
+- html attributes
+	- reserved names
+		- className vs class
+		- htmlFor vs for
+	- style
+		- takes an object of property:value pairs
+		- properties are camelCase except data-* and aria-*
+		- more in Week 10
+	- hidden
+	- title
+- common elements
+	- form, option, input, textarea, select - Week 5
+- `children`
+- ref
+- event handlers
+	- frequently used: keyboard, mouse,
+	- take callback functions
+	- more on Week 4
+
 ### State
+
+- bring back to importance of data to render opened in Props Topic
+	- got to have a way to save + work with it
+- revisit declarative programming
+- discuss immutable data
+- useState
+	- define useState
+	- declare with initial state value
+	- declare with an initializer function (callback that returns some initial state)
+	- returns array containing a state variable and a state setter function
+	- destructuring naming convention
+	- more in Week 4
 
 ## Weekly Assignment Instructions
 
@@ -94,3 +133,4 @@ After completing this week's assignment, the app should be able to:
 - [Managing State (React docs)](https://react.dev/learn/managing-state)
 - [Preserving and Resetting State (React docs)](https://react.dev/learn/preserving-and-resetting-state)
 - [useState (React docs)](https://react.dev/reference/react/useState)
+- [State as a Snapshot (React docs)](https://react.dev/learn/state-as-a-snapshot)

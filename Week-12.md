@@ -1,6 +1,6 @@
 ---
 title: Week-12
-dateModified: 2024-09-04
+dateModified: 2024-09-13
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -41,11 +41,113 @@ By the end of this lesson, we will:
 
 ## Discussion Topics
 
-### Topic 1
+### Pagination
 
-### Topic 2
+- pagination breaks lists of data up (array of objects of the same structure) into digestible chunks
+	- Google search results
+	- book pages (yeah??)
+	- social media feeds
+	- forum conversations
+	- lists of products for sale
+	- infinite scroll feeds - Pinterest, X, Tumblr, YouTube
+		- these have some other mechanisms in place to optimize for memory and network requests but we're not going to focus on that - complex and different ways to approach it
+- setup
+	- create pagination component
+		- simple forward, backward buttons, may add page count later
+		- props currentPageData
+	- listeners on buttons
+	- handler functions wired to listeners
+		- nextPage
+		- backPage
+	- useReducer
+	- count of objects to display at a time - configuration
+	- state variable holding:
+		- value of current pagination depth - counter
+		- current subset of displayed objects
+		- initial state {items: [], currentPage: 0)}
+	- reducer function that returns the subset of the full list
+		- takes count, current pagination depth
+		- calculates start + stop values
+		- returns appropriate subset base on action received
+			- increment +
+				- disable for end of list
+			- decrement -
+				- disable for beginning of list
+			- default
+				- error handling escape hatch
+	- add useReducer's dispatch to handler functions
+		- create action objects in handler functions
+		- dispatch action
 
-### Topic n
+### Routing
+
+- SPAs
+	- don't have page history but can behave similar to traditional website
+		- pages doesn't reload like a traditional website when we navigate
+		- fetch happens in the background + React re-renders interface
+	- can have full screens which users navigate
+		- think of all the aspects of a social media website
+			- we'll look at Facebook since they developed and maintain React
+				- news feed
+				- marketplace
+				- settings and privacy
+		- tends to feel like a traditional website
+			- would be better for users if they can continue to use familiar tools like back and forward buttons
+- starting to work with data that spans "pages"
+- browser session history
+	- keeps track of pages visited in a browser window
+	- allows us to navigate back and forward quickly
+	- each tab or window opened has its own session history
+- can emulate some of this with the browser's History API
+	- properties:
+		- **length**: number of elements in session history
+		- **scrollRestoration**: auto | manual - allows web apps to explicitly set scroll restoration
+		- **state**: null until pushState or replaceState are used - can contain anything that can be serialized
+		- NOTE: for security reasons, the API does not give us access to urls
+			- This would allow a site to see where all we have been previous to that site. Major privacy concern!
+	- methods:
+		- **back**: navigates back 1 page
+		- **forward**: navigates forward 1 page
+		- **go**: takes a number and navigates to a page in history relative to current one open
+		- **pushState**: adds an entry to the session history stack
+			- takes
+				- **state object**
+					- mandatory
+					- anything serializable
+				- **unused**
+					- parameter is not used but still need it
+					- programmers sometimes make mistakes that are hard to get out of software!!
+					- pass it an empty string
+				- **url**
+					- optional
+					- url for new history entry
+						- relative urls resolved relative to the current url
+						- absolute urls must be of same origin as current URL
+					- if unspecified, automatically set to current URL
+		- **replaceState**: replaces current history entry
+			- takes state object, unused, and url - same as defined in pushState
+- complex problem, especially to take full advantage of state object
+
+### react-router
+
+> [!drafting note] #drafting-note
+> 2024-09-13 left off here
+
+- 3rd party tool that emulates page navigation in SPAs
+- makes use of the History API and history.state
+- developer can configure lists of routes that mount feature components and include certain state
+	- routes can include sub-routes that point to sub-resources
+	- Routes component with nested Route components
+	- sub-routes defined as Route components that are children to a Route component
+	- Each Route component is an
+	- useRoutes hook does same thing but we will stick with the component approach - easier to read
+- link components the library provide can point to these routes to navigate around the app
+	- emulates page navigation
+		- change url in bar
+		- mounts feature component
+		- allows use of browser forward + backward buttons for navigation
+- during page load or when history stack changes react-router will compare url against list of routes
+	- best match will be loaded
 
 ## Weekly Assignment Instructions
 
@@ -90,3 +192,4 @@ After completing this week's assignment, the app should be able to:
 
 - [React Router Feature Overview (react-router docs)](https://reactrouter.com/en/main/start/overview)
 - [A Complete Guide to React Router: Everything You Need to Know (ui.dev)](https://ui.dev/react-router-tutorial)
+- [react-router implementation Examples (GitHub)](https://github.com/remix-run/react-router/tree/dev/examples)
