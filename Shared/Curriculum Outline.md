@@ -1,6 +1,6 @@
 ---
 title: Curriculum Outline
-dateModified: 2024-09-03
+dateModified: 2024-09-11
 dateCreated: 2024-08-16
 ---
 
@@ -14,7 +14,7 @@ dateCreated: 2024-08-16
 - **Week 6** - Re-usable Components, Refactoring, Project Organization, and Testing
 - **Week 7** - Data fetching, Conditional Rendering, UI Update Strategies
 - **Week 8** - Sorting, Filtering
-- **Week 9** - useCallback, useMemo, Data Caching, and Refetching
+- **Week 9** - useCallback, useMemo, Limiting Network Requests, and Refetching
 - **Week 10** - Styling and Including Graphical Elements
 - **Week 11** - Advanced State and useReducer, useContext
 - **Week 12** - react-router, Routing, and Pagination
