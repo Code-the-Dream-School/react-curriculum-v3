@@ -1,6 +1,6 @@
 ---
 title: Curriculum Outline
-dateModified: 2024-09-11
+dateModified: 2024-09-18
 dateCreated: 2024-08-16
 ---
 
@@ -17,7 +17,7 @@ dateCreated: 2024-08-16
 - **Week 9** - useCallback, useMemo, Limiting Network Requests, and Refetching
 - **Week 10** - Styling and Including Graphical Elements
 - **Week 11** - Advanced State and useReducer, useContext
-- **Week 12** - react-router, Routing, and Pagination
+- **Week 12** - React Router, Routing, and Pagination
 - **Week 13** - Deploying an App and a Snapshot of the React Ecosystem (frameworks, libraries, TS)
 - **Week 14** - Final Project Begin - Requirements, Planning, and Getting Started
 - **Week 15** - Final Project - Continued Work
