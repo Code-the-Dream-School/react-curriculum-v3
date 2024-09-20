@@ -1,6 +1,6 @@
 ---
 title: Week-12
-dateModified: 2024-09-13
+dateModified: 2024-09-18
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -17,7 +17,7 @@ content: lesson plan
 
 - Pagination
 - Routing
-- react-router
+- React Router
 
 ### Lesson Objectives
 
@@ -128,26 +128,23 @@ By the end of this lesson, we will:
 			- takes state object, unused, and url - same as defined in pushState
 - complex problem, especially to take full advantage of state object
 
-### react-router
-
-> [!drafting note] #drafting-note
-> 2024-09-13 left off here
+### React Router
 
 - 3rd party tool that emulates page navigation in SPAs
 - makes use of the History API and history.state
-- developer can configure lists of routes that mount feature components and include certain state
-	- routes can include sub-routes that point to sub-resources
-	- Routes component with nested Route components
-	- sub-routes defined as Route components that are children to a Route component
-	- Each Route component is an
-	- useRoutes hook does same thing but we will stick with the component approach - easier to read
-- link components the library provide can point to these routes to navigate around the app
-	- emulates page navigation
-		- change url in bar
-		- mounts feature component
-		- allows use of browser forward + backward buttons for navigation
-- during page load or when history stack changes react-router will compare url against list of routes
-	- best match will be loaded
+- take some time to familiarize yourself with [React Router Terminology](https://reactrouter.com/en/main/start/concepts#definitions)
+- a lot to learn about this library but we are going to focus on:
+	- matching
+		- defining routes using component trees
+		- dynamic segments
+		- ranking routes and making matches
+	- rendering
+		- outlets
+		- index route
+		- grouping routes with a layout route
+	- navigating
+		- user directed navigation
+		- programmatic navigation
 
 ## Weekly Assignment Instructions
 
@@ -190,6 +187,7 @@ After completing this week's assignment, the app should be able to:
 
 ### react-router
 
+- [React Router Terminology (React Router docs)](https://reactrouter.com/en/main/start/concepts#definitions)
 - [React Router Feature Overview (react-router docs)](https://reactrouter.com/en/main/start/overview)
 - [A Complete Guide to React Router: Everything You Need to Know (ui.dev)](https://ui.dev/react-router-tutorial)
 - [react-router implementation Examples (GitHub)](https://github.com/remix-run/react-router/tree/dev/examples)
