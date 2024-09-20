@@ -1,6 +1,6 @@
 ---
 title: Week-06
-dateModified: 2024-09-10
+dateModified: 2024-09-15
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -89,7 +89,7 @@ By the end of this lesson, we will:
 	- features tend to be splittable into smaller, sub-blocks
 		- headers and footers are common across web pages
 		- single main, sidebar but could still be worth being its own component
-		- #placeholder 2 examples splittable features from [[[Code-Along - eCommerce Store]]]
+		- #placeholder/demo-code 2 examples splittable features from [[[Code-Along - eCommerce Store]]]
 		- features tend to be areas where state is managed
 - Smaller feature or elements that appear in more than one place
 	- cluster of social media share buttons
