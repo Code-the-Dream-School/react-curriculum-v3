@@ -1,6 +1,6 @@
 ---
 title: Week-05
-dateModified: 2024-09-09
+dateModified: 2024-09-15
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -103,7 +103,7 @@ By the end of this lesson, we will:
 	- precede a form element with a sibling label
 	- prefer the use of buttons over divs that look like buttons
 		- it's common to see this but buttons are the more appropriate option
-- The repeated usage of useState for each one of the state variables can make the component hard to maintain. We will cover ways to address this when we work with advanced state in [[Week-11]]. #placeholder
+- The repeated usage of useState for each one of the state variables can make the component hard to maintain. We will cover ways to address this when we work with advanced state in [[Week-11]]. #placeholder/link-to-week-11
 
 ## Weekly Assignment Instructions
 
