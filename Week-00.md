@@ -1,14 +1,13 @@
 ---
 title: Week-00
 filedUnder: unsorted
-dateModified: 2024-09-15
+dateModified: 2024-09-26
 dateCreated: 2024-08-27
 tags: [react]
 context: [ctd, freelance, personal, work]
 parent: "[[Intro to React V3]]"
 draftStatus: draft
 discription: new note
-lifecycle: planted
 ---
 
 # Week-00

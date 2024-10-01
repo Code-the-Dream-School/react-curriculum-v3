@@ -16,5 +16,5 @@ Continued Project Work
 > [!draft note] #drafting-note
 > this should probably be a linked PDF so the student can download + mark it up
 
-- [[Intro to React v3 final project rubric]]
-- [[Intro to React v3 final project submission checklist]]
+- [[Final Project Rubric]]
+- [[Final Project Submission Checklist]]

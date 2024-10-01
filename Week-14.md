@@ -50,7 +50,7 @@ By the end of this lesson, we will:
 ### Topic 1
 
 > [!drafting note] #drafting-note
-> [[Intro to React v3 final project rubric|project rubric]] is a re-usable content block for here and PDF generation
+> [[Final Project Rubric|project rubric]] is a re-usable content block for here and PDF generation
 
 ### Topic 2
 
@@ -81,8 +81,8 @@ By the end of this lesson, we will:
 ### Final Project Requirements
 
 - [18 common React errors and a comprehensive guide on React error handling (DEV Community)](https://dev.to/zipy/18-common-react-errors-and-a-comprehensive-guide-on-react-error-handling-cm2)
-- [[Intro to React v3 final project rubric]]
-- [[Intro to React v3 final project submission checklist]]
+- [[Final Project Rubric]]
+- [[Final Project Submission Checklist]]
 
 ### Planning Your Project
 
