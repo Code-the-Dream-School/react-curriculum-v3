@@ -1,13 +1,12 @@
 ---
 title: Week-00
 filedUnder: unsorted
-dateModified: 2024-09-26
+dateModified: 2024-10-09
 dateCreated: 2024-08-27
 tags: [react]
 context: [ctd, freelance, personal, work]
 parent: "[[Intro to React V3]]"
-draftStatus: draft
-discription: new note
+content: lesson plan
 ---
 
 # Week-00
@@ -58,7 +57,7 @@ The materials for the course is further broken down into a full list of topics c
 
 - **Week 1** - Intro to React, App Installation, and Project Setup
 - **Week 2** - ReactDOM, Components, JSX, and Troubleshooting
-- **Week 3** - Props, Common Component Props, State
+- **Week 3** - State, Props, Common Component Props
 - **Week 4** - Basic Hooks, Passing Props, Events, Updating State
 - **Week 5** - Controlled Components and Forms
 - **Week 6** - Re-usable Components, Refactoring, Project Organization, and Testing
