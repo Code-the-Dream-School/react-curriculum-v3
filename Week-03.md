@@ -1,6 +1,6 @@
 ---
 title: Week-03
-dateModified: 2024-09-05
+dateModified: 2024-10-09
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -23,6 +23,11 @@ content: lesson plan
 
 By the end of this lesson, we will:
 
+#### Objective 3: State
+
+- Explain the importance of state in managing dynamic data within React components
+- Demonstrate the usage of state with the useState hook
+
 #### Objective 1: Props
 
 - Understand props in React and how they facilitate parent-child component communication
@@ -33,16 +38,50 @@ By the end of this lesson, we will:
 - Describe the importance of props in built-in components
 - Identify common props such as className, handler functions, style, etc and describe their relation to HTML attributes
 
-#### Objective 3: State
-
-- Explain the importance of state in managing dynamic data within React components
-- Demonstrate the usage of state with the useState hook
-
 ## Discussion Topics
+
+### State
+
+All of the information on an plain web page is composed of data of one type or another - text, images, structure, styling, etc. One thing to note though is that it is static. In other words, it does not change after the page loads. This remains true whether the page is created manually or assembled by a web server then served to a user. JavaScript allows us to bring dynamism to the equation. When going from a static web page to an SPA, we have to determine what data should load dynamically and what should remain static. To one extreme, we may limit it to a username in a page header. Towards the other extreme, everything on the page all the way down to the text inside of a button can be loaded dynamically. Most of the time, it's somewhere in the middle.
+
+We have plenty of options when working with state. The simplest place to start is by defining a variable used inside our component. We can do this outside of the component or inside, before the return statement. We then reference that variable in the desired area inside our return statement surrounded by `{}`. When the component is rendered, React will insert the value in its place in the virtual DOM. One detail to keep in the back of your mind is that every time a function is re-rendered, any variables defined inside the component will be re-instantiated. Most of this time this is not a problem but this will come up later in the course when we focus on optimizing our code.
+
+```jsx
+import ctdLogo from './assets/mono-blue-logo.svg';
+import './App.css';
+
+const message = 'Coming Soon...'; //This is outside the function definition for App
+
+function App() {
+    const title = ' CTD Swag'; // This is inside the Component before the return
+    return (
+        <div className="coming-soon">
+          <h1>{title}</h1>
+          <div style={{ height: 100, width: 100 }}>
+            <img src={ctdLogo} alt="Code The Dream Logo" />
+          </div>
+          <h2>{message}</h2>
+        </div>
+    );
+}
+
+export default App;
+```
+
+This approach does not give us a way to make updates to `message` or `title`. "Well, we could use `let` instead." Oh, no no no! This breaks one of the rules about writing a React component: state should never be mutated. Not only that, React has no way to tell if and when a variable gets updated. Let's see if we can demonstrate that:
+
+- revisit declarative programming
+- discuss immutable data
+- useState
+	- define useState
+	- declare with initial state value
+	- declare with an initializer function (callback that returns some initial state)
+	- returns array containing a state variable and a state setter function
+	- destructuring naming convention
+	- more in Week 4
 
 ### Props
 
-- importance of data to render content in the user interface
 - props is a tool to communicate with child components
 	- object containing key-value pairs that can be referenced in the component
 	- values can be anything, including callback functions covered in Week 4
@@ -73,20 +112,6 @@ By the end of this lesson, we will:
 	- frequently used: keyboard, mouse,
 	- take callback functions
 	- more on Week 4
-
-### State
-
-- bring back to importance of data to render opened in Props Topic
-	- got to have a way to save + work with it
-- revisit declarative programming
-- discuss immutable data
-- useState
-	- define useState
-	- declare with initial state value
-	- declare with an initializer function (callback that returns some initial state)
-	- returns array containing a state variable and a state setter function
-	- destructuring naming convention
-	- more in Week 4
 
 ## Weekly Assignment Instructions
 
