@@ -1,6 +1,6 @@
 ---
 title: Week-01
-dateModified: 2024-10-01
+dateModified: 2024-10-08
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -148,7 +148,7 @@ To work with the project, we have to start Vite's server. To find the right comm
 }
 ```
 
-Since the packages in the repo are installed locally, the command line will not recognize them. Instead of trying to call them directly (e.g. typing `vite build` into our terminal), we use npm to call the scripts for us by using the command `npm run <<scriptKey>>` in the terminal at the project's root directory. Remember in JSON, a `key` is a property name - the word on the left side of a colon. In our case, we're going to use the command `npm run dev`. This will spin up a development pipeline to create a version of our code that is understandable by the browser.
+Since the packages in the repo are installed locally, the command line will not recognize them. Instead of trying to call them directly (e.g. typing `vite build` into our terminal), we use npm to call the scripts for us by using the command `npm run <<scriptKey>>` in the terminal at the project's root directory. Remember in JSON, a `key` is a property name - the word on the left side of a colon. In our case, we're going to use the command **`npm run dev`**. This will spin up a development pipeline to create a version of our code that is understandable by the browser.
 
 ![[202409_0416PM-iTerm.png|300]]
 
@@ -157,6 +157,8 @@ Vite then serves up the transformed code so we can see it in the browser!
 ![[202409_0408PM-Firefox Developer Edition.png|500]]
 
 You may have noticed a `:5173` in the url. This is the port number that Vite serves content from locally. We will talk more about this and how to deploy a live app in [[Week-13|week 13]].
+
+Any time we are working in our codebase, it's *highly recommended* to have the development server running and our SPA open in a browser window. This gives instant feedback on the code that we are working on. There are plenty of scenarios where our code does not have any errors in a grammatical or technical sense but will crash our SPA or generate other undesirable behaviors.
 
 ### Project Setup
 
@@ -178,33 +180,11 @@ Now that we have the project scaffolded and we know it runs, we'll dig into some
 - **Inclusion of static assets** - these resolve a public URL for the file when imported into a `.jsx` file. We'll explore how to take advantage of this during [[Week-10|week 10]].
 - **strong Plugin ecosystem** - Vite has [official plugins](](https://vitejs.dev/plugins/)) and [community plugins](https://github.com/vitejs/awesome-vite#plugins) that extend its capabilities - some are React-specific, some work with other frameworks, and a lot are UI framework/library agnostic.
 
-### Working With Vite's Development Server
-
-We've already started the development server but there are a few things to take note of while working with it. Any time we are working in our codebase, it's *highly recommended* to have the development server running and our SPA open in a browser window. This gives instant feedback on the code that we are working on. There are plenty of scenarios where our code does not have any errors in a grammatical or technical sense but will crash our SPA or generate other undesirable behaviors.
-
-> [!note]
-> The examples introduce some concepts that we will eventually cover so don't worry if the specifics don't make sense at this time!
-
-Vite provides us with some error feedback through the terminal, the browser window, and the browser's development console. In the example below, the code still transpiles to JavaScript correctly but list items returned by the `map` function do not have a mandatory `key` props. React will still render the list but its reconciliation process is degraded severely by this bug.
-
-![[202409_1147AM-Firefox Developer Edition.png]]
-
-Common syntactical issues often result in long stack traces but Vite tries to provide some helpful details in the terminal and in a browser overlay before printing the trace. In the example below, can you tell what syntactical error crashed the application? Hint: look at the second line of the black browser overlay on the right. It should become obvious what character our code is missing.
-
-Another detail to look for is a caret (`^`) inside the printed code snippet - this shows exactly where the error is encountered. In the same example below, it appears under the `<` of the closing tag of the unordered list. Our list item is missing a forward slash `/` inside of its closing tag. As soon as the parser encounters the closing unordered list tag, it knows JSX syntax has been violated since the list item elements have not been closed yet. By the way, the line numbers on the code snippet coincide to the lines in the file that contain the code.
-
-The same message appears in the terminal session running Vite. Don't be daunted by all the `at JSXParserMixin…` lines. These are helpful for more complex problems but all the information we need to resolve the issue is at the top of the output. Error messages are a developer's friend!
-
-![[202409_1206PM-Code.png]]
-
-> [!note]
-> After resolving an error that results in an error overlay in the browser, you have to click in the gray area to dismiss it. You may also need to refresh the browser window to fully restore your app.
-
 ### Stretch Goal: Improving the Development Environment
 
 #### Enhance VS Code's Built-in Linting with ESLint
 
-A linter is a tool that performs a [static analysis](https://en.wikipedia.org/wiki/Static_program_analysis)of a codebase to flag syntax errors and bad practices without having to run the code. VS Code already provides basic static analysis for JavaScript but we can extend this with ESLint. The React template provides some sensible default rules when we installed it but we also have to install VS Code's [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) extension. The extension adds a tooltip when mousing over a flagged item. It usually includes a brief summary of the broken rule and a link to more documentation. In the screenshot below, clicking the blue text "[react/jsx-key](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-key.md)" will open a browser window to documentation that explains the error, how resolve it, or even what rule can be added to `ESLint.config.js` to suppress the error.
+A linter is a tool that performs a [static analysis](https://en.wikipedia.org/wiki/Static_program_analysis)of a codebase to flag syntax errors and bad practices without having to run the code. VS Code already provides basic static analysis for JavaScript but we can extend this with ESLint. The React template includes some sensible default rules when we installed it but we also have to install VS Code's [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) extension. The extension will allow VS Code to lint all project files and adds a tooltip when mousing over a flagged item. The tooltips usually include a brief summary of the rule violation and a link to more documentation. In the screenshot below, clicking the blue text "[react/jsx-key](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-key.md)" will open a browser window to documentation that explains the error, how to resolve it, and even rule configuration options for `eslint.config.js`.
 
 ![[202409_0459PM-Code.png|400]]
 
@@ -216,23 +196,23 @@ In the following screenshot of an error tooltip, we have an error on `setTestLis
 
 ![[202410_1121AM-Code.png|400]]
 
- When working with ESLint, we can to add and remove rules that suit our needs as developers. ESLint provides three ways to modify rules.
+ When working with ESLint, we can to add and remove rules that suit our needs. ESLint provides three ways to modify rules:
 
 1. ignore a rule for a file
-2. ignore a rule for a single code block
+2. ignore a rule for a single line
 3. apply or ignore rules across a codebase
 
-We have already seen how to turn off the rule for the entire file. Another way is to add the appropriate comment directly above a code block which will then ignore only that instance of the warning. Finally, to change a rule's behavior across the codebase, it can be configured in `ESLint.config.js`. We can add, modify, or disable rules with this file. Keep in mind that the rules already in place conform to community best practices. Don't change them just to get rid of the squiggly lines in the code! Make sure you understand the rules you disable or enable and have a strong reason for doing so.
+We have already seen how to turn off the rule for the entire file. Another way is to add the appropriate comment directly above a line of code which will then ignore only that instance of the warning. Finally, to change a rule's behavior across the codebase, it can be configured in `eslint.config.js` which is found at the root of the project. We can add, modify, or disable rules with this file. Keep in mind that the rules already in place conform to community best practices. Don't change them just to get rid of the squiggly lines in the code! Make sure you understand the rules you disable or enable and have a strong reason for doing so.
 
 ![[202409_0507PM-Code.png|500]]
 
 #### Automatic Code Formatting with Prettier
 
-Another way to improve the development experience is by employing an automatic formatting utility. They improve code hygiene by applying consistent formatting across a codebase. Formatting is vital for any project, especially on a team codebase, but having to think about these details detracts from our attention which is better spent on creating useful code.
+Clean code is vital for any project, especially in a team codebase, but having to think about formatting details detracts from our attention which is better spent on crafting useful code. We can delegate formatting to tool that automates the process of applying formatting rules consistently across a codebase.
 
-One of the most popular JavaScript formatting tools [Prettier](https://prettier.io/). Like ESLint, we include a configuration file in our codebase and we have to install [a plugin for VS Code](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode). When configured correctly, it frees us from having to think about formatting! Let's go ahead and set that up.
+One of the most popular JavaScript formatting tools is [Prettier](https://prettier.io/). Like ESLint, we include a configuration file in our codebase and we have to install [a plugin for VS Code](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode). When configured correctly, it frees us from having to think about formatting! Let's go ahead and set that up.
 
-Since this is a development tool and is not a part of the app, we install Prettier as a dev dependency. `npm install --save-dev prettier`. A shorthand of this command is `npm i -D prettier`. After installing, we create a configuration file, `.prettierrc` at the root directory of the project. Inside `.prettierrc` we add a JSON object containing some starting rules
+Since this is a development tool and is not a part of the app, we install Prettier as a dev dependency. `npm install --save-dev prettier`. The shorthand of this command is `npm i -D prettier`. After installing, we create a configuration file, `.prettierrc` at the root directory of the project. Inside `.prettierrc` we add a JSON object containing some starting rules:
 
 ```JSON
 {
@@ -242,7 +222,7 @@ Since this is a development tool and is not a part of the app, we install Pretti
 }
 ```
 
-We then have to install Prettier plugin and configure VS Code to use it as the default code formatter. Once installed, open settings and filter for "format". For `Editor: Default Formatter` select Prettier and then check the box for `Editor: Format on Save`.
+We then have to install Prettier plugin and configure VS Code to use it as the default code formatter. After installing the plugin, open VS Code's settings and filter for "format". For `Editor: Default Formatter` select Prettier and then check the box for `Editor: Format on Save`.
 
 ![[202410_0402PM-Code.png|450]]
 
@@ -257,7 +237,7 @@ Code before and after saving with Prettier enabled:
 
 ### Summary
 
-We have covered a lot of material this first week - there is a lot to know to get started! We were introduced to React and how it benefits front end web developers. We also set a repo, installed a development server, and got a React project spun up. We covered some basics about working with Vite and some optional tools that will make our development experience much nicer! It is now time to apply this to the project that you will be turning in weekly.
+We were introduced to React its benefits for front end web developers. We also set a repo, installed a development server, and got a React project spun up. We covered some basics about working with Vite and introduced optional tools that will make our development experience much nicer. We have covered a lot of material this first week! Armed with this knowledge, it's time for you to set up the project that you'll be submitting weekly.
 
 ## Weekly Assignment Instructions
 
