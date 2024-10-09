@@ -15,9 +15,9 @@ content: lesson plan
 
 ### Topics Covered
 
+- State
 - Props
 - Common Component Props
-- State
 
 ### Lesson Objectives
 
