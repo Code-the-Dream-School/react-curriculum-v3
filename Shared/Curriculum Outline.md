@@ -1,12 +1,12 @@
 ---
 title: Curriculum Outline
-dateModified: 2024-10-08
+dateModified: 2024-10-09
 dateCreated: 2024-08-16
 ---
 
 # Curriculum Outline
 
-- **Week 1** - Intro to React, App Installation, and Project Setup
+- **Week 1** - Intro to React, App Installation, and Project Walk-Through
 - **Week 2** - ReactDOM, Components, JSX, and Troubleshooting
 - **Week 3** - State, Props, Common Component Props
 - **Week 4** - Basic Hooks, Passing Props, Events, Updating State
