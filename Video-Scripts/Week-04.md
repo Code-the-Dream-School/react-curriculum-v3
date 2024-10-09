@@ -6,3 +6,9 @@ content: video script
 ---
 
 # Week-04
+
+## Video 1 of 3: Basic Hooks
+
+## Video 2 of 3: Passing Props
+
+## Video 3 of 3: Events and Updating State

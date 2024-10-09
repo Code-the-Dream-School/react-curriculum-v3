@@ -6,3 +6,9 @@ content: video script
 ---
 
 # Week-07
+
+## Video 1 of 3: Data Fetching
+
+## Video 2 of 3: Conditional Rendering
+
+## Video 3 of 3: UI Update Strategies

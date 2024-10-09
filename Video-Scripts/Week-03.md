@@ -6,3 +6,7 @@ content: video script
 ---
 
 # Week-03
+
+## Video 1 of 2: State
+
+## Video 2 of 3: Props and Common Component Props
