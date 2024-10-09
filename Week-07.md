@@ -1,6 +1,6 @@
 ---
 title: Week-07
-dateModified: 2024-09-10
+dateModified: 2024-10-09
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -10,9 +10,6 @@ content: lesson plan
 ---
 
 # Week-07
-
-> [!drafting note] #drafting-note
-> 2024-09-10 - left off here
 
 ## Introduction
 
