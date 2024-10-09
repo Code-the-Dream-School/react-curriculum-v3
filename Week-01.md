@@ -1,6 +1,6 @@
 ---
 title: Week-01
-dateModified: 2024-10-08
+dateModified: 2024-10-09
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -35,7 +35,10 @@ By the end of this lesson, we will:
 - List the dependencies and scripts in package.json.
 - Use the CLI to install Vite.js, React, and dependencies
 
-#### Objective 3: Project Setup
+#### Objective 3: Project Walk-Through
+
+> [!drafting note] #drafting-note
+> needs updated to reflect content
 
 - Describe the role of Vite.js as a development server for React projects.
 - Demonstrate how to run installed app on a local development server
@@ -160,7 +163,7 @@ You may have noticed a `:5173` in the url. This is the port number that Vite ser
 
 Any time we are working in our codebase, it's *highly recommended* to have the development server running and our SPA open in a browser window. This gives instant feedback on the code that we are working on. There are plenty of scenarios where our code does not have any errors in a grammatical or technical sense but will crash our SPA or generate other undesirable behaviors.
 
-### Project Setup
+### Project Walk-Through
 
 Now that we have the project scaffolded and we know it runs, we'll dig into some of the details about working with our SPA. Vite incorporates several other tools to be aware of and provides us with features to make UI development a pretty nice experience.
 
