@@ -1,6 +1,6 @@
 ---
 title: Week-02
-dateModified: 2024-10-08
+dateModified: 2024-10-15
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -59,16 +59,16 @@ ReactDOM is already set up inside of our project, courtesy of the React template
 ```jsx
 //Main.jsx
 
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App.jsx";
+import "./index.css";
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
     <App />
   </StrictMode>,
-)
+);
 ```
 
 From here we have two directions to go to identify how everything is tied together. The first is to find the element with the id of `root`. It's not found in `/src` anywhere. Recall that `index.html` in the root directory is the entry point for the application. In that file, we will find a div with an id of `root`. When Vite starts, it serves up this file. The script loaded on line 11 is our application! Once it loaded, the script runs which renders the application inside of that div. If there is anything in that element, it removes it first.
@@ -98,8 +98,8 @@ Now that we know how ReactDOM ties into the application, it's time to explore on
 To look at the structure of a component, we need to convert the JSX syntax to JavaScript. More on JSX soon. For now, we'll convert our `App` component to plain JavaScript. The original file looks like:
 
 ```jsx
-import ctdLogo from './assets/mono-blue-logo.svg';
-import './App.css';
+import ctdLogo from "./assets/mono-blue-logo.svg";
+import "./App.css";
 
 function App() {
   return (
@@ -120,30 +120,30 @@ export default App;
 The following JavaScript version of `App` is functionally identical to the original.
 
 ```javascript
-import React from 'react';
-import ctdLogo from './assets/mono-blue-logo.svg';
-import './App.css';
+import React from "react";
+import ctdLogo from "./assets/mono-blue-logo.svg";
+import "./App.css";
 function App() {
   return React.createElement(
-    'div',
+    "div",
     {
-      className: 'coming-soon',
+      className: "coming-soon",
     },
-    React.createElement('h1', null, 'CTD Swag'),
+    React.createElement("h1", null, "CTD Swag"),
     React.createElement(
-      'div',
+      "div",
       {
         style: {
           height: 100,
           width: 100,
         },
       },
-      React.createElement('img', {
+      React.createElement("img", {
         src: ctdLogo,
-        alt: 'Code The Dream Logo',
-      })
+        alt: "Code The Dream Logo",
+      }),
     ),
-    React.createElement('h2', null, 'Coming Soon...')
+    React.createElement("h2", null, "Coming Soon..."),
   );
 }
 export default App;
@@ -168,23 +168,23 @@ We can use function declarations, function expressions, or arrow functions - eac
 ```jsx
 
 function Component1(){
-    return(
-        <p>Component1 uses a function declaration</p>
-    );
+  return(
+    <p>Component1 uses a function declaration</p>
+  );
 }
 
 //or
 
 const Component2 = function(){
-    return(
-        <p>Component2 uses a function expression</p>
-    );
+  return(
+    <p>Component2 uses a function expression</p>
+  );
 }
 
 //or
 
 const Component3 = () => {
-    return <p>Component3 uses an arrow function</p>
+  return <p>Component3 uses an arrow function</p>
 }
 
 //or
@@ -192,14 +192,14 @@ const Component3 = () => {
 const Component4 = () => <p>Component4 uses an arrow function with implicit return</p>
 
 function App() {
-    return (
-        <>
-            <Component1/>
-            <Component2/>
-            <Component3/>
-            <Component4/>
-        </>
-    )
+  return (
+    <>
+      <Component1/>
+      <Component2/>
+      <Component3/>
+      <Component4/>
+    </>
+  )
 }
 ```
 
@@ -233,30 +233,7 @@ React includes several built-in components - we've already ran into the two used
 	- flags use of [deprecated](https://en.wikipedia.org/wiki/Deprecation) APIs
 	- It's added to our project automatically with Vite's React template. It may be tempting to remove it to suppress odd behaviors (especially with useEffect) but don't. Again, errors are our friends and they'll guide us to the right path!
 
-ReactDOM provides common components for all of the elements that can be found in an html document. When using `div`, `button`, or `input` for example, they are not directly referencing the native HTML element itself. We are using component representations which also provide a host of built in props and events. The [common components](https://react.dev/reference/react-dom/components#all-html-components) and their features are [too numerous](https://react.dev/reference/react-dom/components/common) to list here but here are a few props highlights:
-
-#### Props for All Built-in Components
-
-- **children**: accepts a React node. Valid React nodes include custom or built-in components, array of React nodes, empty node (null, undefined), string, number, or a portal[^portal].
-- **ref**: takes a reference object from useRef (covered in [[Week-04|week 4]]) or createRef, or a callback that gets called when React renders the element.
-- **style**: takes an object defining CSS styles in property name/ property value pairs. All property names must be written in camelCase. Eg. `background-color` is written as `backgroundColor`.
-
-#### Props for Standard DOM Components
-
-- **className**: String. Replacement for `class`. Multiple classes can be added by using spaces between class names.
-- **htmlFor**: String. Primarily for `label` or `output` and is a replacement for `for`.
-- **on\* (onBlur, onClick, onFocus, etc.)**: Takes a callback function. Event handler functions that are named after a specific event that they listen for on the element where they are used. More in [[Week-04|week 4]]
-
-#### Props for DOM Components that Accept User Input
-
-> [!note]
-> These include `<input>`,`<textarea>`, etc.
-> We will cover these in depth when we start working with React controlled components and forms in [[Week-05|week 5]].
-
-- **disabled**: Boolean. Prevents a user from interacting with element when true.
-- **value**: String: the text contents inside the element.
-- **onChange**: Accepts a callback function. Event handler function that fires when an update is made by the user to the element's value.
-
+ReactDOM provides common components for all of the elements that can be found in an html document. When using `div`, `button`, or `input` for example, they are not directly referencing the native HTML element itself. We are using component representations which also provide a host of built in props and events. The [common components](https://react.dev/reference/react-dom/components/common) are too numerous to list here but are worth reviewing.
 ### JSX
 
 Writing components in JavaScript is possible but becomes but becomes tedious as a component grows. JSX provides a more concise and expressive syntax for defining UI components. JSX stands for **JavaScript XML**. It is a syntax extension for JavaScript that Vite transpiles down to JavaScript using [[Week-01#Sub-tools|esbuild]]. #placeholder/link/internal JSX resembles HTML, making it easier for developers to visualize the component structure and to write code that closely resembles the final UI. JSX also allows for embedding JavaScript expressions directly in the markup.
@@ -320,10 +297,10 @@ JSX
     using multiple lines
 */}
 <div>
-    {isLoggedIn ? <p>Welcome {userName}!</p> : <button onClick={() => logIn()}>Log In</button>}
-    <ul>
-        {products.map((product)=> <li>{product.name}</li>)}
-    </ul>
+  {isLoggedIn ? <p>Welcome {userName}!</p> : <button onClick={() => logIn()}>Log In</button>}
+  <ul>
+    {products.map((product)=> <li>{product.name}</li>)}
+  </ul>
 </div>
 ```
 

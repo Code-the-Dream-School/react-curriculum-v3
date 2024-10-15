@@ -1,6 +1,6 @@
 ---
 title: Week-06
-dateModified: 2024-09-15
+dateModified: 2024-10-15
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -13,6 +13,9 @@ content: lesson plan
 
 > [!drafting note] #drafting-note
 > we will probably expose the students to a repo that has pre-written tests rather than write their own. This week will probably have 2 submissions
+
+> [!drafting note] #drafting-note
+> We've sit on props destructuring assignment for this week
 
 1. submission #1 - code updates to refactor project
 2. submission #2 - diagnose 3-4 failed tests, stretch goal: write test for a component
@@ -31,6 +34,10 @@ content: lesson plan
 By the end of this lesson, we will:
 
 #### Objective 1: Reusing Components
+
+> [!drafting note] #drafting-note
+> Take advantage of the variants property: phones have models, shirts, hats, jackets have different colors
+> This may be a good way to deal with optional props with default values
 
 - Discuss the value of reusable components and how they foster efficiency, scalability, and consistency in React development
 - Implement reusable components that can be shared across an application
@@ -72,6 +79,7 @@ By the end of this lesson, we will:
 	- example props in action
 		- dialogs: message, type (error, info, warning), callback
 		- profile cards: name, profilePicture, location, motto, profileUrl
+	- discuss setting default values
 - component libraries provide re-usable components that:
 	- can be used 1 or more times in an application
 	- provide styling or animation through component definition

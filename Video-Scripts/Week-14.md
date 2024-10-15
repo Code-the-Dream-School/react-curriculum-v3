@@ -9,4 +9,4 @@ content: video script
 
 ## Video 1 of 2: Final Project Requirements and Planning Your Project
 
-## Getting Started
+## Video 2 of 2: Getting Started
