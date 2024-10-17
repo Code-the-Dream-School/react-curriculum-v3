@@ -1,6 +1,6 @@
 ---
 title: Video-Scripts
-dateModified: 2024-10-09
+dateModified: 2024-10-16
 dateCreated: 2024-10-09
 ---
 
@@ -16,4 +16,4 @@ The video description should provide:
 - time markers for each topic if the video covers more than 1 topic
 - links to documentation or articles that further cover the topic(s)
 
-The scripts for each section will be written as narratives but the volunteer recorder will be given leeway to paraphrase or restructure that video's material. The only constraint here is that they should not omit any talking points and should provide coding examples that are in line with the CTD-Swag app presented in the curriculum.
+The scripts for each section will be written as outlines to provide the volunteer recorder to bring their own voice and personality to that video's material. The only constraint here is that they should not omit any talking points and should provide coding examples that are in line with the CTD-Swag app presented in the curriculum.

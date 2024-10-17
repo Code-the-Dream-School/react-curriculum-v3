@@ -1,6 +1,6 @@
 ---
 title: Week-02
-dateModified: 2024-10-15
+dateModified: 2024-10-17
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -165,6 +165,9 @@ There certainly is a lot of `React.createElement`s! Each one accepts a `type`, a
 
 We can use function declarations, function expressions, or arrow functions - each are equally valid.
 
+> [!drafting note] #drafting-note
+> update examples to use JS not JSX
+
 ```jsx
 
 function Component1(){
@@ -234,6 +237,7 @@ React includes several built-in components - we've already ran into the two used
 	- It's added to our project automatically with Vite's React template. It may be tempting to remove it to suppress odd behaviors (especially with useEffect) but don't. Again, errors are our friends and they'll guide us to the right path!
 
 ReactDOM provides common components for all of the elements that can be found in an html document. When using `div`, `button`, or `input` for example, they are not directly referencing the native HTML element itself. We are using component representations which also provide a host of built in props and events. The [common components](https://react.dev/reference/react-dom/components/common) are too numerous to list here but are worth reviewing.
+
 ### JSX
 
 Writing components in JavaScript is possible but becomes but becomes tedious as a component grows. JSX provides a more concise and expressive syntax for defining UI components. JSX stands for **JavaScript XML**. It is a syntax extension for JavaScript that Vite transpiles down to JavaScript using [[Week-01#Sub-tools|esbuild]]. #placeholder/link/internal JSX resembles HTML, making it easier for developers to visualize the component structure and to write code that closely resembles the final UI. JSX also allows for embedding JavaScript expressions directly in the markup.
@@ -407,4 +411,3 @@ After completing this week's assignment, the app should be able to:
 
 [^class-component]: React components can also be class-based but it's not common to see them any more. With the introduction of hooks in React v16.8 (released February, 2019), many of the disadvantages of functional components disappeared. A large portion of the JavaScript community eschews [OOP](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object-oriented_programming) in favor of [functional](https://github.com/readme/guides/functional-programming-basics) programming. This is not a judgement, just an observation.
 [^avoid-anonymous]: Default export can be used with anonymous functions but this is discouraged. While components are given a name when imported, anonymous function components make React needlessly difficult to troubleshoot.
-[^portal]: A portal allows children to be rendered in a different part of a DOM. This concept will not be covered in this course but more information can be found in [`createPortal` section of React's dev docs](https://react.dev/reference/react-dom/createPortal).

@@ -1,6 +1,6 @@
 ---
 title: Week-01
-dateModified: 2024-10-09
+dateModified: 2024-10-16
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -53,7 +53,7 @@ By the end of this lesson, we will:
 
 ### Intro to React
 
-React is a frontend library used by developers to build Single Page Applications (SPAs). React takes a declarative approach to DOM manipulation with the help of React DOM to provide interactivity in web applications. React takes care of:
+React is a frontend library used by developers to build dynamic user interfaces. React takes a declarative approach to DOM manipulation with the help of React DOM to provide interactivity in web applications, also known as single-page applications (or SPA). React takes care of:
 
 - assembling components to render a UI
 - listening for user events - mouse cursor hovering, typing in a field, button clicks, etc
@@ -144,10 +144,10 @@ To work with the project, we have to start Vite's server. To find the right comm
 
 ```json
 "scripts": {
-	"dev": "vite",
-	"build": "vite build",
-	"lint": "ESLint .",
-	"preview": "vite preview"
+ "dev": "vite",
+ "build": "vite build",
+ "lint": "ESLint .",
+ "preview": "vite preview"
 }
 ```
 
@@ -290,8 +290,8 @@ After completing this week's assignment, the app should be able to:
 
 ### Project Setup
 
- - [The "npm run" Command (npm docs)](https://docs.npmjs.com/cli/v10/commands/npm-run-script)
- - [The Basics of Package.json (NodeSource)](https://nodesource.com/blog/the-basics-of-package-json/)
+- [The "npm run" Command (npm docs)](https://docs.npmjs.com/cli/v10/commands/npm-run-script)
+- [The Basics of Package.json (NodeSource)](https://nodesource.com/blog/the-basics-of-package-json/)
 
 ### Improving the Development Environment
 
@@ -304,7 +304,7 @@ After completing this week's assignment, the app should be able to:
 [^state]: State refers to the current condition or data within an application at a specific point in time. It includes all data relevant to the application, such as user input, server responses, and UI state.
 [^libraries-and-frameworks]: Libraries and frameworks are code packages written to solve complex or specialized challenges. We incorporate libraries or frameworks into our projects to simplify the development process. The distinction between the libraries and frameworks is a nuanced topic and can be interpreted differently based on their programming language and what they're used for. "[Inversion of control](https://en.wikipedia.org/wiki/Inversion_of_control)" is a common element to most comparisons between the two.
 
-	With a library, we are in control of how its code is called. Libraries provide a toolset that we use by calling application programming interfaces (APIs) that they provide. Conversely, a framework defines how the application works then calls our code to configure its behavior and to determine what to include. They tend to be larger in scope and provide more programming tools for us to use.
+ With a library, we are in control of how its code is called. Libraries provide a toolset that we use by calling application programming interfaces (APIs) that they provide. Conversely, a framework defines how the application works then calls our code to configure its behavior and to determine what to include. They tend to be larger in scope and provide more programming tools for us to use.
 
-	**Example UI libraries**: jQuery, Knockout, Preact, and React.
-	**Example UI frameworks**: Angular, Astro, Ember, Next.js, Remix, and Vue.
+ **Example UI libraries**: jQuery, Knockout, Preact, and React.
+ **Example UI frameworks**: Angular, Astro, Ember, Next.js, Remix, and Vue.
