@@ -1,6 +1,6 @@
 ---
 title: Week-03
-dateModified: 2024-10-15
+dateModified: 2024-10-31
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -101,9 +101,13 @@ We'll know when the `setTimeout` fires off because of the console statement that
 
 ![[202410_0222PM-Firefox Developer Edition.gif]]
 
- `useState` is a React hook that allows us to set and update a piece of data that we can then use in our SPA. We invoke `useState` with an initial state value as an argument. That initial state value can be of any type. If given a function, it would be called an "initializer function" in that context. React will run it and use the returned value to set the initial state value. Initializer functions must be pure functions and cannot take any arguments. When called, `useState` returns an array containing a state variable and an updater function. We follow array [destructuring assignment](https://javascript.info/destructuring-assignment) #placeholder/link convention `const [noun, setNoun] = useState(intialState)` to make use of this hook.
+#### useState
 
-With `useState` called, we can now start setting up CTD Swag's storefront. Let's get some inventory on the page! We first need to put together some sample inventory data for our app to start with. Each item should include `name`, `id` `price`, `description`, and `variants` for color variations, phone models for cases, etc. Garments also need a `size`. Here's an example of an inventory items:
+`const [state, setState] = useState(initialState`
+
+ `useState` is a React hook that allows us to set and update a piece of data that we can then use in our SPA. We invoke `useState` with an initial state value as an argument. That initial state value can be of any type. If given a function, it would be called an "initializer function" in that context. React will run it and use the returned value to set the initial state value. Initializer functions must be pure functions and cannot take any arguments. When called, `useState` returns an array containing a state variable (a reference to the current state) and an updater function. We follow array [destructuring assignment](https://javascript.info/destructuring-assignment) #placeholder/link convention `const [noun, setNoun] = useState(intialState)` to make use of this hook.
+
+With `useState` explained, we can now start setting up CTD Swag's storefront. Let's get some inventory on the page! We first need to put together some sample inventory data for our app to start with. Each item should include `name`, `id` `price`, `description`, and `variants` for color variations, phone models for cases, etc. Garments also need a `size`. Here's an example of an inventory items:
 
 ```json
 {
@@ -187,13 +191,55 @@ export default App;
 
 ![[202410_1122AM-Code.png|400]]
 
-The `key` helps React keep track of elements that are rendered from an array. It may initially seem like a good idea to use the item's array index since each item has one and it is unique. The downside is that an item and its index value are not guaranteed to keep matching. An item may be removed from the inventory, changing the array, when it goes out of stock. `inventory` can eventually have a sort or filter feature added to it which would also have an impact on item order. In either case, using the indices as keys could introduce unexpected behavior or degrade React's rendering cycle. Luckily we have an `id` on the item so this will not happen.
+The `key` in `<li key={item.id}>` helps React keep track of elements that are rendered from an array. It may initially seem like a good idea to use the item's array index since each item has one and it is unique. The downside is that an item and its index value are not guaranteed to keep matching. An item may be removed from the inventory, changing the array, when it goes out of stock. `inventory` can eventually have a sort or filter feature added to it which would also have an impact on item order. In either case, using array indices as keys could introduce unexpected behavior or degrade React's rendering cycle. We've included an `id` on the item so this will not happen.
 
 ### Props
 
+#### Communicating with Children
+
 At this point we are almost ready to do some refactoring. App component is small but will continue to grow as we set up our storefront. Remember that with "separation of concerns" it is good to limit each component to a single job. The title and the logo can be separated out as a storefront header. The inventory list and inventory cards area also good candidates for refactoring into components. Before we proceed, we need to know how to communicate data down to child components, otherwise we will have no way to pass on the `title` or `description`.
 
-Enter React **`props`**. Short for "properties", the are used to pass data from a component down to its children. They can be any type, including a function, but are immutable and managed by the parent component. The components receiving props use the data to configure themselves. Functions passed as props are another key tool for interactivity but we will cover that next week. We are already making use of props inside of App.jsx but let's expand on this by introducing three new components.
+Enter React **`props`**. Short for "properties", the are used to pass data from a component down to its children. They can can accept any type, including functions, but their values are immutable and managed by the parent component. The components receiving props use the data to configure themselves. In order to take props in a component, a value representing props has to be added to the component's function parameters- `function SomeComponent(props){…`. Since props are just objects, it's common to use [destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) to immediately get specific values from props in the component's arguments. This allows us to immediately see what sort of values we need from the parent component. An additional benefit is that we can set a default value for any of the props.
+
+```jsx
+//without destructuring
+function Inventory(props){
+	const inventory = props.inventory
+	return (
+		<ul>
+		    {inventory.map((item) => {
+			    return (
+					<li key={item.id}>
+						{item.name}
+					</li>
+				);
+			})}
+	    </ul>
+	)
+}
+
+//with destructuring
+function Inventory({inventory = []){ //destructuring assignment grabs `inventory` out of props
+									 //we're also setting a default value og `inventory` to an empty array
+	return (
+		<ul>
+		    {inventory.map((item) => {
+			    return (
+					<li key={item.id}>
+						{item.name}
+					</li>
+				);
+			})}
+	    </ul>
+	)
+}
+```
+
+Functions passed as props are a key tool for interactivity. This is such an important detail that we have to cover a few more topics before we can fully appreciate their role in an interactive application. We continue talking about functions used in props next week.
+
+#### Props in Action
+
+Let's expand on CTD Swag by introducing three new components.
 
 We create the first two new files and define the components inside each:
 
@@ -224,10 +270,10 @@ export default Header;
 ```jsx
 /*InventoryList.jsx*/
 
-function InventoryList(props) {
+function InventoryList({inventory}) {
   return (
     <ul>
-      {props.inventory.map((item) => {
+      {inventory.map((item) => {
         return (
           <li key={item.id}>
             <div className="itemCard">
@@ -276,10 +322,10 @@ Create the file, `ItemCard.jsx` and move the list item over to the new component
 
 import ItemCard from './InventoryItem';
 
-function InventoryList(props) {
+function InventoryList({inventory}) {
   return (
     <ul>
-      {props.inventory.map((item) => {
+      {inventory.map((item) => {
         return (
           <ItemCard
             key={item.id}
@@ -298,7 +344,7 @@ export default InventoryList;
 ```jsx
 /*ItemCard.jsx*/
 
-function ItemCard(props) {
+function ItemCard({name, description}) {
   return (
     <li>
       <div className="itemCard">
@@ -340,23 +386,23 @@ function App() {
 export default App;
 ```
 
-### Common Component Props
+#### Common Component Props
 
 Along with the props that we can define on our own, React's common components feature numerous [built-in props](https://react.dev/reference/react-dom/components/common) that are worth exploring. Here are a few props highlights:
 
-#### Props for All Built-in Components
+##### Props for All Built-in Components
 
 - **children**: accepts a React node. Valid React nodes include custom or built-in components, array of React nodes, empty node (null, undefined), string, number, or a portal[^portal]. We'll cover children in more detail below.
-- **ref**: takes a reference object from useRef (covered in [[Week-04|week 4]]) or createRef, or a callback that gets called when React renders the element.
+- **ref**: takes a reference object from useRef (covered in [[Code The Dream/Intro to React V3/Curriculum/Week-04|week 4]]) or createRef, or a callback that gets called when React renders the element.
 - **style**: takes an object defining CSS styles in property name/ property value pairs. All property names must be written in camelCase. Eg. `background-color` is written as `backgroundColor`. More in [[Code The Dream/Intro to React V3/Curriculum/Week-10#|week 10]].
 
-#### Props for Standard DOM Components
+##### Props for Standard DOM Components
 
 - **className**: String. Replacement for html attribute `class`. Multiple classes can be added by using spaces between class names.
 - **htmlFor**: String. Primarily for `label` or `output` and is a replacement for html attribute `for`.
-- **on\* - (onBlur, onClick, onFocus, etc.)**: Takes a callback function. Event handler functions that are named after a specific event that they listen for on the element where they are used. More in [[Week-04|week 4]]
+- **on\* - (onBlur, onClick, onFocus, etc.)**: Takes a callback function. Event handler props are named after a specific event that they listen for on the element where they are used. More in [[Code The Dream/Intro to React V3/Curriculum/Week-04|week 4]]
 
-#### Props for DOM Components that Accept User Input
+##### Props for DOM Components that Accept User Input
 
 > [!note]
 > These include `<input>`,`<textarea>`, etc.
@@ -366,7 +412,7 @@ Along with the props that we can define on our own, React's common components fe
 - **value**: String: the text contents inside the element.
 - **onChange**: Accepts a callback function. Event handler function that fires when an update is made by the user to the element's value.
 
-#### Children Props - A Closer Look
+##### Children Props - A Closer Look
 
 We are able to use a `children` prop to pass React elements into our custom components. Rather than assign `children` a value (`children={someValue}`), they are placed between the opening and closing tags for the element. For example, we may be trying to promote a specific item in our store and want to appear on the top, regardless of filters or sort order. We define that item in the App component and nest it inside `<Inventory></Inventory>` tags.
 
@@ -409,11 +455,11 @@ In order for it to appear in `InventoryList`, we need to include `{children}` in
 
 import ItemCard from './ItemCard';
 
-function InventoryList(props) {
+function InventoryList({inventory, children}) {
   return (
     <ul>
-      {props.children} //this location guarantees that this list item will be first
-      {props.inventory.map((item) => {
+      {children} //this location guarantees that this list item will be first
+      {inventory.map((item) => {
         return (
           <ItemCard
             key={item.id}
