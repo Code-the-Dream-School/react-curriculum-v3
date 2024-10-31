@@ -1,6 +1,6 @@
 ---
 title: Week-00
-dateModified: 2024-10-16
+dateModified: 2024-10-31
 dateCreated: 2024-10-09
 content: video script
 ---
@@ -40,7 +40,7 @@ content: video script
 - **Week 1** - Intro to React, App Installation, and Project Setup
 - **Week 2** - ReactDOM, Components, JSX, and Troubleshooting
 - **Week 3** - State, Props, Common Component Props
-- **Week 4** - Basic Hooks, Passing Props, Events, Updating State
+- **Week 4** - Basic Hooks, Events and Handlers, Updating State
 - **Week 5** - Controlled Components and Forms
 - **Week 6** - Re-usable Components, Refactoring, Project Organization, and Testing
 - **Week 7** - Data fetching, Conditional Rendering, UI Update Strategies

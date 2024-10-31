@@ -1,6 +1,6 @@
 ---
 title: Week-01
-dateModified: 2024-10-16
+dateModified: 2024-10-30
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -53,7 +53,10 @@ By the end of this lesson, we will:
 
 ### Intro to React
 
-React is a frontend library used by developers to build dynamic user interfaces. React takes a declarative approach to DOM manipulation with the help of React DOM to provide interactivity in web applications, also known as single-page applications (or SPA). React takes care of:
+> [!drafting note] #drafting-note
+> expand explanation of SPA. Compare with multi-page website
+
+React is a frontend library used by developers to build dynamic user interfaces. React takes a declarative approach to DOM manipulation with the help of React DOM to provide interactivity in web applications, also known as single-page applications (or SPA)[^SPA-draft]. React takes care of:
 
 - assembling components to render a UI
 - listening for user events - mouse cursor hovering, typing in a field, button clicks, etc
@@ -69,6 +72,9 @@ Developing an SPA without libraries (or even with jQuery) is a complicated proce
 - Elements then need to be added, removed, replaced, or modified to update the UI.
 
 Often, this includes adding or removing sub-elements that aren't known about ahead of time like list items or images loaded from a remote data source. Each element may need event listeners which in turn, are configured with logic to update the interface. Listeners also need to be managed carefully to keep the application performing smoothly. They don't automatically disappear when elements they are used on are removed or are no longer needed. Forgotten event listeners take up memory on a user's system and can cause serious performance issues or can even crash a browser. This is a lot to manage!
+
+> [!drafting note] #drafting-note
+> explain imperative vs declarative in further detail. Attempt a diagram of how imperative steps flow vs how data flows in declarative programming.
 
 The most of the current front end libraries or frameworks use a declarative approach to programing a UI. Declarative programming allows us to describe the SPA's structure and state. It is then library's/framework's responsibility to accomplish the all the tasks needed to keep the UI updated as state changes. As a consequence, it allows us to create complex SPAs with relative ease compared to approaches that do not use a framework.
 
@@ -144,10 +150,10 @@ To work with the project, we have to start Vite's server. To find the right comm
 
 ```json
 "scripts": {
- "dev": "vite",
- "build": "vite build",
- "lint": "ESLint .",
- "preview": "vite preview"
+	"dev": "vite",
+	"build": "vite build",
+	"lint": "ESLint .",
+	"preview": "vite preview"
 }
 ```
 
@@ -290,8 +296,8 @@ After completing this week's assignment, the app should be able to:
 
 ### Project Setup
 
-- [The "npm run" Command (npm docs)](https://docs.npmjs.com/cli/v10/commands/npm-run-script)
-- [The Basics of Package.json (NodeSource)](https://nodesource.com/blog/the-basics-of-package-json/)
+ - [The "npm run" Command (npm docs)](https://docs.npmjs.com/cli/v10/commands/npm-run-script)
+ - [The Basics of Package.json (NodeSource)](https://nodesource.com/blog/the-basics-of-package-json/)
 
 ### Improving the Development Environment
 
@@ -301,10 +307,16 @@ After completing this week's assignment, the app should be able to:
 - [Prettier Formatter for Visual Studio Code (VS Marketplace)](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 - [Using ESLint and Prettier in Visual Studio Code (Microsoft Learn)](https://learn.microsoft.com/en-us/shows/visual-studio-toolbox/using-eslint-and-prettier-in-visual-studio-code)
 
+[^SPA-draft]: #placeholder/draft-content A Single Page Application (SPA) is a web application that loads a single HTML page initially and dynamically updates its content as users interact with the application. SPAs use client-side rendering to handle all UI updates and data retrieval, resulting in a more fluid and seamless user experience. In SPAs, JavaScript handles the routing and content updates without the need for full-page reloads, making interactions faster and more responsive. This architecture allows SPAs to mimic the feel of native applications, providing a cohesive user experience without the interruptions associated with traditional websites.
+
+	In contrast, traditional multi-page websites follow a server-centric model where navigating between pages involves full-page reloads, resulting in slower interactions and delays in content delivery. Each page request triggers a server response to load a new page, leading to a less interactive and dynamic user experience compared to SPAs. Multi-page websites have distinct HTML files for each page and rely on server-side rendering to generate and serve content, which can be less efficient and scalable for complex web applications.
+
+	SPAs revolutionized web development by optimizing performance and user experience through client-side rendering and dynamic content updates. By eliminating the need for full-page reloads and reducing server requests, SPAs deliver faster load times and smoother interactions. While SPAs excel in creating interactive and responsive applications, multi-page websites remain relevant for content-heavy platforms that benefit from SEO advantages, as search engines find it easier to crawl individual pages. The choice between an SPA and a traditional multi-page website depends on the specific requirements of the application, balancing factors like user experience, performance, and search engine visibility.
+
 [^state]: State refers to the current condition or data within an application at a specific point in time. It includes all data relevant to the application, such as user input, server responses, and UI state.
 [^libraries-and-frameworks]: Libraries and frameworks are code packages written to solve complex or specialized challenges. We incorporate libraries or frameworks into our projects to simplify the development process. The distinction between the libraries and frameworks is a nuanced topic and can be interpreted differently based on their programming language and what they're used for. "[Inversion of control](https://en.wikipedia.org/wiki/Inversion_of_control)" is a common element to most comparisons between the two.
 
- With a library, we are in control of how its code is called. Libraries provide a toolset that we use by calling application programming interfaces (APIs) that they provide. Conversely, a framework defines how the application works then calls our code to configure its behavior and to determine what to include. They tend to be larger in scope and provide more programming tools for us to use.
+	With a library, we are in control of how its code is called. Libraries provide a toolset that we use by calling application programming interfaces (APIs) that they provide. Conversely, a framework defines how the application works then calls our code to configure its behavior and to determine what to include. They tend to be larger in scope and provide more programming tools for us to use.
 
- **Example UI libraries**: jQuery, Knockout, Preact, and React.
- **Example UI frameworks**: Angular, Astro, Ember, Next.js, Remix, and Vue.
+	**Example UI libraries**: jQuery, Knockout, Preact, and React.
+	**Example UI frameworks**: Angular, Astro, Ember, Next.js, Remix, and Vue.
