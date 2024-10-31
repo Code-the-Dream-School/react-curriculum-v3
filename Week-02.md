@@ -1,6 +1,6 @@
 ---
 title: Week-02
-dateModified: 2024-10-17
+dateModified: 2024-10-30
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -35,6 +35,7 @@ By the end of this lesson, we will:
 - List React's common components
 - Describe the anatomy of a component
 - List the contents of a component file
+- Describe the component tree
 
 #### Objective 3: JSX
 
@@ -93,7 +94,12 @@ The other item to look at is the argument that we pass to `render()`. `StrictMod
 
 ### Components
 
-Now that we know how ReactDOM ties into the application, it's time to explore one of the fundamental concepts that makes React such a powerful tool. Components are the building blocks of any React application. A modern[^class-component] React component is essentially a JavaScript function that does some isolated work and returns html. They allow us to break down a UI into smaller elements that can be tied together or re-used as needed.
+#### What is a Component
+
+> [!drafting note] #drafting-note
+> elaborate on the "essentially a JS function…"
+
+Now that we understand how ReactDOM ties into the application, it's time to explore one of the fundamental concepts that makes React such a powerful tool. Components are the building blocks of any React application. A modern[^class-component] React component is essentially a JavaScript function that does some isolated work and returns html. They allow us to break down a UI into smaller elements that can be tied together or re-used as needed.
 
 To look at the structure of a component, we need to convert the JSX syntax to JavaScript. More on JSX soon. For now, we'll convert our `App` component to plain JavaScript. The original file looks like:
 
@@ -161,7 +167,10 @@ There certainly is a lot of `React.createElement`s! Each one accepts a `type`, a
 	- if not used, it must contain an empty object or `null`
 - **`…children`**: Optional. One or more nodes that are nested into the element being created. This can also include text content such as found in a heading, paragraph, etc. Each nested `React.createElement` in the code above is found in `…children` arguments of its parent.
 
-### Defining a Component
+> [!note]
+> `props` is an object.
+
+#### Defining a Component
 
 We can use function declarations, function expressions, or arrow functions - each are equally valid.
 
@@ -214,10 +223,10 @@ Although a component is just a function, there are a few rules to follow when cr
 
 - The name must be capitalized.
 - It must be a pure function.
-	- It is idempotent. This means that its return values are always the same given the same inputs.
-	- No side effects should happen during render. These must happen outside the render cycle.
+	- Its return values are always the same given the same inputs.
+	- No side effects[^side-effects] should happen during render. These must happen outside the render cycle.
 		- Mutations local to the component during render is acceptable. Example: pushing items into an array that is then rendered into list items.
-	- Don't mutate props or state. We'll cover making updates to these next week.
+	- Don't make direct changes (mutate) to props or state. We'll cover making updates to these next week.
 
 There are also a few best practices to follow:
 
@@ -225,7 +234,7 @@ There are also a few best practices to follow:
 - Named or default exports[^avoid-anonymous] are both acceptable but should be consistent across the codebase. We recommend sticking with `default export SomeComponent`.
 - Each component should have its own file.
 
-### Built-in Components
+#### Built-in Components
 
 React includes several built-in components - we've already ran into the two used in the course.
 
@@ -237,6 +246,27 @@ React includes several built-in components - we've already ran into the two used
 	- It's added to our project automatically with Vite's React template. It may be tempting to remove it to suppress odd behaviors (especially with useEffect) but don't. Again, errors are our friends and they'll guide us to the right path!
 
 ReactDOM provides common components for all of the elements that can be found in an html document. When using `div`, `button`, or `input` for example, they are not directly referencing the native HTML element itself. We are using component representations which also provide a host of built in props and events. The [common components](https://react.dev/reference/react-dom/components/common) are too numerous to list here but are worth reviewing.
+
+#### The Component Tree
+
+> [!drafting note] #drafting-note
+> keep current with latest from app
+
+```mermaid
+---
+title: Component Tree for CTD Swag
+---
+flowchart TD
+    A("root (main.jsx)") ---- B
+    B("App - (manages app state)") <--> C(Header)
+    B <--> D(ProductList)
+    D <--> E(Product 1)
+    D <--> F(Product 2)
+    D <--> G(Product n)
+    C <--> H(ShoppingCart)
+```
+
+When assembling components, the hierarchical structure that is formed is called a component tree. At the top of the tree is the root component, with child components branching out from it to form an inverted tree-like structure. Where each branch forms, the component that contains further sub-components is referred to as a parent component. Each component in the tree encapsulates a specific part of the UI and can contain other components as children. The component tree visually depicts the relationships and dependencies between components, illustrating how data flows from parent components to their children through props, and how updates propagate downward through the tree via state and context. This tree structure is fundamental to understanding how components are composed and nested within a React application.
 
 ### JSX
 
@@ -410,4 +440,10 @@ After completing this week's assignment, the app should be able to:
 	- [Using React Developer Tools with Safari and other browsers without plugins](https://react.dev/learn/react-developer-tools#safari-and-other-browsers)
 
 [^class-component]: React components can also be class-based but it's not common to see them any more. With the introduction of hooks in React v16.8 (released February, 2019), many of the disadvantages of functional components disappeared. A large portion of the JavaScript community eschews [OOP](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object-oriented_programming) in favor of [functional](https://github.com/readme/guides/functional-programming-basics) programming. This is not a judgement, just an observation.
-[^avoid-anonymous]: Default export can be used with anonymous functions but this is discouraged. While components are given a name when imported, anonymous function components make React needlessly difficult to troubleshoot.
+[^side-effects]: In JavaScript, a side effect refers to any observable behavior or change that a function introduces beyond simply returning a value. Side effects can include modifying variables outside the function's scope, interacting with the DOM, making API calls, and updating state in a React component. Side effects can impact the application's state, environment, or external systems in ways that go beyond the function's primary purpose of computing and returning a value.
+
+	For example, consider a function that updates a global variable or performs a network request. These actions are considered side effects because they alter the program's state or interact with external resources outside the function's local scope. While side effects are often necessary for applications to interact with the outside world, excessive or unexpected side effects can lead to unintended consequences, bugs, and harder-to-maintain code.
+
+	Managing and controlling side effects is a key consideration in JavaScript development, especially when working with asynchronous operations, state management, and complex applications. Tools like pure functions, immutability, and libraries like Redux and React's useEffect hook help developers manage side effects effectively while keeping the codebase clean and maintainable.
+
+[^avoid-anonymous]: Default export can be used with anonymous functions but this is discouraged. While components are given a name when imported, anonymous function components make React needlessly difficult to troubleshoot.\
