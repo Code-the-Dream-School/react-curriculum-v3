@@ -1,6 +1,6 @@
 ---
 title: Week-04
-dateModified: 2024-10-31
+dateModified: 2024-11-01
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -470,9 +470,111 @@ function Counter() {
 
 #### Putting it all Together
 
-We're not quite ready to do any more with the inventory but the store is missing a key feature: a shopping cart! Let's fix up the styling to make it look more like a storefront and then implement a cart.
+We need to make a minor change to the inventory. Currently, we're not using the updater function for the cart but we will when transition over to API use. Let's implement `useEffect` to load in the inventory in preparation for this move. To make sure we load the inventory only once, we include an empty dependency array in the `useEffect`.
 
+```jsx
+//App.jsx
+//...component code
+const [inventory, setInventory] = useState([]);
+useEffect(() => {
+	setInventory([...catalog.products]);
+}, []); //<--- don't forget the dependency array or you can end up with an infinite loop!!
+//...component code
+```
 
+It loads the same as before but now the code is a bit more flexible for future changes.
+
+![[202410_0336PM-Firefox Developer Edition.png|600]]
+
+Let's fix up the styling to make it look more like a storefront and then add a shopping cart! For now, we'll add classes to elements so that they're easy to select and add style rules to `App.css`. We'll talk about css and images in depth in week 10 because there are other, more flexible options for styling in React, especially as an app grows and becomes more complex.
+
+![[202410_0406PM-Firefox Developer Edition.png|600]]
+
+For a cart feature, we need to be able to track items that have been put into a cart. To do so, we'll to add another `useState` to hold and update the items a user has selected. The initial state will be an empty array and we need handler functions to add and remove items from the cart. We're also going to remove the special limited edition tee to simplify the product list. It will end up causing bugs because it's not a part of the inventory that we import from `catalog.json`. Sorry Frank, it'll come back later!
+
+```jsx
+//App.jsx
+//...component code
+const [cart, setCart] = useState([]);
+function addItemToCart(item) {
+setCart([...cart, item]);
+}
+function removeItemFromCart(id) {
+const updatedCart = cart.filter((item) => item.id !== id);
+setCart([...updatedCart]);
+  }
+//...component code
+```
+
+There's a problem with this implementation… what if a user adds the same item to their cart twice? That would mean there is more than one item in the cart with the same `id`. As it's implemented, the `id` that's used would filter out all the inventory items with a matching `id`. That's not a desired behavior so we need to come up with a unique cart item identifier.
+
+We might employ `Math.random()` to generate a random number but this is not a great idea. [`Math.random`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random) only generates *pseudo-random* numbers and we may end up with the identical id every once in a while. A better option would be the `Date.now()` method. This returns a number, in milliseconds from January 1, 1970, UTC. In production, we would probably use a UUID library but this works for our purposes. As we add an item into the cart, we'll assign it a `cartItemId` with the timestamp so we are better able to manage the cart.
+
+```jsx
+//App.jsx
+//...component code
+const [cart, setCart] = useState([]);
+function handleAddItemToCart(id) {
+    const target = inventory.find((item) => item.id === id);
+    //if no inventory items are found
+    //we want to prevent the app from crashing
+    //by exiting this function now
+    if(!target){
+      console.error('cart error: item not found');
+      return;
+    }
+    //create an new object, spread the contents of the item selected
+    //and add a `cartItemId`
+    const cartItem = { ...target, cartItemId: Date.now() };
+    console.log(cartItem);
+    setCart([...cart, cartItem]);
+  }
+function handleRemoveItemFromCart(cartItemId) {
+	const updatedCart = cart.filter((item) => item.cartItemId !== cartItemId);
+	setCart([...updatedCart]);
+}
+//...component code
+```
+
+Now that we have 2 handler functions to update the cart state, we need to wire `handleAddItemToCart` to the UI so a user can add items to the cart. We will do so by adding buttons to each of the cards so that its product can added to the cart. This will not account for different t-shirt sizes or products that have color variations but we will address those cases after we get the basics of the cart in place.
+
+1. Add the props `handleAddItemToCart={handleAddItemToCart}` to `ProductList`, then from `ProductList` pass down to `ProductCard` using `handleAddItemToCart={handleAddItemToCart}`
+2. Create a button in `ProductCard`
+3. We then add an `onClick` event prop to the button. Since we have to provide it with an argument unrelated to the synthetic event, we'll create an anonymous arrow function to call our handler with the correct args.
+	- `<button onClick={() => handleAddItemToCart(cartItemId)}>Add to Cart</button>`
+
+With that done, we can now look at the state in `App` using our [React Dev Tools](https://react.dev/learn/react-developer-tools) (it's highly recommended that you have them installed!). The second State entry grows every time one of the buttons is clicked. When the entries are expanded, they contain all the details of the product but there is also a unique `cartItemId`.
+
+![[202411_0225PM-Firefox Developer Edition.gif]]
+
+Now that we have a state representation of the cart, we can add it to the page. The cart does not need to remain open all the time - it would get in the way of the products. We'll keep the cart minimized and add a cart icon with an item count in the upper-left corner which is controlled by the Header component.
+
+1. We add in the icon and place it on the page and use styling to push it over to the side of the screen.
+2. We then add a `cart` props to the Header component definition: `function Header({ cart }) {`
+3. Back in App, we then add the cart props to the header tag: `<Header cart={cart} />`
+4. To get an item count to appear, we calculate the length of the cart array.
+
+Since we haven't talked about conditional rendering, we cannot work on displaying a full cart list. We would have to have this full list available to implement the `removeItemFromCart` handler function. For now, we'll update the `Header` so that it prints the shopping cart to the console. To run useEffect every time the component renders, we'll exclude the dependency list.
+
+```jsx
+//Header.jsx
+
+//... component code
+useEffect(() => {
+    cart.forEach((item) => {
+	    console.log(item.name, item.cartItemId);
+    });
+    if (cart.length > 0) {
+	    console.log('--end of cart--');
+    }
+});
+//...component code.
+```
+
+![[202411_0331PM-Firefox Developer Edition.gif]]
+
+> [!note]
+> A handler function's name doesn't have to follow it down to where it's being used. We could have called the props `addItem` when defining ProductCard and then added that to the `onClick`
 
 ## Weekly Assignment Instructions
 

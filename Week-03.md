@@ -103,7 +103,7 @@ We'll know when the `setTimeout` fires off because of the console statement that
 
 #### useState
 
-`const [state, setState] = useState(initialState`
+`const [state, setState] = useState(initialState)`
 
  `useState` is a React hook that allows us to set and update a piece of data that we can then use in our SPA. We invoke `useState` with an initial state value as an argument. That initial state value can be of any type. If given a function, it would be called an "initializer function" in that context. React will run it and use the returned value to set the initial state value. Initializer functions must be pure functions and cannot take any arguments. When called, `useState` returns an array containing a state variable (a reference to the current state) and an updater function. We follow array [destructuring assignment](https://javascript.info/destructuring-assignment) #placeholder/link convention `const [noun, setNoun] = useState(intialState)` to make use of this hook.
 
@@ -203,7 +203,7 @@ Enter React **`props`**. Short for "properties", the are used to pass data from 
 
 ```jsx
 //without destructuring
-function Inventory(props){
+function ProductList(props){
 	const inventory = props.inventory
 	return (
 		<ul>
@@ -219,7 +219,7 @@ function Inventory(props){
 }
 
 //with destructuring
-function Inventory({inventory = []){ //destructuring assignment grabs `inventory` out of props
+function ProductList({inventory = []){ //destructuring assignment grabs `inventory` out of props
 									 //we're also setting a default value og `inventory` to an empty array
 	return (
 		<ul>
@@ -268,9 +268,9 @@ export default Header;
 ```
 
 ```jsx
-/*InventoryList.jsx*/
+/*ProductList.jsx*/
 
-function InventoryList({inventory}) {
+function ProductList({inventory}) {
   return (
     <ul>
       {inventory.map((item) => {
@@ -287,7 +287,7 @@ function InventoryList({inventory}) {
   );
 }
 
-export default InventoryList;
+export default ProductList;
 
 ```
 
@@ -313,16 +313,16 @@ rules: {
     },
 ```
 
-We then need to refactor ItemCard out of the Inventory component.
+We then need to refactor ProductCard out of the ProductList component.
 
-Create the file, `ItemCard.jsx` and move the list item over to the new component.
+Create the file, `ProductCard.jsx` and move the list item over to the new component.
 
 ```jsx
-/*Inventory.jsx*/
+/*ProductList.jsx*/
 
-import ItemCard from './InventoryItem';
+import ProductCard from './ProductCard';
 
-function InventoryList({inventory}) {
+function ProductList({inventory}) {
   return (
     <ul>
       {inventory.map((item) => {
@@ -338,13 +338,13 @@ function InventoryList({inventory}) {
   );
 }
 
-export default InventoryList;
+export default ProductList;
 ```
 
 ```jsx
-/*ItemCard.jsx*/
+/*ProductCard.jsx*/
 
-function ItemCard({name, description}) {
+function ProductCard({name, description}) {
   return (
     <li>
       <div className="itemCard">
@@ -368,8 +368,8 @@ import { useState } from 'react';
 import './App.css';
 import catalog from './assets/catalog.json';
 import Header from './Header';
-import InventoryList from './InventoryList';
-import ItemCard from './ItemCard';
+import ProductList from './ProductList';
+import ProductCard from './ProductCard';
 
 function App() {
   const [inventory, setInventory] = useState(catalog.items);
@@ -378,7 +378,7 @@ function App() {
   return (
     <main>
       <Header />
-      <InventoryList />
+      <ProductList />
     </main>
   );
 }
@@ -414,7 +414,7 @@ Along with the props that we can define on our own, React's common components fe
 
 ##### Children Props - A Closer Look
 
-We are able to use a `children` prop to pass React elements into our custom components. Rather than assign `children` a value (`children={someValue}`), they are placed between the opening and closing tags for the element. For example, we may be trying to promote a specific item in our store and want to appear on the top, regardless of filters or sort order. We define that item in the App component and nest it inside `<Inventory></Inventory>` tags.
+We are able to use a `children` prop to pass React elements into our custom components. Rather than assign `children` a value (`children={someValue}`), they are placed between the opening and closing tags for the element. For example, we may be trying to promote a specific item in our store and want to appear on the top, regardless of filters or sort order. We define that item in the App component and nest it inside `<ProductList></ProductList>` tags.
 
 ```jsx
 /*App.jsx*/
@@ -423,15 +423,15 @@ import { useState } from 'react';
 import './App.css';
 import catalog from './assets/catalog.json';
 import Header from './Header';
-import InventoryList from './InventoryList';
-import ItemCard from './ItemCard';
+import ProductList from './ProductList';
+import ProductCard from './ProductCard';
 
 function App() {
   const [inventory, setInventory] = useState(catalog.items);
 
   function promoteItem() {
     return (
-      <ItemCard
+      <ProductCard
         name="Limited Edition Tee!"
         description="Special limited edition neon green shirt with a metallic Code the Dream Logo shinier than the latest front-end framework! Signed by the legendary Frank!"
       />
@@ -440,7 +440,7 @@ function App() {
   return (
     <main>
       <Header />
-      <InventoryList inventory={inventory}>{promoteItem()}</InventoryList> //invoking promoted item between the tags inserts the ItemCard
+      <ProductList inventory={inventory}>{promoteItem()}</ProductList> //invoking promoted item between the tags inserts the ItemCard
     </main>
   );
 }
@@ -448,20 +448,20 @@ function App() {
 export default App;
 ```
 
-In order for it to appear in `InventoryList`, we need to include `{children}` in the desired area of our return statement.
+In order for it to appear in `ProductList`, we need to include `{children}` in the desired area of our return statement.
 
 ```jsx
-/*InventoryList.jsx*/
+/*ProductList.jsx*/
 
-import ItemCard from './ItemCard';
+import ProductCard from './ProductCard';
 
-function InventoryList({inventory, children}) {
+function ProductList({inventory, children}) {
   return (
     <ul>
       {children} //this location guarantees that this list item will be first
       {inventory.map((item) => {
         return (
-          <ItemCard
+          <ProductCard
             key={item.id}
             name={item.name}
             description={item.description}
@@ -472,7 +472,7 @@ function InventoryList({inventory, children}) {
   );
 }
 
-export default InventoryList;
+export default ProductList;
 ```
 
 ![[202410_0336PM-Firefox Developer Edition.png|600]]
