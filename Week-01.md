@@ -1,6 +1,6 @@
 ---
 title: Week-01
-dateModified: 2024-10-30
+dateModified: 2024-10-31
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -237,7 +237,7 @@ We then have to install Prettier plugin and configure VS Code to use it as the d
 
 Code before and after saving with Prettier enabled:
 
-![[202410_0416PM-Code.png]]
+![[202410_0416PM-Code.png|600]]
 
 - semicolons are consistently used
 - quotes on imports are single quotes instead of double quotes
