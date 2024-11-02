@@ -1,6 +1,6 @@
 ---
 title: Week-07
-dateModified: 2024-10-09
+dateModified: 2024-11-02
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -16,7 +16,6 @@ content: lesson plan
 ### Topics Covered
 
 - Data Fetching
-- Conditional Rendering
 - UI Update Strategies
 
 ### Lesson Objectives
@@ -27,10 +26,6 @@ By the end of this lesson, we will:
 
 - Discuss data fetching in React applications to send and receive data
 - Implement data fetching to retrieve and save data to manage application state
-
-#### Objective 2: Conditional Rendering
-
-- Incorporate conditional rendering techniques to show or hide elements based user interactions or received data
 
 #### Objective 3: UI Update Strategies
 

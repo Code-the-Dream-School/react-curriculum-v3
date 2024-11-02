@@ -1,6 +1,6 @@
 ---
 title: Week-05
-dateModified: 2024-09-15
+dateModified: 2024-11-02
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -15,6 +15,7 @@ content: lesson plan
 
 ### Topics Covered
 
+- Conditional Rendering
 - Controlled Components
 - Forms
 
@@ -22,12 +23,16 @@ content: lesson plan
 
 By the end of this lesson, we will:
 
-#### Objective 1: Controlled Components
+#### Objective 1: Conditional Rendering
+
+- Incorporate conditional rendering techniques to show or hide elements based user interactions or received data
+
+#### Objective 2: Controlled Components
 
 - Explain controlled components and their importance in managing state
 - Demonstrate how to use controlled components to build interactive elements that behave predictably and share user input back to the application
 
-#### Objective 2: React Forms
+#### Objective 3: React Forms
 
 - Explain the management of form data in React and recognize the form's role in collecting and validating user input
 - Use a controlled form to handle form events and validate user input
