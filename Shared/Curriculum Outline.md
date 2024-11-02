@@ -1,6 +1,6 @@
 ---
 title: Curriculum Outline
-dateModified: 2024-10-31
+dateModified: 2024-11-02
 dateCreated: 2024-08-16
 contentType: block
 ---
@@ -11,7 +11,7 @@ contentType: block
 - **Week 2** - ReactDOM, Components, JSX, and Troubleshooting
 - **Week 3** - State, Props, Common Component Props
 - **Week 4** - Basic Hooks, Events and Handlers, Updating State
-- **Week 5** - Controlled Components and Forms
+- **Week 5** - Conditional Rendering, Controlled Components and Forms
 - **Week 6** - Re-usable Components, Refactoring, Project Organization, and Testing
 - **Week 7** - Data fetching, Conditional Rendering, UI Update Strategies
 - **Week 8** - Sorting, Filtering

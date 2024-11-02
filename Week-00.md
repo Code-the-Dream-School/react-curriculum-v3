@@ -1,7 +1,7 @@
 ---
 title: Week-00
 filedUnder: unsorted
-dateModified: 2024-10-31
+dateModified: 2024-11-02
 dateCreated: 2024-08-27
 tags: [react]
 context: [ctd, freelance, personal, work]
@@ -59,7 +59,7 @@ The materials for the course is further broken down into a full list of topics c
 - **Week 2** - ReactDOM, Components, JSX, and Troubleshooting
 - **Week 3** - State, Props, Common Component Props
 - **Week 4** - Basic Hooks, Events and Handlers, Updating State
-- **Week 5** - Controlled Components and Forms
+- **Week 5** - Conditional Rendering, Controlled Components and Forms
 - **Week 6** - Re-usable Components, Refactoring, Project Organization, and Testing
 - **Week 7** - Data fetching, Conditional Rendering, UI Update Strategies
 - **Week 8** - Sorting, Filtering
