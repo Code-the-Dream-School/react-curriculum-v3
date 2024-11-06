@@ -1,6 +1,6 @@
 ---
 title: Week-04
-dateModified: 2024-11-01
+dateModified: 2024-11-04
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -486,7 +486,7 @@ It loads the same as before but now the code is a bit more flexible for future c
 
 ![[202410_0336PM-Firefox Developer Edition.png|600]]
 
-Let's fix up the styling to make it look more like a storefront and then add a shopping cart! For now, we'll add classes to elements so that they're easy to select and add style rules to `App.css`. We'll talk about css and images in depth in week 10 because there are other, more flexible options for styling in React, especially as an app grows and becomes more complex.
+Let's fix up the styling to make it look more like a storefront and then add a shopping cart! For now, we'll add classes to elements so that they're easy to select and add style rules to `App.css` - the same that we would do with a static html page. We'll talk about css and images in depth in week 10 because there are other, more flexible options for styling in React, especially as an app grows and becomes more complex.
 
 ![[202410_0406PM-Firefox Developer Edition.png|600]]
 
