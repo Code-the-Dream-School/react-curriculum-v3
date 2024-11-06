@@ -1,6 +1,6 @@
 ---
 title: Week-03
-dateModified: 2024-10-31
+dateModified: 2024-11-05
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -415,6 +415,9 @@ Along with the props that we can define on our own, React's common components fe
 ##### Children Props - A Closer Look
 
 We are able to use a `children` prop to pass React elements into our custom components. Rather than assign `children` a value (`children={someValue}`), they are placed between the opening and closing tags for the element. For example, we may be trying to promote a specific item in our store and want to appear on the top, regardless of filters or sort order. We define that item in the App component and nest it inside `<ProductList></ProductList>` tags.
+
+> [!drafting note] #drafting-note
+> simplify this component - attempt to demote `promoteItem` to an object to feed in card props
 
 ```jsx
 /*App.jsx*/
