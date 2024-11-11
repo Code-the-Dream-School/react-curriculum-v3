@@ -1,6 +1,6 @@
 ---
 title: Week-06
-dateModified: 2024-10-22
+dateModified: 2024-11-11
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -17,6 +17,7 @@ content: lesson plan
 > [!drafting note] #drafting-note
 > - introduce props destructuring assignment for this week
 > - incorporate custom hooks into refactoring
+> - move formIsDirty to app to block buttons - screen insufficient
 
 1. submission #1 - code updates to refactor project
 2. submission #2 - diagnose 3-4 failed tests, stretch goal: write test for a component

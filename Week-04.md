@@ -1,6 +1,6 @@
 ---
 title: Week-04
-dateModified: 2024-11-04
+dateModified: 2024-11-08
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -490,7 +490,7 @@ Let's fix up the styling to make it look more like a storefront and then add a s
 
 ![[202410_0406PM-Firefox Developer Edition.png|600]]
 
-For a cart feature, we need to be able to track items that have been put into a cart. To do so, we'll to add another `useState` to hold and update the items a user has selected. The initial state will be an empty array and we need handler functions to add and remove items from the cart. We're also going to remove the special limited edition tee to simplify the product list. It will end up causing bugs because it's not a part of the inventory that we import from `catalog.json`. Sorry Frank, it'll come back later!
+For a cart feature, we need to be able to track items that have been put into a cart. To do so, we'll to add another `useState` to hold and update the items a user has selected. The initial state will be an empty array and we need handler function to add items from the cart. Removing items will come next week when we work with forms. We're also going to remove the special limited edition tee to simplify the product list. It will end up causing bugs because it's not a part of the inventory that we import from `catalog.json`. Sorry Frank, it'll come back later!
 
 ```jsx
 //App.jsx
@@ -529,14 +529,10 @@ function handleAddItemToCart(id) {
     console.log(cartItem);
     setCart([...cart, cartItem]);
   }
-function handleRemoveItemFromCart(cartItemId) {
-	const updatedCart = cart.filter((item) => item.cartItemId !== cartItemId);
-	setCart([...updatedCart]);
-}
 //...component code
 ```
 
-Now that we have 2 handler functions to update the cart state, we need to wire `handleAddItemToCart` to the UI so a user can add items to the cart. We will do so by adding buttons to each of the cards so that its product can added to the cart. This will not account for different t-shirt sizes or products that have color variations but we will address those cases after we get the basics of the cart in place.
+Now that we have a handler function to update the cart state, we need to wire `handleAddItemToCart` to the UI so a user can add items to the cart. We will do so by adding buttons to each of the cards so that its product can added to the cart. This will not account for different t-shirt sizes or products that have color variations but we will address those cases after we get the basics of the cart in place.
 
 1. Add the props `handleAddItemToCart={handleAddItemToCart}` to `ProductList`, then from `ProductList` pass down to `ProductCard` using `handleAddItemToCart={handleAddItemToCart}`
 2. Create a button in `ProductCard`
