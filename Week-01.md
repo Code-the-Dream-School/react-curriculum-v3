@@ -1,6 +1,6 @@
 ---
 title: Week-01
-dateModified: 2024-10-31
+dateModified: 2024-11-18
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -312,7 +312,6 @@ After completing this week's assignment, the app should be able to:
 	In contrast, traditional multi-page websites follow a server-centric model where navigating between pages involves full-page reloads, resulting in slower interactions and delays in content delivery. Each page request triggers a server response to load a new page, leading to a less interactive and dynamic user experience compared to SPAs. Multi-page websites have distinct HTML files for each page and rely on server-side rendering to generate and serve content, which can be less efficient and scalable for complex web applications.
 
 	SPAs revolutionized web development by optimizing performance and user experience through client-side rendering and dynamic content updates. By eliminating the need for full-page reloads and reducing server requests, SPAs deliver faster load times and smoother interactions. While SPAs excel in creating interactive and responsive applications, multi-page websites remain relevant for content-heavy platforms that benefit from SEO advantages, as search engines find it easier to crawl individual pages. The choice between an SPA and a traditional multi-page website depends on the specific requirements of the application, balancing factors like user experience, performance, and search engine visibility.
-
 [^state]: State refers to the current condition or data within an application at a specific point in time. It includes all data relevant to the application, such as user input, server responses, and UI state.
 [^libraries-and-frameworks]: Libraries and frameworks are code packages written to solve complex or specialized challenges. We incorporate libraries or frameworks into our projects to simplify the development process. The distinction between the libraries and frameworks is a nuanced topic and can be interpreted differently based on their programming language and what they're used for. "[Inversion of control](https://en.wikipedia.org/wiki/Inversion_of_control)" is a common element to most comparisons between the two.
 
