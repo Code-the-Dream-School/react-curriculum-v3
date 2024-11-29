@@ -1,6 +1,6 @@
 ---
 title: Week-11
-dateModified: 2024-09-12
+dateModified: 2024-11-19
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -12,6 +12,10 @@ content: lesson plan
 # Week-11
 
 ## Introduction
+
+> [!drafting note] #drafting-note
+> expand ProductItems to display sizing and variation details
+> add checkout cart
 
 ### Topics Covered
 
