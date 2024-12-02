@@ -1,6 +1,6 @@
 ---
 title: Week-02
-dateModified: 2024-10-30
+dateModified: 2024-11-19
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -230,9 +230,10 @@ Although a component is just a function, there are a few rules to follow when cr
 
 There are also a few best practices to follow:
 
-- Use PascalCase if the component name is multi-worded(eg - `<BackButton />`.
+- Use PascalCase if the component name is multi-worded(eg - `BackButton`.
 - Named or default exports[^avoid-anonymous] are both acceptable but should be consistent across the codebase. We recommend sticking with `default export SomeComponent`.
 - Each component should have its own file.
+- The file name should match the component name. Eg - `Header` component should go in a file named `Header.jsx`.
 
 #### Built-in Components
 
@@ -270,7 +271,9 @@ When assembling components, the hierarchical structure that is formed is called 
 
 ### JSX
 
-Writing components in JavaScript is possible but becomes but becomes tedious as a component grows. JSX provides a more concise and expressive syntax for defining UI components. JSX stands for **JavaScript XML**. It is a syntax extension for JavaScript that Vite transpiles down to JavaScript using [[Week-01#Sub-tools|esbuild]]. #placeholder/link/internal JSX resembles HTML, making it easier for developers to visualize the component structure and to write code that closely resembles the final UI. JSX also allows for embedding JavaScript expressions directly in the markup.
+Writing components in JavaScript is possible but becomes but becomes tedious as a component grows. JSX provides a more concise and expressive syntax for defining UI components. JSX stands for **JavaScript XML**. It is a syntax extension for JavaScript that Vite transpiles down to JavaScript using [[Week-01#Sub-tools|esbuild]]. #placeholder/link/internal JSX resembles HTML, making it easier for developers to visualize the component structure and to write code that closely resembles the final UI.
+
+When we place custom or built-in components into JSX with `<>` brackets, that element is commonly referred to as an "instance" of that component. JSX also allows for embedding JavaScript expressions directly in the markup using `{}` brackets.
 
 #### Rules of JSX
 
@@ -278,12 +281,12 @@ To keep the transpilation process simple and performant, we must follow some rul
 
 - a component must return a single React element or component.
 	- This element can contain one or more child elements.
-	- React includes a special component `Fragment` that acts as a wrapper element for sibling elements. It gets stripped out during render time.
+	- React includes a special component `Fragment` or written in shorthand as `<></>` that acts as a wrapper element for sibling elements. It gets stripped out during render time.
 
 JSX
 
 ```jsx
-<>
+<> //React's fragment is easy to identify and saves a lot of space in the code
   <h1>CTD Swag</h1>
   <p>We have merch!!!</p>
   <ul>
@@ -293,7 +296,7 @@ JSX
 </>
 ```
 
-- All tags must be terminated. They either have to have an accompanying closing tag (`<div></div>`) or be self-closing (`<img/>`)
+- All tags must be terminated. They either have to have an accompanying closing tag (`<div></div>`) or be self-closing (`<img/>`).
 
 HTML
 
@@ -445,5 +448,4 @@ After completing this week's assignment, the app should be able to:
 	For example, consider a function that updates a global variable or performs a network request. These actions are considered side effects because they alter the program's state or interact with external resources outside the function's local scope. While side effects are often necessary for applications to interact with the outside world, excessive or unexpected side effects can lead to unintended consequences, bugs, and harder-to-maintain code.
 
 	Managing and controlling side effects is a key consideration in JavaScript development, especially when working with asynchronous operations, state management, and complex applications. Tools like pure functions, immutability, and libraries like Redux and React's useEffect hook help developers manage side effects effectively while keeping the codebase clean and maintainable.
-
 [^avoid-anonymous]: Default export can be used with anonymous functions but this is discouraged. While components are given a name when imported, anonymous function components make React needlessly difficult to troubleshoot.\

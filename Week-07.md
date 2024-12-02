@@ -1,11 +1,11 @@
 ---
 title: Week-07
-dateModified: 2024-11-02
+dateModified: 2024-11-13
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
 week: 7
-topics: [conditional rendering, data fetching, ui update strategies]
+topics: [data fetching, ui update strategies]
 content: lesson plan
 ---
 

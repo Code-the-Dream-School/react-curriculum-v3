@@ -1,6 +1,6 @@
 ---
 title: Week-04
-dateModified: 2024-11-08
+dateModified: 2024-11-19
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -24,7 +24,7 @@ content: lesson plan
 By the end of this lesson, we will:
 
 > [!drafting note]
-> clean up the Events and Updating State objectives - bit mixed up
+> need to clean up the Events and Updating State objectives…
 
 #### Objective 1: Basic Hooks
 
@@ -51,7 +51,7 @@ By the end of this lesson, we will:
 
 ### Basic Hooks
 
-A React Hook is a function that allows functional components add state, integrate with side-effects, and work with other React features. We can also develop our own custom hooks to encapsulate logic (including other hooks!) into reusable functions. Hooks were introduced in React 16.8 (released February 2019) and gave functional components access to features that were previously available to only class-based components. We won't be working with class-based components but it's important to be aware they exist since you may encounter them in older codebases.
+A React Hook is a function that allows functional components add state, integrate with side-effects, and work with other React features. We can also develop our own custom hooks to encapsulate logic into reusable functions. Hooks were introduced in React 16.8 (released February 2019) and gave functional components access to features that were previously available to only class-based components. We won't be working with class-based components but it's important to be aware they exist since you may encounter them in older codebases.
 
 The existing hooks can be broken down into several categories. We'll highlight the common ones.
 
@@ -67,7 +67,7 @@ The existing hooks can be broken down into several categories. We'll highlight t
 - **performance**: optimizes re-render performance by allowing unnecessary re-rendering to be skipped - more in [[Code The Dream/Intro to React V3/Curriculum/Week-09|Week-09]]
 	- `useMemo`: caches result of an expensive calculation
 	- `useCallback`: caches a function definition between re-renders
-- **custom**: hooks created by the developer or imported from a 3rd party library to encapsulate re-usable logic - more in [[Code The Dream/Intro to React V3/Curriculum/Week-06|Week-06]]
+- **custom**: hooks created by the developer or imported from a 3rd party library to encapsulate re-usable logic - advanced topic not covered in this course
 
 Lets examine several more frequently used hooks.
 

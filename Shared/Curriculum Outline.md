@@ -1,6 +1,6 @@
 ---
 title: Curriculum Outline
-dateModified: 2024-11-02
+dateModified: 2024-11-13
 dateCreated: 2024-08-16
 contentType: block
 ---
@@ -12,7 +12,7 @@ contentType: block
 - **Week 3** - State, Props, Common Component Props
 - **Week 4** - Basic Hooks, Events and Handlers, Updating State
 - **Week 5** - Conditional Rendering, Controlled Components and Forms
-- **Week 6** - Re-usable Components, Refactoring, Project Organization, and Testing
+- **Week 6** - Re-usable Components, Project Organization, Refactoring, and Testing
 - **Week 7** - Data fetching, Conditional Rendering, UI Update Strategies
 - **Week 8** - Sorting, Filtering
 - **Week 9** - useCallback, useMemo, Limiting Network Requests, and Refetching
