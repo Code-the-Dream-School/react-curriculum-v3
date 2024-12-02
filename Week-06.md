@@ -1,6 +1,6 @@
 ---
 title: Week-06
-dateModified: 2024-11-29
+dateModified: 2024-12-02
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -598,7 +598,9 @@ All of these changes should result in an interface that continues to look and be
 
 #### Purpose of Testing
 
-Testing plays a crucial role in detecting bugs and errors during the development process. Tests validate the behavior of a codebase under various conditions, ensuring consistent functionality. They provide a safety net that can catch unintended side effects that may arise while making updates to the codebase. A well-designed test suite ensures that existing functionality continues to work correctly after making code changes. Writing tests alongside code encourages modularity and separation of concerns within the application architecture. If it's easy to test, it's easy to maintain. Testing also serves as a communication tool within teams, documenting component specifications and expected behaviors. Writing tests initially requires additional time from developers but it ultimately improves developer efficiency. Tests come in three basic categories: unit, integration, and end to end (E2E). Each type serves a specific purpose and comes with advantages and disadvantages.
+Testing plays a crucial role in detecting bugs and errors during the development process. Tests validate the behavior of a codebase under various conditions, ensuring consistent functionality. They provide a safety net that can catch unintended side effects that may arise while making updates. A well-designed test suite ensures that existing functionality continues to work correctly after adding new features. Writing tests alongside code encourages modularity and separation of concerns within the application architecture. If it's easy to test, it's easy to maintain. Testing also serves as a communication tool within teams, documenting component specifications and expected behaviors. Writing tests initially requires additional time from developers but it ultimately improves developer efficiency.
+
+Tests come in three basic categories: unit, integration, and end to end (E2E). Each type serves a specific purpose and comes with advantages and disadvantages.
 
 #### Types of Testing
 
@@ -661,7 +663,7 @@ Unit testing is a good place to start when introducing tests. Using Vite, it doe
 
 #### Introduction to Libraries Used
 
-We will be installing [Vitest](https://vitest.dev/guide/), [React Testing Library (abbreviated as RTL)](https://testing-library.com/docs/react-testing-library/intro. Vitest runs the codebase's tests and provides some handy, non-React specific tools to author tests including [Chai](https://www.chaijs.com/) and a few helper libraries. Vitest is a test runner library that also includes [Chai](https://www.chaijs.com/) assertions and additional assertions that are with Jest's [expect API](https://jestjs.io/docs/expect). RTL provides APIs to work with React Components. It is built on top of the core [DOM Testing Library](https://testing-library.com/) which helps test web pages by querying for and interacting with DOM notes in an application.
+We will be installing [Vitest](https://vitest.dev/guide/), [React Testing Library (abbreviated as RTL)](https://testing-library.com/docs/react-testing-library/intro. Vitest runs the codebase's tests and provides some handy, non-React specific tools to author tests including [Chai](https://www.chaijs.com/) and a few helper libraries. Vitest is a test runner library that also includes [Chai](https://www.chaijs.com/) assertions built in and assertions that are compatible with Jest's [expect API](https://jestjs.io/docs/expect). RTL provides APIs to work with React Components. It is built on top of the core [DOM Testing Library](https://testing-library.com/) which helps with querying and interacting with DOM nodes in an application.
 
 There are a few common terms that need to be defined as they relate to our testing software:
 
@@ -675,7 +677,7 @@ There are a few common terms that need to be defined as they relate to our testi
 		- example: ``assert.typeOf(foo, 'string', '`foo` is not a string');``
 		- we will not be using this approach but it is worthwhile to review a full list of assertions which can be found in the [Chai's assertion documentation](https://www.chaijs.com/api/assert/)
 - `expect()`: this function takes an expression to be evaluated. `expect` is then chained to one or more chain-able assertions that take an outcome as an argument. This approach uses a natural language approach that makes it a popular way to write unit tests.
-	- Eg: `expect(foo, 'test failure message').to.equal('bar');`
+	- Eg: `expect(foo, 'test failure message').toEqual('bar');`
 	- Because of its popularity, we will use `expect` most of the time.
 	- assertions are named after the type of assertion that they are making: `toBe` `toBeTruthy`, `toContain`, `toMatch`, `toThrowError`, `toHaveReturned` and so on.
 	- A full list of assertions can be found in [Vitest's documentation](https://vitest.dev/api/expect.html) - There's no need to memorize them but it's good to review all of them. Some have similar sounding names that have some subtle but important differences.
@@ -689,7 +691,7 @@ There are a few common terms that need to be defined as they relate to our testi
 
 **Fixture** is a fixed state or set of data used as the baseline for running tests. It can include pre-defined data, settings, or configurations that ensure consistent test conditions for reproducible and reliable testing.
 
-**Mock** is a simulated object or component that replicates the behavior of a real object or component. Mocks mimic the functionality of dependencies in order to isolate the unit being tested and facilitate more controlled and efficient testing.
+**Mock** is a simulated object, function, or component that replicates the behavior of real code. Mocks help us isolate the tested unit while examining its behavior or output.
 
 **Test suite** is a collection of related tests. Vitest uses the `describe` function to group test cases together. If test cases are written outside of a test suite, they are implicitly grouped together in a top-level suite. All test cases in a suite share a "context" which may include utilities and fixtures that we can define to guarantee consistent tests.
 
@@ -697,15 +699,17 @@ There are a few common terms that need to be defined as they relate to our testi
 
 #### Installation
 
-To get started, we need to install testing libraries. From the terminal, we issue the command `npm install --save-dev @testing-library/react @testing-library/jest-dom @testing-library/jest-dom eslint-plugin-jest-dom jsdom vitest`. This installs:
+To get started, we need to install testing libraries. From the terminal, we issue the command `npm install --save-dev @testing-library/dom @testing-library/react @testing-library/jest-dom @testing-library/user-event eslint-plugin-jest-dom jsdom vitest`. This installs:
 
-- RTL (@testing-library/react)
-- DOM Testing Library (@testing-library/jest-dom) - this package also includes some handy assertions to work with dom elements
-- ESLint's Jest-DOM plugin - this plugin provides some linting rules that address common errors while writing tests.
-- JSDOM - implements DOM and HTML in JavaScript so our test library can render components since unit tests don't use a web browser.
-- Vitest
+- **DOM Testing Library** (@testing-library/dom) - base library which RTL is built on top of
+- **RTL** (@testing-library/react)
+- **jest-dom** (@testing-library/jest-dom) - this package also includes some handy assertions to work with dom elements
+- **user-event**(@testing-library/user-event) - simulates user interactions by dispatching events as if they happened in the browser
+- **ESLint's Jest-DOM plugin** (eslint-plugin-jest-dom) - this plugin provides some linting rules that address common errors while writing tests.
+- **JSDOM** - implements DOM and HTML in JavaScript so our test library can render components since unit tests don't use a web browser.
+- **Vitest**
 
-We then add
+We then add a test command to package.json.
 
 ```json
 {
@@ -719,6 +723,45 @@ We then add
 },
 other config info...
 }
+```
+
+We now have to configure Vitest to work with the libraries and look for a setup file we create in the next step.
+
+1. **environment: 'jsdom'**: Informs Vitest to use JSDOM for any html rendering
+2. **globals: true**: this is a convenience setting so Vitest doesn't need to be imported into test files
+3. **setupFiles**: points Vitest towards a file that customizes the test runner
+
+```javascript
+// vite.config.js
+
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: './test.setup.js',
+  },
+});
+```
+
+Next we create a setup file for the test runner. We use this file to extend the built-in assertions we get from Vitest with those that are provided in RTL(Jest calls them "matchers" in their documentation). We also add a `cleanup` function that unmounts components after each test runs. This will save us from having to do so manually in our tests.
+
+```javascript
+//test.setup.js
+
+import { expect, afterEach } from 'vitest';
+import { cleanup } from '@testing-library/react';
+import * as matchers from "@testing-library/jest-dom/matchers";
+
+expect.extend(matchers);
+
+afterEach(() => {
+  cleanup();
+});
 ```
 
 Our next step is to confirm the testing libraries work properly. By convention, we name test files after the files containing the tested module(s) and append ".test" to the filename. We will start with `App.jsx` first so we create a file `App.test.jsx` in the same location as `App.jsx`. When Vitest is ran, it scans the repository looking for any files that contain `.test` or `.spec` in their filename and will automatically run them.
@@ -745,7 +788,7 @@ Let's look at the output for a failing test. In the example below, our original 
 
 ![[202411_1135AM-iTerm2.png|500]]
 
-Using multiple assertions in a test case keeps the tests compact but it comes with a tradeoff. An assertion is only ran if the previous assertion is alright. At this point, we can't tell if the last assertion (`.not.toMatch`) is true or not. This may be acceptable depending on the test but let's refactor this so that all of the assertions are ran. We will also take this opportunity place `App`'s tests into a suite.
+Using multiple assertions in a test case keeps the tests compact but it comes with a tradeoff. An assertion is only ran if the previous assertion is valid. At this point, we can't tell if the outcome of the final assertion (`.not.toMatch`). This may be acceptable depending on the test but let's refactor this so that all of the assertions are ran. We will also take this opportunity place `App`'s tests into a suite.
 
 ```javascript
 import { describe, expect, it } from 'vitest';
@@ -770,19 +813,166 @@ describe('App test suite', () => {
 });
 ```
 
-Now we can tell that that final assertion, placed in its own test case passes even though the previous one still fails:
+Now we know the outcome of the last assertion even though the previous one still fails:
 
 ![[202411_1156AM-iTerm2.png|500]]
 
-Our test library works so now we have to make a few more adjustments to work with components using React Testing Library(RTL).
-
 #### Evaluating a Component
 
-1. create (and observe running) tests
-	1. rendering test
-	2. props test
-	3. conditional rendering test
-	4. event handling test
+Let's remove those tests and start working with components. Starting with a simple example first, we will test if the App contains a `<main>` html element.
+
+```javascript
+import { describe, expect, it } from 'vitest';
+import App from './App';
+import { render, screen } from '@testing-library/react';
+
+describe('App test suite', () => {
+  it('contains a `main` html element', () => {
+    render(<App />);
+    expect(screen.getByRole('main')).toBeInTheDocument();
+  });
+});
+```
+
+You may notice the keyword `screen`. When a component or a portion of HTML is rendered, DOM Testing Library gives us a `screen` object that contains rendered content and all of the queries available to select various text or elements. `screen` also includes a method, `.debug()` that is very useful for exploring the contents of the of the `screen` while writing tests. When `screen.debug()` is added to the test, it outputs the rendered elements in neatly formatted html. Notice that everything inside of `App` is rendered into HTML, including its children components.
+
+![[202411_0431PM-iTerm2.png|500]]
+
+To focus in on a single element, `.debug()` can accept a `screen` query.
+
+```javascript
+describe('App test suite', () => {
+  it('contains a `main` html element', () => {
+    render(<App />);
+    expect(screen.getByRole('main')).toBeInTheDocument();
+    screen.debug(screen.getByRole('heading', { level: 1 }));
+  });
+});
+```
+
+![[202411_0434PM-iTerm2.png|500]]
+
+Testing props for a component differs from case to case but can be as simple as passing some data into the component as rendered. We'll create a new file to test the ProductCard component.
+
+```javascript
+import { describe, expect, it } from 'vitest';
+import ProductCard from './ProductCard';
+import { render, screen } from '@testing-library/react';
+
+describe('ProductCard component', () => {
+  const testProduct = {
+    name: 'Test Product',
+    description: 'Test product description',
+    handleAddItemToCart: 'todo',
+  };
+
+  it('includes an h2 containing "Test Product"', () => {
+    render(
+      <ProductCard
+        name={testProduct.name}
+        description={testProduct.description}
+      />
+    );
+    expect(screen.getByRole('heading', { level: 2 }))
+	    .toHaveTextContent(testProduct.name);
+  });
+});
+```
+
+![[202411_0506PM-iTerm2.png|500]]
+
+Even though we now have 2 test files, only results for the ProductCard test is displayed. Vitest will not re-run tests unless the evaluated code, or its dependencies, has changed.
+
+To test interactive elements, we need to use the user-event library and change to async test case functions. user-library provides a `userEvent.setup()` method that allows us to emulate UI interactions. It can be invoked in a test case before rendering the component. If we have 2 or more tests cases in a test suite, we should create a new `setup` function that takes care of the setup and rendering at the same time.
+
+```javascript
+//ProductCard.test.js
+
+describe('ProductCard component', () => {
+  function setup(jsx) {
+    return {
+      user: userEvent.setup(),
+      ...render(jsx),
+    };
+  }
+// testing code continues...
+```
+
+We can then use the setup function in place of the render function in the tests.
+
+```jsx
+//instead of `render`
+render(<ProductCard .../>)
+const {user} setup(<ProductCard .../>)
+```
+
+The `user` that is assigned through destructuring is the tool we use to emulate user actions.
+
+```javascript
+await user.click(screen.getByRole('button'));
+```
+
+We don't have access to the original `handleAddItemToCart` so we have to create a mock to simulate its behavior. By looking at the handler function `ProductCard` uses, we can see that it is only returning the product's id. This is easy to replicate: `const returnId = (id) => id`.
+
+Although it has a return value, we don't have direct access to it. We still need a way to observe the behavior of the mock function. For this, we use a spy. Spies record a function's behaviors each time it is called, including any arguments and return values. In Vitest's [Vi Utility](https://vitest.dev/api/vi.html) library we use `fn()` to create a spy on function. To do so, we wrap the original mock function `vi.fn((id) => id)` and then place it into the `testProduct` object to make it available to our ProductCard's test suite.
+
+```javascript
+//ProductCard.test.js
+//...testing code
+const testProduct = {
+    id: 'testId',
+    name: 'Test Product',
+    description: 'Test product description',
+	handleAddItemToCart: vi.fn((id) => id),
+};
+//testing code continues...
+```
+
+The following test confirms that a `ProductCard` button is clicked.
+
+```javascript
+//ProductCard.test.js
+//...testing code
+it('button fires callback', async () => {
+    const { user } = setup(
+      <ProductCard
+        name={testProduct.name}
+        description={testProduct.description}
+        id={testProduct.id}
+        handleAddItemToCart={testProduct.handleAddItemToCart}
+      />
+    );
+    await user.click(screen.getByRole('button'));
+    expect(testProduct.handleAddItemToCart).toHaveBeenCalled();
+    vi.clearAllMocks();
+  });
+```
+
+After the user click, the assertion examines `handleAddItemToCart` with `.toHaveBeenCalled()` to evaluate whether or not the mock handler has been called. Since we've used a spy, it has a record of the event so the test case passes.
+
+This next test asserts that the value that the mock returns is the product's id.
+
+```javascript
+//ProductCard.test.js
+//...testing code
+it('callback returns product id', async () => {
+    const { user } = setup(
+      <ProductCard
+        name={testProduct.name}
+        description={testProduct.description}
+        id={testProduct.id}
+        handleAddItemToCart={testProduct.handleAddItemToCart}
+      />
+    );
+    await user.click(screen.getByRole('button'));
+    expect(testProduct.handleAddItemToCart).toHaveReturnedWith(testProduct.id);
+    vi.clearAllMocks();
+  });
+```
+
+![[202412_1243PM-iTerm2.png|500]]
+
+Testing in React is a fundamental practice that aids in identifying bugs and errors throughout the development process. By validating code behaviors in different scenarios, tests establish a reliable foundation for consistent functionality. They act as a protective layer, catching unintended repercussions when code modifications occur. A robust test suite guarantees that system integrity is maintained even after changes have been made. This week's discussion covers the basics of unit testing, and it's important to acknowledge that there is much more to explore beyond these foundational materials.
 
 ## Weekly Assignment Instructions
 
