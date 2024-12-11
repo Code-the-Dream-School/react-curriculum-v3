@@ -788,7 +788,7 @@ Let's look at the output for a failing test. In the example below, our original 
 
 ![[202411_1135AM-iTerm2.png|500]]
 
-Using multiple assertions in a test case keeps the tests compact but it comes with a tradeoff. An assertion is only ran if the previous assertion is valid. At this point, we can't tell if the outcome of the final assertion (`.not.toMatch`). This may be acceptable depending on the test but let's refactor this so that all of the assertions are ran. We will also take this opportunity place `App`'s tests into a suite.
+Using multiple assertions in a test case keeps the tests compact but it comes with a tradeoff. An assertion is only ran if the previous assertion is valid. At this point, we can't tell the outcome of the final assertion (`.not.toMatch`). This may be acceptable depending on the test but let's refactor this so that all of the assertions are ran. We will also take this opportunity place `App`'s tests into a suite.
 
 ```javascript
 import { describe, expect, it } from 'vitest';
@@ -914,7 +914,7 @@ await user.click(screen.getByRole('button'));
 
 We don't have access to the original `handleAddItemToCart` so we have to create a mock to simulate its behavior. By looking at the handler function `ProductCard` uses, we can see that it is only returning the product's id. This is easy to replicate: `const returnId = (id) => id`.
 
-Although it has a return value, we don't have direct access to it. We still need a way to observe the behavior of the mock function. For this, we use a spy. Spies record a function's behaviors each time it is called, including any arguments and return values. In Vitest's [Vi Utility](https://vitest.dev/api/vi.html) library we use `fn()` to create a spy on function. To do so, we wrap the original mock function `vi.fn((id) => id)` and then place it into the `testProduct` object to make it available to our ProductCard's test suite.
+Although it has a return value, we don't have direct access to it. We still need a way to observe the behavior of the mock function. For this, we use a spy. Spies record a function's behaviors each time it is called, including any arguments and return values. In Vitest's [Vi Utility](https://vitest.dev/api/vi.html) library we use `fn()` to create a spy on a function. To do so, we wrap the mock function `vi.fn((id) => id)` and then place it into the `testProduct` object to make it available to our ProductCard's test suite.
 
 ```javascript
 //ProductCard.test.js
@@ -948,7 +948,7 @@ it('button fires callback', async () => {
   });
 ```
 
-After the user click, the assertion examines `handleAddItemToCart` with `.toHaveBeenCalled()` to evaluate whether or not the mock handler has been called. Since we've used a spy, it has a record of the event so the test case passes.
+After the user click, the assertion examines `handleAddItemToCart` with `.toHaveBeenCalled()` to determine whether or not the mock handler has been called. Since we've used a spy, it has recorded the event so the test case passes.
 
 This next test asserts that the value that the mock returns is the product's id.
 

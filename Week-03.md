@@ -1,6 +1,6 @@
 ---
 title: Week-03
-dateModified: 2024-11-05
+dateModified: 2024-12-05
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -116,15 +116,16 @@ With `useState` explained, we can now start setting up CTD Swag's storefront. Le
       name: "Bucket Hat",
       id: "hat01",
       price: 29.99,
-      sizes: ["S", "M", "L"],
       description:
         "Protect your head from the sun with this stylish bucket hat",
       variants: [
         {
+	      id: "hat01-variant01"
           color: "black",
           image: "bucket-hat-black.png",
         },
         {
+		  id: "hat01-variant02"
           color: "peach",
           image: "bucket-hat-peach.png",
         },
