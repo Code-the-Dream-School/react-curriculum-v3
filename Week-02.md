@@ -1,6 +1,6 @@
 ---
 title: Week-02
-dateModified: 2024-11-19
+dateModified: 2024-12-11
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -241,8 +241,8 @@ React includes several built-in components - we've already ran into the two used
 
 - **Fragment**: allows us to group elements together without affecting the DOM structure. The shorthand `<></>` is used in most cases.
 - **StrictMode**: a special development tool that adds behaviors to the application that reveal common React bugs
-	- components re-render twice to expose impure renders
-	- effects are re-ran to validate cleanup functions work correctly - more details about useEffect will be covered [[Week-08|week 8]]
+	- components mount twice to expose impure renders
+	- effects are re-ran to validate cleanup functions work correctly - more details about useEffect will be covered [[Week-08|week 8]] #drafting-note/incorrect
 	- flags use of [deprecated](https://en.wikipedia.org/wiki/Deprecation) APIs
 	- It's added to our project automatically with Vite's React template. It may be tempting to remove it to suppress odd behaviors (especially with useEffect) but don't. Again, errors are our friends and they'll guide us to the right path!
 
