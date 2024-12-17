@@ -1,11 +1,11 @@
 ---
-title: Week-03
-dateModified: 2024-10-17
+title: Script-Week-03
+dateModified: 2024-12-16
 dateCreated: 2024-10-09
 content: video script
 ---
 
-# Week-03
+# Script-Week-03
 
 ## Video 1 of 2: State
 
@@ -40,7 +40,6 @@ content: video script
 ## Video 2 of 2: Props and Common Component Props
 
 > [!drafting note] #drafting-note
-> - don't discuss JSX spread syntax to pass all props - covered in [[Code The Dream/Intro to React V3/Curriculum/Week-06|Week-06]]
 > - don't discuss updating objects - covered next week
 
 - short for "properties"

@@ -1,6 +1,6 @@
 ---
 title: Script-Week-00
-dateModified: 2024-12-10
+dateModified: 2024-12-16
 dateCreated: 2024-10-09
 content: video script
 ---
@@ -34,7 +34,7 @@ content: video script
 
 #### Course Structure
 
-> [!drafting note] #drafting-note
+> [!drafting note] #drafting-note/update
 > order and wording of topics subject to revision
 
 - **Week 1** - Intro to React, App Installation, and Project Walk-Through

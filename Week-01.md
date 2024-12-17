@@ -1,6 +1,6 @@
 ---
 title: Week-01
-dateModified: 2024-11-18
+dateModified: 2024-12-16
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -37,7 +37,7 @@ By the end of this lesson, we will:
 
 #### Objective 3: Project Walk-Through
 
-> [!drafting note] #drafting-note
+> [!drafting note] #drafting-note/update-objectives
 > needs updated to reflect content
 
 - Describe the role of Vite.js as a development server for React projects.
@@ -53,7 +53,7 @@ By the end of this lesson, we will:
 
 ### Intro to React
 
-> [!drafting note] #drafting-note
+> [!drafting note] #drafting-note/expand-topic
 > expand explanation of SPA. Compare with multi-page website
 
 React is a frontend library used by developers to build dynamic user interfaces. React takes a declarative approach to DOM manipulation with the help of React DOM to provide interactivity in web applications, also known as single-page applications (or SPA)[^SPA-draft]. React takes care of:
@@ -73,7 +73,7 @@ Developing an SPA without libraries (or even with jQuery) is a complicated proce
 
 Often, this includes adding or removing sub-elements that aren't known about ahead of time like list items or images loaded from a remote data source. Each element may need event listeners which in turn, are configured with logic to update the interface. Listeners also need to be managed carefully to keep the application performing smoothly. They don't automatically disappear when elements they are used on are removed or are no longer needed. Forgotten event listeners take up memory on a user's system and can cause serious performance issues or can even crash a browser. This is a lot to manage!
 
-> [!drafting note] #drafting-note
+> [!drafting note] #drafting-note/expand-topic
 > explain imperative vs declarative in further detail. Attempt a diagram of how imperative steps flow vs how data flows in declarative programming.
 
 The most of the current front end libraries or frameworks use a declarative approach to programing a UI. Declarative programming allows us to describe the SPA's structure and state. It is then library's/framework's responsibility to accomplish the all the tasks needed to keep the UI updated as state changes. As a consequence, it allows us to create complex SPAs with relative ease compared to approaches that do not use a framework.

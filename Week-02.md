@@ -1,6 +1,6 @@
 ---
 title: Week-02
-dateModified: 2024-12-11
+dateModified: 2024-12-16
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -96,7 +96,7 @@ The other item to look at is the argument that we pass to `render()`. `StrictMod
 
 #### What is a Component
 
-> [!drafting note] #drafting-note
+> [!drafting note] #drafting-note/expand-topic
 > elaborate on the "essentially a JS function…"
 
 Now that we understand how ReactDOM ties into the application, it's time to explore one of the fundamental concepts that makes React such a powerful tool. Components are the building blocks of any React application. A modern[^class-component] React component is essentially a JavaScript function that does some isolated work and returns html. They allow us to break down a UI into smaller elements that can be tied together or re-used as needed.
@@ -167,14 +167,11 @@ There certainly is a lot of `React.createElement`s! Each one accepts a `type`, a
 	- if not used, it must contain an empty object or `null`
 - **`…children`**: Optional. One or more nodes that are nested into the element being created. This can also include text content such as found in a heading, paragraph, etc. Each nested `React.createElement` in the code above is found in `…children` arguments of its parent.
 
-> [!note]
-> `props` is an object.
-
 #### Defining a Component
 
 We can use function declarations, function expressions, or arrow functions - each are equally valid.
 
-> [!drafting note] #drafting-note
+> [!drafting note] #drafting-note/refactor-examples
 > update examples to use JS not JSX
 
 ```jsx
@@ -250,7 +247,7 @@ ReactDOM provides common components for all of the elements that can be found in
 
 #### The Component Tree
 
-> [!drafting note] #drafting-note
+> [!drafting note] #drafting-note/update
 > keep current with latest from app
 
 ```mermaid
