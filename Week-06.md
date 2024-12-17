@@ -1,6 +1,6 @@
 ---
 title: Week-06
-dateModified: 2024-12-02
+dateModified: 2024-12-16
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -68,6 +68,7 @@ Components are one of the fundamental building blocks of any React application. 
 - day boxes in a calendar
 
 We have already seen a few examples of repeated elements in CTD Swag. The blurred out product cards and the shopping cart items are both elements that repeat themselves. In fact, we've already had some experience with the card components. The shopping cart items are a prime example of an element that can be turned into a re-usable component. Inside of the `Cart` component, we map over the `workingCart` to create each list item. Rather than housing the code in `Cart` component, it can be extracted out to a `CartItem` component. Doing so saves space in the existing component file plus make it easier to read.
+
 
 ![[202411_0415PM-Firefox Developer Edition.png|400]]
 
@@ -457,7 +458,7 @@ Our next task is to extract the cart's product item into `ProductItemCard`. We c
                 return (
                   <li className="cartListItem" key={item.id}>
                     <img src={placeholder} alt="" />
-                    <h2>{item.name}</h2>
+                    <h2>{item.baseName}</h2>
                     <div className="cartListItemSubtotal">
                       <label>
                         Count:{' '}
@@ -549,6 +550,9 @@ With these considerations identified, we can finally plan our refactor to extrac
 
 We have a completed `CartItem` component ready for use. As you can see, most of the code extracted remains the same. Only the `key` is removed and the input's handler function name changes.
 
+> [!drafting note] #drafting-note/products-schema-refactor
+> update code example - product schema change
+
 ```jsx
 // src/features/Cart/CartItem.jsx
 import placeholder from '../../assets/placeholder.png';
@@ -557,7 +561,7 @@ function CartItem({ item, onHandleItemUpdate }) {
   return (
     <li className="cartListItem"> //key removed since no longer used here
       <img src={placeholder} alt="" />
-      <h2>{item.name}</h2>
+      <h2>{item.baseName}</h2>
       <div className="cartListItemSubtotal">
         <label>
           Count:{' '}
@@ -930,6 +934,9 @@ const testProduct = {
 
 The following test confirms that a `ProductCard` button is clicked.
 
+> [!drafting note] #drafting-note/products-schema-refactor
+> update code example - product schema change
+
 ```javascript
 //ProductCard.test.js
 //...testing code
@@ -951,6 +958,9 @@ it('button fires callback', async () => {
 After the user click, the assertion examines `handleAddItemToCart` with `.toHaveBeenCalled()` to determine whether or not the mock handler has been called. Since we've used a spy, it has recorded the event so the test case passes.
 
 This next test asserts that the value that the mock returns is the product's id.
+
+> [!drafting note] #drafting-note/products-schema-refactor
+> update code example - product schema change
 
 ```javascript
 //ProductCard.test.js

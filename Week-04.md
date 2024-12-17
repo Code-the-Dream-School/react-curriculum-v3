@@ -1,6 +1,6 @@
 ---
 title: Week-04
-dateModified: 2024-11-19
+dateModified: 2024-12-16
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -23,7 +23,7 @@ content: lesson plan
 
 By the end of this lesson, we will:
 
-> [!drafting note]
+> [!drafting note] #drafting-note/update-objectives
 > need to clean up the Events and Updating State objectives…
 
 #### Objective 1: Basic Hooks
@@ -103,9 +103,6 @@ function Counter() {
 For objects and arrays React does not look into their contents so cannot see changes to object members or array items. To properly update these state in this case, we need to create a new object or array.
 
 The example below demonstrates how to add items to an array. The buttons use `onClick` event listeners that call `addOption`. Each button press passes a corresponding text value for the option it represents. Inside `addOption`, found on line 6, we call state update function `setTacoOptions` with a new array. Inside this array, we use spread syntax to spread in the current `tacoOptions` and add the new option.
-
-> [!drafting note] #drafting-note
-> simpler example needed
 
 ```jsx
 //useState with an array
@@ -477,7 +474,7 @@ We need to make a minor change to the inventory. Currently, we're not using the 
 //...component code
 const [inventory, setInventory] = useState([]);
 useEffect(() => {
-	setInventory([...catalog.products]);
+	setInventory([...inventoryData.inventory);
 }, []); //<--- don't forget the dependency array or you can end up with an infinite loop!!
 //...component code
 ```
@@ -541,6 +538,7 @@ Now that we have a handler function to update the cart state, we need to wire `h
 
 With that done, we can now look at the state in `App` using our [React Dev Tools](https://react.dev/learn/react-developer-tools) (it's highly recommended that you have them installed!). The second State entry grows every time one of the buttons is clicked. When the entries are expanded, they contain all the details of the product but there is also a unique `cartItemId`.
 
+
 ![[202411_0225PM-Firefox Developer Edition.gif]]
 
 Now that we have a state representation of the cart, we can add it to the page. The cart does not need to remain open all the time - it would get in the way of the products. We'll keep the cart minimized and add a cart icon with an item count in the upper-left corner which is controlled by the Header component.
@@ -558,7 +556,7 @@ Since we haven't talked about conditional rendering, we cannot work on displayin
 //... component code
 useEffect(() => {
     cart.forEach((item) => {
-	    console.log(item.name, item.cartItemId);
+	    console.log(item.baseName, item.cartItemId);
     });
     if (cart.length > 0) {
 	    console.log('--end of cart--');
@@ -570,7 +568,7 @@ useEffect(() => {
 ![[202411_0331PM-Firefox Developer Edition.gif]]
 
 > [!note]
-> A handler function's name doesn't have to follow it down to where it's being used. We could have called the props `addItem` when defining ProductCard and then added that to the `onClick`
+> A handler function's name doesn't have to remain the same when it passed through props. We could have called the props `addItem` when defining ProductCard and then added that to the `onClick`
 
 ## Weekly Assignment Instructions
 
