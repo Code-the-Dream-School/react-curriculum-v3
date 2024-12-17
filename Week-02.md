@@ -1,6 +1,6 @@
 ---
 title: Week-02
-dateModified: 2024-11-19
+dateModified: 2024-12-16
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -96,7 +96,7 @@ The other item to look at is the argument that we pass to `render()`. `StrictMod
 
 #### What is a Component
 
-> [!drafting note] #drafting-note
+> [!drafting note] #drafting-note/expand-topic
 > elaborate on the "essentially a JS function…"
 
 Now that we understand how ReactDOM ties into the application, it's time to explore one of the fundamental concepts that makes React such a powerful tool. Components are the building blocks of any React application. A modern[^class-component] React component is essentially a JavaScript function that does some isolated work and returns html. They allow us to break down a UI into smaller elements that can be tied together or re-used as needed.
@@ -167,14 +167,11 @@ There certainly is a lot of `React.createElement`s! Each one accepts a `type`, a
 	- if not used, it must contain an empty object or `null`
 - **`…children`**: Optional. One or more nodes that are nested into the element being created. This can also include text content such as found in a heading, paragraph, etc. Each nested `React.createElement` in the code above is found in `…children` arguments of its parent.
 
-> [!note]
-> `props` is an object.
-
 #### Defining a Component
 
 We can use function declarations, function expressions, or arrow functions - each are equally valid.
 
-> [!drafting note] #drafting-note
+> [!drafting note] #drafting-note/refactor-examples
 > update examples to use JS not JSX
 
 ```jsx
@@ -241,8 +238,8 @@ React includes several built-in components - we've already ran into the two used
 
 - **Fragment**: allows us to group elements together without affecting the DOM structure. The shorthand `<></>` is used in most cases.
 - **StrictMode**: a special development tool that adds behaviors to the application that reveal common React bugs
-	- components re-render twice to expose impure renders
-	- effects are re-ran to validate cleanup functions work correctly - more details about useEffect will be covered [[Week-08|week 8]]
+	- components mount twice to expose impure renders
+	- effects are re-ran to validate cleanup functions work correctly - more details about useEffect will be covered [[Week-08|week 8]] #drafting-note/incorrect
 	- flags use of [deprecated](https://en.wikipedia.org/wiki/Deprecation) APIs
 	- It's added to our project automatically with Vite's React template. It may be tempting to remove it to suppress odd behaviors (especially with useEffect) but don't. Again, errors are our friends and they'll guide us to the right path!
 
@@ -250,7 +247,7 @@ ReactDOM provides common components for all of the elements that can be found in
 
 #### The Component Tree
 
-> [!drafting note] #drafting-note
+> [!drafting note] #drafting-note/update
 > keep current with latest from app
 
 ```mermaid

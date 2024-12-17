@@ -1,6 +1,6 @@
 ---
 title: Week-03
-dateModified: 2024-11-05
+dateModified: 2024-12-16
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -107,56 +107,71 @@ We'll know when the `setTimeout` fires off because of the console statement that
 
  `useState` is a React hook that allows us to set and update a piece of data that we can then use in our SPA. We invoke `useState` with an initial state value as an argument. That initial state value can be of any type. If given a function, it would be called an "initializer function" in that context. React will run it and use the returned value to set the initial state value. Initializer functions must be pure functions and cannot take any arguments. When called, `useState` returns an array containing a state variable (a reference to the current state) and an updater function. We follow array [destructuring assignment](https://javascript.info/destructuring-assignment) #placeholder/link convention `const [noun, setNoun] = useState(intialState)` to make use of this hook.
 
-With `useState` explained, we can now start setting up CTD Swag's storefront. Let's get some inventory on the page! We first need to put together some sample inventory data for our app to start with. Each item should include `name`, `id` `price`, `description`, and `variants` for color variations, phone models for cases, etc. Garments also need a `size`. Here's an example of an inventory items:
+With `useState` explained, we can now start setting up CTD Swag's storefront. Let's get some inventory on the page! We first need to put together some sample inventory data for our app to start with. We want to be able to offer differing colors or versions for some products but without each having their own product card. We will eventually make use of `base-` and `variant-` prefixes to combine related products to a single product card in [[Week-05|week 5]] when we discuss conditional rendering. Each item should include `baseName`, `variantName`, `id` `price`, `baseDescription`, `variantDescription`, `image`, and `inStock` keys. Here's an example of several inventory items:
 
 ```json
 {
-  items: [
-    {
-      name: "Bucket Hat",
-      id: "hat01",
-      price: 29.99,
-      sizes: ["S", "M", "L"],
-      description:
-        "Protect your head from the sun with this stylish bucket hat",
-      variants: [
+  inventory: [
         {
-          color: "black",
-          image: "bucket-hat-black.png",
-        },
-        {
-          color: "peach",
-          image: "bucket-hat-peach.png",
-        },
-      ],
+      "id": 1,
+      "baseName": "Bucket Hat",
+      "variantName": "Black",
+      "price": 22.99,
+      "baseDescription": "Protect your head from the sun with this stylish bucket hat",
+      "variantDescription": "Black with an orange logo",
+      "image": "bucket-hat-black.png",
+      "inStock": "TRUE"
     },
+    {
+      "id": 2,
+      "baseName": "Bucket Hat",
+      "variantName": "Peach",
+      "price": 22.99,
+      "baseDescription": "Protect your head from the sun with this stylish bucket hat",
+      "variantDescription": "Pale peach with an orange logo",
+      "image": "bucket-hat-peach.png",
+      "inStock": "TRUE"
+    },
+    {
+      "id": 5,
+      "baseName": "Clock",
+      "variantName": "Default",
+      "price": 27.99,
+      "baseDescription": "Battery-powered wall clock. White face with black logo",
+      "variantDescription": "",
+      "image": "clock.png",
+      "inStock": "TRUE"
+    }
   ];
 }
 
 ```
 
-A JSON file that includes a full starting inventory can be found [here](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/Gists/ctd-swag-inventory.json). We will use Vite's JSON import feature to access the inventory. Let's get some product names and descriptions onto the page!
+A JSON file that includes a full starting inventory can be found [here](). We will use Vite's JSON import feature to access the inventory. Let's get some product names and descriptions onto the page!
+
+> [!note]
+> Note: Screen captures of the application using an older version of this JSON file. The newest version includes product variations that will be used in later lessons.
 
 1. Add the JSON file to `/assets` and then add an import statement for it at the top of App.jsx.
-2. Wrap everything in `<main></main>` so we continue to return a single element after adding the inventory list.
-3. import `useState`
-4. `inventory` contains an array of items that we want to display. Call useState with `inventory.items` as the initial value.
-5. Destructure the returned array into a state variable, `inventory` and updater function, `setInventory`.
+2. import `useState`
+3. `inventoryData` contains an array of items that we want to display. Call useState with `inventoryData.inventory` as the initial value.
+4. Destructure the returned array into a state variable, `inventory` and updater function, `setInventory`.
+5. Wrap everything in `<main></main>` so we continue to return a single element after adding the inventory list.
 6. Create an unordered list below the `.coming-soon` div
 7. Use JavaScript's `.map()` method to return an array of list items.
 8. For now we'll use three `item` properties to create a card[^card] in the list item.
 	1. **item.id**: used at the key for the list item so React can efficiently track the item for subsequent re-renders.
-	2. **item.name**: used inside of the item card heading
-	3. **item.description**: general details about the item displayed
+	2. **item.baseName**: used inside of the item card heading
+	3. **item.baseDescription**: general details about the item displayed
 
 ```jsx
 import { useState } from 'react';
 import ctdLogo from './assets/mono-blue-logo.svg';
 import './App.css';
-import catalog from './assets/catalog.json';
+import inventoryData from './assets/catalog.json';
 
 function App() {
-  const [inventory, setInventory] = useState(catalog.items);
+  const [inventory, setInventory] = useState(inventoryData.inventory);
   return (
     <main>
       <div className="coming-soon">
@@ -170,8 +185,8 @@ function App() {
           return (
             <li key={item.id}>
               <div className="itemCard">
-                <h2>{item.name}</h2>
-                <p>{item.description}</p>
+                <h2>{item.baseName}</h2>
+                <p>{item.baseDescription}</p>
               </div>
             </li>
           );
@@ -183,6 +198,9 @@ function App() {
 
 export default App;
 ```
+
+> [!drafting note] #drafting-note/products-schema-refactor
+> update image - product schema change
 
 ![[202410_0948AM-Firefox Developer Edition.png|500]]
 
@@ -210,7 +228,7 @@ function ProductList(props){
 		    {inventory.map((item) => {
 			    return (
 					<li key={item.id}>
-						{item.name}
+						{item.baseName}
 					</li>
 				);
 			})}
@@ -226,7 +244,7 @@ function ProductList({inventory = []){ //destructuring assignment grabs `invento
 		    {inventory.map((item) => {
 			    return (
 					<li key={item.id}>
-						{item.name}
+						{item.baseName}
 					</li>
 				);
 			})}
@@ -277,8 +295,8 @@ function ProductList({inventory}) {
         return (
           <li key={item.id}>
             <div className="itemCard">
-              <h2>{item.name}</h2>
-              <p>{item.description}</p>
+              <h2>{item.baseName}</h2>
+              <p>{item.baseDescription}</p>
             </div>
           </li>
         );
@@ -329,8 +347,8 @@ function ProductList({inventory}) {
         return (
           <ItemCard
             key={item.id}
-            name={item.name}
-            description={item.description}
+            name={item.baseNameame}
+            description={item.baseDescription}
           />
         );
       })}
@@ -344,12 +362,12 @@ export default ProductList;
 ```jsx
 /*ProductCard.jsx*/
 
-function ProductCard({name, description}) {
+function ProductCard({baseName, baseDescription}) {
   return (
     <li>
       <div className="itemCard">
-        <h2>{props.name}</h2>
-        <p>{props.description}</p>
+        <h2>{props.baseName}</h2>
+        <p>{props.baseDescription}</p>
       </div>
     </li>
   );
@@ -366,13 +384,13 @@ Finally, we refactor `App` to use the new components.
 ```jsx
 import { useState } from 'react';
 import './App.css';
-import catalog from './assets/catalog.json';
+import inventoryData from './assets/inventory.json';
 import Header from './Header';
 import ProductList from './ProductList';
 import ProductCard from './ProductCard';
 
 function App() {
-  const [inventory, setInventory] = useState(catalog.items);
+  const [inventory, setInventory] = useState(inventoryData.inventory);
   
   }
   return (
@@ -416,27 +434,24 @@ Along with the props that we can define on our own, React's common components fe
 
 We are able to use a `children` prop to pass React elements into our custom components. Rather than assign `children` a value (`children={someValue}`), they are placed between the opening and closing tags for the element. For example, we may be trying to promote a specific item in our store and want to appear on the top, regardless of filters or sort order. We define that item in the App component and nest it inside `<ProductList></ProductList>` tags.
 
-> [!drafting note] #drafting-note
-> simplify this component - attempt to demote `promoteItem` to an object to feed in card props
-
 ```jsx
 /*App.jsx*/
 
 import { useState } from 'react';
 import './App.css';
-import catalog from './assets/catalog.json';
+import inventoryData from './assets/inventory.json';
 import Header from './Header';
 import ProductList from './ProductList';
 import ProductCard from './ProductCard';
 
 function App() {
-  const [inventory, setInventory] = useState(catalog.items);
+  const [inventory, setInventory] = useState(inventoryData.inventory);
 
   function promoteItem() {
     return (
       <ProductCard
-        name="Limited Edition Tee!"
-        description="Special limited edition neon green shirt with a metallic Code the Dream Logo shinier than the latest front-end framework! Signed by the legendary Frank!"
+        baseName="Limited Edition Tee!"
+        baseDescription="Special limited edition neon green shirt with a metallic Code the Dream Logo shinier than the latest front-end framework! Signed by the legendary Frank!"
       />
     );
   }
@@ -466,8 +481,8 @@ function ProductList({inventory, children}) {
         return (
           <ProductCard
             key={item.id}
-            name={item.name}
-            description={item.description}
+            name={item.baseName}
+            description={item.baseDescription}
           />
         );
       })}
@@ -477,6 +492,9 @@ function ProductList({inventory, children}) {
 
 export default ProductList;
 ```
+
+> [!drafting note] #drafting-note/products-schema-refactor
+> update picture - product schema change
 
 ![[202410_0336PM-Firefox Developer Edition.png|600]]
 

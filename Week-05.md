@@ -1,6 +1,6 @@
 ---
 title: Week-05
-dateModified: 2024-11-11
+dateModified: 2024-12-16
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -133,6 +133,155 @@ return(
 > [!tip]
 > When we need to see dynamic elements in our layout but are not ready to code them, we can add placeholders in the JSX. These can be plain text substitutions for values like a cart's total price or placeholder images similar to the one found on each product's card. This helps us determine our layout and anticipate any tasks that we are going to have to complete. As we continue to build the feature we can replace these substitutions with live code.
 
+##### Combining `baseItems`
+
+Now that we know how to show and hide components, we can start making improvements to the store. The first task is to update cards to let users choose from product variations. This will allow us to combine items of different colors or models into a single card that the user opens to select which variant they want to add to their cart.
+
+To achieve this, we have to change the way ProductList handles inventory items. Rather than mapping them to a `ProductCard` component, we make state variable, `products`, that is updated when `inventory` props changes. Inside this `useEffect` we create an empty array containing `workingProducts` and then iterate over the inventory to compose the each product in `workingProducts` before using that array to set the `products` variable.
+
+`forEach` basically looks at each item's `baseName` property to see if it matches any object already in `workingProducts`. If a match is found, that item is pushed into a `variants` array. If there is no match, a new object is composed for a product and then pushed into `workingProducts`.
+
+```jsx
+//extract from ProductList.jsx
+//...component code
+const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const workingProducts = [];
+    inventory.forEach((item) => {
+      if (!item.inStock) {
+        return;
+      }
+      if (
+        !workingProducts.find(
+          (productItem) => productItem.baseName === item.baseName
+        )
+      ) {
+        workingProducts.push({
+          baseName: item.baseName,
+          price: item.price,
+          baseDescription: item.baseDescription,
+          variants: [{ ...item }],
+        });
+      } else {
+        const index = workingProducts.findIndex(
+          (productItem) => productItem.baseName === item.baseName
+        );
+        workingProducts[index].variants.push({ ...item });
+      }
+    });
+    setProducts([...workingProducts]);
+  }, [inventory]);
+  //component code...
+```
+
+Our next step is to make changes to the `ProductCard` component so it can conditionally show a "Show Options" button instead of "Add to Cart" when a card contains more than one product variant. We can do so by examining the `variants` length. Our handleAddItemToCart is also updated to grab the id off of the default variant when only one exists.
+
+```jsx
+//extract from ProductCard.jsx
+<div className="productButtons">
+	{product.variants.length > 1 ? (
+		<button>
+			Show Options
+		</button>
+		) : (
+		<button onClick={() => handleAddItemToCart(product.variants[0].id)}>
+			Add to Cart
+		</button>
+	)}
+</div>
+```
+
+Finally, we need to display the variants to the user so they can add them to their cart. For this, we create another component, `ProductCardVariants` that accepts an array of variants, a handler function to close the display, and a handler function to add an item to the cart.
+
+```jsx
+//ProductCardVariants.jsx
+
+function ProductCardVariants({ variants, closeVariants, handleAddItemToCart }) {
+  return (
+    <div className="productVariantsWrapper">
+      <ul>
+        {variants.map((variant) => {
+          return (
+            <li key={variant.id} className="productVariant">
+              <div className="variantPreview">
+                <img
+                  src={`/public/product-images/${variant.image}`}
+                  alt={variant.variantDescription}
+                />
+                <p>${variant.price}</p>
+              </div>
+              <div className="variantDetails">
+                <h3>{variant.variantName}</h3>
+                <p>{variant.variantDescription}</p>
+                <button
+                  onClick={() => {
+                    handleAddItemToCart(variant.id);
+                    closeVariants();
+                  }}
+                >
+                  Add to cart
+                </button>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+      <button
+        className="variantsCloseButton"
+        type="button"
+        onClick={closeVariants}
+      >
+        Close
+      </button>
+    </div>
+  );
+}
+
+export default ProductCardVariants;
+
+```
+
+That component is imported into ProductCard, and its visibility will depend on a state variable `areVariantsShown` the accompanying state variable updater function is then used to show/hide the options.
+
+```jsx
+//ProductCard.jsx extract
+
+return (
+    <li className="productCard">
+      <div className="productPreview">
+        <img src={placeholder} alt=" " />
+      </div>
+      <div className="productCopy">
+        <h2>{product.baseName}</h2>
+        <p>{product.baseDescription}</p>
+      </div>
+      <div className="productButtons">
+        {product.variants.length > 1 ? (
+          <button onClick={() => setAreVariantsShown(true)}>
+            Show Options
+          </button>
+        ) : (
+          <button onClick={() => handleAddItemToCart(product.variants[0].id)}>
+            Add to Cart
+          </button>
+        )}
+      </div>
+      {areVariantsShown && (
+        <ProductCardVariants
+          handleAddItemToCart={handleAddItemToCart}
+          variants={product.variants}
+          closeVariants={() => setAreVariantsShown(false)}
+        />
+      )}
+    </li>
+  );
+```
+
+Here is the resulting change:
+
+![[202412_0151PM-Brave Browser.gif|300]]
+
 ##### Create Cart Component
 
 Looking back at CTD swag, we can now determine which approaches to use that best suites our needs at each step of building out the feature.
@@ -147,24 +296,32 @@ import placeholder from './assets/placeholder.png';
 // `handleCloseCart` is not made yet but we know we will need it
 function Cart({ cart, handleCloseCart }) {
   return (
-    <div className="cartListWrapper">
-      <ul className="cartList">
-        {cart.map((item) => {
-          return (
-            <li className="cartListItem" key={item.cartItemId}>
-              <img src={placeholder} alt="" />
-              <h2>{item.name}</h2>
-              <div className="cartListItemSubtotal">
-                <p>${item.price}</p>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
-      {/* cart total will need to be calculated */}
-      <h2>Cart Total: $0.00</h2>
-      <button onClick={handleCloseCart}>CloseCart</button>
-    </div>
+  <>
+	  <div className="cartScreen"></div> 
+		{/*
+			.cartScreen covers the product list with
+			a div that has a blur effect placed on it.
+			this makes the product buttons unclickable
+		*/}
+	    <div className="cartListWrapper"> 
+	      <ul className="cartList">
+	        {cart.map((item) => {
+	          return (
+	            <li className="cartListItem" key={item.cartItemId}>
+	              <img src={placeholder} alt="" />
+	              <h2>{item.baseName}</h2>
+	              <div className="cartListItemSubtotal">
+	                <p>${item.price}</p>
+	              </div>
+	            </li>
+	          );
+	        })}
+	      </ul>
+	      {/* cart total will need to be calculated */}
+	      <h2>Cart Total: $0.00</h2>
+	      <button onClick={handleCloseCart}>CloseCart</button>
+	    </div>
+	</>
   );
 }
 
@@ -202,9 +359,9 @@ return (
   );
 ```
 
-Let's open the React dev tools to see how things are working. We don't have out button wired up yet but we should be able to modify that state value to show/hide the cart.
+Let's open the React dev tools to see how things are working. We don't have our button wired up yet but we should be able to modify that state value to show/hide the cart.
 
-![[202411_0445PM-Firefox Developer Edition.gif|700]]
+![[202412_0219PM-Firefox Developer Edition.gif|700]]
 
 #### Opening and Closing Cart
 
@@ -260,14 +417,10 @@ export default Header;
 
 Since we already have the `handleCartClose` in the props of the `Cart` component, it's now a matter of passing the handler as props: `{isCartOpen && <Cart cart={cart} handleCloseCart={handleCloseCart} />}`.
 
-> [!drafting note] #drafting-note
-> add .screen in and re-take the below screencaps
 
-![[202411_0529PM-Firefox Developer Edition.gif|500]]
+![[202412_0222PM-Firefox Developer Edition.gif|500]]
 
 #### Render a Message Instead of an Empty List
-
-![[202411_0650AM-Firefox Developer Edition.gif|500]]
 
 It may also be nicer for the user to see a message rather than rendering an empty list. Showing a message or a list is another conditional rendering scenario to address. The logic to change between the two elements is still simple enough that we don't need to extract a function for conditional rendering. The `&&` operator will not work here either so we are left with using a ternary. We look at the `cart`'s length and then determine if it's empty or not. If `cart.length === 0` then the lefthand expression executes, showing the message. If it contain items, the righthand executes, showing the list.
 
@@ -282,7 +435,7 @@ It may also be nicer for the user to see a message rather than rendering an empt
 			return (
 				<li className="cartListItem" key="{item.cartItemId}">
 				<img src="{placeholder}" alt="" />
-				<h2>{item.name}</h2>
+				<h2>{item.baseName}</h2>
 				<div className="cartListItemSubtotal">
 					<p>${item.price}</p>
 				</div>
@@ -329,18 +482,15 @@ Currently, the state value, `cart`, is just an array that lists the cart's conte
 ```js
 //typical `cart` item
 {
-  "name": "Mouse Pad",
-  "id": "misc02",
+  "baseName": "Mouse Pad",
+  "variantName": "Default"
+  "id": "6",
   "price": 12.99,
-  "sizes": [],
-  "description": "A pad perfect for mousing",
-  "variants": [
-    {
-      "color": "default",
-      "image": "mouse-pad.png"
-    }
-  ],
-  "itemCount": 3 //remove `cartItemId` and add a counter
+  "baseDescription": "A pad perfect for mousing",
+  "variantDescription": "",
+  "image": "mouse-pad.png",
+  "inStock": "TRUE",
+  "itemCount": 3
 }
 ```
 
@@ -415,28 +565,32 @@ function Cart({ cart, handleCloseCart }) {
   }
 
   return (
-    <div className="cartListWrapper">
-      {cart.length === 0 ? (
-        <p>cart is empty</p>
-      ) : (
-        <ul className="cartList">
-          {cart.map((item) => {
-            return (
-              <li className="cartListItem" key={item.id}>
-                <img src={placeholder} alt="" />
-                <h2>{item.name}</h2>
-                <div className="cartListItemSubtotal">
-                  <p>Count: {item.itemCount}</p>
-                  <p>Subtotal: ${(item.price * item.itemCount).toFixed(2)}</p>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-      )}
-      <h2>Cart Total: ${getCartPrice()}</h2>
-      <button onClick={handleCloseCart}>CloseCart</button>
-    </div>
+	<>
+		<div className="cartScreen"></div>
+	    <div className="cartListWrapper">
+	      {cart.length === 0 ? (
+	        <p>cart is empty</p>
+	      ) : (
+	        <ul className="cartList">
+	          {cart.map((item) => {
+	            return (
+	              <li className="cartListItem" key={item.id}>
+	                <img src={placeholder} alt="" />
+	                <h2>{item.baseName}</h2>
+	                {item.variantName !== 'Default' ? <p>{item.variantName}</p> : null}
+	                <div className="cartListItemSubtotal">
+	                  <p>Count: {item.itemCount}</p>
+	                  <p>Subtotal: ${(item.price * item.itemCount).toFixed(2)}</p>
+	                </div>
+	              </li>
+	            );
+	          })}
+	        </ul>
+	      )}
+	      <h2>Cart Total: ${getCartPrice()}</h2>
+	      <button onClick={handleCloseCart}>CloseCart</button>
+	    </div>
+	</>
   );
 }
 
@@ -444,7 +598,9 @@ export default Cart;
 
 ```
 
-With the cart ready, we can its data updatable for users.
+With the cart ready, we can make its data updatable for users.
+
+![[202412_0229PM-Firefox Developer Edition.png|500]]
 
 ### Controlled Components
 
@@ -645,7 +801,6 @@ We next;
 
 - replace all references to `cart` in the return statement with `workingCart`
 - wrap the unordered list with a form and convert the paragraph containing `itemCount` into an `input` that accepts numbers.
-- add in a screening element, `.cartScreen`, to block the user from updating the `cart` state value while the shopping cart is open. This is just a div that covers the product list that has a blur effect placed in it with CSS.
 
 ```jsx
 function Cart({ cart, handleCloseCart, setCart }) {
@@ -673,7 +828,8 @@ function handleCancel(){};
 								return (
 									<li className="cartListItem" key={item.id}>
 									<img src={placeholder} alt="" />
-									<h2>{item.name}</h2>
+									<h2>{item.baseName}</h2>
+									{item.variantName !== 'Default' ? <p>{item.variantName}</p> : null}
 									<div className="cartListItemSubtotal">
 										<label>
 					                        Count:{' '} {/*preserve space after colon*/}
@@ -705,6 +861,8 @@ export default Cart;
 ```
 
 With these changes, we are left with an cart that displays the item count in an input and a nifty screen is cast across the shop so none of the products are clickable.
+
+
 
 ![[202411_0531PM-Firefox Developer Edition.gif]]
 
@@ -785,7 +943,10 @@ The final helper we need to create handles the user's change confirmation. `hand
 
 CTD Swag is coming along! A user can brows items in the list, add items to their cart, and they can modify item counts in the cart. With our work, the `App` and `Cart` components continue to grow in size.
 
-![[202411_1023AM-Firefox Developer Edition.gif|500]]
+> [!drafting note] #drafting-note/products-schema-refactor
+> update image - product schema change
+
+![[202412_0239PM-Firefox Developer Edition.gif|500]]
 
 We still have a ways to go before this app is complete though. We still need to allow users to chose item variants, shirt sizes, a checkout, and an order history. Before CTD Swag become challenging to continue to develop, we will take some time next week to refactor our code into further sub-components and some utility functions. We will also talk about organizing a React project so that it continues to be easy to manage as the codebase grows.
 
