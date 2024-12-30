@@ -1,6 +1,6 @@
 ---
 title: Week-07
-dateModified: 2024-12-16
+dateModified: 2024-12-28
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -346,17 +346,24 @@ useEffect(() => {
 
 ### UI Update Strategies
 
-With this new knowledge and an API to interact with, we can strategize how to improve a user's experience with CTD-Swag. Let's add user accounts and a saved cart so a user can resume shopping if they leave our store.
+Before we plan any more changes, we need to consider how to manage UI state as the application interacts with an API. Network operations, even on a fast connection, are not instantaneous. They take milliseconds to seconds to resolve. While that does not sound like much, it's enough time to to frustrate users depending on what they are doing and what feedback they expect the app. We need to address the state of the application between the time when a user commits a change and when it is actually processed by a back end.
 
- Before we plan these changes, we need to consider how to manage UI state as the application interacts with the API. Network operations, even on a fast connection, are not instantaneous. They take milliseconds to seconds to resolve. While that does not sound like much, it's enough time to to frustrate some users if we do not handle the intermediate state properly. Intermediate state simply refers to the state of the application during the time between when a user commits a change and when it is actually processed by a back end.
-
-Do we want to make updates to the UI as soon as a user makes a change and then save it to the API's back end? Or do we want to make sure that the data is saved first before making updates to the UI? The first approach is known as an "optimistic" update while the second is "pessimistic". Setting the emotional tone of each word aside, they describe how we prioritize data and state synchronization. Each has its advantages and disadvantages.
+This *intermediate* state affects both the perceived performance and the users ability to rely on highly reliable representation of state. When do we want to ensure that the information displayed is accurate and when do we prefer the UI to be fast? In other words: do we want to make sure that the data is saved first before updating the UI, or should we update the UI immediately based on a user event and then save changes to the API's backend afterwards? The first approach is known as a "pessimistic" UI update strategy while the second is "optimistic". Setting the emotional tone of each word aside, they describe how we prioritize data and state synchronization. Each has its advantages and disadvantages.
 
 #### Pessimistic
 
-A pessimistic strategy places an emphasis on data integrity. This approach ensures that state of the UI accurately reflects the data as it is stored on the back end. Rather than speculating about the success of a transaction, we wait for the API to send a success or failure response and then use that response's payload to update application state.
+A pessimistic strategy is based on the assumption that there is a possibility of operation failure and places an emphasis on making sure a system update is successful before updating the UI. This approach requires that the state of the UI accurately reflects the data as it is stored on the back end. Rather than speculating about the success of a transaction, we wait for the API to send a success or failure response and then use that response's payload to update application state.
 
-For example, a person uses a bank's app to transfer money between two accounts. When they submit the transfer request, the interface doesn't automatically update account balances. Instead, it waits for the bank's server to process the request and send a response back. Usually during this time, the UI may show a spinning wheel or loading bar that lets the user know that the transaction is still pending. When a response is received it will contain updated account balance information that the application then uses to update state.
+For example from life is transferring money between two accounts using a banking app. When a user submits the transfer request, the interface doesn't automatically update account balances. Instead, it waits for the bank's server to process the request and send a response back. Usually during this time, the UI may show a spinning wheel or loading bar that lets the user know that the transaction is still pending. When a response is received it will contain updated account balance information that the application then uses to update state.
+
+This strategy is much easier of the two to implement. The implementation details are usually formulaic and result in compact, easy to read code. A typical breakdown of state change operations using the pessimistic strategy:
+
+1. A user triggers an event that requires an API response
+2. Relevant data is gathered and inserted into a fetch request
+3. The request is sent off to an API. Note: This pauses any updates to the UI that depend on the values being updated
+4. The API server formulates a response containing data up update the UI state
+5. The server responds with an update.
+6. The response data is applied to state.
 
 ##### Advantages
 
@@ -365,7 +372,7 @@ For example, a person uses a bank's app to transfer money between two accounts. 
 
 ##### Disadvantages
 
-- **Slow**: UI feels sluggish to users even on fast internet connections
+- **Slow**: Some UI operations feels sluggish to users even on fast internet connections
 
 ##### Best Used For
 
@@ -374,12 +381,15 @@ For example, a person uses a bank's app to transfer money between two accounts. 
 - **Form Submissions**: In scenarios where form submissions require validation from the server before proceeding, especially in cases involving sensitive data or multi-step processes.
 - **Compliance Requirements**: For applications subject to regulatory compliance or audit requirements, a pessimistic strategy helps enforce strict data validation and auditing controls.
 - **Concurrency Control**: When dealing with shared resources or collaborative editing scenarios, pessimistic locking mechanisms help prevent conflicts and ensure data consistency.
+- **Code Simplicity**: When the application's developer(or team) prioritizes code simplicity so that features can be rapidly implemented or refactored with relative ease.
 
 #### Optimistic
 
-The Merriam-Webster dictionary provides a definition for optimism as "an inclination to put the most favorable construction upon actions and events or to anticipate the best possible outcome". When approaching a UI change optimistically, we prioritize a responsive UI based on the assumption that most of the API interactions will succeed.
+The Merriam-Webster dictionary provides a definition for optimism as "an inclination to put the most favorable construction upon actions and events or to anticipate the best possible outcome". When approaching a UI change optimistically, we prioritize a responsive UI assuming that most of the API interactions will succeed. The smoothness of operation is also worth the effort that comes with complex error handling and recovery.
 
-We still handle errors and failures but also need to incorporate mechanisms to roll back intermediate state changes. For example, a user of a social media app hits the like button on a post. A thumbs-up, smiley face, heart, or some other icon shows up in a reactions area along with other people's reaction icons. This happens instantaneously in the UI, indicating to the user that they've liked the post and can continue skimming their feed. Meanwhile, the app sends off a request to the social media platform's API with data needed for the backend to process the reaction. If all goes well, nothing else needs to be done. The UI is already updated and the API has applied the like to the post. However, if there's a failure while processing the request, the app needs to undo changes to the UI and notify the user that there was an issue.
+We handle errors just like when using the pessimistic strategy but also need to be able to roll back intermediate state changes. For example, a user of a social media app hits the like button on a post. A thumbs-up, smiley face, heart, or some other icon shows up in a reactions area along with other people's reaction icons. This happens instantaneously in the UI, giving the user feedback that indicates they've liked the post and can continue skimming their feed. Meanwhile, the app sends off a request to the social media platform's API with data needed for the backend to update the post. If all goes well, nothing else needs to be done and the user is already engaged in other tasks. The UI is already updated and reflects the data stored on the API.
+
+However, if there's a failure while processing the request, the app needs to undo changes to the UI and notify the user that there was an issue. The code to implement this can get very complex. Depending on the application, developers tend to rely on specialized frameworks or libraries to manage state synchronization between the front end and back end. We will not be using any libraries and keep any examples as simple as possible.
 
 ##### Advantages
 
@@ -399,9 +409,9 @@ We still handle errors and failures but also need to incorporate mechanisms to r
 - **Non-critical Data Operations:** Suitable for non-critical operations where occasional inconsistencies are acceptable and can be resolved later without significant impact on user experience.
 - **Offline Functionality:** Useful for scenarios where users need to perform actions offline and sync data later, like note-taking apps or task managers.
 
-#### A Note on Ephemeral State
+#### A Note on Transient State
 
-State changes caused by interaction with interface elements don't create data worth saving. These temporary UI state values should not be synchronized with the back end. Here are a few examples:
+With the the ability to save data to a server, it's important to remember that state changes which are limited to the UI do not create data worth saving. These temporary UI state values should not be synchronized with the back end. Here are a few examples:
 
 1. **Form Field Validation State:** Flags indicating the validity of user input in client-side form validation.
 2. **Sorting or Filtering Preferences:** User-defined sorting or filtering options applied to view data on the client side, such as changing the order of displayed items in a list.
@@ -409,24 +419,15 @@ State changes caused by interaction with interface elements don't create data wo
 4. **Local Notifications:** Displaying temporary notifications or alerts within the app for user feedback.
 5. **Client-Side Calculations:** Intermediate results or calculations performed in the UI for dynamic updates or real-time feedback.
 
-### Saving Users and Cart State in CTD-Swag
+### Planning User and Cart Features in CTD-Swag
+
+#### Identify Development Tasks
 
 > [!note]
-> We will not be using the [`useOptimistic` hook](https://react.dev/reference/react/useOptimistic#reference). Implementing this hook makes little sense without a solid understanding of how to plan for error handling and recovery.
+> Most of the time this sort of information is brainstormed as a team so you'll rarely have to do this on your own as a junior developer.
 
-We look at the tasks a user should be able to take and expected application behavior to determine how to break work down into components and supporting code.
+After learning about asynchronous operations and how to synchronize application state with an API, we're ready to make some expansions to CTD-Swag. As we build out each new feature, we have to determine which strategy we to use. To do so we start by listing the tasks a user should be able accomplish in the UI after the new feature is implemented. Then need to consider what role state plays while a user interacts with the application. To help with the thought process we take an educated guess about what key tasks that we can anticipate while developing the feature. From there we'll determine if it needs optimistic or pessimistic UI features.
 
-> [!drafting note] #drafting-note
-> probably should use simulated login if auth isn't finished
-
-- **A new user needs to be able to sign up for an account.**
-	- a user details form needs to be displayed by a hitting a sign up button
-	- a POST request needs to be sent to `/users` on submit
-	- on a successful API response, the user is logged in
-		- response data will include user info:
-			- account info, excluding password
-			- user id - needed to create a fetch request to GET cart
-			- JWT authentication token saved as HttpOnly cookie
 - **An existing user needs to be able to sign in**
 	- an authentication form needs to be displayed by hitting a login button
 		- the login form can be re-used by conditionally displaying certain fields and the correct button
@@ -436,29 +437,523 @@ We look at the tasks a user should be able to take and expected application beha
 			- account info, excluding password
 			- user id - needed to create a fetch request to GET cart
 			- JWT authentication token needs be saved as an HttpOnly cookie
-- **An existing user's cart should be updated remotely with any changes as they are com**
+- **A new user needs to be able to sign up for an account.**
+	- a user details form needs to be displayed by a hitting a sign up button
+	- a POST request needs to be sent to `/users` on submit
+	- on a successful API response, the user is logged in
+		- response data will include user info:
+			- account info, excluding password
+			- user id - needed to create a fetch request to GET cart
+			- JWT authentication token saved as HttpOnly cookie
+- **A user's cart should be saved to their account if they are logged in*
 	- when user is signed in, a fetch GETs the user's shopping cart.
 	- when user adds item to cart
 		- cart in UI should update automatically
 		- PUT request containing the full cart is sent to API
 			- success is silent
 			- failure rolls back cart change and displays error message to user
-	- when user edits cart
+- **A user submitting the cart update expects the cart to reflect the updated as it's represented on the server.**
+		- users expect to wait for remote confirmation when submitting a form
 		- only local state is updated while making changes
-		- when user confirms, PUT request containing cart is sent to API with same outcomes as above
-- **An existing user should stay logged into CTD-Swag between sessions**
-	- application automatically includes cookie containing JWT
-		- If it exists it will send user payload same as registering or logging in
+		- when user submits the form, a PUT request containing cart is sent to API
+		- a successful cart update response replaces the cart in the app state which automatically updates state managed locally on the form
+		- when the back end reports a failure of that operation
+			- UI rolls local state back to the previous app state before user edits (this is the same way the current cancel button works)
+			- display error message
+
+#### Matching Actions to UI Updating Strategy
+
+##### Pessimistic
+
+- **An existing user needs to be able to sign in.**
+- **A new user needs to be able to sign up for an account.**
+- **User cart edits should update the user's saved cart when the user confirms the updates.**
+
+All of the data changes from the above tasks can be considered major operations. A user record is needed to save user info to the server so it must exist before they are able to log in. For a user to log in or resume a previous session, their user information and cart contents must be loaded on the front end before populating UI elements. The cart edits also need to be confirmed before updating the interface. Since this is done through a form, the user already expects a save confirmation from the back end before changes are finalized. For these features to behave in a desired manner where we are emphasizing data accuracy, we will take a pessimistic approach.
+
+##### Optimistic
+
+**A logged in user's cart items should be saved to their account**
+
+We want to avoid making a user having to wait to take further actions after adding an item to their cart. Delaying a user to make sure the item has been added to the stored cart is a detriment to the shopping experience. The increased wait time a user must endure decreases the likeliness that they will add more items to their cart. This is definitely not good for the user or the store! To keep the shopping experience pleasant, an item it should immediately appear in the cart while the app is synchronizes cart information in the background. If the API fails for any reason, we will need to revert the state changes. An emphasis on user experience indicates we should adopt an optimistic strategy for this feature. Luckily, our state recovery mechanism is already implemented!
+
+### Implementing User and Cart Features
+
+We are now ready to expand the functionality of CTD Swag. The discussion will focus on state updates and API synchronization using fetch and how they relate to intermediate UI state. In week 11, we'll cover some more advanced state management techniques that will help simplify UI state updates. For now, we will stick with the `useState` hook.
+
+#### Log in an Existing User
+
+For this task we need to create a form that accepts an email and password. Since we don't want to clutter the interface any further, we will add a Log In button beside the cart that toggles the visibility of a dialog containing the auth form. We will use a state variable, `isAuthFormShown` to control this dialog's visibility.
+
+![[202412_1156PM-Firefox Developer Edition.gif|500]]
+
+We next consider the POST request that we send to authenticate. An initial request looks like:
+
+```jsx
+// extract from App.jsx
+//...component code
+
+async function handleAuthenticate(credentials) {
+    const options = {
+      method: 'POST',
+      body: JSON.stringify(credentials),
+      headers: { 'Content-Type': 'application/json' },
+    };
+    try {
+      const resp = await fetch(`${baseUrl}/auth/login`, options);
+      if (!resp.ok) {
+      //status will be 401 if authentication fails
+      //we want to handle it differently than other errors
+        if (resp.status === 401) {
+          console.dir(resp);
+        }
+        throw new Error(resp.status);
+      }
+      console.dir(userData);
+    } catch (error) {
+      console.dir(error);
+    }
+  }
+  //...continued component code
+```
+
+This function is passed through props to the login form and fired off with an event handler that also prevents the page from reloading:
+
+```jsx
+// extract from src/features/Auth/AuthForm.jsx
+
+import { useState } from 'react';
+import ctdLogo from '../../assets/icons/mono-blue-logo.svg';
+
+function AuthForm({ handleCloseAuthForm, handleAuthenticate }) {
+  const [email, setEmail] = useState('dev@test.com');
+  const [password, setPassword] = useState('password123');
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    handleAuthenticate({ email, password });
+  }
+  return (
+    <>
+		<div className="authFormScreen"></div>
+	    <form className="authForm">
+{/*continued component code...*/}
+		<div className="authButtons">
+          <button
+            disabled={!email || !password}
+            type="button"
+            onClick={handleSubmit}
+          >
+            Submit
+          </button>
+          <button type="button" onClick={handleCloseAuthForm}>
+            Cancel
+          </button>
+        </div>
+        {/*continued component code...*/}
+```
+
+With that in place with a few `console.dir` statements, we get the auth response's payload logged to the console.
+
+Here's the current UI appearance for successful login and failed login:
+
+![[202412_0359PM-Firefox Developer Edition.gif|500]]
+Here are the relevant console outputs so that we can determine how to integrate it to our existing state:
+
+```javascript
+// successful login
+Object {
+	cartItems: Array [ {…}, {…} ],
+	message: "Login successful",
+	token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTksImlhdCI6MTczNTE1MTQ5MiwiZXhwIjoxNzM1NzU2MjkyfQ.vVSO53L3Ow8D3TwJcQByB2tGuMqkPP0j4ITFK_yqP30";
+	user: Object { id: 19, firstName: "First", lastName: "Last", … };
+	// continued...
+​}
+
+// failed login
+Response { 
+	url: "http://localhost:8641/auth/login", 
+	status: 401, 
+	ok: false,
+	statusText: "Unauthorized", 
+	​​// continued...
+}
+
+```
+
+When the user hits the submit button, it initiates the POST request and the UI should display that the system is processing the login. When we get the success message from the server, we'll close the login form and use the API response to populate the user's cart. If the API informs us that a login attempt failed we will show an appropriate message in the modal and give the user a chance to log in again.
+
+We now have to consider intermediate state. To indicate when the app is waiting for a response, we create a boolean state variable `isAthenticating`. We also create another state variable, `user` to hold the user's information while they are logged in. We'll tell whether a user is logged in when it is no longer an empty object. Finally, we need to be able to display an error if there is an authentication issue.
+
+```jsx
+//extract from App.jsx
+const [isAuthenticating, setIsAuthenticating] = useState('false');
+const [user, setUser] = useState({});
+const [authError, setAuthError] = useState('')'
+```
+
+From these three state variables we can display content based on the four following UI conditions for before, during, and after a user logs in:
+
+- **not authenticated** - We want to display a log in button beside the cart.
+- **authenticating** - We want to display an in-progress message and a spinner while authentication is in progress.
+- **authenticated** - We want to change the "login" button to "logout" and display an account name near the cart.
+- **failed authentication** - We want to display a dismissible message about failed log in attempts.
+
+> [!danger]
+> Error messages should be helpful for the user but not too specific. Sharing too many details about system errors can pose a security risk. For example, if we let the user know if it was the email or password that caused authentication to fail, a malicious hacker can test a list of email addresses to see if they match any user that is registered in the system. It's better in this case to limit the message to whether logging was successful or not. Most of the time, this is taken care of on the back end but front-end developers need to be careful not to expose exploitable data.
+
+ In the updated `handleAuthenticate`, when the fetch requests initiates, it changes `isAuthenticating` to `true`. Whenever it resolves `isAuthenticating` is set back to `false`. A successful login will set the user's value with the API response. If there is an error, `authError` is set with the API's error message.
+
+```jsx
+//extract from App.jsx
+async function handleAuthenticate(credentials) {
+    const options = {
+      method: 'POST',
+      body: JSON.stringify(credentials),
+      headers: { 'Content-Type': 'application/json' },
+    };
+    try {
+      setIsAuthenticating(true);
+      const resp = await fetch(`${baseUrl}/auth/login`, options);
+      if (!resp.ok) {
+        if (resp.status === 401) {
+          setAuthError(resp.statusText);
+        }
+        throw new Error(resp.status);
+      }
+      const userData = await resp.json();
+      //assigning an new object that's more convenient to work with
+      setUser({ ...userData.user, token: userData.token });
+      setIsAuthenticating(false);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+```
+
+Finally, we use those state values to update the content in the UI. We'll take care of items that use intermediate state - loading message and the spinner. We pass `isAuthenticating` to the auth form. Using conditional rendering, we'll toggle between the form and the loading elements. If the authentication is successful, we'll also close out the form dialog window.
+
+![[202412_1105AM-Firefox Developer Edition.gif|400]]
+
+That quick state change makes it challenging to work with html elements and styling if you forget to take advantage of React's dev tools. In the Components tab of the browser's dev tools, you are able to see and change state values in all of the components rendered on the page. We can find the one that toggles the dialog's loading message and set it to true. This results in the loading elements staying on screen.
+
+![[202412_0514PM-Firefox Developer Edition.gif|500]]
+
+With this open, we can also insert and position the error message to the bottom of the dialog. Remember to reset `authError` to an empty string if the user successfully logs in or they close the dialog out. We don't want that value persisting in the application.
+
+![[202412_0537PM-Firefox Developer Edition.gif|500]]
+
+ Our final step is to update UI content for the user based on the `user` state variable. This includes populating the cart, changing the login button to log out (text and functionality), and adding the welcome message.
+
+##### Setting up Cart
+
+One of the key features of adding users and carts is to populate the cart. Luckily, this is a simple matter. Recall that in the console statements, the response object contained an `cartItems` entry. We don't have to go through the awkward transformation of product items into cart items again. Our API is set up to deliver the cart items so we can add them directly into the cart. We can take a closer look at that fetch response but this time in the browser's Network tab.
+
+![[202412_1055AM-Firefox Developer Edition.png|900]]
+
+We just have to confirm that the variable names for each property matches the corresponding value in the response response (eg: `cart` vs `cartList` vs `cartItems`). We can then destructure the cart items directly into the the cart's state updater function to update the cart.
+
+```js
+// extract from App.jsx
+//...code
+async function handleAuthenticate(credentials) {
+    const options = {
+      method: 'POST',
+      body: JSON.stringify(credentials),
+      headers: { 'Content-Type': 'application/json' },
+    };
+    try {
+      setIsAuthenticating(true);
+      const resp = await fetch(`${baseUrl}/auth/login`, options);
+      if (!resp.ok) {
+        if (resp.status === 401) {
+          setAuthError('email or password incorrect');
+        }
+        throw new Error(resp.status);
+      }
+      const userData = await resp.json();
+      // this is a LOT of state update functions in a row!!
+      // we fix this in week 11
+      setUser({ ...userData.user, token: userData.token });
+      setCart([...userData.cartItems]);
+      setAuthError('');
+      setIsAuthenticating(false);
+      setIsAuthFormOpen(false);
+    } catch (error) {
+      setIsAuthenticating(false);
+      console.log(error.message);
+    }
+  }
+//code continues...
+```
+
+##### Updating Button and Adding Welcome Message
+
+We pass the Header additional props:
+
+```jsx
+
+{/*extract from App.jsx*/}
+{/*...component code*/}
+  function handleLogOut() {
+    setUser({});
+    setCart([]);
+  }
+  
+  return (
+    <>
+		<Header
+			cart={cart}
+			handleOpenCart={() => setIsCartOpen(true)}
+			handleOpenAuthForm={() => setIsAuthFormOpen(true)}
+			//new props
+			handleLogOut={handleLogOut} //wipes out the user and cart values
+			user={user} //used to tell if user logged in
+		/>
+{/*component code continues...*/}
+```
+
+In the Header component, we determine there is a user by looking for the existence of `user.id` which will only be set if there is a user logged in. There are better approaches to solving this problem but we'll cover that in week 11 when we address advanced state topics. We'll also use conditional rendering to toggle between the existing log in button and a new sign out button.
+
+```jsx
+{/*extract from Header.jsx*/}
+{/*...code*/}
+<div className="userActions">
+{user.id ? (
+  <>
+	<span>Hi, {user.firstName}</span>
+	<button className="authButton signOut" onClick={handleLogOut}>
+	  Sign out
+	</button>
+  </>
+) : (
+  <button
+	className="authButton"
+	type="button"
+	onClick={handleOpenAuthForm}
+>
+	Log in
+  </button>
+)}
+</div>
+{/*code continues...*/}
+```
+
+Here is the updated UI functionality for logging in:
+
+![[202412_1253PM-Firefox Developer Edition.gif|400]]
+
+#### Sign Up New User
+
+Signing up a new user uses the same pessimistic UI strategy that logging in employs. Since we already saw an example of a pessimistic approach, we'll just summarize the changes for signing up a new user. We first added a register button beside login.
+
+![[202412_0554PM-Firefox Developer Edition.png|500]]
+
+Both buttons call the same handler, `handleOpenAuthDialog`, to open the dialog, but we also set an `isRegistering` state variable that we use to show either the `LoginForm` or the `RegisterForm` form in the `AuthDialog`. We then extract the login form from the into its own `LoginForm` component and then create a `RegisterForm` component.
+
+![[202412_0616PM-Firefox Developer Edition.gif|400]]
+
+We then create a new POST fetch request to the `/auth/register` endpoint. If all goes well with the registration, then we use the response to set the `user` state value, completing a successful registration and login. We handle any registration errors by displaying messages in the form with the same `authError` state value the login form uses.
+
+![[202412_0623PM-Firefox Developer Edition.gif|400]]
+
+#### Sync Cart Form Update
 
 > [!drafting note] #drafting-note
-> braindump of other possible endpoints:
-> GET api/v1/products
-> GET api/v1/products/:id
-> POST api/v1/login
-> POST api/v1/users
-> PUT api/v1/users/:id
-> GET api/v1/cart
-> POST api/v1/cart
+> 2024-12-27 - left off here
+
+Our API's `/cart` endpoint incudes a PATCH method. Our response include the auth token in the Authorization header and a stringified version of the workingCart state value. We'll adapt the handler function from the existing confirm update button to make our request. On a successful response, we then set the current `cart` value that propagates to all components dependent on that data.
+
+Note the flicker in the gif below - this is caused by the brief change of `workingCart` to the previous `cart` value before the API response completes. When the cart is updated from the fetch response, that `workingCart` is being changed again.
+
+![[202412_1121AM-Finder.gif|300]]
+
+We can prevent that rapid change by relying on a state boolean, `isCartSyncing`. While it's set to true, we prevent the `useEffect` in the `Cart` component making any state updates to `workingCart`. When the response resolves, we toggle `isCartSyncing` so that `Cart` can resume syncing its `workingCart` with the global `cart`.
+
+```js
+// extract from Cart.jsx
+//...component code
+  //resets `workingCart`
+  useEffect(() => {
+	if (isFormDirty || isCartSyncing) {
+		//prevents setWorkingCart from running
+		return;
+	}
+    setWorkingCart(cart);
+  }, [cart, isFormDirty, isCartSyncing]);
+
+//code continues...
+```
+
+After adding the appropriate intermediate state variables to configure the display of our components, we have the following function that synchronizes the cart with the API:
+
+```js
+// extract from App.jsx
+//...code
+async function handleSyncCart(workingCart) {
+	if (!user.id) {
+	  setCart(workingCart);
+	  return;
+    };
+	setIsCartSyncing(true);
+	const options = {
+	  method: 'PATCH',
+	  body: JSON.stringify({ cartItems: workingCart }),
+	  headers: {
+		'Content-Type': 'application/json',
+		Authorization: `Bearer ${user.token}`,
+	  },
+	};
+	try {
+	  const resp = await fetch(`${baseUrl}/cart`, options);
+	  if (!resp.ok) {
+		console.log('resp not okay');
+		if (resp.status === 401) {
+		  throw new Error('Not authorized. Please log in.');
+		}
+		const cartData = await resp.json();
+		//cartData.error on all other errors from this endpoint 
+		if (cartData.error) {
+		  throw new Error(cartData.error);
+		}
+		//catch-all
+		throw new Error('Error occurred while syncing');
+	  }
+	  const cartData = await resp.json();
+	  setCart([...cartData]);
+	  //clean up state variables
+	  setIsCartSyncing(false);
+	  setCartError('');
+	} catch (error) {
+	  setCartError(error.message);
+	  setIsCartSyncing(false);
+	}
+}
+//code continues...
+```
+
+On review of that function, we can see a pattern emerge from how we tie together API requests with our application's state:
+
+1. we set up intermediate state
+2. set fetch's options
+3. send request
+4. handle expected errors
+5. update global state with the API response
+6. reset intermediate state
+7. handle unanticipated errors
+
+And here is the final cart behavior!
+
+![[202412_1233PM-Firefox Developer Edition.gif|500]]
+
+Note how pessimistic strategy of UI updates doesn't make the experience *bad* or *slow* as long as it's applied to major operations. In the state updates that we have done so far, making the user wait for the back end has only a part of confirmation tasks. In the last feature planned, making the user to wait while adding items to the cart would be detrimental to the shopping experience.
+
+#### Add Items (With an optimistic UI strategy)
+
+Our final feature saves a logged in user's shopping cart items to their account. The optimistic approach applies changes to the UI and then saves the change to the backend. Depending on our needs, we either ignore successful responses back or swap out a placeholder value with the API response data. If there is an error, we will need to recover from it. For this feature, we'll ignore successful responses and, if there's an error, de-increment the cart item's quantity and then show an error message.
+
+To get started, we add the following to the existing `handleAddItemToCart` function:
+
+```js
+// extract from App.jsx
+//...code
+
+async function handleAddItemToCart(id) {
+//...existing function code
+    if (!user.id) {
+		//exit out of function to prevent anon fetches
+		return;
+    }
+    //API accepts only these fields
+    const payload = {
+      userId: updatedCartItem.userId,
+      productId: updatedCartItem.productId,
+      quantity: updatedCartItem.quantity,
+    };
+    const options = {
+      method: 'POST',
+      body: JSON.stringify(payload),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${user.token}`,
+      },
+    };
+    try {
+      const resp = await fetch(`${baseUrl}/cart`, options);
+      if (!resp.ok) {
+		console.log(resp);
+		const failData = await resp.json()
+		console.dir(failData);
+      }
+    } catch (error) {
+      console.log(error.message);
+      //TODO code to de-increment item count here
+    }
+//code continues...
+```
+
+From here, we start looking to the error responses generated if the response is not okay. Each console statement examines the data as it's processed. We'll send a response with a bad token to observe a 401 response. This is coming from the `console.dir` on line 29 of the code extract above:
+
+```console
+Response { type: "cors", url: "http://localhost:8641/cart", redirected: false, status: 401, ok: false, statusText: "Unauthorized", headers: Headers(2), body: ReadableStream, bodyUsed: false }
+App.jsx:176:16
+```
+
+We'll simulate a POST response that send a bogus productId to the backend:
+
+```console
+Response { type: "cors", url: "http://localhost:8641/cart", redirected: false, status: 500, ok: false, statusText: "Internal Server Error", headers: Headers(2), body: ReadableStream, bodyUsed: false }
+App.jsx:176:16
+```
+
+We'll want to show a "not logged in" message for an authorization error and a generic error, "cart failed to save" for everything else. We do this in the `if (!resp.ok){}` block with a new `cartItemError` state variable and toggle a dismissible message dialog using `setIsDialogOpen`.
+
+```js
+// extract from App.jsx
+//...code
+if (!resp.ok) {
+	if (resp.status === 401) {
+		setCartItemError(
+		'Your item could not be saved. Log out and log back in again to continue'
+	);
+	} else {
+		setCartItemError('Cart failed to save');
+	}
+		setIsDialogOpen(true);
+}
+//code continues...
+```
+
+![[202412_0612PM-Firefox Developer Edition.png|500]]
+
+![[202412_0614PM-Firefox Developer Edition.png|500]]
+
+After setting up the alert dialog, we finally need to revert the cart item to its state prior to adding it to the cart. We still have access to target list item so we can decrement its quantity. If the quantity goes down to 0, we then remove it from the cart entirely.
+
+```js
+// extract from App.jsx 
+//...code
+
+if (updatedCartItem.quantity === 1) {
+		setCart([...cart.filter((item) => item.productId !== id)]);
+	} else {
+		const revertedCartItem = {
+			...updatedCartItem,
+			quantity: updatedCartItem.quantity - 1,
+		};
+	if (revertedCartItem) {
+		setCart([
+			...cart.filter((item) => item.productId !== id),
+			revertedCartItem,
+		]);
+	}
+}
+//code continues...
+```
+
+As seen in the gif below, the cart number updates immediately. When an error response is received, it reverts back to its previous value. This lets us know the item has been removed.
+
+![[202412_0627PM-Firefox Developer Edition.gif|500]]
 
 ## Weekly Assignment Instructions
 
