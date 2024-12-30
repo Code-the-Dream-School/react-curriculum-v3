@@ -1,6 +1,6 @@
 ---
 title: Week-09
-dateModified: 2024-09-11
+dateModified: 2024-12-27
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -16,6 +16,12 @@ content: lesson plan
 > [!drafting note] #drafting-note
 > - let's also include updating the todo object with a completed bool so we can work with longer lists in future lessons
 > - focus on url params for searching and filtering
+
+> [!drafting note] #drafting-note
+> - **An authenticated user should stay logged into CTD-Swag between sessions**
+	- existing JWT cookie should be valid for the length of time a user should remain logged in. This app will use 7 days.
+	- application automatically includes the JWT as a cookie on all requests to the SPA's domain.
+		- Navigating to CTD-Swag's home page fires off a GET request for the products. Since the API will also see this cookie on the request it will be able to identify that the request came from a logged in user and will send user and cart information.
 
 ### Topics Covered
 

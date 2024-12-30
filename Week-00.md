@@ -1,7 +1,7 @@
 ---
 title: Week-00
 filedUnder: unsorted
-dateModified: 2024-11-02
+dateModified: 2024-12-29
 dateCreated: 2024-08-27
 tags: [react]
 context: [ctd, freelance, personal, work]
@@ -94,7 +94,7 @@ Each weekly lesson page has the same structure so you'll know where to find spec
 
 #### 2. Discussion
 
-In the discussion portion of each weekly lesson, we will explore each of the listed topics in depth. We will learn key techniques and best practices that developers employ while working with the topics presented. All coding examples are from another project we'll watch come together: CTD's new eCommerce Store : CTD Swag[^1]. No coding for that project is required from you, but if you're interested, a repo for this project can be found here: #placeholder/swag-app-link
+In the discussion portion of each weekly lesson, we will explore each of the listed topics in depth. We will learn key techniques and best practices that developers employ while working with the topics presented. Many coding examples are from another project we'll watch come together: CTD's new eCommerce Store : CTD Swag[^1]. No coding for that project is required from you, but if you're interested, a repo for this project can be found here: #placeholder/swag-app-link
 
 #### 3. Weekly Assignment Instructions
 

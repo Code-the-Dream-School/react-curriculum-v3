@@ -1,6 +1,6 @@
 ---
 title: Week-12
-dateModified: 2024-09-18
+dateModified: 2024-12-17
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -18,6 +18,9 @@ content: lesson plan
 - Pagination
 - Routing
 - React Router
+
+> [!drafting note] #drafting-note
+> implement user authentication
 
 ### Lesson Objectives
 
