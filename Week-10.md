@@ -1,6 +1,6 @@
 ---
 title: Week-10
-dateModified: 2024-09-12
+dateModified: 2024-12-13
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
@@ -10,6 +10,9 @@ content: lesson plan
 ---
 
 # Week-10
+
+> [!drafting note] #drafting-note
+> use this as an opportunity to add in centralized toast message and clean up error handling
 
 ## Introduction
 
