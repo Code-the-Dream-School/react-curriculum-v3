@@ -1,8 +1,9 @@
 ---
 title: Curriculum Outline
-dateModified: 2024-11-13
+dateModified: 2025-01-06
 dateCreated: 2024-08-16
-contentType: block
+parent: "[[Unsorted Notes|Unsorted Notes]]"
+draftStatus: draft
 ---
 
 # Curriculum Outline
@@ -15,7 +16,7 @@ contentType: block
 - **Week 6** - Re-usable Components, Project Organization, Refactoring, and Testing
 - **Week 7** - Data fetching, Conditional Rendering, UI Update Strategies
 - **Week 8** - Sorting, Filtering
-- **Week 9** - useCallback, useMemo, Limiting Network Requests, and Refetching
+- **Week 9** - useCallback, useMemo, Limiting Network Requests
 - **Week 10** - Styling and Including Graphical Elements
 - **Week 11** - Advanced State and useReducer, useContext
 - **Week 12** - React Router, Routing, and Pagination

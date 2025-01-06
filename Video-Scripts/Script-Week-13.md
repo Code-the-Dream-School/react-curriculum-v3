@@ -1,7 +1,9 @@
 ---
-title: Week-13
-dateModified: 2024-10-09
+title: Script-Week-13
+dateModified: 2025-01-06
 dateCreated: 2024-10-09
+parent: "[[Unsorted Notes|Unsorted Notes]]"
+draftStatus: draft
 content: video script
 ---
 

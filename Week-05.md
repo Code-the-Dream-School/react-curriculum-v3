@@ -1,12 +1,13 @@
 ---
 title: Week-05
-dateModified: 2024-12-16
+dateModified: 2025-01-06
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
-week: 5
-topics: [controlled components, forms]
+draftStatus: draft
 content: lesson plan
+topics: [controlled components, forms]
+week: 5
 ---
 
 # Week-05

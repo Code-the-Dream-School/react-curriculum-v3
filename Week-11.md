@@ -1,26 +1,26 @@
 ---
 title: Week-11
-dateModified: 2024-11-19
+dateModified: 2025-01-06
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
-week: 11
-topics: [advanced state, useReducer]
+draftStatus: draft
 content: lesson plan
+topics: [advanced state, useReducer]
+week: 11
 ---
 
 # Week-11
 
 ## Introduction
 
-> [!drafting note] #drafting-note
-> expand ProductItems to display sizing and variation details
-> add checkout cart
-
 ### Topics Covered
 
 - Advanced State and useReducer
 - Passing Data Using useContext
+
+> [!drafting note] #drafting-note
+> Stage: "big refactor" to prepare for routing and the addition of new features
 
 ### Lesson Objectives
 

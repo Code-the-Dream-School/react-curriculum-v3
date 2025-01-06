@@ -1,7 +1,9 @@
 ---
 title: Curriculum
-dateModified: 2024-10-22
+dateModified: 2025-01-06
 dateCreated: 2024-08-16
+parent: "[[Unsorted Notes|Unsorted Notes]]"
+draftStatus: draft
 ---
 
 # Curriculum

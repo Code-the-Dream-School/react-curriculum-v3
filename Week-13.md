@@ -1,12 +1,13 @@
 ---
 title: Week-13
-dateModified: 2024-09-04
+dateModified: 2025-01-06
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
-week: 13
-topics: [deploying an app, snapshot of the react ecosystem]
+draftStatus: draft
 content: lesson plan
+topics: [deploying an app, snapshot of the react ecosystem]
+week: 13
 ---
 
 # Week-13

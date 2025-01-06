@@ -1,12 +1,13 @@
 ---
 title: Week-04
-dateModified: 2024-12-16
+dateModified: 2025-01-06
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
-week: 4
-topics: [basic hooks, events, passing props, updating state]
+draftStatus: draft
 content: lesson plan
+topics: [basic hooks, events, passing props, updating state]
+week: 4
 ---
 
 # Week-04

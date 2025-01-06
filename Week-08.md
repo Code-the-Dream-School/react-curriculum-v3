@@ -1,12 +1,13 @@
 ---
 title: Week-08
-dateModified: 2024-12-30
+dateModified: 2025-01-06
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
-week: 8
-topics: [searching, sorting]
+draftStatus: draft
 content: lesson plan
+topics: [searching, sorting]
+week: 8
 ---
 
 # Week-08
@@ -32,19 +33,18 @@ By the end of this lesson, we will:
 
 ## Discussion Topics
 
-We've been introduced to many React's features since the start of the course. We've also worked with network requests and syncing state with an API. In this lesson, we'll implement sorting and filtering display data. We'll turn to basic JavaScript to allow a user to customize how information is being presented to them. This is an opportunity to emphasize the importance of JavaScript knowledge and its place in developing React SPAs.
-
 ### Sorting
 
 #### Default Sorting
 
-After some (pretend) success, CTD has decided to add more items to its eCommerce store. What is readily apparent is the store's page is much longer. Either of these can frustrate a user who is browsing for specific items. Perhaps they are skimming the store or are browsing for a specific kind of product. We can we help the user find items faster by by sorting the cards in the product list by their name in alphabetic order.
+After some (pretend) success, CTD has decided to add more items to its eCommerce store:
 
 ![[202412_1059AM-Firefox Developer Edition.gif]]
 
-Our data takes form of an array but we shouldn't rely on the API (yet) to sort it for the interface. We can can implement an array sorting function but need decide which array method is most appropriate for a React codebase. Array's `.sort()` or `.toSorted()` methods can be employed to sort an array but differ in how the consume data. `.sort` mutates the array in place which we want to avoid. `.toSorted` returns a new updated array which conforms to React' functional approach.
 
-We'll declare this new utility function above the App component.
+What is readily apparent with the growth is the store's page is much longer and products are out of order. We can improve the user's experience by immediately sorting the products alphabetic order and giving the them other sorting options.
+
+To get started, we'll declare a new utility function above the App component to keep our sorting logic. To respect to React's functional programming approach we choose methods that return data instead of update some existing value. When sorting an array, we have two methods available to help us sort `.toSorted()` and`.sort()`. We choose `.toSorted()` because it returns a new array.
 
 ```js
 // extract from App.jsx
@@ -67,11 +67,41 @@ function App() {
 //code continues...
 ```
 
+To finish up this first iteration of sorting, we then add it to the `useEffect` that processes our initial fetch request. `sortByBaseName` is then called with the response to alphabetize the array we pass `setInventory`.
+
+```js
+// extract from App.jsx
+//...code
+  useEffect(() => {
+    (async () => {
+      try {
+        const resp = await fetch(`${baseUrl}/products`);
+        if (!resp.ok) {
+          throw new Error(resp.status);
+        }
+        const products = await resp.json();
+        const sortedProducts = sortByBaseName({
+          productItems: products,
+          isSortAscending: true,
+        });
+        setInventory([...sortedProducts]);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, []);
+//code continues...
+```
+
+CTD-Swag's product list now shows in alphabetic order. That is a helpful start but I think we can do better.
+
 #### Sort by Field
 
-Of course, CTD Swag's users may want to browse the shop in different ways. For, example, a user has limited finances and want to sort by price. We can implement another sorting feature that can sort by price, ascending or descending. For the user to make a choice, we'll add a form at the top of the page that contains a field selector and an ascending/descending option selector.
+CTD Swag's users may also want to browse the shop in different ways. For, example, a user may want to sort by price. To allow the user to browse by price, we'll create a form at the top of the page. For now, we just construct the basic form with static content to visualize the purpose of the form.
 
-First we update `sortByBaseName`, adding `isSortAscending` to the function arguments and update the logic to sort by ascending or descending.
+![[202412_0255PM-Brave BrowserEdit.png|500]]
+
+We then update the utility function `sortByBaseName` by adding `isSortAscending` to the arguments and updating the sorting logic.
 
 ```js
 // extract from App.jsx
@@ -100,7 +130,7 @@ function sortByBaseName({ productItems, isSortAscending }) {
 //code continues...
 ```
 
-We then create a sortByPrice utility function that behaves similarly to `sortByBaseName` but works with numerical values instead of strings.
+We create another utility function, `sortByPrice`, that behaves similar `sortByBaseName` but is much shorter since we are working with numbers:
 
 ```js
 // extract from App.jsx
@@ -119,7 +149,7 @@ function App() {
 //code continues...
 ```
 
-We next create state values so we have options that can be passed into the utility functions when they are integrated into our component code. We can anticipate the need for `sortBy` which represents the property being sorted and `isSortAscending` which indicates the sort direction.
+We we now employ 2 `useState` hooks so that we can make that form into a controlled form.
 
 ```js
 // extract from App.jsx
@@ -129,9 +159,9 @@ const [sortBy, setSortBy] = useState('baseName');
 //code continues...
 ```
 
-With the state values in place, we can then create a form component to allow the user to update the sort options. This form will not be re-used and is referenced in App, so to keep the codebase organized, we create a new features folder to contain the ProductViewForm component: `src/features/ProductViewForm/ProductViewForm.jsx`. The `ProductSupportForm` consists of a form containing two select fields which correspond to the values represented in `sortBy` and `isSortAscending`.
+This form isn't going to be re-used but to keep the codebase organized we refactor the form out of App and into a `ProductViewForm` located at `src/features/ProductViewForm/ProductViewForm.jsx`.
 
-Since `isSortAscending` is a boolean and all event target values are expressed in strings or numbers, we'll need a helper function to convert the value used to update `isSortAscending` back into a boolean. Here is the final `ProductViewForm`:
+In the new `ProductViewComponent` we update the placeholder values to work with state, converting the form to a controlled form. Since HTML stores values as either strings or numbers, we need a helper function to convert the value used to update `isSortAscending` back into a boolean. Here is the final `ProductViewForm`:
 
 ```js
 // extract from ProductViewForm.jsx
@@ -141,6 +171,7 @@ function ProductViewForm({
   sortBy,
   isSortAscending,
 }) {
+//helper to convert text back into a boolean
   const handleSortDirectionChange = (e) => {
     const sortDirection = e.target.value;
     if (sortDirection === 'false') {
@@ -184,7 +215,7 @@ export default ProductViewForm;
 
 ```
 
-Finally, we'll create a `useEffect` in `App` that watches for changes on either of the new state values. This `useEffect` ties in our utility functions to sort the product list. Note that if we were to feed the productItems directly into the useEffect, they would become a dependency of that function. We can get around this by using returning a function inside the state update function. The state update function provides the old state value as an argument that we can use to return a new value for the state.
+Finally, we'll create a `useEffect` in `App` that watches for changes on either of the new state values. This `useEffect` ties in our utility functions to sort the product list. Note that if we were to work with `inventory` directly into the useEffect, that state value would become a dependency of that `useEffect`. We can avoid this by passing in a function to update state rather than setting it directly. The reason why we are able to do this is that the state update function provides the old state value as an argument that we can use to return a new value for the state. This behavior can be made more apparent through by naming the argument `previous`, similar to how we would use `item` in a map going over `listItems`: eg `listItems.map((item)=> {…`
 
 ```js
 // extract from App.jsx
@@ -209,7 +240,7 @@ These updates results in a product list that the user can sort by the product na
 
 ### Filtering
 
-We can also provide a filter for the user show only a sub-set of product items that contain the term. Not surprisingly, array's `.filter` method is central to this feature. Let's get started with a basic filter function. We'll focus on searching the `baseName`, `baseDescription`, and the `variantDescription` to determine which to items to show to the user.
+Filters are useful for showing only a a sub-set of product items that contain the term. This can shorten the list of items the user needs to look. Not surprisingly, array's `.filter` method is central to this feature. Let's get started with a basic filter function. We'll allow the user to filter on a match in `baseName`, `baseDescription`, and the `variantDescription` properties on each item.
 
 ```js
 const items = [
@@ -231,7 +262,7 @@ const filteredItems = filterByQuery({ productItems: items, searchTerm: "pillow" 
 console.log(filteredItems);
 ```
 
-Running the code results in:
+This initial `filterQuery` when ran on its own results in the following output:
 
 ```terminal
 #terminal output from running code above:
@@ -279,11 +310,11 @@ Running the code results in:
 ]
 ```
 
-Our filtering function works so now we need to create the rest of the filter feature before we integrate it. For now, we place it with the other utility functions at the top of the App component file. We next need to add filter UI elements to the form we made while implementing sort.
+Our now utility function works so now we need to create the rest of the filter feature before we integrate it. For now, we place it with the other utility functions at the top of the App component file. We next need to add filter UI elements to the form we made while implementing sort.
 
 ![[202412_1140AM-Brave Browser.png|500]]
 
-At this point, we have to consider how this filter should interact with our global state. We don't want this this function removing anything from the `inventory` so we will have to create an intermediate working state to provide a filteredInventory to the product list. Its associated `setFilteredInventory` state function is called alongside `setInventory` in the `useEffect` that fetches the inventory. We then replace the `inventory` prop with `filteredInventory` in ProductList instance.
+At this point, we have to consider how this filter should interact with our global state. We don't want this this function removing anything from the `inventory` so we will have to create an intermediate working state to provide a `filteredInventory` to the product list. Its associated `setFilteredInventory` state function is called alongside `setInventory` in the `useEffect` that fetches the inventory. We then replace the `inventory` prop with `filteredInventory` in ProductList instance.
 
 ```jsx
 {/*extract from App.jsx*/}
@@ -317,6 +348,9 @@ Sort and search implemented locally are appropriate for applications that work w
 Applications that use larger datasets commonly paginate the data returned from an API into digestible chunks. Think of how many products Amazon.com has. It would be impossible to send all of their product information is set to the UI. In these cases, sorting and filtering are handled by the API. Just like the sort and search feature we just implemented, we don't need any other React tools to create an SPA that relies on an API for search and filtering.
 
 ## Weekly Assignment Instructions
+
+> [!drafting note] #drafting-note
+> - let's also include updating the todo object with a completed bool so we can work with longer lists in future lessons
 
 ### Expected App Capabilities
 

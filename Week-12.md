@@ -1,12 +1,13 @@
 ---
 title: Week-12
-dateModified: 2024-12-17
+dateModified: 2025-01-06
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
-week: 12
-topics: [pagination, react-router, routing]
+draftStatus: draft
 content: lesson plan
+topics: [pagination, react-router, routing]
+week: 12
 ---
 
 # Week-12
@@ -20,7 +21,9 @@ content: lesson plan
 - React Router
 
 > [!drafting note] #drafting-note
-> implement user authentication
+> add checkout cart
+> add user account page
+> implement persistent login w/jwt
 
 ### Lesson Objectives
 
