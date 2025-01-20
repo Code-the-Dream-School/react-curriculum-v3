@@ -1,12 +1,3 @@
----
-title: README
-dateModified: 2025-01-06
-dateCreated: 2024-10-09
-parent: "[[Unsorted Notes|Unsorted Notes]]"
-draftStatus: draft
-content: readme
----
-
 # README
 
 This repo contains the materials for Intro to React V3 curriculum. Everything is WIP and subject to change.
