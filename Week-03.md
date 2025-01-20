@@ -1,12 +1,13 @@
 ---
 title: Week-03
-dateModified: 2024-12-16
+dateModified: 2025-01-06
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
-week: 3
-topics: [component attributes, props, state]
+draftStatus: draft
 content: lesson plan
+topics: [component attributes, props, state]
+week: 3
 ---
 
 # Week-03

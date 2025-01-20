@@ -1,7 +1,9 @@
 ---
 title: Shared
-dateModified: 2024-08-27
+dateModified: 2025-01-06
 dateCreated: 2024-08-22
+parent: "[[Unsorted Notes|Unsorted Notes]]"
+draftStatus: draft
 ---
 
 # Shared

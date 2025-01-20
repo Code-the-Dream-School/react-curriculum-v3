@@ -1,12 +1,13 @@
 ---
 title: Week-14
-dateModified: 2024-10-03
+dateModified: 2025-01-06
 dateCreated: 2024-08-20
 tags: [react]
 parent: "[[Intro to React V3]]"
-week: 14
-topics: [final project requirements, getting started, planning your project]
+draftStatus: draft
 content: lesson plan
+topics: [final project requirements, getting started, planning your project]
+week: 14
 ---
 
 # Week-14

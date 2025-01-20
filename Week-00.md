@@ -1,11 +1,10 @@
 ---
 title: Week-00
-filedUnder: unsorted
-dateModified: 2024-12-29
+dateModified: 2025-01-06
 dateCreated: 2024-08-27
 tags: [react]
-context: [ctd, freelance, personal, work]
 parent: "[[Intro to React V3]]"
+draftStatus: draft
 content: lesson plan
 ---
 
