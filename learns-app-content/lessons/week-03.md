@@ -86,7 +86,7 @@ export default App;
 
 We'll know when the `setTimeout` fires off because of the console statement that prints out the updated `message`. As expected, this has no affect to the "Coming Soon…" message on the page:
 
-![[202410_0222PM-Firefox Developer Edition.gif]]
+![setTimeout firing console message 1 second after page load](./assets/week-03/timeout-message.gif)
 
 #### useState
 
@@ -186,12 +186,12 @@ function App() {
 export default App;
 ```
 
-![[202410_0948AM-Firefox Developer Edition.png|500]]
+![render product list](./assets/week-03/render-product-list.png)
 
 > [!note]
 > ESLint may be highlighting `setInventory` since it hasn't been used yet. We will use it next lesson. For now, this is one of the few errors we'll ignore.
 
-![[202410_1122AM-Code.png|400]]
+![highlighting eslint error to ignore](./assets/week-03/ignore-error.png)
 
 The `key` in `<li key={item.id}>` helps React keep track of elements that are rendered from an array. It may initially seem like a good idea to use the item's array index since each item has one and it is unique. The downside is that an item and its index value are not guaranteed to keep matching. An item may be removed from the inventory, changing the array, when it goes out of stock. `inventory` can eventually have a sort or filter feature added to it which would also have an impact on item order. In either case, using array indices as keys could introduce unexpected behavior or degrade React's rendering cycle. We've included an `id` on the item so this will not happen.
 
@@ -295,7 +295,7 @@ export default ProductList;
 
 **You may see an ESLint error when working with props in Inventory**.
 
-![[202410_1114AM-Code.png|500]]
+![eslint tooltop missing props validation](./assets/week-03/missing-props-validation.png)
 
 We will not be using prop-types in our project so we need to disable that rule in `config.eslint.js`. We do so by adding `'react/prop-types': 'off',` to the existing rules. The rules object should look similar to this:
 
@@ -477,4 +477,4 @@ function ProductList({inventory, children}) {
 export default ProductList;
 ```
 
-![[202410_0336PM-Firefox Developer Edition.png|600]]
+![alt](./assets/week-03/render-priority-product-list.png)
