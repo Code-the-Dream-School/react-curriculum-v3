@@ -25,7 +25,7 @@ By the end of this lesson, we will:
 
 After some (pretend) success, CTD has decided to add more items to its eCommerce store:
 
-![[202412_1059AM-Firefox Developer Edition.gif]]
+![scrolling product list](./assets/week-08/long-scroll.gif)
 
 What is readily apparent with the growth is the store's page is much longer and products are out of order. We can improve the user's experience by immediately sorting the products alphabetic order and giving the them other sorting options.
 
@@ -84,7 +84,7 @@ CTD-Swag's product list now shows in alphabetic order. That is a helpful start b
 
 CTD Swag's users may also want to browse the shop in different ways. For, example, a user may want to sort by price. To allow the user to browse by price, we'll create a form at the top of the page. For now, we just construct the basic form with static content to visualize the purpose of the form.
 
-![[202412_0255PM-Brave BrowserEdit.png|500]]
+![sort options](./assets/week-08/sort-options.png)
 
 We then update the utility function `sortByBaseName` by adding `isSortAscending` to the arguments and updating the sorting logic.
 
@@ -221,7 +221,7 @@ useEffect(() => {
 
 These updates results in a product list that the user can sort by the product name or the price:
 
-![[202412_0916PM-Firefox Developer Edition.gif|500]]
+![changing sort options](./assets/week-08/sort-options.gif)
 
 ### Filtering
 
@@ -297,7 +297,7 @@ This initial `filterQuery` when ran on its own results in the following output:
 
 Our now utility function works so now we need to create the rest of the filter feature before we integrate it. For now, we place it with the other utility functions at the top of the App component file. We next need to add filter UI elements to the form we made while implementing sort.
 
-![[202412_1140AM-Brave Browser.png|500]]
+![filter field added](./assets/week-08/filter-field.png)
 
 At this point, we have to consider how this filter should interact with our global state. We don't want this this function removing anything from the `inventory` so we will have to create an intermediate working state to provide a `filteredInventory` to the product list. Its associated `setFilteredInventory` state function is called alongside `setInventory` in the `useEffect` that fetches the inventory. We then replace the `inventory` prop with `filteredInventory` in ProductList instance.
 
@@ -326,7 +326,7 @@ useEffect(() => {
 
 Here is the update interface in action:
 
-![[202412_0247PM-Brave Browser.gif|500]]
+![filter live-updates search for terms](./assets/week-08/filter-pillow.gif)
 
 Sort and search implemented locally are appropriate for applications that work with a limited amount of data. We already have all product data on hand so these approaches great for improving the experience users have with CTD Swag.
 

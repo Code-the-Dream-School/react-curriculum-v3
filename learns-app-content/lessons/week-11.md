@@ -54,7 +54,7 @@ function App() {
 
 All of the state update functions listed above are referenced at least once somewhere in the component. Many are found in two places. `setIsAuthenticating` is called in five locations!
 
-![[202501_0331PM-Code.png|400]]
+![IDE screen shot with all instances of setIsAuthenticating highlighted](./assets/week-11/set-is-auth-hilighted.png)
 
 `setIsAuthenticating` is found only in two event handlers, but but state update functions are also used in `useEffect`s and passed in props to child components. You can see how it can be easy to lose track of state!
 
@@ -144,9 +144,9 @@ Reducer functions and the initial state values tend to be more complex than the 
 
 For this discussion, we will implement the reducer pattern on cart's state. We create a file `cart.reducer.js` and place it into a `/reducers` folder created under `/src`. It's helpful to drop the "x" from the filename's extension since it will not contain any React-specific code or JSX. This will tell us, at a glance that it is not component code without having to open the file up. After creating the new file, we when need to identify the relevant `useState`s:
 
-![[202501_0334PM-Code.png|500]]
+![ide screenshot highlighting cart state](./assets/week-11/cart-state-hilighted.png)
 
-The `useState`s highlighted above all manage some aspect of state related to the cart. From this list, we can determine `intialState`:
+The `useState`s highlighted above all manage some aspect of state related to the cart. From this list, we can determine `initialState`:
 
 ```js
 // extract from cart.reducer.js
@@ -172,11 +172,11 @@ function reducer(state, action) {
  }
 }
 
-export {intialState, reducer}
+export {initialState, reducer}
 
 ```
 
-We will add `case` statements for each of the actions we identify to organize the state logic. `switch/case` flow control is easier to read than `if/esle` statements so is usually preferred. Reducer functions tend to grow quite long.
+We will add `case` statements for each of the actions we identify to organize the state logic. `switch/case` flow control is easier to read than `if/else` statements so is usually preferred. Reducer functions tend to grow quite long.
 
 We then import the initial value and the reducer into `App.js` and add them to a `useReducer` hook:
 
@@ -197,7 +197,7 @@ const [cartState, dispatch] = useReducer(cartReducer, cartInitialState);
 
 Next, we'll find places where `isCartOpen` is used and determine how argument is created. In some cases, it's a direct value that is passed in. In other cases, our event handlers and helper functions calculate that value. Using VS Code's file search we can find 3 instances to `setIsCardOpen`.
 
-![[202501_0453PM-Code.png|500]]
+![ide file search result numbers for setIsCartOpen](./assets/week-11/is-cart-open-search.png)
 
 The first location is in `useState` so we do not need to worry about that for now. The second one is in a handler function that closes the cart and the final on is in the Header instance:
 
@@ -275,11 +275,11 @@ We then update each `isCartSyncing` with `cartState.isCartSyncing` to use the st
 
 After completing these updates, our cart behaves the same but that state is now fully managed by the reducer.
 
-![[202501_0118PM-Firefox Developer Edition.gif|500]]
+![animated screen capture highlighting isCartOpen as UI is manipulated](./assets/week-11/is-cart-open-state.gif)
 
 We are now left with 5 more `useStates` to refactor.
 
-```
+```javascript
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false); //DONE
   const [isCartSyncing, setIsCartSyncing] = useState(false);

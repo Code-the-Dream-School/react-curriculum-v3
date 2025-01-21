@@ -205,7 +205,7 @@ Going back into the function that runs fetch, code execution stops at `const res
 
 The code above also includes a few `console.log` statements that provide us some insight into the execution order across the useEffect.
 
-![[202412_0653PM-Firefox Developer Edition.gif]]
+![page loads dog image](./assets/week-07/useeffect-skip-image.gif)
 
 The following is logged to the console when the app first loads:
 
@@ -291,7 +291,7 @@ Of course, seeing only one dog is boring! Let's add a button that will load a ne
 
 We can then update the JSX with the new button. `fetchDog` can be passed to the button's onClick handler props.
 
-![[202412_0712PM-Firefox Developer Edition.gif|500]]
+![clicking button loads another dog image](./assets/week-07/another.gif)
 
 ### Loading CTD-Swag with Product Data from an API
 
@@ -472,7 +472,7 @@ We are now ready to expand the functionality of CTD Swag. The discussion will fo
 
 For this task we need to create a form that accepts an email and password. Since we don't want to clutter the interface any further, we will add a Log In button beside the cart that toggles the visibility of a dialog containing the auth form. We will use a state variable, `isAuthFormShown` to control this dialog's visibility.
 
-![[202412_1156PM-Firefox Developer Edition.gif|500]]
+![submitting auth form](./assets/week-07/login3.gif)
 
 We next consider the POST request that we send to authenticate. An initial request looks like:
 
@@ -544,7 +544,7 @@ With that in place with a few `console.dir` statements, we get the auth response
 
 Here's the current UI appearance for successful login and failed login:
 
-![[202412_0359PM-Firefox Developer Edition.gif|500]]
+![failed login attempt](./assets/week-07/login-error.gif)
 Here are the relevant console outputs so that we can determine how to integrate it to our existing state:
 
 ```javascript
@@ -620,15 +620,15 @@ async function handleAuthenticate(credentials) {
 
 Finally, we use those state values to update the content in the UI. We'll take care of items that use intermediate state - loading message and the spinner. We pass `isAuthenticating` to the auth form. Using conditional rendering, we'll toggle between the form and the loading elements. If the authentication is successful, we'll also close out the form dialog window.
 
-![[202412_1105AM-Firefox Developer Edition.gif|400]]
+![loading spinner shows briefly during login](./assets/week-07/login2.gif)
 
 That quick state change makes it challenging to work with html elements and styling if you forget to take advantage of React's dev tools. In the Components tab of the browser's dev tools, you are able to see and change state values in all of the components rendered on the page. We can find the one that toggles the dialog's loading message and set it to true. This results in the loading elements staying on screen.
 
-![[202412_0514PM-Firefox Developer Edition.gif|500]]
+![alt](./assets/week-07/login-spinner.gif)
 
 With this open, we can also insert and position the error message to the bottom of the dialog. Remember to reset `authError` to an empty string if the user successfully logs in or they close the dialog out. We don't want that value persisting in the application.
 
-![[202412_0537PM-Firefox Developer Edition.gif|500]]
+![login dialog shows error message on bad login attempt](./assets/week-07/login-error.gif)
 
  Our final step is to update UI content for the user based on the `user` state variable. This includes populating the cart, changing the login button to log out (text and functionality), and adding the welcome message.
 
@@ -636,7 +636,7 @@ With this open, we can also insert and position the error message to the bottom 
 
 One of the key features of adding users and carts is to populate the cart. Luckily, this is a simple matter. Recall that in the console statements, the response object contained an `cartItems` entry. We don't have to go through the awkward transformation of product items into cart items again. Our API is set up to deliver the cart items so we can add them directly into the cart. We can take a closer look at that fetch response but this time in the browser's Network tab.
 
-![[202412_1055AM-Firefox Developer Edition.png|900]]
+![pointing out server-based properties in cart items](./assets/week-07/cart-state-server-fields.png)
 
 We just have to confirm that the variable names for each property matches the corresponding value in the response response (eg: `cart` vs `cartList` vs `cartItems`). We can then destructure the cart items directly into the the cart's state updater function to update the cart.
 
@@ -728,21 +728,21 @@ In the Header component, we determine there is a user by looking for the existen
 
 Here is the updated UI functionality for logging in:
 
-![[202412_1253PM-Firefox Developer Edition.gif|400]]
+![cart loads at login](./assets/week-07/login-cart-loaded2.gif)
 
 #### Sign Up New User
 
 Signing up a new user uses the same pessimistic UI strategy that logging in employs. Since we already saw an example of a pessimistic approach, we'll just summarize the changes for signing up a new user. We first added a register button beside login.
 
-![[202412_0554PM-Firefox Developer Edition.png|500]]
+![login and register buttons](./assets/week-07/login-register-buttons.png)
 
 Both buttons call the same handler, `handleOpenAuthDialog`, to open the dialog, but we also set an `isRegistering` state variable that we use to show either the `LoginForm` or the `RegisterForm` form in the `AuthDialog`. We then extract the login form from the into its own `LoginForm` component and then create a `RegisterForm` component.
 
-![[202412_0616PM-Firefox Developer Edition.gif|400]]
+![toggling between auth and login dialogs](./assets/week-07/login-auth-dialogs.gif)
 
 We then create a new POST fetch request to the `/auth/register` endpoint. If all goes well with the registration, then we use the response to set the `user` state value, completing a successful registration and login. We handle any registration errors by displaying messages in the form with the same `authError` state value the login form uses.
 
-![[202412_0623PM-Firefox Developer Edition.gif|400]]
+![user registers and logs in](./assets/week-07/register-form.gif)
 
 #### Sync Cart Form Update
 
@@ -750,7 +750,7 @@ Our API's `/cart` endpoint incudes a PATCH method. Our response include the auth
 
 Note the flicker in the gif below - this is caused by the brief change of `workingCart` to the previous `cart` value before the API response completes. When the cart is updated from the fetch response, that `workingCart` is being changed again.
 
-![[202412_1121AM-Finder.gif|300]]
+![alt](./assets/week-07/confirm-update-temp-reversion.gif)
 
 We can prevent that rapid change by relying on a state boolean, `isCartSyncing`. While it's set to true, we prevent the `useEffect` in the `Cart` component making any state updates to `workingCart`. When the response resolves, we toggle `isCartSyncing` so that `Cart` can resume syncing its `workingCart` with the global `cart`.
 
@@ -828,7 +828,7 @@ On review of that function, we can see a pattern emerge from how we tie together
 
 And here is the final cart behavior!
 
-![[202412_1233PM-Firefox Developer Edition.gif|500]]
+![logs in and opens loaded cart](./assets/week-07/login-cart-loaded.gif)
 
 Note how pessimistic strategy of UI updates doesn't make the experience *bad* or *slow* as long as it's applied to major operations. In the state updates that we have done so far, making the user wait for the back end has only a part of confirmation tasks. In the last feature planned, making the user to wait while adding items to the cart would be detrimental to the shopping experience.
 
@@ -908,9 +908,9 @@ if (!resp.ok) {
 //code continues...
 ```
 
-![[202412_0612PM-Firefox Developer Edition.png|500]]
+![error saving item](./assets/week-07/saving-error.png)
 
-![[202412_0614PM-Firefox Developer Edition.png|500]]
+![error confirming cart update](./assets/week-07/cart-saving-error.png)
 
 After setting up the alert dialog, we finally need to revert the cart item to its state prior to adding it to the cart. We still have access to target list item so we can decrement its quantity. If the quantity goes down to 0, we then remove it from the cart entirely.
 
@@ -937,4 +937,4 @@ if (updatedCartItem.quantity === 1) {
 
 As seen in the gif below, the cart number updates immediately. When an error response is received, it reverts back to its previous value. This lets us know the item has been removed.
 
-![[202412_0627PM-Firefox Developer Edition.gif|500]]
+![cart displaying error dialog](./assets/week-07/cart-saving-error.gif)
