@@ -71,7 +71,7 @@ To work with a React project, we must choose a build tool and server. One of the
 
 Create a new repo in GitHub and give it a name. All of the other options can remain the default. Any files such as the license, readme, or .gitignore will just get in the way of the installation process and be re-created anyways. The .git directory (a normally invisible directory used to manage version control) is unaffected so does not have to be worried about.
 
-![github create new repository](./assets/week-01/new-repo.png)
+![github create new repository](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-01/new-repo.png)
 
 Clone the repo locally. With a terminal opened to the local repo's directory, issue the command below to scaffold out a Vite project using the React template.
 
@@ -137,11 +137,11 @@ To work with the project, we have to start Vite's server. To find the right comm
 
 Since the packages in the repo are installed locally, the command line will not recognize them. Instead of trying to call them directly (e.g. typing `vite build` into our terminal), we use npm to call the scripts for us by using the command `npm run <<scriptKey>>` in the terminal at the project's root directory. Remember in JSON, a `key` is a property name - the word on the left side of a colon. In our case, we're going to use the command **`npm run dev`**. This will spin up a development pipeline to create a version of our code that is understandable by the browser.
 
-![vite running in terminal](./assets/week-01/terminal-serve.png)
+![vite running in terminal](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-01/terminal-serve.png)
 
 Vite then serves up the transformed code so we can see it in the browser!
 
-![starting page in browser](./assets/week-01/starter-page.png)
+![starting page in browser](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-01/starter-page.png)
 
 You may have noticed a `:5173` in the url. This is the port number that Vite serves content from locally. We will talk more about this and how to deploy a live app in week 13.
 
@@ -173,14 +173,14 @@ Now that we have the project scaffolded and we know it runs, we'll dig into some
 
 A linter is a tool that performs a [static analysis](https://en.wikipedia.org/wiki/Static_program_analysis)of a codebase to flag syntax errors and bad practices without having to run the code. VS Code already provides basic static analysis for JavaScript but we can extend this with ESLint. The React template includes some sensible default rules when we installed it but we also have to install VS Code's [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) extension. The extension will allow VS Code to lint all project files and adds a tooltip when mousing over a flagged item. The tooltips usually include a brief summary of the rule violation and a link to more documentation. In the screenshot below, clicking the blue text "[react/jsx-key](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-key.md)" will open a browser window to documentation that explains the error, how to resolve it, and even rule configuration options for `eslint.config.js`.
 
-![missing key props error in ide](./assets/week-01/missing-key.png)
+![missing key props error in ide](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-01/missing-key.png)
 
 A keen observer may have noticed a few unusual comments in an earlier screenshot. At the top of the file for the `App` component, there are commented lines that disable two rules. Those lines are suppressing errors ESLint would have flagged.
 
-![eslint rules disabled in file by comment](./assets/week-01/eslint-disable.png)
+![eslint rules disabled in file by comment](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-01/eslint-disable.png)
 In the following screenshot of an error tooltip, we have an error on `setTestList` being reported by VS Code's built-in static analysis and ESLint. `ts` stands for TypeScript even though it's evaluating JavaScript. This may be confusing since we're not using TypeScript but is just an odd detail resulting from how the internals of VS Code work.
 
-![no unused vars tooltip](./assets/week-01/unused-vars.png)
+![no unused vars tooltip](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-01/unused-vars.png)
 
 When working with ESLint, we can to add and remove rules that suit our needs. ESLint provides three ways to modify rules:
 
@@ -190,7 +190,7 @@ When working with ESLint, we can to add and remove rules that suit our needs. ES
 
 We have already seen how to turn off the rule for the entire file. Another way is to add the appropriate comment directly above a line of code which will then ignore only that instance of the warning. Finally, to change a rule's behavior across the codebase, it can be configured in `eslint.config.js` which is found at the root of the project. We can add, modify, or disable rules with this file. Keep in mind that the rules already in place conform to community best practices. Don't change them just to get rid of the squiggly lines in the code! Make sure you understand the rules you disable or enable and have a strong reason for doing so.
 
-![eslint config rules disabled](./assets/week-01/eslint-rules-config.png)
+![eslint config rules disabled](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-01/eslint-rules-config.png)
 
 #### Automatic Code Formatting with Prettier
 
@@ -210,11 +210,11 @@ Since this is a development tool and is not a part of the app, we install Pretti
 
 We then have to install Prettier plugin and configure VS Code to use it as the default code formatter. After installing the plugin, open VS Code's settings and filter for "format". For `Editor: Default Formatter` select Prettier and then check the box for `Editor: Format on Save`.
 
-![searching for format in ide settings](./assets/week-01/search-format.png)
+![searching for format in ide settings](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-01/search-format.png)
 
 Code before and after saving with Prettier enabled:
 
-![code before and after prettier formatting](./assets/week-01/pretter-before-after.png)
+![code before and after prettier formatting](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-01/pretter-before-after.png)
 
 - semicolons are consistently used
 - quotes on imports are single quotes instead of double quotes

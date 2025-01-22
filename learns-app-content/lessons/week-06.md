@@ -48,7 +48,7 @@ Components are one of the fundamental building blocks of any React application. 
 
 We have already seen a few examples of repeated elements in CTD Swag. The blurred out product cards and the shopping cart items are both elements that repeat themselves. In fact, we've already had some experience with the card components. The shopping cart items are a prime example of an element that can be turned into a re-usable component. Inside of the `Cart` component, we map over the `workingCart` to create each list item. Rather than housing the code in `Cart` component, it can be extracted out to a `CartItem` component. Doing so saves space in the existing component file plus make it easier to read.
 
-![displaying cart list](./assets/week-06/cart.png)
+![displaying cart list](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/cart.png)
 
 Another category of reusable components are elements that are used throughout an interface that allow user to navigate or interact with the page. They can also be visual details that unify the look and feel of an interface. Such components could include:
 
@@ -62,7 +62,7 @@ Any visual element is a candidate to become a reusable component as long as 2 cr
 
 Dialog boxes convey messages to users based on their actions, such as success messages, error notifications, or warnings, or general information the user may need. A typical dialog box consists of its container, a heading, message, and one or more buttons to take an action on the message.
 
-![alt](./assets/week-06/info-dialog-white-header.png)
+![alt](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/info-dialog-white-header.png)
 
 Below is the equivalent code, excluding styles to neaten up the dialog's appearance.
 
@@ -192,7 +192,7 @@ function App() {
 export default App;
 ```
 
-![toggle through dialog types](./assets/week-06/toggle-dialogs.gif)
+![toggle through dialog types](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/toggle-dialogs.gif)
 
 The dialog has a default `kind` when first rendered and when changed, it displays a different color and a helpful icon in its heading. Suppose that we have messages that come from an API response that we wanted to include them instead of the static paragraph we currently had. We have two options with this approach - we can add a `message` props or we can place the message into the instance using `children` props. Using the `children` approach has the added advantage that we can further format the message or include other jsx.
 
@@ -250,7 +250,7 @@ function App() {
 }
 ```
 
-![info dialog with blue heading](./assets/week-06/info-dialog.png)
+![info dialog with blue heading](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/info-dialog.png)
 
 ### Organizing Files in a React Project
 
@@ -335,11 +335,11 @@ The outline below provides a few more notes on the directories.
 
 To start the refactor, we create the new directories and move existing files into their updated location. As each file is moved, it's important to make sure that import statements are updated - both inside the file as well as wherever it is being imported. Running the dev server provides in-browser errors that are handy at letting us know where file imports are incorrect.
 
-![vite fails to resolve import](./assets/week-06/error-hint-fail-import.png)
+![vite fails to resolve import](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/error-hint-fail-import.png)
 
 VS Code is helpful in making some of these updates automatically as we move around files too. Be careful to double-check the imports in the file being moved - VS Code may not recognize non-JavaScript imports. Being able to import images and other non-JavaScript files is a feature of Vite and is not a part of [JavaScript module syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
 
-![alt](./assets/week-06/import-dialog.png)
+![alt](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/import-dialog.png)
 
 #### Refactoring Out Components
 
@@ -510,7 +510,7 @@ We go through the decision tree as we examine the JSX to come up with the follow
 
 For ease of reference, the image below highlights the considerations listed above:
 
-![highlighting workingCart map JSX](./assets/week-06/working-cart-map.png)
+![highlighting workingCart map JSX](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/working-cart-map.png)
 
 With these considerations identified, we can finally plan our refactor to extract `CartItem`. We first create the new file inside `src/features/cart` and define the `CartItem` component. We include `{item}` in the arguments so that we have it to work with. We next copy over (don't remove it yet) the entire list item into `CartItem's` return statement. We also copy over the image import. Remove the `key` props from the list item in the new component since it's not needed any more. We add `onHandleItemUpdate` to `CartItem`'s arguments so that we can pass the handler function as props.
 
@@ -574,7 +574,7 @@ Tests come in three basic categories: unit, integration, and end to end (E2E). E
 
 #### Types of Testing
 
-![venn diagram of test types - unit, integration, end-to-end](./assets/week-06/tests-venn_diagram.png)
+![venn diagram of test types - unit, integration, end-to-end](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/tests-venn_diagram.png)
 
 ##### Unit
 
@@ -752,11 +752,11 @@ Running `npm test` in the terminal will start up the test runner. Similar to the
 
 While it's running, Vitest will show the results of the test in the terminal window.
 
-![test passed](./assets/week-06/app-test-passed.png)
+![test passed](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/app-test-passed.png)
 
 Let's look at the output for a failing test. In the example below, our original test passes but the second one contains an invalid assertion which causes that test to fail. Each test that passes has a checkmark beside it and failed tests have an x-mark. Failed tests display in the terminal and uses a caret the point to the first assertion that fails. This is handy since a test case can contain more than one assertion.
 
-![test suite highlight failure point](./assets/week-06/test-error-hilight.png)
+![test suite highlight failure point](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/test-error-hilight.png)
 
 Using multiple assertions in a test case keeps the tests compact but it comes with a tradeoff. An assertion is only ran if the previous assertion is valid. At this point, we can't tell the outcome of the final assertion (`.not.toMatch`). This may be acceptable depending on the test but let's refactor this so that all of the assertions are ran. We will also take this opportunity place `App`'s tests into a suite.
 
@@ -785,7 +785,7 @@ describe('App test suite', () => {
 
 Now we know the outcome of the last assertion even though the previous one still fails:
 
-![cli test suite passes](./assets/week-06/test-suite-pass.png)
+![cli test suite passes](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/test-suite-pass.png)
 
 #### Evaluating a Component
 
@@ -806,7 +806,7 @@ describe('App test suite', () => {
 
 You may notice the keyword `screen`. When a component or a portion of HTML is rendered, DOM Testing Library gives us a `screen` object that contains rendered content and all of the queries available to select various text or elements. `screen` also includes a method, `.debug()` that is very useful for exploring the contents of the of the `screen` while writing tests. When `screen.debug()` is added to the test, it outputs the rendered elements in neatly formatted html. Notice that everything inside of `App` is rendered into HTML, including its children components.
 
-![test outputting html to cli](./assets/week-06/test-html-output.png)
+![test outputting html to cli](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/test-html-output.png)
 
 To focus in on a single element, `.debug()` can accept a `screen` query.
 
@@ -820,7 +820,7 @@ describe('App test suite', () => {
 });
 ```
 
-![h1 highlighted in test output to cli](./assets/week-06/h1-hilight.png)
+![h1 highlighted in test output to cli](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/h1-hilight.png)
 
 Testing props for a component differs from case to case but can be as simple as passing some data into the component as rendered. We'll create a new file to test the ProductCard component.
 
@@ -850,7 +850,7 @@ describe('ProductCard component', () => {
 });
 ```
 
-![test passes for product card](./assets/week-06/product-card-test-passed.png)
+![test passes for product card](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/product-card-test-passed.png)
 
 Even though we now have 2 test files, only results for the ProductCard test is displayed. Vitest will not re-run tests unless the evaluated code, or its dependencies, has changed.
 
@@ -941,7 +941,7 @@ it('callback returns product id', async () => {
 });
 ```
 
-![alt](./assets/week-06/product-card-tests-passed.png)
+![alt](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/product-card-tests-passed.png)
 
 Testing in React is a fundamental practice that aids in identifying bugs and errors throughout the development process. By validating code behaviors in different scenarios, tests establish a reliable foundation for consistent functionality. They act as a protective layer, catching unintended repercussions when code modifications occur. A robust test suite guarantees that system integrity is maintained even after changes have been made. This week's discussion covers the basics of unit testing, and it's important to acknowledge that there is much more to explore beyond these foundational materials.
 

@@ -262,7 +262,7 @@ return (
 
 Here is the resulting change:
 
-![show bucket hat options](./assets/week-05/show-options.gif)
+![show bucket hat options](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-05/show-options.gif)
 
 ##### Create Cart Component
 
@@ -341,7 +341,7 @@ return (
 
 Let's open the React dev tools to see how things are working. We don't have our button wired up yet but we should be able to modify that state value to show/hide the cart.
 
-![showing state change in components tab](./assets/week-05/open-cart-state.gif)
+![showing state change in components tab](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-05/open-cart-state.gif)
 
 #### Opening and Closing Cart
 
@@ -396,7 +396,7 @@ export default Header;
 
 Since we already have the `handleCartClose` in the props of the `Cart` component, it's now a matter of passing the handler as props: `{isCartOpen && <Cart cart={cart} handleCloseCart={handleCloseCart} />}`.
 
-![cart opening and closing](./assets/week-05/open-close-cart.gif)
+![cart opening and closing](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-05/open-close-cart.gif)
 
 #### Render a Message Instead of an Empty List
 
@@ -455,8 +455,8 @@ export default Cart;
 
 Our shopping cart looks pretty good but there are a few improvements that can be made. In shopping carts on other sites frequently users to make changes to their carts - they can remove items or change the quantity of items in the cart.
 
-![updating cart at mechanicalkeyboards.com](./assets/week-05/keyboard-switch.gif)
-![updating cart at louisianapantry.com](./assets/week-05/lousiana-pantry.gif)
+![updating cart at mechanicalkeyboards.com](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-05/keyboard-switch.gif)
+![updating cart at louisianapantry.com](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-05/lousiana-pantry.gif)
 Currently, the state value, `cart`, is just an array that lists the cart's contents. We want to update `cart` so it creates only one list item for each unique product. The product, in turn, contains data about how times it's been added to the cart using `itemCount`. We can remove `cartItemId` property and then resume using the item's id as a key in the cart's list. An example cart item now looks like:
 
 ```js
@@ -581,7 +581,7 @@ export default Cart;
 
 With the cart ready, we can make its data updatable for users.
 
-![cart open](./assets/week-05/cart.png)
+![cart open](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-05/cart.png)
 
 ### Controlled Components
 
@@ -738,7 +738,7 @@ flowchart TD
 
 To keep a field synchronized in a controlled component, it must have a `value` props that takes a state variable and an `onChange` props with a handler function to update the local state. This update triggers a re-render which then causes the interface to show the new value. All of this happens almost instantaneously so you are left with an input that, for the user, behaves like a normal input but now we have continuous access to the field's value.
 
-![input syncing live on page](./assets/week-05/input-1.gif)
+![input syncing live on page](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-05/input-1.gif)
 
 #### Putting Controlled Components into Action
 
@@ -864,7 +864,7 @@ export default Cart;
 
 With these changes, we are left with an cart that displays the item count in an input and a nifty screen is cast across the shop so none of the products are clickable.
 
-![alt](./assets/week-05/open-cart-disabled-bg.gif)
+![alt](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-05/open-cart-disabled-bg.gif)
 
 We next add in the confirm and cancel buttons for the working form. We don't want them showing until the user makes a change so we conditionally render them based in `isCartDirty`
 
@@ -945,6 +945,6 @@ The final helper we need to create handles the user's change confirmation. `hand
 
 CTD Swag is coming along! A user can brows items in the list, add items to their cart, and they can modify item counts in the cart. With our work, the `App` and `Cart` components continue to grow in size.
 
-![adding product variants to cart](./assets/week-05/add-products-mod-cart.gif)
+![adding product variants to cart](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-05/add-products-mod-cart.gif)
 
 We still have a ways to go before this app is complete though. We still need to allow users to chose item variants, shirt sizes, a checkout, and an order history. Before CTD Swag become challenging to continue to develop, we will take some time next week to refactor our code into further sub-components and some utility functions. We will also talk about organizing a React project so that it continues to be easy to manage as the codebase grows.

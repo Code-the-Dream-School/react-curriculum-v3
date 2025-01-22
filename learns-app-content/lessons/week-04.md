@@ -482,11 +482,11 @@ useEffect(() => {
 
 It loads the same as before but now the code is a bit more flexible for future changes.
 
-![alt](./assets/week-04/render-priority-product-list.png)
+![alt](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-04/render-priority-product-list.png)
 
 Let's fix up the styling to make it look more like a storefront and then add a shopping cart! For now, we'll add classes to elements so that they're easy to select and add style rules to `App.css` - the same that we would do with a static html page. We'll talk about css and images in depth in week 10 because there are other, more flexible options for styling in React, especially as an app grows and becomes more complex.
 
-![product cards](./assets/week-04/product-cards.png)
+![product cards](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-04/product-cards.png)
 
 For a cart feature, we need to be able to track items that have been put into a cart. To do so, we'll to add another `useState` to hold and update the items a user has selected. The initial state will be an empty array and we need handler function to add items from the cart. Removing items will come next week when we work with forms. We're also going to remove the special limited edition tee to simplify the product list. It will end up causing bugs because it's not a part of the inventory that we import from `catalog.json`. Sorry Frank, it'll come back later!
 
@@ -540,7 +540,7 @@ Now that we have a handler function to update the cart state, we need to wire `h
 
 With that done, we can now look at the state in `App` using our [React Dev Tools](https://react.dev/learn/react-developer-tools) (it's highly recommended that you have them installed!). The second State entry grows every time one of the buttons is clicked. When the entries are expanded, they contain all the details of the product but there is also a unique `cartItemId`.
 
-![adding items to cart updates state](./assets/week-04/add-product-state.gif)
+![adding items to cart updates state](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-04/add-product-state.gif)
 
 Now that we have a state representation of the cart, we can add it to the page. The cart does not need to remain open all the time - it would get in the way of the products. We'll keep the cart minimized and add a cart icon with an item count in the upper-left corner which is controlled by the Header component.
 
@@ -566,7 +566,7 @@ useEffect(() => {
 //...component code.
 ```
 
-![print shopping cart to console](./assets/week-04/add-product-console.gif)
+![print shopping cart to console](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-04/add-product-console.gif)
 
 > [!note]
 > A handler function's name doesn't have to remain the same when it passed through props. We could have called the props `addItem` when defining ProductCard and then added that to the `onClick`

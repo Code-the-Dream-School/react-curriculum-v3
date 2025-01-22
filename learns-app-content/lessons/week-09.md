@@ -166,7 +166,7 @@ useEffect(() => {
 
 The console statements from the above statement illustrates how the caching logic prevents the request in this screen recording:
 
-![searching for chicken then beef](./assets/week-09/search-chicken-beef.gif)
+![searching for chicken then beef](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-09/search-chicken-beef.gif)
 
 #### Throttling Request Rates
 
@@ -174,7 +174,7 @@ Another type of common API requirement is that a set amount of time must elapse 
 
 We are going to look closer at pagination in [[Week-12|week 12]] but we need to know some basic details about the API response that enable us to paginate. Each API response includes a portion of the search results, an offset value(how many recipes that have been skipped), and a total number of results in a search. By updating the fetch logic and updating the UI, the app ends up with a group of buttons below the results that allow a user to page through all the search results.
 
-![paging through search results](./assets/week-09/search-chicken-pagination.gif)
+![paging through search results](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-09/search-chicken-pagination.gif)
 
 The easiest way to throttle the response is to limit the availability of the buttons. We can temporarily set state to disable the button and then use `setTimeout` to re-enable them after a certain time has elapsed. We'll look at the handler functions since they end up with the logic to perform the throttle:
 
@@ -203,15 +203,15 @@ function pageBack() {
 //code continues...
 ```
 
-![demo of button disabled by a timer](./assets/week-09/search-lentils.gif)
+![demo of button disabled by a timer](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-09/search-lentils.gif)
 
 That is not the sort of delay that a user would want on their application so we can refine timeout duration. We can look at the network requests in the network activity tab in our browser to figure out how long it's taking the request to process. We see in the following request, that we're waiting around 160 milliseconds for the server to respond.
 
-![response time in network tab](./assets/week-09/response-time-hilight.png)
+![response time in network tab](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-09/response-time-hilight.png)
 
 We'll send off several requests and then average out the wait times between each. For this API, the response time averages out to 350ms. We can then reduce the timeout delay by this amount, making the interface a little friendlier to use without running against the API request speed limitations.
 
-![delay timing minimized](./assets/week-09/search-spinach.gif)
+![delay timing minimized](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-09/search-spinach.gif)
 
 ### useMemo and useCallback
 

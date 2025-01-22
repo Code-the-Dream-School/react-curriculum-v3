@@ -29,3 +29,7 @@ Written lesson Materials
 ## Contribution
 
 We are not currently taking any contributions until the course is completed - est. Jan 2025.
+
+## Misc notes
+
+- all images should be use a `src` like "<https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-01/eslint-disable.png>"
