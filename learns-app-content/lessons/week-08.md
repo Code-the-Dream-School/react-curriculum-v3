@@ -57,24 +57,24 @@ To finish up this first iteration of sorting, we then add it to the `useEffect` 
 ```js
 // extract from App.jsx
 //...code
-  useEffect(() => {
-    (async () => {
-      try {
-        const resp = await fetch(`${baseUrl}/products`);
-        if (!resp.ok) {
-          throw new Error(resp.status);
-        }
-        const products = await resp.json();
-        const sortedProducts = sortByBaseName({
-          productItems: products,
-          isSortAscending: true,
-        });
-        setInventory([...sortedProducts]);
-      } catch (error) {
-        console.error(error);
+useEffect(() => {
+  (async () => {
+    try {
+      const resp = await fetch(`${baseUrl}/products`);
+      if (!resp.ok) {
+        throw new Error(resp.status);
       }
-    })();
-  }, []);
+      const products = await resp.json();
+      const sortedProducts = sortByBaseName({
+        productItems: products,
+        isSortAscending: true,
+      });
+      setInventory([...sortedProducts]);
+    } catch (error) {
+      console.error(error);
+    }
+  })();
+}, []);
 //code continues...
 ```
 
@@ -156,7 +156,7 @@ function ProductViewForm({
   sortBy,
   isSortAscending,
 }) {
-//helper to convert text back into a boolean
+  //helper to convert text back into a boolean
   const handleSortDirectionChange = (e) => {
     const sortDirection = e.target.value;
     if (sortDirection === 'false') {
@@ -174,8 +174,7 @@ function ProductViewForm({
           name="sortBy"
           id="sortBy"
           value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
-        >
+          onChange={(e) => setSortBy(e.target.value)}>
           <option value="baseName">Product Name</option>
           <option value="price">Price</option>
         </select>
@@ -186,8 +185,7 @@ function ProductViewForm({
           name="sortDirection"
           id="sortDirection"
           value={isSortAscending}
-          onChange={handleSortDirectionChange}
-        >
+          onChange={handleSortDirectionChange}>
           <option value={true}>Ascending</option>
           <option value={false}>Descending</option>
         </select>
@@ -197,7 +195,6 @@ function ProductViewForm({
 }
 
 export default ProductViewForm;
-
 ```
 
 Finally, we'll create a `useEffect` in `App` that watches for changes on either of the new state values. This `useEffect` ties in our utility functions to sort the product list. Note that if we were to work with `inventory` directly into the useEffect, that state value would become a dependency of that `useEffect`. We can avoid this by passing in a function to update state rather than setting it directly. The reason why we are able to do this is that the state update function provides the old state value as an argument that we can use to return a new value for the state. This behavior can be made more apparent through by naming the argument `previous`, similar to how we would use `item` in a map going over `listItems`: eg `listItems.map((item)=> {…`
@@ -206,15 +203,15 @@ Finally, we'll create a `useEffect` in `App` that watches for changes on either 
 // extract from App.jsx
 //...code
 useEffect(() => {
- if (sortBy === 'baseName') {
-   setInventory((previous) =>
-  sortByBaseName({ productItems: previous, isSortAscending })
-   );
- } else {
-   setInventory((previous) =>
-  sortByPrice({ productItems: previous, isSortAscending })
-   );
- }
+  if (sortBy === 'baseName') {
+    setInventory((previous) =>
+      sortByBaseName({ productItems: previous, isSortAscending }),
+    );
+  } else {
+    setInventory((previous) =>
+      sortByPrice({ productItems: previous, isSortAscending }),
+    );
+  }
 }, [isSortAscending, sortBy]);
 //code continues...
 ```
@@ -229,8 +226,8 @@ Filters are useful for showing only a a sub-set of product items that contain th
 
 ```js
 const items = [
-//contains an offline copy of listItems
-]
+  //contains an offline copy of listItems
+];
 function filterByQuery({ productItems, searchTerm }) {
   const term = searchTerm.toLowerCase();
   return productItems.filter((item) => {
@@ -243,7 +240,10 @@ function filterByQuery({ productItems, searchTerm }) {
     }
   });
 }
-const filteredItems = filterByQuery({ productItems: items, searchTerm: "pillow" });
+const filteredItems = filterByQuery({
+  productItems: items,
+  searchTerm: 'pillow',
+});
 console.log(filteredItems);
 ```
 
@@ -317,9 +317,7 @@ Whenever a user adds a filter term, we filter `inventory` and provide the return
 // extract from App.jsx
 //...code
 useEffect(() => {
-    setFilteredInventory(
-     filterByQuery({ productItems: inventory, searchTerm })
-    );
+  setFilteredInventory(filterByQuery({ productItems: inventory, searchTerm }));
 }, [searchTerm, inventory]);
 //code continues...
 ```

@@ -10,9 +10,9 @@
 - benefits of React
   - imperative vs declarative
   - separation of concerns + usage of components
-	- grouping code by language vs grouping by functionality
-	- traditional web separates web pages html/php, styles, and javascript
-	- React philosophy single-function modules better than organizing code by language/filetype
+  - grouping code by language vs grouping by functionality
+  - traditional web separates web pages html/php, styles, and javascript
+  - React philosophy single-function modules better than organizing code by language/filetype
   - hooks
   - Virtual DOM and diffing process to optimize rendering
 
@@ -31,7 +31,7 @@
 - start hello world app
   - mention port number
   - explain importance of running SPA while developing
-	- (some students don't unless told)
+  - (some students don't unless told)
 
 ## Video 3 of 4: Project Walk-Through
 
@@ -56,13 +56,13 @@
   - install
   - demo tooltips on errors (both intellisense and eslint versions -hint: unused variables trips both)
   - explain how to add rules or disable existing ones
-	- per line
-	- per file
-	- `eslint.config.js`
+  - per line
+  - per file
+  - `eslint.config.js`
 - introduce code formatting with prettier
   - describe benefits
-	- individual developers
-	- working with team codebases
+  - individual developers
+  - working with team codebases
   - install and configure (format on save, auto formatting, formatting with `npm run ???`)
   - explain how to add, change rules with `.prettierrc`
   - demonstrate before and after

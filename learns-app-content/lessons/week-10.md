@@ -55,19 +55,25 @@ Vite includes CSS Modules by default so we don't need to import the library into
 When we import a stylesheet into its associated component the CSS Module library parses the file contents. It then makes any classes found in the file's rules available by dot-notation on import statement object. For example, `<li className="item">` becomes `<li className={styles.cartItem}>`. Seeing in context to the component may illustrate this better:
 
 ```jsx
-{/*CartItem.jsx*/}
+{
+  /*CartItem.jsx*/
+}
 import placeholder from '../../assets/placeholder.png';
 import styles from './CartItem.module.css';
 
 function CartItem({ item, onHandleItemUpdate }) {
   return (
-    <li className={styles.item}> {/*<--- references style from import*/}
+    <li className={styles.item}>
+      {' '}
+      {/*<--- references style from import*/}
       <img src={placeholder} alt="" />
       <div>
         <h2>{item.baseName}</h2>
         {item.variantName !== 'Default' ? <p>{item.variantName}</p> : null}
       </div>
-      <div className={styles.subtotal}> {/*<--- references style from import*/}
+      <div className={styles.subtotal}>
+        {' '}
+        {/*<--- references style from import*/}
         <label>
           Count:{' '}
           <input
@@ -101,8 +107,8 @@ To employ the stylesheet module, we move rules out of `App.css` that apply only 
   justify-content: space-between;
   margin: 0;
   align-items: center;
-  margin-bottom: .25rem;
-  padding-left: .75rem;
+  margin-bottom: 0.25rem;
+  padding-left: 0.75rem;
 }
 
 .item h2 {
@@ -115,7 +121,7 @@ To employ the stylesheet module, we move rules out of `App.css` that apply only 
 
 .subtotal {
   border-left: 1px solid var(--dark-blue);
-  padding: .25rem;
+  padding: 0.25rem;
   text-align: right;
 }
 ```
@@ -129,7 +135,7 @@ We continue to write normal CSS with CSS Modules which makes it an attractive to
 ```css
 /*scopes to component*/
 .cartItem {
-/*various styles*/
+  /*various styles*/
 }
 
 /*scopes to component*/
@@ -149,7 +155,7 @@ We continue to write normal CSS with CSS Modules which makes it an attractive to
 
 /*scopes globally!*/
 h2 {
-  background-color: green
+  background-color: green;
 }
 ```
 
@@ -161,20 +167,26 @@ There are use cases for element-only selectors. These usually revolve applying s
 
 ![highlighting examples of element selectors with style rules](./assets/week-10/root-header-h1-hilighted.png)
 
- Like all JavaScript libraries, CSS Modules has a few other features not discussed here but they are for more advanced use cases. Even not taking advantage of them, CSS Modules is a powerful library. It helps a developer produce a maintainable app by the reducing the risk of style leakage or unintended overrides. It takes the familiar approach to writing CSS and in returns provides scoping to keep css class naming strategies manageable in a growing project.
+Like all JavaScript libraries, CSS Modules has a few other features not discussed here but they are for more advanced use cases. Even not taking advantage of them, CSS Modules is a powerful library. It helps a developer produce a maintainable app by the reducing the risk of style leakage or unintended overrides. It takes the familiar approach to writing CSS and in returns provides scoping to keep css class naming strategies manageable in a growing project.
 
 #### Styled Components
 
 [Styled Components](https://styled-components.com) scopes styling to a component but uses a drastically different approach. Rather than using styles from a css file, it takes a "css-in-js" approach. We write our styles using [tagged template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) with transformation functions provided by Styled Components. These functions use the styles found in the template literal to configure the styles of a component that it returns. We don't need to worry about naming style classes anymore - just new components. Let's look at an example since tagged template literals are not a frequently used JavaScript feature.
 
 ```jsx
-{/*extract from ProductCard.jsx*/}
-{/*...code*/}
+{
+  /*extract from ProductCard.jsx*/
+}
+{
+  /*...code*/
+}
 
 const Details = styled.p`
   padding: 0.5rem;
 `;
-{/*code continues...*/}
+{
+  /*code continues...*/
+}
 ```
 
 The styles in the backticks are processed by the library and returns the component `Details` inside of the paragraph elements. Here, styled components gives us a `.p` transformation function. This function will return a component based on the `<p>` element and scope the classes using dynamic class names.
@@ -198,8 +210,8 @@ We can also make Styled Components out of custom components. Instead of referenc
 
 ```jsx
 const StyledProductVariants = styled(Product)`
-/*component styles*/
-`
+  /*component styles*/
+`;
 ```
 
 ##### Making Classes Readable
@@ -208,7 +220,7 @@ The class names are generated dynamically by a process internal to the library. 
 
 ![screen capture of main in html showing transformed classnames in sub-elements](./assets/week-10/html-main.png)
 
- We can install the [Babel plugin for styled components](https://styled-components.com/docs/tooling#babel-plugin) for readable class names to aid in troubleshooting.
+We can install the [Babel plugin for styled components](https://styled-components.com/docs/tooling#babel-plugin) for readable class names to aid in troubleshooting.
 
 ```terminal
 npm install --save-dev babel-plugin-styled-components
@@ -306,9 +318,9 @@ import styled from 'styled-components';
 //continued component code
 
 const SuccessModalTitle = styled.h1`
-    color: ${(props) => props.color || 'green'};
-    font-size: 24px;
-    font-weight: bold;
+  color: ${(props) => props.color || 'green'};
+  font-size: 24px;
+  font-weight: bold;
 `;
 ```
 

@@ -32,7 +32,7 @@
 
 ## Video 2 of 2: Props and Common Component Props
 
-*don't discuss updating objects - covered next week*
+_don't discuss updating objects - covered next week_
 
 - short for "properties"
 - tool to communicate state to children

@@ -28,7 +28,7 @@ By the end of this lesson, we will:
 - Demonstrate how to run installed app on a local development server
 - Describe the development workflow using the development server
 
-#### Stretch Goal: Improving the Development Environment
+#### Objective 4 (Stretch Goal): Improving the Development Environment
 
 - Explore options to improve the React development experience
 - Configure ESLint and Prettier
@@ -81,11 +81,11 @@ Clone the repo locally. With a terminal opened to the local repo's directory, is
 
 Let's break that command down to see what it's doing:
 
-1. `npm create …`: we're using npm's create command. `create` is an [alias](https://en.wikipedia.org/wiki/Aliasing_(computing)) of the `init` command which creates our package.json file.
+1. `npm create …`: we're using npm's create command. `create` is an [alias](<https://en.wikipedia.org/wiki/Aliasing_(computing)>) of the `init` command which creates our package.json file.
 2. `… vite@latest …`: this argument tells npm to scaffold the project using Vite's newest package.
 3. `… ./ …` lets npm know to use the current directory.
 4. `… -- …` forwards the remaining options to the package used to scaffold the project.
-5. `… --tempate react` tells vite's package to scaffold the project using its React template.
+5. `… --template react` tells vite's package to scaffold the project using its React template.
 
 > [!info]
 > If we run the command without any options (`npm create vite@latest`) this will start an interactive prompt in the terminal to help scaffold the Vite project. It will ask for a project name, a template to use, and then finally a template variant. Be careful to choose `JavaScript`, not `JavaScript SWC`. [SWC](https://swc.rs/) is a faster bundler that can be used instead of the default one used by Vite but doesn't have the right options for our project. We will not be using TypeScript in this course so don't choose that either.
@@ -115,7 +115,7 @@ The scaffolded project includes a starter SPA and a few supporting files. None o
 ```
 
 1. **.git/**: is an invisible directory created by git to maintain version control. You may not see it if your operating system hides directories and files that start with a ".". VS Code also will hide this directory by default.
-2. **.gitignore**: this file lists all those files and directories that should *not* be tracked with version control.
+2. **.gitignore**: this file lists all those files and directories that should _not_ be tracked with version control.
 3. **README.md**: this file contains pertinent information about the project. We keep this up to date with details such as a project description and steps that others need to take to run or work with the project.
 4. **ESLint.config.js**: is used to configure [ESLint](https://ESLint.org/), a tool used to identify syntax problems or common [anti-patterns](https://en.wikipedia.org/wiki/Anti-pattern).
 5. **index.html**: this file is the [entry point](https://vitejs.dev/guide/#index-html-and-project-root) for the application.
@@ -128,10 +128,10 @@ To work with the project, we have to start Vite's server. To find the right comm
 
 ```json
 "scripts": {
- "dev": "vite",
- "build": "vite build",
- "lint": "ESLint .",
- "preview": "vite preview"
+  "dev": "vite",
+  "build": "vite build",
+  "lint": "ESLint .",
+  "preview": "vite preview"
 }
 ```
 
@@ -145,7 +145,7 @@ Vite then serves up the transformed code so we can see it in the browser!
 
 You may have noticed a `:5173` in the url. This is the port number that Vite serves content from locally. We will talk more about this and how to deploy a live app in week 13.
 
-Any time we are working in our codebase, it's *highly recommended* to have the development server running and our SPA open in a browser window. This gives instant feedback on the code that we are working on. There are plenty of scenarios where our code does not have any errors in a grammatical or technical sense but will crash our SPA or generate other undesirable behaviors.
+Any time we are working in our codebase, it's _highly recommended_ to have the development server running and our SPA open in a browser window. This gives instant feedback on the code that we are working on. There are plenty of scenarios where our code does not have any errors in a grammatical or technical sense but will crash our SPA or generate other undesirable behaviors.
 
 ### Project Walk-Through
 
@@ -165,7 +165,7 @@ Now that we have the project scaffolded and we know it runs, we'll dig into some
 - **JSX transformation** - Similar to TypeScript, browsers do not understand JSX. This extension of JavaScript (which we will talk more about next week) needs converted to plain JavaScript before being served to a browser. Vite provides this transformation for any `.jsx` or `.tsx` (the TypeScript equivalent) file in the `src/` directory automatically.
 - **CSS, JSON importing** - JavaScript files are not normally able to import files that are written in other languages. Rather than having to create special loaders ourselves so that we can work with non-JavaScript files, Vite gives us the ability to do so. Vite injects CSS onto the page and gives it HMR support. Vite also allows us to work with JSON through named or default imports that we can treat it like a JavaScript object. This is handy for data population where we don't want to reach for an API connection.
 - **Inclusion of static assets** - these resolve a public URL for the file when imported into a `.jsx` file. We'll explore how to take advantage of this during [[Week-10|week 10]].
-- **strong Plugin ecosystem** - Vite has [official plugins](](https://vitejs.dev/plugins/)) and [community plugins](https://github.com/vitejs/awesome-vite#plugins) that extend its capabilities - some are React-specific, some work with other frameworks, and a lot are UI framework/library agnostic.
+- **strong Plugin ecosystem** - Vite has [official plugins](https://vitejs.dev/plugins/) and [community plugins](https://github.com/vitejs/awesome-vite#plugins) that extend its capabilities - some are React-specific, some work with other frameworks, and a lot are UI framework/library agnostic.
 
 ### Stretch Goal: Improving the Development Environment
 
@@ -182,7 +182,7 @@ In the following screenshot of an error tooltip, we have an error on `setTestLis
 
 ![no unused vars tooltip](./assets/week-01/unused-vars.png)
 
- When working with ESLint, we can to add and remove rules that suit our needs. ESLint provides three ways to modify rules:
+When working with ESLint, we can to add and remove rules that suit our needs. ESLint provides three ways to modify rules:
 
 1. ignore a rule for a file
 2. ignore a rule for a single line
@@ -225,14 +225,15 @@ Code before and after saving with Prettier enabled:
 
 We were introduced to React its benefits for front end web developers. We also set a repo, installed a development server, and got a React project spun up. We covered some basics about working with Vite and introduced optional tools that will make our development experience much nicer. We have covered a lot of material this first week! Armed with this knowledge, it's time for you to set up the project that you'll be submitting weekly.
 
- In contrast, traditional multi-page websites follow a server-centric model where navigating between pages involves full-page reloads, resulting in slower interactions and delays in content delivery. Each page request triggers a server response to load a new page, leading to a less interactive and dynamic user experience compared to SPAs. Multi-page websites have distinct HTML files for each page and rely on server-side rendering to generate and serve content, which can be less efficient and scalable for complex web applications.
+In contrast, traditional multi-page websites follow a server-centric model where navigating between pages involves full-page reloads, resulting in slower interactions and delays in content delivery. Each page request triggers a server response to load a new page, leading to a less interactive and dynamic user experience compared to SPAs. Multi-page websites have distinct HTML files for each page and rely on server-side rendering to generate and serve content, which can be less efficient and scalable for complex web applications.
 
- SPAs revolutionized web development by optimizing performance and user experience through client-side rendering and dynamic content updates. By eliminating the need for full-page reloads and reducing server requests, SPAs deliver faster load times and smoother interactions. While SPAs excel in creating interactive and responsive applications, multi-page websites remain relevant for content-heavy platforms that benefit from SEO advantages, as search engines find it easier to crawl individual pages. The choice between an SPA and a traditional multi-page website depends on the specific requirements of the application, balancing factors like user experience, performance, and search engine visibility.
+SPAs revolutionized web development by optimizing performance and user experience through client-side rendering and dynamic content updates. By eliminating the need for full-page reloads and reducing server requests, SPAs deliver faster load times and smoother interactions. While SPAs excel in creating interactive and responsive applications, multi-page websites remain relevant for content-heavy platforms that benefit from SEO advantages, as search engines find it easier to crawl individual pages. The choice between an SPA and a traditional multi-page website depends on the specific requirements of the application, balancing factors like user experience, performance, and search engine visibility.
 
 [^state]: State refers to the current condition or data within an application at a specific point in time. It includes all data relevant to the application, such as user input, server responses, and UI state.
+
 [^libraries-and-frameworks]: Libraries and frameworks are code packages written to solve complex or specialized challenges. We incorporate libraries or frameworks into our projects to simplify the development process. The distinction between the libraries and frameworks is a nuanced topic and can be interpreted differently based on their programming language and what they're used for. "[Inversion of control](https://en.wikipedia.org/wiki/Inversion_of_control)" is a common element to most comparisons between the two.
 
- With a library, we are in control of how its code is called. Libraries provide a toolset that we use by calling application programming interfaces (APIs) that they provide. Conversely, a framework defines how the application works then calls our code to configure its behavior and to determine what to include. They tend to be larger in scope and provide more programming tools for us to use.
+With a library, we are in control of how its code is called. Libraries provide a toolset that we use by calling application programming interfaces (APIs) that they provide. Conversely, a framework defines how the application works then calls our code to configure its behavior and to determine what to include. They tend to be larger in scope and provide more programming tools for us to use.
 
- **Example UI libraries**: jQuery, Knockout, Preact, and React.
- **Example UI frameworks**: Angular, Astro, Ember, Next.js, Remix, and Vue.
+**Example UI libraries**: jQuery, Knockout, Preact, and React.
+**Example UI frameworks**: Angular, Astro, Ember, Next.js, Remix, and Vue.

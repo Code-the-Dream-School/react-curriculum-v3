@@ -82,37 +82,39 @@ In the example below, the interface renders a button that calls `cycleLight`. Ea
 ```jsx
 const [trafficLightColor, setTrafficLightColor] = useState('green');
 
-function cycleLight(){
- switch(trafficLightColor){
-  case "green":
-   setTrafficLightColor("yellow");
-   return;
-  case "yellow":
-   setTrafficLightColor("red");
-   return
-  default:
-   setTrafficLightColor("green");
-   return;
- }
+function cycleLight() {
+  switch (trafficLightColor) {
+    case 'green':
+      setTrafficLightColor('yellow');
+      return;
+    case 'yellow':
+      setTrafficLightColor('red');
+      return;
+    default:
+      setTrafficLightColor('green');
+      return;
+  }
 }
 
-function renderLight(){
- switch(trafficLightColor){
-  case "green":
-   return <YellowLight />
-  case "yellow":
-   return <RedLight />
-  default:
-   return <GreenLight />
- }
+function renderLight() {
+  switch (trafficLightColor) {
+    case 'green':
+      return <YellowLight />;
+    case 'yellow':
+      return <RedLight />;
+    default:
+      return <GreenLight />;
+  }
 }
 
-return(
- <>
-  {renderLight()}
-  <button type="button" onClick={cycleLight}>Cycle Light</button>
- </>
-)
+return (
+  <>
+    {renderLight()}
+    <button type="button" onClick={cycleLight}>
+      Cycle Light
+    </button>
+  </>
+);
 ```
 
 #### Putting Conditional Rendering into Action
@@ -133,33 +135,33 @@ To achieve this, we have to change the way ProductList handles inventory items. 
 //...component code
 const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    const workingProducts = [];
-    inventory.forEach((item) => {
-      if (!item.inStock) {
-        return;
-      }
-      if (
-        !workingProducts.find(
-          (productItem) => productItem.baseName === item.baseName
-        )
-      ) {
-        workingProducts.push({
-          baseName: item.baseName,
-          price: item.price,
-          baseDescription: item.baseDescription,
-          variants: [{ ...item }],
-        });
-      } else {
-        const index = workingProducts.findIndex(
-          (productItem) => productItem.baseName === item.baseName
-        );
-        workingProducts[index].variants.push({ ...item });
-      }
-    });
-    setProducts([...workingProducts]);
-  }, [inventory]);
-  //component code...
+useEffect(() => {
+  const workingProducts = [];
+  inventory.forEach((item) => {
+    if (!item.inStock) {
+      return;
+    }
+    if (
+      !workingProducts.find(
+        (productItem) => productItem.baseName === item.baseName,
+      )
+    ) {
+      workingProducts.push({
+        baseName: item.baseName,
+        price: item.price,
+        baseDescription: item.baseDescription,
+        variants: [{ ...item }],
+      });
+    } else {
+      const index = workingProducts.findIndex(
+        (productItem) => productItem.baseName === item.baseName,
+      );
+      workingProducts[index].variants.push({ ...item });
+    }
+  });
+  setProducts([...workingProducts]);
+}, [inventory]);
+//component code...
 ```
 
 Our next step is to make changes to the `ProductCard` component so it can conditionally show a "Show Options" button instead of "Add to Cart" when a card contains more than one product variant. We can do so by examining the `variants` length. Our handleAddItemToCart is also updated to grab the id off of the default variant when only one exists.
@@ -167,15 +169,13 @@ Our next step is to make changes to the `ProductCard` component so it can condit
 ```jsx
 //extract from ProductCard.jsx
 <div className="productButtons">
- {product.variants.length > 1 ? (
-  <button>
-   Show Options
-  </button>
+  {product.variants.length > 1 ? (
+    <button>Show Options</button>
   ) : (
-  <button onClick={() => handleAddItemToCart(product.variants[0].id)}>
-   Add to Cart
-  </button>
- )}
+    <button onClick={() => handleAddItemToCart(product.variants[0].id)}>
+      Add to Cart
+    </button>
+  )}
 </div>
 ```
 
@@ -205,8 +205,7 @@ function ProductCardVariants({ variants, closeVariants, handleAddItemToCart }) {
                   onClick={() => {
                     handleAddItemToCart(variant.id);
                     closeVariants();
-                  }}
-                >
+                  }}>
                   Add to cart
                 </button>
               </div>
@@ -217,8 +216,7 @@ function ProductCardVariants({ variants, closeVariants, handleAddItemToCart }) {
       <button
         className="variantsCloseButton"
         type="button"
-        onClick={closeVariants}
-      >
+        onClick={closeVariants}>
         Close
       </button>
     </div>
@@ -226,7 +224,6 @@ function ProductCardVariants({ variants, closeVariants, handleAddItemToCart }) {
 }
 
 export default ProductCardVariants;
-
 ```
 
 That component is imported into ProductCard, and its visibility will depend on a state variable `areVariantsShown` the accompanying state variable updater function is then used to show/hide the options.
@@ -235,34 +232,32 @@ That component is imported into ProductCard, and its visibility will depend on a
 //ProductCard.jsx extract
 
 return (
-    <li className="productCard">
-      <div className="productPreview">
-        <img src={placeholder} alt=" " />
-      </div>
-      <div className="productCopy">
-        <h2>{product.baseName}</h2>
-        <p>{product.baseDescription}</p>
-      </div>
-      <div className="productButtons">
-        {product.variants.length > 1 ? (
-          <button onClick={() => setAreVariantsShown(true)}>
-            Show Options
-          </button>
-        ) : (
-          <button onClick={() => handleAddItemToCart(product.variants[0].id)}>
-            Add to Cart
-          </button>
-        )}
-      </div>
-      {areVariantsShown && (
-        <ProductCardVariants
-          handleAddItemToCart={handleAddItemToCart}
-          variants={product.variants}
-          closeVariants={() => setAreVariantsShown(false)}
-        />
+  <li className="productCard">
+    <div className="productPreview">
+      <img src={placeholder} alt=" " />
+    </div>
+    <div className="productCopy">
+      <h2>{product.baseName}</h2>
+      <p>{product.baseDescription}</p>
+    </div>
+    <div className="productButtons">
+      {product.variants.length > 1 ? (
+        <button onClick={() => setAreVariantsShown(true)}>Show Options</button>
+      ) : (
+        <button onClick={() => handleAddItemToCart(product.variants[0].id)}>
+          Add to Cart
+        </button>
       )}
-    </li>
-  );
+    </div>
+    {areVariantsShown && (
+      <ProductCardVariants
+        handleAddItemToCart={handleAddItemToCart}
+        variants={product.variants}
+        closeVariants={() => setAreVariantsShown(false)}
+      />
+    )}
+  </li>
+);
 ```
 
 Here is the resulting change:
@@ -283,37 +278,36 @@ import placeholder from './assets/placeholder.png';
 // `handleCloseCart` is not made yet but we know we will need it
 function Cart({ cart, handleCloseCart }) {
   return (
-  <>
-   <div className="cartScreen"></div> 
-  {/*
+    <>
+      <div className="cartScreen"></div>
+      {/*
    .cartScreen covers the product list with
    a div that has a blur effect placed on it.
    this makes the product buttons unclickable
   */}
-     <div className="cartListWrapper"> 
-       <ul className="cartList">
-         {cart.map((item) => {
-           return (
-             <li className="cartListItem" key={item.cartItemId}>
-               <img src={placeholder} alt="" />
-               <h2>{item.baseName}</h2>
-               <div className="cartListItemSubtotal">
-                 <p>${item.price}</p>
-               </div>
-             </li>
-           );
-         })}
-       </ul>
-       {/* cart total will need to be calculated */}
-       <h2>Cart Total: $0.00</h2>
-       <button onClick={handleCloseCart}>CloseCart</button>
-     </div>
- </>
+      <div className="cartListWrapper">
+        <ul className="cartList">
+          {cart.map((item) => {
+            return (
+              <li className="cartListItem" key={item.cartItemId}>
+                <img src={placeholder} alt="" />
+                <h2>{item.baseName}</h2>
+                <div className="cartListItemSubtotal">
+                  <p>${item.price}</p>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+        {/* cart total will need to be calculated */}
+        <h2>Cart Total: $0.00</h2>
+        <button onClick={handleCloseCart}>CloseCart</button>
+      </div>
+    </>
   );
 }
 
 export default Cart;
-
 ```
 
 #### Track Cart's Display Status
@@ -326,24 +320,23 @@ We need a boolean state value that starts out with a value that hides the cart w
 // App.jsx excerpt
 
 return (
-    <>
-      <Header cart={cart} handleOpenCart={handleOpenCart} />
-      <main>
-        <ProductList
-          inventory={inventory}
-          handleAddItemToCart={handleAddItemToCart}
-        ></ProductList>
-        {/*`isCartOpen has to be true for the cart to be rendered*/}
-        {isCartOpen && <Cart cart={cart} />}
-      </main>
-      <footer>
-        <p>
-          Made with ❤️ | &copy; {year.current}{' '}
-          <a href="https://codethedream.org/">CTD </a>
-        </p>
-      </footer>
-    </>
-  );
+  <>
+    <Header cart={cart} handleOpenCart={handleOpenCart} />
+    <main>
+      <ProductList
+        inventory={inventory}
+        handleAddItemToCart={handleAddItemToCart}></ProductList>
+      {/*`isCartOpen has to be true for the cart to be rendered*/}
+      {isCartOpen && <Cart cart={cart} />}
+    </main>
+    <footer>
+      <p>
+        Made with ❤️ | &copy; {year.current}{' '}
+        <a href="https://codethedream.org/">CTD </a>
+      </p>
+    </footer>
+  </>
+);
 ```
 
 Let's open the React dev tools to see how things are working. We don't have our button wired up yet but we should be able to modify that state value to show/hide the cart.
@@ -357,20 +350,20 @@ The cart is working so now it's time to make handlers to open and close the cart
 ```jsx
 //App.jsx
 //component code...
-  function handleCloseCart() {
-    //prevents re-render if unchanged
-    if (isCartOpen) {
-      setIsCartOpen(false);
-    }
+function handleCloseCart() {
+  //prevents re-render if unchanged
+  if (isCartOpen) {
+    setIsCartOpen(false);
   }
+}
 
-  function handleOpenCart() {
-    //prevents re-render if unchanged
-    if (!isCartOpen) {
-      setIsCartOpen(true);
-    }
+function handleOpenCart() {
+  //prevents re-render if unchanged
+  if (!isCartOpen) {
+    setIsCartOpen(true);
   }
-  //component code...
+}
+//component code...
 ```
 
 We then need to add the props for the handler function into the component definition of the `Header`. When that's been added, we go back to `App` and pass the props into the `Header` `<Header cart={cart} handleOpenCart={handleOpenCart} />`. We complete the handling for opening of the cart by wrapping the image with a button element and then adding in an `onClick` props with the handler function. We also can remove the `useEffect` since it was just to log the cart contents to the console. The `Header`'s code will now look like this:
@@ -382,7 +375,6 @@ import ctdLogo from './assets/icons/mono-blue-logo.svg';
 import shoppingCart from './assets/icons/shoppingCart.svg';
 
 function Header({ cart, handleOpenCart }) {
-
   return (
     <header>
       <div className="siteBranding">
@@ -413,22 +405,25 @@ It may also be nicer for the user to see a message rather than rendering an empt
 ```jsx
 // extract from Cart.jsx
 //...component code
-{cart.length === 0 ? (
- <p>cart is empty</p>
-) : (
- <ul className="cartList">
-  {cart.map((item) => {
-   return (
-    <li className="cartListItem" key="{item.cartItemId}">
-    <img src="{placeholder}" alt="" />
-    <h2>{item.baseName}</h2>
-    <div className="cartListItemSubtotal">
-     <p>${item.price}</p>
-    </div>
-   </li>
-  ); })}
- </ul>
-)}
+{
+  cart.length === 0 ? (
+    <p>cart is empty</p>
+  ) : (
+    <ul className="cartList">
+      {cart.map((item) => {
+        return (
+          <li className="cartListItem" key="{item.cartItemId}">
+            <img src="{placeholder}" alt="" />
+            <h2>{item.baseName}</h2>
+            <div className="cartListItemSubtotal">
+              <p>${item.price}</p>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
 //component code...
 ```
 
@@ -444,13 +439,13 @@ function Cart({ cart, handleCloseCart }) {
     // eg: `console.log(.99 + .99 +.99)` will print 2.9699999999999998
     return cart.reduce((acc, item) => acc + item.price, 0).toFixed(2);
   }
- return (
-  <div className="cartListWrapper">
-  //...component code
-    <h2>Cart Total: ${getCartPrice()}</h2>
+  return (
+    <div className="cartListWrapper">
+      //...component code
+      <h2>Cart Total: ${getCartPrice()}</h2>
       <button onClick={handleCloseCart}>CloseCart</button>
-     </div>
- );
+    </div>
+  );
 }
 
 export default Cart;
@@ -479,29 +474,29 @@ Currently, the state value, `cart`, is just an array that lists the cart's conte
 }
 ```
 
- We then need to update the handler that adds item to `cart`. After doing some error handling on `inventoryItem` we search the `cart` for an item that includes the product id. If one exists, the handler needs to increment `itemCount`. If not, it creates a new item to add to the `cart`.
+We then need to update the handler that adds item to `cart`. After doing some error handling on `inventoryItem` we search the `cart` for an item that includes the product id. If one exists, the handler needs to increment `itemCount`. If not, it creates a new item to add to the `cart`.
 
 ```jsx
 //extract from App.jsx
 
 function handleAddItemToCart(id) {
-    const inventoryItem = inventory.find((item) => item.id === id);
-    if (!inventoryItem) {
-      console.error('cart error: item not found');
-      return;
-    }
-    const itemToUpdate = cart.find((item) => item.id === id);
-    let updatedCartItem;
-    if (itemToUpdate) {
-      updatedCartItem = {
-        ...itemToUpdate,
-        itemCount: itemToUpdate.itemCount + 1,
-      };
-    } else {
-      updatedCartItem = { ...inventoryItem, itemCount: 1 };
-    }
-    setCart([...cart.filter((item) => item.id !== id), updatedCartItem]);
+  const inventoryItem = inventory.find((item) => item.id === id);
+  if (!inventoryItem) {
+    console.error('cart error: item not found');
+    return;
   }
+  const itemToUpdate = cart.find((item) => item.id === id);
+  let updatedCartItem;
+  if (itemToUpdate) {
+    updatedCartItem = {
+      ...itemToUpdate,
+      itemCount: itemToUpdate.itemCount + 1,
+    };
+  } else {
+    updatedCartItem = { ...inventoryItem, itemCount: 1 };
+  }
+  setCart([...cart.filter((item) => item.id !== id), updatedCartItem]);
+}
 ```
 
 We need to update the logic that provides the cart icon its number. Rather than retrieving the cart's length, we have to add together all of the item's `itemCount`s. We extract this to a function since `.reduce`would make the JSX difficult to read if we inline it between the paragraph tags.
@@ -550,37 +545,38 @@ function Cart({ cart, handleCloseCart }) {
   }
 
   return (
- <>
-  <div className="cartScreen"></div>
-     <div className="cartListWrapper">
-       {cart.length === 0 ? (
-         <p>cart is empty</p>
-       ) : (
-         <ul className="cartList">
-           {cart.map((item) => {
-             return (
-               <li className="cartListItem" key={item.id}>
-                 <img src={placeholder} alt="" />
-                 <h2>{item.baseName}</h2>
-                 {item.variantName !== 'Default' ? <p>{item.variantName}</p> : null}
-                 <div className="cartListItemSubtotal">
-                   <p>Count: {item.itemCount}</p>
-                   <p>Subtotal: ${(item.price * item.itemCount).toFixed(2)}</p>
-                 </div>
-               </li>
-             );
-           })}
-         </ul>
-       )}
-       <h2>Cart Total: ${getCartPrice()}</h2>
-       <button onClick={handleCloseCart}>CloseCart</button>
-     </div>
- </>
+    <>
+      <div className="cartScreen"></div>
+      <div className="cartListWrapper">
+        {cart.length === 0 ? (
+          <p>cart is empty</p>
+        ) : (
+          <ul className="cartList">
+            {cart.map((item) => {
+              return (
+                <li className="cartListItem" key={item.id}>
+                  <img src={placeholder} alt="" />
+                  <h2>{item.baseName}</h2>
+                  {item.variantName !== 'Default' ? (
+                    <p>{item.variantName}</p>
+                  ) : null}
+                  <div className="cartListItemSubtotal">
+                    <p>Count: {item.itemCount}</p>
+                    <p>Subtotal: ${(item.price * item.itemCount).toFixed(2)}</p>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+        <h2>Cart Total: ${getCartPrice()}</h2>
+        <button onClick={handleCloseCart}>CloseCart</button>
+      </div>
+    </>
   );
 }
 
 export default Cart;
-
 ```
 
 With the cart ready, we can make its data updatable for users.
@@ -605,22 +601,22 @@ const UncontrolledForm = () => {
     const firstName = firstNameRef.current.value;
     const lastName = lastNameRef.current.value;
     console.log(`First Name: ${firstName}, Last Name: ${lastName}`);
-  }
+  };
 
   return (
- <form onSubmit={handleSubmit}>
-   <label>
-  First Name:
-  <input type="text" ref={firstNameRef} />
-   </label>
-   <label>
-  Last Name:
-  <input type="text" ref={lastNameRef} />
-   </label>
-   <button type="submit">Submit</button>
- </form>
+    <form onSubmit={handleSubmit}>
+      <label>
+        First Name:
+        <input type="text" ref={firstNameRef} />
+      </label>
+      <label>
+        Last Name:
+        <input type="text" ref={lastNameRef} />
+      </label>
+      <button type="submit">Submit</button>
+    </form>
   );
-}
+};
 
 export default UncontrolledForm;
 ```
@@ -629,28 +625,36 @@ export default UncontrolledForm;
 import React, { useState } from 'react';
 
 const ControlledForm = () => {
- const [firstName, setFirstName] = useState('');
- const [lastName, setLastName] = useState('');
- 
- const handleSubmit = (event) => {
-  event.preventDefault();
-  console.log(`First Name: ${firstName}, Last Name: ${lastName}`);
- }
- 
- return (
-  <form onSubmit={handleSubmit}>
-    <label>
-      First Name:
-      <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-    </label>
-    <label>
-      Last Name:
-      <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-    </label>
-    <button type="submit">Submit</button>
-  </form>
- );
-}
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(`First Name: ${firstName}, Last Name: ${lastName}`);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        First Name:
+        <input
+          type="text"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+        />
+      </label>
+      <label>
+        Last Name:
+        <input
+          type="text"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+        />
+      </label>
+      <button type="submit">Submit</button>
+    </form>
+  );
+};
 
 export default ControlledForm;
 ```
@@ -680,35 +684,42 @@ With the advantages of each discussed, we need to look closer at a controlled co
 
 ```jsx
 //example controlled component
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 
-function ControlledComponent({formState, setFormState}){
- const [input1, setInput1] = useState("");
- const [input2, setInput2] = useState("");
- useEffect(()=>{
-  setInput1(formState.input1);
-  setInput(formState.input2);
- },[formData]);
- function handleSubmit(event){
-  event.preventDefault();
-  setFormState({input1, input2})
- }
+function ControlledComponent({ formState, setFormState }) {
+  const [input1, setInput1] = useState('');
+  const [input2, setInput2] = useState('');
+  useEffect(() => {
+    setInput1(formState.input1);
+    setInput(formState.input2);
+  }, [formData]);
+  function handleSubmit(event) {
+    event.preventDefault();
+    setFormState({ input1, input2 });
+  }
 
- return(
-  <form onSubmit={handleSubmit}>
-   <label>
-    Input 1
-    <input type="text" value={input1} onChange={((e) => setInput1(e.target.value))} />
-   </label>
-   <label>
-    Input 2
-    <input type="text" value={input2} onChange={((e) => setInput2(e.target.value))} />
-   </label>
-   <button>Submit</button>
-  </form>
- )
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        Input 1
+        <input
+          type="text"
+          value={input1}
+          onChange={(e) => setInput1(e.target.value)}
+        />
+      </label>
+      <label>
+        Input 2
+        <input
+          type="text"
+          value={input2}
+          onChange={(e) => setInput2(e.target.value)}
+        />
+      </label>
+      <button>Submit</button>
+    </form>
+  );
 }
-
 ```
 
 ```mermaid
@@ -717,7 +728,7 @@ title: Flow of State in ControlledComponent
 ---
 flowchart TD
     App -->|initial form state|Controlled[Controlled Component]
-    Controlled -->|useEffect to set intitial state|Local1[Local State - Input1] & Local2[Local State - Input2]
+    Controlled -->|useEffect to set initial state|Local1[Local State - Input1] & Local2[Local State - Input2]
     Controlled -->|"submitted changes"|App
     Local1 -->|input1|Input1
     Local2 -->|input2|Input2
@@ -731,7 +742,7 @@ To keep a field synchronized in a controlled component, it must have a `value` p
 
 #### Putting Controlled Components into Action
 
- We want our users to be able to modify the count of a particular cart item so we will use elements that accept user input. These include elements such as `input`, `textarea`, `radio-buttons`, etc. It's also considered a best practice to use a form wherever we accept user inputs. We will need to prevent form submission and manage form data so this is a perfect use case for a controlled component.
+We want our users to be able to modify the count of a particular cart item so we will use elements that accept user input. These include elements such as `input`, `textarea`, `radio-buttons`, etc. It's also considered a best practice to use a form wherever we accept user inputs. We will need to prevent form submission and manage form data so this is a perfect use case for a controlled component.
 
 The `App` component manages our application's state, including the cart, so it's considered our "single source of truth". While a user is updating the form, we want to avoid updating this source of truth with every change. This makes it difficult to cancel/undo changes and has negative performance implications. Recall that every time state is changed, React re-renders the component managing that state and all of its children. Done too high up the component tree, this can lead to large UI re-renders.
 
@@ -739,10 +750,10 @@ To keep our app smooth and responsive, we want to manage state as close to the e
 
 ```mermaid
 sequenceDiagram
-    App->>+Cart: pass `cart` & `setCart` props 
-    Cart->>+useState: set `workingCart` intialState to `cart`
+    App->>+Cart: pass `cart` & `setCart` props
+    Cart->>+useState: set `workingCart` initialState to `cart`
     participant form as form and inputs
-    loop Every `onChange` 
+    loop Every `onChange`
         useState->>+form: `workingCart` manages form value
         form->>+useState: `setWorkingCart` updates local state
     end
@@ -760,13 +771,15 @@ App needs only one small change: we pass the state update function, `setCart` to
 ```jsx
 //extract from App.jsx
 //...component code
-{isCartOpen && (
- <Cart
-  cart={cart}
-  setCart={setCart} // only change
-  handleCloseCart={handleCloseCart}
- />
-)}
+{
+  isCartOpen && (
+    <Cart
+      cart={cart}
+      setCart={setCart} // only change
+      handleCloseCart={handleCloseCart}
+    />
+  );
+}
 //component code...
 ```
 
@@ -789,60 +802,64 @@ We next;
 
 ```jsx
 function Cart({ cart, handleCloseCart, setCart }) {
- const [workingCart, setWorkingCart] = useState(cart);
- const [isFormDirty, setIsFormDirty] = useState(false);
- function getWorkingCartPrice() {
-     return workingCart
+  const [workingCart, setWorkingCart] = useState(cart);
+  const [isFormDirty, setIsFormDirty] = useState(false);
+  function getWorkingCartPrice() {
+    return workingCart
       .reduce((acc, item) => acc + item.price * item.itemCount, 0)
       .toFixed(2);
   }
 
-function handleUpdateField(){};
-function handleCancel(){};
+  function handleUpdateField() {}
+  function handleCancel() {}
 
- return (
-  <>
-   <div className="cartScreen"></div>
+  return (
+    <>
+      <div className="cartScreen"></div>
       <div className="cartListWrapper">
-    {workingCart.length === 0 ? (
-     <p>cart is empty</p>
-    ) : (
-     <form>
-      <ul className="cartList">
-       {workingCart.map((item) => {
-        return (
-         <li className="cartListItem" key={item.id}>
-         <img src={placeholder} alt="" />
-         <h2>{item.baseName}</h2>
-         {item.variantName !== 'Default' ? <p>{item.variantName}</p> : null}
-         <div className="cartListItemSubtotal">
-          <label>
-                             Count:{' '} {/*preserve space after colon*/}
-                             <input
-                              type="number"
-                              value={item.itemCount}
-                              onChange={(event) =>
-                                  handleUpdateField({ event, id: item.id })
-                           }
-                             />
-                           </label>
-          <p>Subtotal: ${(item.price * item.itemCount).toFixed(2) || 0}</p>
-         </div>
-         </li>
-        );
-       })}
-      </ul>
-     </form>
-    )}
-    <h2>Cart Total: ${getWorkingCartPrice() || 0}</h2>
-    <button onClick={handleCloseCart}>CloseCart</button>
+        {workingCart.length === 0 ? (
+          <p>cart is empty</p>
+        ) : (
+          <form>
+            <ul className="cartList">
+              {workingCart.map((item) => {
+                return (
+                  <li className="cartListItem" key={item.id}>
+                    <img src={placeholder} alt="" />
+                    <h2>{item.baseName}</h2>
+                    {item.variantName !== 'Default' ? (
+                      <p>{item.variantName}</p>
+                    ) : null}
+                    <div className="cartListItemSubtotal">
+                      <label>
+                        Count:
+                        <input
+                          type="number"
+                          value={item.itemCount}
+                          onChange={(event) =>
+                            handleUpdateField({ event, id: item.id })
+                          }
+                        />
+                      </label>
+                      <p>
+                        Subtotal: $
+                        {(item.price * item.itemCount).toFixed(2) || 0}
+                      </p>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </form>
+        )}
+        <h2>Cart Total: ${getWorkingCartPrice() || 0}</h2>
+        <button onClick={handleCloseCart}>CloseCart</button>
       </div>
-  </>
+    </>
   );
 }
 
 export default Cart;
-
 ```
 
 With these changes, we are left with an cart that displays the item count in an input and a nifty screen is cast across the shop so none of the products are clickable.
@@ -854,12 +871,14 @@ We next add in the confirm and cancel buttons for the working form. We don't wan
 ```jsx
 //extract from Cart.jsx
 
-{isFormDirty && (
- <div>
-  <button onClick={handleConfirm}>Confirm Update</button>
-  <button onClick={handleCancel}>Cancel Update</button>
- </div>
-)}
+{
+  isFormDirty && (
+    <div>
+      <button onClick={handleConfirm}>Confirm Update</button>
+      <button onClick={handleCancel}>Cancel Update</button>
+    </div>
+  );
+}
 ```
 
 We now need to finish the handler functions so that the user can confirm or cancel their changes. `handleUpdateField` combines several tasks:
@@ -881,33 +900,33 @@ We now need to finish the handler functions so that the user can confirm or canc
 // extract from Cart.jsx
 
 function handleUpdateField({ event, id }) {
-    event.preventDefault();
-    // prevent re-render if already dirty
-    if (!isFormDirty) {
-      setIsFormDirty(true);
-    }
-    const targetProduct = cart.find((item) => item.id === id);
-    const targetIndex = cart.findIndex((item) => item.id === id);
-    if (!targetProduct) {
-      console.error('cart error: item not found');
-      return;
-    }
-    //reject negative values or if user deletes value
-    if (event.target.value < 0 || event.target.value === '') {
-      return;
-    }
-    // create new object instead of updating old
-    const updatedProduct = {
-      ...targetProduct,
-      itemCount: parseInt(event.target.value, 10),
-    };
-    //avoid re-ordering array when updating cart item
-    setWorkingCart([
-      ...workingCart.slice(0, targetIndex),
-      updatedProduct,
-      ...workingCart.slice(targetIndex + 1),
-    ]);
+  event.preventDefault();
+  // prevent re-render if already dirty
+  if (!isFormDirty) {
+    setIsFormDirty(true);
   }
+  const targetProduct = cart.find((item) => item.id === id);
+  const targetIndex = cart.findIndex((item) => item.id === id);
+  if (!targetProduct) {
+    console.error('cart error: item not found');
+    return;
+  }
+  //reject negative values or if user deletes value
+  if (event.target.value < 0 || event.target.value === '') {
+    return;
+  }
+  // create new object instead of updating old
+  const updatedProduct = {
+    ...targetProduct,
+    itemCount: parseInt(event.target.value, 10),
+  };
+  //avoid re-ordering array when updating cart item
+  setWorkingCart([
+    ...workingCart.slice(0, targetIndex),
+    updatedProduct,
+    ...workingCart.slice(targetIndex + 1),
+  ]);
+}
 ```
 
 `handleCancel` is much simpler than its counterpart. With `handleCancel`, we call `setWorkingCart` with the `cart` to reset `workingCart` to the source of truth. `setIsFormDirty` then sets `isFormDirty` to false which re-enables a user's ability to close out the cart.
@@ -915,11 +934,11 @@ function handleUpdateField({ event, id }) {
 ```jsx
 //extract from Cart.jsx
 
-  function handleCancel(e) {
-    e.preventDefault();
-    setIsFormDirty(false);
-    setWorkingCart([...cart]);
-  }
+function handleCancel(e) {
+  e.preventDefault();
+  setIsFormDirty(false);
+  setWorkingCart([...cart]);
+}
 ```
 
 The final helper we need to create handles the user's change confirmation. `handleConfirm` prevents the form from refreshing, calls `setCart` with the `workingCart` value. We also add in a helper function `removeEmptyItems` that removes any item that has a count of 0. It's okay to have an item in the cart with a value of 0 while the user is still editing but it should be removed once they are okay with their edits.

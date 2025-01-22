@@ -47,12 +47,12 @@ ReactDOM is already set up inside of our project, courtesy of the React template
 ```jsx
 //Main.jsx
 
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import App from "./App.jsx";
-import "./index.css";
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App.jsx';
+import './index.css';
 
-createRoot(document.getElementById("root")).render(
+createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />
   </StrictMode>,
@@ -88,8 +88,8 @@ Now that we understand how ReactDOM ties into the application, it's time to expl
 To look at the structure of a component, we need to convert the JSX syntax to JavaScript. More on JSX soon. For now, we'll convert our `App` component to plain JavaScript. The original file looks like:
 
 ```jsx
-import ctdLogo from "./assets/mono-blue-logo.svg";
-import "./App.css";
+import ctdLogo from './assets/mono-blue-logo.svg';
+import './App.css';
 
 function App() {
   return (
@@ -104,40 +104,39 @@ function App() {
 }
 
 export default App;
-
 ```
 
 The following JavaScript version of `App` is functionally identical to the original.
 
 ```javascript
-import React from "react";
-import ctdLogo from "./assets/mono-blue-logo.svg";
-import "./App.css";
+import React from 'react';
+import ctdLogo from './assets/mono-blue-logo.svg';
+import './App.css';
+
 function App() {
   return React.createElement(
-    "div",
+    'div',
     {
-      className: "coming-soon",
+      className: 'coming-soon',
     },
-    React.createElement("h1", null, "CTD Swag"),
+    React.createElement('h1', null, 'CTD Swag'),
     React.createElement(
-      "div",
+      'div',
       {
         style: {
           height: 100,
           width: 100,
         },
       },
-      React.createElement("img", {
+      React.createElement('img', {
         src: ctdLogo,
-        alt: "Code The Dream Logo",
+        alt: 'Code The Dream Logo',
       }),
     ),
-    React.createElement("h2", null, "Coming Soon..."),
+    React.createElement('h2', null, 'Coming Soon...'),
   );
 }
 export default App;
-
 ```
 
 There certainly is a lot of `React.createElement`s! Each one accepts a `type`, a `props` object, and `…children` arguments.
@@ -156,40 +155,37 @@ There certainly is a lot of `React.createElement`s! Each one accepts a `type`, a
 We can use function declarations, function expressions, or arrow functions - each are equally valid.
 
 ```jsx
-
-function Component1(){
-  return(
-    <p>Component1 uses a function declaration</p>
-  );
+function Component1() {
+  return <p>Component1 uses a function declaration</p>;
 }
 
 //or
 
-const Component2 = function(){
-  return(
-    <p>Component2 uses a function expression</p>
-  );
-}
+const Component2 = function () {
+  return <p>Component2 uses a function expression</p>;
+};
 
 //or
 
 const Component3 = () => {
-  return <p>Component3 uses an arrow function</p>
-}
+  return <p>Component3 uses an arrow function</p>;
+};
 
 //or
 
-const Component4 = () => <p>Component4 uses an arrow function with implicit return</p>
+const Component4 = () => (
+  <p>Component4 uses an arrow function with implicit return</p>
+);
 
 function App() {
   return (
     <>
-      <Component1/>
-      <Component2/>
-      <Component3/>
-      <Component4/>
+      <Component1 />
+      <Component2 />
+      <Component3 />
+      <Component4 />
     </>
-  )
+  );
 }
 ```
 
@@ -261,14 +257,17 @@ To keep the transpilation process simple and performant, we must follow some rul
 JSX
 
 ```jsx
-<> //React's fragment is easy to identify and saves a lot of space in the code
+{
+  /*React's fragment is easy to identify and saves a lot of space in the code*/
+}
+<>
   <h1>CTD Swag</h1>
   <p>We have merch!!!</p>
   <ul>
     <li>tee shirt</li>
     <li>bucket hat</li>
   </ul>
-</>
+</>;
 ```
 
 - All tags must be terminated. They either have to have an accompanying closing tag (`<div></div>`) or be self-closing (`<img/>`).
@@ -277,7 +276,9 @@ HTML
 
 ```html
 <!-- valid HTML but INVALID JSX -->
+<!-- prettier-ignore -->
 <img src="/assets/hat.png">
+<!-- prettier-ignore -->
 <input val="">
 ```
 
@@ -285,14 +286,14 @@ JSX
 
 ```jsx
 <>
-    {/*valid JSX*/}
-    <img src="/assets/hat.png" />
-    <input val="" />
+  {/*valid JSX*/}
+  <img src="/assets/hat.png" />
+  <input val="" />
 </>
 ```
 
 - Most keys and attributes must be camelCase
-  - [aria-*](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*) + [data-*](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes) are still written with dashes
+  - [aria-\*](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*) + [data-\*](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes) are still written with dashes
 - `class` and `for` are reserved words in JavaScript so `className` and `htmlFor` are used in their place.
 - JavaScript blocks inside JSX must be wrapped with curly brackets `{}`
   - don't use single line JS comments, eg. `//some comment`
@@ -302,18 +303,28 @@ JSX
 JSX
 
 ```jsx
-{/*single line comment*/}
-{/*
+{
+  /*single line comment*/
+}
+{
+  /*
     longer comments
     can be written
     using multiple lines
-*/}
+*/
+}
 <div>
-  {isLoggedIn ? <p>Welcome {userName}!</p> : <button onClick={() => logIn()}>Log In</button>}
+  {isLoggedIn ? (
+    <p>Welcome {userName}!</p>
+  ) : (
+    <button onClick={() => logIn()}>Log In</button>
+  )}
   <ul>
-    {products.map((product)=> <li>{product.name}</li>)}
+    {products.map((product) => (
+      <li>{product.name}</li>
+    ))}
   </ul>
-</div>
+</div>;
 ```
 
 - Don't forget to wrap objects in additional `{}`!
@@ -321,8 +332,10 @@ JSX
 JSX
 
 ```jsx
-{/*style props takes an object*/}
-<div style={{ backgroundColor: "#800080", borderBottom: 3 }}></div>
+{
+  /*style props takes an object*/
+}
+<div style={{ backgroundColor: '#800080', borderBottom: 3 }}></div>;
 ```
 
 ### Troubleshooting
@@ -361,9 +374,10 @@ Above: Screenshot of the Components Inspector as used in Firefox.
 Above: Screenshot of the Profiler as used in Firefox.
 
 [^class-component]: React components can also be class-based but it's not common to see them any more. With the introduction of hooks in React v16.8 (released February, 2019), many of the disadvantages of functional components disappeared. A large portion of the JavaScript community eschews [OOP](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object-oriented_programming) in favor of [functional](https://github.com/readme/guides/functional-programming-basics) programming. This is not a judgement, just an observation.
+
 [^side-effects]: In JavaScript, a side effect refers to any observable behavior or change that a function introduces beyond simply returning a value. Side effects can include modifying variables outside the function's scope, interacting with the DOM, making API calls, and updating state in a React component. Side effects can impact the application's state, environment, or external systems in ways that go beyond the function's primary purpose of computing and returning a value.
 
- For example, consider a function that updates a global variable or performs a network request. These actions are considered side effects because they alter the program's state or interact with external resources outside the function's local scope. While side effects are often necessary for applications to interact with the outside world, excessive or unexpected side effects can lead to unintended consequences, bugs, and harder-to-maintain code.
+For example, consider a function that updates a global variable or performs a network request. These actions are considered side effects because they alter the program's state or interact with external resources outside the function's local scope. While side effects are often necessary for applications to interact with the outside world, excessive or unexpected side effects can lead to unintended consequences, bugs, and harder-to-maintain code.
 
- Managing and controlling side effects is a key consideration in JavaScript development, especially when working with asynchronous operations, state management, and complex applications. Tools like pure functions, immutability, and libraries like Redux and React's useEffect hook help developers manage side effects effectively while keeping the codebase clean and maintainable.
+Managing and controlling side effects is a key consideration in JavaScript development, especially when working with asynchronous operations, state management, and complex applications. Tools like pure functions, immutability, and libraries like Redux and React's useEffect hook help developers manage side effects effectively while keeping the codebase clean and maintainable.
 [^avoid-anonymous]: Default export can be used with anonymous functions but this is discouraged. While components are given a name when imported, anonymous function components make React needlessly difficult to troubleshoot.\
