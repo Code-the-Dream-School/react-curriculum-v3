@@ -70,18 +70,19 @@ React performs [shallow comparisons](https://monsterlessons-academy.com/posts/sh
 
 ```jsx
 function Counter() {
- const [counter, setCounter] = useState(0);
- function updateCounter(){
-  setCounter(counter + 1); //
- }
- return (
-  <>
-   <p>{counter}</p>
-   <button type="button" onClick={updateCounter}>Count Up</button>
-  </>
- )
+  const [counter, setCounter] = useState(0);
+  function updateCounter() {
+    setCounter(counter + 1); //
+  }
+  return (
+    <>
+      <p>{counter}</p>
+      <button type="button" onClick={updateCounter}>
+        Count Up
+      </button>
+    </>
+  );
 }
-
 ```
 
 For objects and arrays React does not look into their contents so cannot see changes to object members or array items. To properly update these state in this case, we need to create a new object or array.
@@ -91,43 +92,59 @@ The example below demonstrates how to add items to an array. The buttons use `on
 ```jsx
 //useState with an array
 
-function TacoBuilder(){
- const [tacoOptions, setTacoOptions] = useState(["corn tortilla"]);
- 
- function addOption(option){
-  //spread operator expands tacoOptions into a new array
-  setTacoOptions([...tacoOptions, option]);
- }
- 
- function showSelections(){
-  return tacoOptions.reduce((accumulator, currentValue, currentIndex, tacoOptions) =>{
-   if( currentIndex === tacoOptions.length - 1){
-    return `${accumulator}, and ${currentValue}`
-   };
-   return `${accumulator}, ${currentValue}`
-  })
- }
- 
- return (
-  <>
-   <div className="mains">
-    <button type="button" onClick={(() => addOption("chicken"))}>Chicken</button>
-    <button type="button" onClick={(() => addOption("beef"))}>Beef</button>
-    <button type="button" onClick={(() => addOption("vegitarian"))}>Vegitarian</button>
-   </div>
-   <div className="cheeses">
-    <button type="button" onClick={(() => addOption("cheddar"))}>Add Cheddar</button>
-    <button type="button" onClick={(() => addOption("queso fresco"))}>Add Queso Fresco</button>
-   <div>
-   <div className="extras">
-    <button type="button" onClick={(() => addOption("sour cream"))}>Add Sour Cream</button>
-    <button type="button" onClick={(() => addOption("salsa"))}>Add Salsa</button>
-   </div>
-   <div>
-    <p>Your taco includes: {showSelections()}</p>
-   </div>
-  </>
- )
+function TacoBuilder() {
+  const [tacoOptions, setTacoOptions] = useState(['corn tortilla']);
+
+  function addOption(option) {
+    //spread operator expands tacoOptions into a new array
+    setTacoOptions([...tacoOptions, option]);
+  }
+
+  function showSelections() {
+    return tacoOptions.reduce(
+      (accumulator, currentValue, currentIndex, tacoOptions) => {
+        if (currentIndex === tacoOptions.length - 1) {
+          return `${accumulator}, and ${currentValue}`;
+        }
+        return `${accumulator}, ${currentValue}`;
+      },
+    );
+  }
+
+  return (
+    <>
+      <div className="mains">
+        <button type="button" onClick={() => addOption('chicken')}>
+          Chicken
+        </button>
+        <button type="button" onClick={() => addOption('beef')}>
+          Beef
+        </button>
+        <button type="button" onClick={() => addOption('vegitarian')}>
+          Vegitarian
+        </button>
+      </div>
+      <div className="cheeses">
+        <button type="button" onClick={() => addOption('cheddar')}>
+          Add Cheddar
+        </button>
+        <button type="button" onClick={() => addOption('queso fresco')}>
+          Add Queso Fresco
+        </button>
+      </div>
+      <div className="extras">
+        <button type="button" onClick={() => addOption('sour cream')}>
+          Add Sour Cream
+        </button>
+        <button type="button" onClick={() => addOption('salsa')}>
+          Add Salsa
+        </button>
+      </div>
+      <div>
+        <p>Your taco includes: {showSelections()}</p>
+      </div>
+    </>
+  );
 }
 ```
 
@@ -136,35 +153,36 @@ Object-based state value takes a similar approach. In the example below, the `Cr
 ```jsx
 //useState with an object
 
-function CreateUserForm(){
+function CreateUserForm() {
+  const [userInfo, setUserInfo] = useState({ firstName: '', lastName: '' });
 
- const [userInfo, setUserInfo] = useState({firstName : "", lastName  : ""})
-
- function handleSubmit(event){
-  //logic to handle form submission
- }
- function updateFirstName(event){
-  //more on the event object later this lesson...
-  //pulling the first name out of the event object
-  const firstName = event.target.value;
-  setUserInfo({firstName: firstName, lastName: userInfo.lastName})
- }
- function updateLastName(event){
-  //pulling the last name out of the event object
-  const lastName = event.target.value;
-  setUserInfo({firstName: userInfo.firstName, lastName: lastName})
- }
- return(
-  //more on forms in 
-  <form submit={handleSubmit}>
-   <label>First Name
-    <input onChange={updateFirstName}
-   </label>
-   <label>Last Name
-    <input onChange={updateLastName}
-   </label>
-  </form>
- )
+  function handleSubmit(event) {
+    //logic to handle form submission
+  }
+  function updateFirstName(event) {
+    //more on the event object later this lesson...
+    //pulling the first name out of the event object
+    const firstName = event.target.value;
+    setUserInfo({ firstName: firstName, lastName: userInfo.lastName });
+  }
+  function updateLastName(event) {
+    //pulling the last name out of the event object
+    const lastName = event.target.value;
+    setUserInfo({ firstName: userInfo.firstName, lastName: lastName });
+  }
+  return (
+    //more on forms in
+    <form submit={handleSubmit}>
+      <label>
+        First Name
+        <input onChange={updateFirstName} />
+      </label>
+      <label>
+        Last Name
+        <input onChange={updateLastName} />
+      </label>
+    </form>
+  );
 }
 ```
 
@@ -197,11 +215,11 @@ function AnotherCounter() {
   useEffect(() => {
     // This code will run when the component first loads
     // and each time `count` changes
-    if(count === 0 ){
-     console.log(`Count has started at: ${count}`);
+    if (count === 0) {
+      console.log(`Count has started at: ${count}`);
     } else {
-     console.log(`Count has changed to: ${count}`);
-    };
+      console.log(`Count has changed to: ${count}`);
+    }
   }, [count]);
 
   return (
@@ -210,19 +228,19 @@ function AnotherCounter() {
       <p>Count: {count} </p>
     </>
   );
-};
+}
 ```
 
 In `WebSocketComponent` below, we use the `useEffect` to create a new web socket connection after the component first renders. The connection remains intact during subsequent re-renders of the component. The `useEffect` returns a cleanup function that disconnects the component from the web socket when the component is removed from the DOM. If this step was not included, the web socket connection would remain open and would not close until the application was closed out or the page manually refreshed.
 
 ```jsx
-//useEffect with depencency array and cleanup function
+//useEffect with dependency array and cleanup function
 
 function WebSocketComponent {
 
   useEffect(() => {
     const socket = new WebSocket('sockets://example.com/socket');
-    
+
     socket.onopen = () => {
       console.log('WebSocket connection opened');
     };
@@ -244,7 +262,7 @@ function WebSocketComponent {
 The `useEffect` in the example logs a message to the console when the component first renders. It does nothing else on subsequent re-renders.
 
 ```jsx
-//useEffect with empty depencency array
+//useEffect with empty dependency array
 const ExampleComponent = () => {
   useEffect(() => {
     console.log('Component mounted');
@@ -257,7 +275,7 @@ const ExampleComponent = () => {
 In the final example, the `useEffect` logs a message to the console on the initial render and after each re-render.
 
 ```jsx
-//useEffect with no depencency array
+//useEffect with no dependency array
 const ExampleComponent = () => {
   useEffect(() => {
     console.log('Effect without dependencies - runs on every render');
@@ -303,10 +321,10 @@ Using `useRef` comes with a few rules.
 
 ```jsx
 //do NOT do this:
-function BadComponent(){
- const someValue = useRef("foo");
- someValue.current = "bar"; //accessing or changing here can lead to problems
- //rest of the component code...
+function BadComponent() {
+  const someValue = useRef('foo');
+  someValue.current = 'bar'; //accessing or changing here can lead to problems
+  //rest of the component code...
 }
 ```
 
@@ -314,12 +332,12 @@ Updating the value during initialization is alright so long as the initial value
 
 ```jsx
 //this is OK
-function ExampleComponent(){
- const title = useRef(null);
- if(title.current === null){
-  title.current = document.querySelector('title');
- };
- //rest of the component code...
+function ExampleComponent() {
+  const title = useRef(null);
+  if (title.current === null) {
+    title.current = document.querySelector('title');
+  }
+  //rest of the component code...
 }
 ```
 
@@ -346,7 +364,7 @@ Child -->|callback invocation| Parent
 
 #### Synthetic Events
 
-Browsers emit objects called events that signal when things happen on a web page. This gives developers information about the event so that they can program behavior around it. React introduces a concept of a *React event object*, more frequently known as a *synthetic event*, which is very similar to a browser's *event object*. In fact, a synthetic event is just a wrapper around a normal event object with the main goal of having consistent event APIs across all the different browsers.
+Browsers emit objects called events that signal when things happen on a web page. This gives developers information about the event so that they can program behavior around it. React introduces a concept of a _React event object_, more frequently known as a _synthetic event_, which is very similar to a browser's _event object_. In fact, a synthetic event is just a wrapper around a normal event object with the main goal of having consistent event APIs across all the different browsers.
 
 [React's documentation](https://react.dev/reference/react-dom/components/common#react-event-object) includes a full list of common properties and methods on the synthetic event. A few are worth mentioning because we will see them frequently:
 
@@ -375,30 +393,30 @@ React includes an [exhaustive list](https://react.dev/reference/react-dom/compon
 
 #### Handler Composition Options
 
-React provides a great deal of flexibility when it comes to composing handler props and handler/callback functions in our applications. Creating a custom callback in the parent or the child are equally acceptable. To help with readability, it is common to prefix a custom function's name with "handle", as in `handleClick`, `handleUpdatePassword`, or `handleAddItemToCart`. This approach lets us know that data related to an event is being *handled*. The example below transforms a email address to all lowercase letters before it is passed to `setEmail`. It also prevents the default form behavior which is to trigger a page refresh.
+React provides a great deal of flexibility when it comes to composing handler props and handler/callback functions in our applications. Creating a custom callback in the parent or the child are equally acceptable. To help with readability, it is common to prefix a custom function's name with "handle", as in `handleClick`, `handleUpdatePassword`, or `handleAddItemToCart`. This approach lets us know that data related to an event is being _handled_. The example below transforms a email address to all lowercase letters before it is passed to `setEmail`. It also prevents the default form behavior which is to trigger a page refresh.
 
 ```jsx
 //setEmail is a state update function provided as a callback by the parent component
-function EmailInput({setEmail})(
- const emailInput = useRef();
+function EmailInput({ setEmail }) {
+  const emailInput = useRef();
 
- function handleSubmit(){
-  //prevents page refresh
-  event.preventDefault();
-  const lowerCaseEmail = emailInput.current.value.toLowerCase();
-  updateEmail(lowerCaseEmail);
- }
- return (
-  <form onSubmit={handleSubmit}>
-   <label>
-    User Name:
-    {/*assigning ref selects the element on the page*/}
-    <input type="text" ref={userNameInput}/>
-   </label>
-   <button/>
-  </form>
- )
-)
+  function handleSubmit() {
+    //prevents page refresh
+    event.preventDefault();
+    const lowerCaseEmail = emailInput.current.value.toLowerCase();
+    updateEmail(lowerCaseEmail);
+  }
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        User Name:
+        {/*assigning ref selects the element on the page*/}
+        <input type="text" ref={userNameInput} />
+      </label>
+      <button />
+    </form>
+  );
+}
 ```
 
 In the example below, we've created 2 custom callbacks, `increment` and `decrement` and then pass them each to an instance of a `Button` component. When clicked, `onClick` invokes the callback which uses `setCount` to update state with the appropriate value.
@@ -445,8 +463,7 @@ function Counter() {
       <p>Button pressed {count} times.</p>
     </div>
   );
-};
-
+}
 ```
 
 #### Putting it all Together
@@ -465,11 +482,11 @@ useEffect(() => {
 
 It loads the same as before but now the code is a bit more flexible for future changes.
 
-![alt](./assets/week-04/render-priority-product-list.png)
+![alt](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-04/render-priority-product-list.png)
 
 Let's fix up the styling to make it look more like a storefront and then add a shopping cart! For now, we'll add classes to elements so that they're easy to select and add style rules to `App.css` - the same that we would do with a static html page. We'll talk about css and images in depth in week 10 because there are other, more flexible options for styling in React, especially as an app grows and becomes more complex.
 
-![product cards](./assets/week-04/product-cards.png)
+![product cards](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-04/product-cards.png)
 
 For a cart feature, we need to be able to track items that have been put into a cart. To do so, we'll to add another `useState` to hold and update the items a user has selected. The initial state will be an empty array and we need handler function to add items from the cart. Removing items will come next week when we work with forms. We're also going to remove the special limited edition tee to simplify the product list. It will end up causing bugs because it's not a part of the inventory that we import from `catalog.json`. Sorry Frank, it'll come back later!
 
@@ -478,38 +495,38 @@ For a cart feature, we need to be able to track items that have been put into a 
 //...component code
 const [cart, setCart] = useState([]);
 function addItemToCart(item) {
-setCart([...cart, item]);
+  setCart([...cart, item]);
 }
 function removeItemFromCart(id) {
-const updatedCart = cart.filter((item) => item.id !== id);
-setCart([...updatedCart]);
-  }
+  const updatedCart = cart.filter((item) => item.id !== id);
+  setCart([...updatedCart]);
+}
 //...component code
 ```
 
 There's a problem with this implementation… what if a user adds the same item to their cart twice? That would mean there is more than one item in the cart with the same `id`. As it's implemented, the `id` that's used would filter out all the inventory items with a matching `id`. That's not a desired behavior so we need to come up with a unique cart item identifier.
 
-We might employ `Math.random()` to generate a random number but this is not a great idea. [`Math.random`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random) only generates *pseudo-random* numbers and we may end up with the identical id every once in a while. A better option would be the `Date.now()` method. This returns a number, in milliseconds from January 1, 1970, UTC. In production, we would probably use a UUID library but this works for our purposes. As we add an item into the cart, we'll assign it a `cartItemId` with the timestamp so we are better able to manage the cart.
+We might employ `Math.random()` to generate a random number but this is not a great idea. [`Math.random`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random) only generates _pseudo-random_ numbers and we may end up with the identical id every once in a while. A better option would be the `Date.now()` method. This returns a number, in milliseconds from January 1, 1970, UTC. In production, we would probably use a UUID library but this works for our purposes. As we add an item into the cart, we'll assign it a `cartItemId` with the timestamp so we are better able to manage the cart.
 
 ```jsx
 //App.jsx
 //...component code
 const [cart, setCart] = useState([]);
 function handleAddItemToCart(id) {
-    const target = inventory.find((item) => item.id === id);
-    //if no inventory items are found
-    //we want to prevent the app from crashing
-    //by exiting this function now
-    if(!target){
-      console.error('cart error: item not found');
-      return;
-    }
-    //create an new object, spread the contents of the item selected
-    //and add a `cartItemId`
-    const cartItem = { ...target, cartItemId: Date.now() };
-    console.log(cartItem);
-    setCart([...cart, cartItem]);
+  const target = inventory.find((item) => item.id === id);
+  //if no inventory items are found
+  //we want to prevent the app from crashing
+  //by exiting this function now
+  if (!target) {
+    console.error('cart error: item not found');
+    return;
   }
+  //create an new object, spread the contents of the item selected
+  //and add a `cartItemId`
+  const cartItem = { ...target, cartItemId: Date.now() };
+  console.log(cartItem);
+  setCart([...cart, cartItem]);
+}
 //...component code
 ```
 
@@ -523,7 +540,7 @@ Now that we have a handler function to update the cart state, we need to wire `h
 
 With that done, we can now look at the state in `App` using our [React Dev Tools](https://react.dev/learn/react-developer-tools) (it's highly recommended that you have them installed!). The second State entry grows every time one of the buttons is clicked. When the entries are expanded, they contain all the details of the product but there is also a unique `cartItemId`.
 
-![adding items to cart updates state](./assets/week-04/add-product-state.gif)
+![adding items to cart updates state](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-04/add-product-state.gif)
 
 Now that we have a state representation of the cart, we can add it to the page. The cart does not need to remain open all the time - it would get in the way of the products. We'll keep the cart minimized and add a cart icon with an item count in the upper-left corner which is controlled by the Header component.
 
@@ -539,17 +556,17 @@ Since we haven't talked about conditional rendering, we cannot work on displayin
 
 //... component code
 useEffect(() => {
-    cart.forEach((item) => {
-     console.log(item.baseName, item.cartItemId);
-    });
-    if (cart.length > 0) {
-     console.log('--end of cart--');
-    }
+  cart.forEach((item) => {
+    console.log(item.baseName, item.cartItemId);
+  });
+  if (cart.length > 0) {
+    console.log('--end of cart--');
+  }
 });
 //...component code.
 ```
 
-![print shopping cart to console](./assets/week-04/add-product-console.gif)
+![print shopping cart to console](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-04/add-product-console.gif)
 
 > [!note]
 > A handler function's name doesn't have to remain the same when it passed through props. We could have called the props `addItem` when defining ProductCard and then added that to the `onClick`

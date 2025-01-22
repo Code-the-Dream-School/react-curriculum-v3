@@ -48,7 +48,7 @@ Components are one of the fundamental building blocks of any React application. 
 
 We have already seen a few examples of repeated elements in CTD Swag. The blurred out product cards and the shopping cart items are both elements that repeat themselves. In fact, we've already had some experience with the card components. The shopping cart items are a prime example of an element that can be turned into a re-usable component. Inside of the `Cart` component, we map over the `workingCart` to create each list item. Rather than housing the code in `Cart` component, it can be extracted out to a `CartItem` component. Doing so saves space in the existing component file plus make it easier to read.
 
-![displaying cart list](./assets/week-06/cart.png)
+![displaying cart list](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/cart.png)
 
 Another category of reusable components are elements that are used throughout an interface that allow user to navigate or interact with the page. They can also be visual details that unify the look and feel of an interface. Such components could include:
 
@@ -62,7 +62,7 @@ Any visual element is a candidate to become a reusable component as long as 2 cr
 
 Dialog boxes convey messages to users based on their actions, such as success messages, error notifications, or warnings, or general information the user may need. A typical dialog box consists of its container, a heading, message, and one or more buttons to take an action on the message.
 
-![alt](./assets/week-06/info-dialog-white-header.png)
+![alt](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/info-dialog-white-header.png)
 
 Below is the equivalent code, excluding styles to neaten up the dialog's appearance.
 
@@ -72,7 +72,6 @@ Below is the equivalent code, excluding styles to neaten up the dialog's appeara
 import info from './assets/info.svg';
 
 export function Dialog() {
-
   return (
     <div className="dialog">
       <div className="heading">
@@ -93,7 +92,6 @@ export function Dialog() {
     </div>
   );
 }
-
 ```
 
 We can categorize the information that we provide into one of several categories: **info**, **success**, **error**, or **warning**. Each one of these are commonly associated with colors and icons to help convey the message's tone to the user. Adding these to our dialog could help our user better understand the information that we are trying to convey.
@@ -122,44 +120,42 @@ import info from './assets/info.svg';
 import success from './assets/success.svg';
 import warning from './assets/warning.svg';
 
-  const images = {
-    error,
-    info,
-    success,
-    warning,
-  };
+const images = {
+  error,
+  info,
+  success,
+  warning,
+};
 
-  const colors = {
-    error: '#f6bed7',
-    info: '#bec7f6',
-    success: '#bef6c5',
-    warning: '#f6eebc',
-  };
-  
+const colors = {
+  error: '#f6bed7',
+  info: '#bec7f6',
+  success: '#bef6c5',
+  warning: '#f6eebc',
+};
+
 export function Dialog({ kind = 'info' }) {
- return (
-  <div className="dialog">
-   <div className="heading" style={{ backgroundColor: colors[kind] }}>
-    <p>{kind.toUpperCase()} dialog</p>
-    <div className="icon">
-     <img src={images[kind]} />
+  return (
+    <div className="dialog">
+      <div className="heading" style={{ backgroundColor: colors[kind] }}>
+        <p>{kind.toUpperCase()} dialog</p>
+        <div className="icon">
+          <img src={images[kind]} />
+        </div>
+      </div>
+      <div className="content">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus
+        exercitationem quos quam, nihil cum voluptates tempore enim! Vel,
+        provident adipisci quos, similique iusto repellendus culpa obcaecati
+        libero, nostrum reiciendis quidem.
+      </div>
+      <div className="controls">
+        <button>Okay</button>
+        <button>Dismiss</button>
+      </div>
     </div>
-   </div>
-   <div className="content">
-    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus
-    exercitationem quos quam, nihil cum voluptates tempore enim! Vel,
-    provident adipisci quos, similique iusto repellendus culpa obcaecati
-    libero, nostrum reiciendis quidem.
-   </div>
-   <div className="controls">
-    <button>Okay</button>
-    <button>Dismiss</button>
-   </div>
-  </div>
- );
-  
+  );
 }
-
 ```
 
 We then go back to the parent component and pass a `kind` props into the instance of `Dialog` component. Finally, add some buttons that will let us toggle between the dialogs.
@@ -196,7 +192,7 @@ function App() {
 export default App;
 ```
 
-![toggle through dialog types](./assets/week-06/toggle-dialogs.gif)
+![toggle through dialog types](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/toggle-dialogs.gif)
 
 The dialog has a default `kind` when first rendered and when changed, it displays a different color and a helpful icon in its heading. Suppose that we have messages that come from an API response that we wanted to include them instead of the static paragraph we currently had. We have two options with this approach - we can add a `message` props or we can place the message into the instance using `children` props. Using the `children` approach has the added advantage that we can further format the message or include other jsx.
 
@@ -227,9 +223,8 @@ export function Dialog({ children, kind = 'info' }) {export function Dialog({ ch
 ```jsx
 //excerpts from App.jsx
 function App() {
-
   const [kind, setKind] = useState(dialogKind.info);
-  
+
   return (
     <>
       <main>
@@ -255,11 +250,11 @@ function App() {
 }
 ```
 
-![info dialog with blue heading](./assets/week-06/info-dialog.png)
+![info dialog with blue heading](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/info-dialog.png)
 
 ### Organizing Files in a React Project
 
-We inevitably add more components and sometimes refactor out non-React code into its own file as a project grows. If we maintain a flat file structure - *everything is in `src/` and `src/assets/` in our case* - the project becomes increasingly disorganized which makes it to be harder to find things or figure out how components relate to each other. In this section, we will discuss some considerations that go into determining the directory structure and organizing files for CTD Swag so we can continue to add functionality.
+We inevitably add more components and sometimes refactor out non-React code into its own file as a project grows. If we maintain a flat file structure - _everything is in `src/` and `src/assets/` in our case_ - the project becomes increasingly disorganized which makes it to be harder to find things or figure out how components relate to each other. In this section, we will discuss some considerations that go into determining the directory structure and organizing files for CTD Swag so we can continue to add functionality.
 
 > [!note]
 > The internet hosts many discussions and even more opinions about how to structure software projects. What we provide is a sensible approach that works well with small to medium React projects. Some larger projects require structures tailored to the problems that they solve and features they implement. Other React projects using frameworks such as Next.js, Astro, Remix must adhere to rules prescribed by the framework since they tend to use specific directories for features such as page routing or asset management.
@@ -340,11 +335,11 @@ The outline below provides a few more notes on the directories.
 
 To start the refactor, we create the new directories and move existing files into their updated location. As each file is moved, it's important to make sure that import statements are updated - both inside the file as well as wherever it is being imported. Running the dev server provides in-browser errors that are handy at letting us know where file imports are incorrect.
 
-![vite fails to resolve import](./assets/week-06/error-hint-fail-import.png)
+![vite fails to resolve import](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/error-hint-fail-import.png)
 
 VS Code is helpful in making some of these updates automatically as we move around files too. Be careful to double-check the imports in the file being moved - VS Code may not recognize non-JavaScript imports. Being able to import images and other non-JavaScript files is a feature of Vite and is not a part of [JavaScript module syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
 
-![alt](./assets/week-06/import-dialog.png)
+![alt](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/import-dialog.png)
 
 #### Refactoring Out Components
 
@@ -354,17 +349,17 @@ After the files have been moved into place, we need to refactor out the footer a
 //extract from App.jsx
 //component code...
 const year = useRef(
-    (() => {
-      const now = new Date(Date.now());
-      return now.getFullYear();
-    })()
-  );
+  (() => {
+    const now = new Date(Date.now());
+    return now.getFullYear();
+  })(),
+);
 //component code...
 <footer>
- <p>
-   Made with ❤️ | &copy; {year.current}{' '}
-  <a href="https://codethedream.org/">CTD </a>
- </p>
+  <p>
+    Made with ❤️ | &copy; {year.current}{' '}
+    <a href="https://codethedream.org/">CTD </a>
+  </p>
 </footer>
 ```
 
@@ -379,7 +374,7 @@ export default function Footer() {
     (() => {
       const now = new Date(Date.now());
       return now.getFullYear();
-    })()
+    })(),
   );
   return (
     <footer>
@@ -390,7 +385,6 @@ export default function Footer() {
     </footer>
   );
 }
-
 ```
 
 After saving the file, we need to import the `Footer` into `App` and then replace the html footer element and its contents with a self-terminating `<Footer />` tag. Once complete, everything in the browser page should look the same.
@@ -399,24 +393,19 @@ After saving the file, we need to import the `Footer` into `App` and then replac
 // return statement from App.jsx
 
 return (
-    <>
-      <Header cart={cart} handleOpenCart={handleOpenCart} />
-      <main>
-        <ProductList
-          inventory={inventory}
-          handleAddItemToCart={handleAddItemToCart}
-        ></ProductList>
-        {isCartOpen && (
-          <Cart
-            cart={cart}
-            setCart={setCart}
-            handleCloseCart={handleCloseCart}
-          />
-        )}
-      </main>
-      <Footer /> {/*this replaces <footer>...</footer> */}
-    </>
-  );
+  <>
+    <Header cart={cart} handleOpenCart={handleOpenCart} />
+    <main>
+      <ProductList
+        inventory={inventory}
+        handleAddItemToCart={handleAddItemToCart}></ProductList>
+      {isCartOpen && (
+        <Cart cart={cart} setCart={setCart} handleCloseCart={handleCloseCart} />
+      )}
+    </main>
+    <Footer /> {/*this replaces <footer>...</footer> */}
+  </>
+);
 ```
 
 Our next task is to extract the cart's product item into `ProductItemCard`. We create a file co-located with Cart.jsx inside the Cart directory and then examine the JSX of cart we need to extract:
@@ -457,7 +446,7 @@ Our next task is to extract the cart's product item into `ProductItemCard`. We c
              {/**********END HERE************/}
               })}
             </ul>
-            
+
 {/* ...component code */}
 ```
 
@@ -491,17 +480,17 @@ flowchart TD
 
 For those who prefer a text-based approach, the following is a bulleted outline of the diagram above:
 
-- Is it an *element tag* and does it contain any *props*?
+- Is it an _element tag_ and does it contain any _props_?
   - **yes to element, no to props**: we can copy it as-is
   - **yes to element, yes to props**
-    - does the *props* reference any *state* or *callbacks*, *variables*, or *functions* defined in the top level of the component?
+    - does the _props_ reference any _state_ or _callbacks_, _variables_, or _functions_ defined in the top level of the component?
       - **no**: are props **static**?
   - **yes**: the element can be copied as-is
   - **no**: are all the values defined in a block contained in the element being extracted to a new component?
     - **yes**: the element can be copied with the block as-is
     - **no**: we need to account for them based on their usage in the application
     - **yes**: we need to account for them based on their usage in the application
-  - **no to element**: is it a *comment* or a self-contained block that *does not reference* anything outside of the JSX being extracted?
+  - **no to element**: is it a _comment_ or a self-contained block that _does not reference_ anything outside of the JSX being extracted?
     - **yes**: it can be copied as-is
     - **no**: we need to account for any props, variables, or functions referenced and how they're being used
 
@@ -513,15 +502,15 @@ We go through the decision tree as we examine the JSX to come up with the follow
 1. **`workingCart.map()`**: This is outside of the component we plan to extract but but creates `item` which `CartItem` uses. We will need to pass `item` into `CartItem` as props.
 2. **`<li>` opening tag**: `className` is a static value. `key` is a special props that allows React to track component instances and is not added to `CartItem`'s function definition. We will end up adding it to the `CartItem` instance.
 3. **list item's contents**
-1. **`<img>`**: uses an image imported in by the `Cart` component. We will move the import with the refactor since it's not used anywhere else.
-2. **`<h2>`**: references `item` which will be in `CartItem`'s props so can be copied as-is.
-3. **`<div>`**: `className` is a static value but contains sub-elements to examine
-1. **`<input>`**: references `item` and uses a handler function for field updates. We will need to pass the handler as props into `CartItem`
-2. **`<p>`**: references `item` which we already know how to handle so can be copied as-is.
+4. **`<img>`**: uses an image imported in by the `Cart` component. We will move the import with the refactor since it's not used anywhere else.
+5. **`<h2>`**: references `item` which will be in `CartItem`'s props so can be copied as-is.
+6. **`<div>`**: `className` is a static value but contains sub-elements to examine
+7. **`<input>`**: references `item` and uses a handler function for field updates. We will need to pass the handler as props into `CartItem`
+8. **`<p>`**: references `item` which we already know how to handle so can be copied as-is.
 
 For ease of reference, the image below highlights the considerations listed above:
 
-![highlighting workingCart map JSX](./assets/week-06/working-cart-map.png)
+![highlighting workingCart map JSX](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/working-cart-map.png)
 
 With these considerations identified, we can finally plan our refactor to extract `CartItem`. We first create the new file inside `src/features/cart` and define the `CartItem` component. We include `{item}` in the arguments so that we have it to work with. We next copy over (don't remove it yet) the entire list item into `CartItem's` return statement. We also copy over the image import. Remove the `key` props from the list item in the new component since it's not needed any more. We add `onHandleItemUpdate` to `CartItem`'s arguments so that we can pass the handler function as props.
 
@@ -533,7 +522,8 @@ import placeholder from '../../assets/placeholder.png';
 
 function CartItem({ item, onHandleItemUpdate }) {
   return (
-    <li className="cartListItem"> //key removed since no longer used here
+    <li className="cartListItem">
+      {/*key removed since no longer used here*/}
       <img src={placeholder} alt="" />
       <h2>{item.baseName}</h2>
       <div className="cartListItemSubtotal">
@@ -559,15 +549,17 @@ Over in the `Cart` component we import `CartItem` then replace the list item wit
 ```jsx
 //extract from Cart.jsx
 
-{workingCart.map((item) => {
- return (
-  <CartItem
-   key={item.id}
-   item={item}
-   onHandleItemUpdate={handleUpdateField}
-  />
- );
-})}
+{
+  workingCart.map((item) => {
+    return (
+      <CartItem
+        key={item.id}
+        item={item}
+        onHandleItemUpdate={handleUpdateField}
+      />
+    );
+  });
+}
 ```
 
 All of these changes should result in an interface that continues to look and behave just the same. However, our code is now organized better and it's easer to read the code in `App` and `Cart` components.
@@ -582,7 +574,7 @@ Tests come in three basic categories: unit, integration, and end to end (E2E). E
 
 #### Types of Testing
 
-![venn diagram of test types - unit, integration, end-to-end](./assets/week-06/tests-venn_diagram.png)
+![venn diagram of test types - unit, integration, end-to-end](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/tests-venn_diagram.png)
 
 ##### Unit
 
@@ -733,7 +725,7 @@ Next we create a setup file for the test runner. We use this file to extend the 
 
 import { expect, afterEach } from 'vitest';
 import { cleanup } from '@testing-library/react';
-import * as matchers from "@testing-library/jest-dom/matchers";
+import * as matchers from '@testing-library/jest-dom/matchers';
 
 expect.extend(matchers);
 
@@ -760,11 +752,11 @@ Running `npm test` in the terminal will start up the test runner. Similar to the
 
 While it's running, Vitest will show the results of the test in the terminal window.
 
-![test passed](./assets/week-06/app-test-passed.png)
+![test passed](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/app-test-passed.png)
 
 Let's look at the output for a failing test. In the example below, our original test passes but the second one contains an invalid assertion which causes that test to fail. Each test that passes has a checkmark beside it and failed tests have an x-mark. Failed tests display in the terminal and uses a caret the point to the first assertion that fails. This is handy since a test case can contain more than one assertion.
 
-![test suite highlight failure point](./assets/week-06/test-error-hilight.png)
+![test suite highlight failure point](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/test-error-hilight.png)
 
 Using multiple assertions in a test case keeps the tests compact but it comes with a tradeoff. An assertion is only ran if the previous assertion is valid. At this point, we can't tell the outcome of the final assertion (`.not.toMatch`). This may be acceptable depending on the test but let's refactor this so that all of the assertions are ran. We will also take this opportunity place `App`'s tests into a suite.
 
@@ -784,7 +776,7 @@ describe('App test suite', () => {
   it('expect up to equal down', () => {
     expect('up').toEqual('down');
   });
-  
+
   it('expect up to not match regular expression /down/', () => {
     expect('up').not.toMatch(/down/);
   });
@@ -793,7 +785,7 @@ describe('App test suite', () => {
 
 Now we know the outcome of the last assertion even though the previous one still fails:
 
-![cli test suite passes](./assets/week-06/test-suite-pass.png)
+![cli test suite passes](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/test-suite-pass.png)
 
 #### Evaluating a Component
 
@@ -814,7 +806,7 @@ describe('App test suite', () => {
 
 You may notice the keyword `screen`. When a component or a portion of HTML is rendered, DOM Testing Library gives us a `screen` object that contains rendered content and all of the queries available to select various text or elements. `screen` also includes a method, `.debug()` that is very useful for exploring the contents of the of the `screen` while writing tests. When `screen.debug()` is added to the test, it outputs the rendered elements in neatly formatted html. Notice that everything inside of `App` is rendered into HTML, including its children components.
 
-![test outputting html to cli](./assets/week-06/test-html-output.png)
+![test outputting html to cli](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/test-html-output.png)
 
 To focus in on a single element, `.debug()` can accept a `screen` query.
 
@@ -828,7 +820,7 @@ describe('App test suite', () => {
 });
 ```
 
-![h1 highlighted in test output to cli](./assets/week-06/h1-hilight.png)
+![h1 highlighted in test output to cli](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/h1-hilight.png)
 
 Testing props for a component differs from case to case but can be as simple as passing some data into the component as rendered. We'll create a new file to test the ProductCard component.
 
@@ -849,15 +841,16 @@ describe('ProductCard component', () => {
       <ProductCard
         name={testProduct.name}
         description={testProduct.description}
-      />
+      />,
     );
-    expect(screen.getByRole('heading', { level: 2 }))
-     .toHaveTextContent(testProduct.name);
+    expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent(
+      testProduct.name,
+    );
   });
 });
 ```
 
-![test passes for product card](./assets/week-06/product-card-test-passed.png)
+![test passes for product card](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/product-card-test-passed.png)
 
 Even though we now have 2 test files, only results for the ProductCard test is displayed. Vitest will not re-run tests unless the evaluated code, or its dependencies, has changed.
 
@@ -898,10 +891,10 @@ Although it has a return value, we don't have direct access to it. We still need
 //ProductCard.test.js
 //...testing code
 const testProduct = {
-    id: 'testId',
-    name: 'Test Product',
-    description: 'Test product description',
- handleAddItemToCart: vi.fn((id) => id),
+  id: 'testId',
+  name: 'Test Product',
+  description: 'Test product description',
+  handleAddItemToCart: vi.fn((id) => id),
 };
 //testing code continues...
 ```
@@ -912,18 +905,18 @@ The following test confirms that a `ProductCard` button is clicked.
 //ProductCard.test.js
 //...testing code
 it('button fires callback', async () => {
-    const { user } = setup(
-      <ProductCard
-        name={testProduct.name}
-        description={testProduct.description}
-        id={testProduct.id}
-        handleAddItemToCart={testProduct.handleAddItemToCart}
-      />
-    );
-    await user.click(screen.getByRole('button'));
-    expect(testProduct.handleAddItemToCart).toHaveBeenCalled();
-    vi.clearAllMocks();
-  });
+  const { user } = setup(
+    <ProductCard
+      name={testProduct.name}
+      description={testProduct.description}
+      id={testProduct.id}
+      handleAddItemToCart={testProduct.handleAddItemToCart}
+    />,
+  );
+  await user.click(screen.getByRole('button'));
+  expect(testProduct.handleAddItemToCart).toHaveBeenCalled();
+  vi.clearAllMocks();
+});
 ```
 
 After the user click, the assertion examines `handleAddItemToCart` with `.toHaveBeenCalled()` to determine whether or not the mock handler has been called. Since we've used a spy, it has recorded the event so the test case passes.
@@ -934,22 +927,22 @@ This next test asserts that the value that the mock returns is the product's id.
 //ProductCard.test.js
 //...testing code
 it('callback returns product id', async () => {
-    const { user } = setup(
-      <ProductCard
-        name={testProduct.name}
-        description={testProduct.description}
-        id={testProduct.id}
-        handleAddItemToCart={testProduct.handleAddItemToCart}
-      />
-    );
-    await user.click(screen.getByRole('button'));
-    expect(testProduct.handleAddItemToCart).toHaveReturnedWith(testProduct.id);
-    vi.clearAllMocks();
-  });
+  const { user } = setup(
+    <ProductCard
+      name={testProduct.name}
+      description={testProduct.description}
+      id={testProduct.id}
+      handleAddItemToCart={testProduct.handleAddItemToCart}
+    />,
+  );
+  await user.click(screen.getByRole('button'));
+  expect(testProduct.handleAddItemToCart).toHaveReturnedWith(testProduct.id);
+  vi.clearAllMocks();
+});
 ```
 
-![alt](./assets/week-06/product-card-tests-passed.png)
+![alt](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-06/product-card-tests-passed.png)
 
 Testing in React is a fundamental practice that aids in identifying bugs and errors throughout the development process. By validating code behaviors in different scenarios, tests establish a reliable foundation for consistent functionality. They act as a protective layer, catching unintended repercussions when code modifications occur. A robust test suite guarantees that system integrity is maintained even after changes have been made. This week's discussion covers the basics of unit testing, and it's important to acknowledge that there is much more to explore beyond these foundational materials.
 
-[^gitkeep]: Git does not track empty directories. Empty directories are retained on the local machine but are not pushed. They will not show up on GithHub or for anyone else who pulls down a copy of the repo. To get around this, developers place a `.gitkeep` file in empty directories that git will track. As a consequence, the directory is now *not* empty so is preserved. We can create a `.gitkeep` file using the terminal command `touch .gitkeep` or right-clicking in VS Code and creating a new file in the target directory. Any type of empty file works here but `.gitkeep` usage lets developers know it's just a placeholder so can be deleted whenever the directory is used.
+[^gitkeep]: Git does not track empty directories. Empty directories are retained on the local machine but are not pushed. They will not show up on GithHub or for anyone else who pulls down a copy of the repo. To get around this, developers place a `.gitkeep` file in empty directories that git will track. As a consequence, the directory is now _not_ empty so is preserved. We can create a `.gitkeep` file using the terminal command `touch .gitkeep` or right-clicking in VS Code and creating a new file in the target directory. Any type of empty file works here but `.gitkeep` usage lets developers know it's just a placeholder so can be deleted whenever the directory is used.

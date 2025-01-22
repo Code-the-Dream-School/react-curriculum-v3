@@ -21,7 +21,7 @@ By the end of this lesson, we will:
 - explain how a web browser's session history works while a user navigates a typical website
 - describe how we can use the History API to interact with a browser's session history
 
-#### Objective 3: react-router
+#### Objective 3: React-Router
 
 - describe the purpose of react-router and how client side routing improves a user's experience with the app
 - implement react-router to emulate page navigation and enable client side routing in a React application

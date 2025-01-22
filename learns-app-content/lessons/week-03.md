@@ -34,13 +34,13 @@ All of the information on an simple web page is composed of data of one type or 
 We have plenty of options when working with state. The simplest place to start is by defining a variable used inside our component. We can do this outside of the component or inside, before the return statement. We reference that variable in our JSX surrounded by `{}`. When the component is rendered, React will insert the value in its place in the virtual DOM then go through reconciliation and rendering. One detail to keep in the back of your mind is that every time a component is re-rendered, any variables defined inside the component will be re-instantiated. Most of this time this is not a problem but this will come up later in the course when we focus on optimizing our code for more advanced scenarios.
 
 ```jsx
-import ctdLogo from "./assets/mono-blue-logo.svg";
-import "./App.css";
+import ctdLogo from './assets/mono-blue-logo.svg';
+import './App.css';
 
-const message = "Coming Soon..."; //This is outside the function definition for App
+const message = 'Coming Soon...'; //This is outside the function definition for App
 
 function App() {
-  const title = " CTD Swag"; // This is inside the Component before the return
+  const title = ' CTD Swag'; // This is inside the Component before the return
   return (
     <div className="coming-soon">
       <h1>{title}</h1> //`title` inserted into heading
@@ -58,13 +58,13 @@ export default App;
 This approach does not give us a way to make updates to `message` or `title`. Using `let` instead of `const` allows us to make an update to the variable but it still breaks one of the rules for writing a React component: state should never be mutated. Not only that, React has no way to tell if and when `message` or `title` gets updated. We can demonstrate this with a setTimeout that changes `message` after 3 seconds.
 
 ```jsx
-import ctdLogo from "./assets/mono-blue-logo.svg";
-import "./App.css";
+import ctdLogo from './assets/mono-blue-logo.svg';
+import './App.css';
 
-let message = "Coming Soon...";
+let message = 'Coming Soon...';
 
 setTimeout(() => {
-  message = "We can feel it...";
+  message = 'We can feel it...';
   console.log(`Updated message: ${message}`);
 }, 3000);
 
@@ -81,25 +81,24 @@ function App() {
 }
 
 export default App;
-
 ```
 
 We'll know when the `setTimeout` fires off because of the console statement that prints out the updated `message`. As expected, this has no affect to the "Coming Soon…" message on the page:
 
-![setTimeout firing console message 1 second after page load](./assets/week-03/timeout-message.gif)
+![setTimeout firing console message 1 second after page load](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-03/timeout-message.gif)
 
 #### useState
 
 `const [state, setState] = useState(initialState)`
 
- `useState` is a React hook that allows us to set and update a piece of data that we can then use in our SPA. We invoke `useState` with an initial state value as an argument. That initial state value can be of any type. If given a function, it would be called an "initializer function" in that context. React will run it and use the returned value to set the initial state value. Initializer functions must be pure functions and cannot take any arguments. When called, `useState` returns an array containing a state variable (a reference to the current state) and an updater function. We follow array [destructuring assignment](https://javascript.info/destructuring-assignment) convention `const [noun, setNoun] = useState(intialState)` to make use of this hook.
+`useState` is a React hook that allows us to set and update a piece of data that we can then use in our SPA. We invoke `useState` with an initial state value as an argument. That initial state value can be of any type. If given a function, it would be called an "initializer function" in that context. React will run it and use the returned value to set the initial state value. Initializer functions must be pure functions and cannot take any arguments. When called, `useState` returns an array containing a state variable (a reference to the current state) and an updater function. We follow array [destructuring assignment](https://javascript.info/destructuring-assignment) convention `const [noun, setNoun] = useState(intialState)` to make use of this hook.
 
 With `useState` explained, we can now start setting up CTD Swag's storefront. Let's get some inventory on the page! We first need to put together some sample inventory data for our app to start with. We want to be able to offer differing colors or versions for some products but without each having their own product card. We will eventually make use of `base-` and `variant-` prefixes to combine related products to a single product card in [[Week-05|week 5]] when we discuss conditional rendering. Each item should include `baseName`, `variantName`, `id` `price`, `baseDescription`, `variantDescription`, `image`, and `inStock` keys. Here's an example of several inventory items:
 
 ```json
 {
   inventory: [
-        {
+    {
       "id": 1,
       "baseName": "Bucket Hat",
       "variantName": "Black",
@@ -134,7 +133,7 @@ With `useState` explained, we can now start setting up CTD Swag's storefront. Le
 
 ```
 
-A JSON file that includes a full starting inventory can be found [here](). We will use Vite's JSON import feature to access the inventory. Let's get some product names and descriptions onto the page!
+A JSON file that includes a full starting inventory can be found here <!--PLACEHOLDER-->. We will use Vite's JSON import feature to access the inventory. Let's get some product names and descriptions onto the page!
 
 > [!note]
 > Note: Screen captures of the application using an older version of this JSON file. The newest version includes product variations that will be used in later lessons.
@@ -186,12 +185,12 @@ function App() {
 export default App;
 ```
 
-![render product list](./assets/week-03/render-product-list.png)
+![render product list](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-03/render-product-list.png)
 
 > [!note]
 > ESLint may be highlighting `setInventory` since it hasn't been used yet. We will use it next lesson. For now, this is one of the few errors we'll ignore.
 
-![highlighting eslint error to ignore](./assets/week-03/ignore-error.png)
+![highlighting eslint error to ignore](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-03/ignore-error.png)
 
 The `key` in `<li key={item.id}>` helps React keep track of elements that are rendered from an array. It may initially seem like a good idea to use the item's array index since each item has one and it is unique. The downside is that an item and its index value are not guaranteed to keep matching. An item may be removed from the inventory, changing the array, when it goes out of stock. `inventory` can eventually have a sort or filter feature added to it which would also have an impact on item order. In either case, using array indices as keys could introduce unexpected behavior or degrade React's rendering cycle. We've included an `id` on the item so this will not happen.
 
@@ -272,7 +271,7 @@ export default Header;
 ```jsx
 /*ProductList.jsx*/
 
-function ProductList({inventory}) {
+function ProductList({ inventory }) {
   return (
     <ul>
       {inventory.map((item) => {
@@ -290,12 +289,11 @@ function ProductList({inventory}) {
 }
 
 export default ProductList;
-
 ```
 
 **You may see an ESLint error when working with props in Inventory**.
 
-![eslint tooltop missing props validation](./assets/week-03/missing-props-validation.png)
+![eslint tooltop missing props validation](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-03/missing-props-validation.png)
 
 We will not be using prop-types in our project so we need to disable that rule in `config.eslint.js`. We do so by adding `'react/prop-types': 'off',` to the existing rules. The rules object should look similar to this:
 
@@ -346,7 +344,7 @@ export default ProductList;
 ```jsx
 /*ProductCard.jsx*/
 
-function ProductCard({baseName, baseDescription}) {
+function ProductCard({ baseName, baseDescription }) {
   return (
     <li>
       <div className="itemCard">
@@ -360,8 +358,7 @@ function ProductCard({baseName, baseDescription}) {
 export default ItemCard;
 ```
 
-> [!Remember]
-> `key` is a special prop that React uses to track components rendered from an array. Because of this, `key` gets added to `InventoryItem` instances in `map()` but is **not used** in the `InventoryItem` component.
+> [!Remember] > `key` is a special prop that React uses to track components rendered from an array. Because of this, `key` gets added to `InventoryItem` instances in `map()` but is **not used** in the `InventoryItem` component.
 
 Finally, we refactor `App` to use the new components.
 
@@ -375,8 +372,7 @@ import ProductCard from './ProductCard';
 
 function App() {
   const [inventory, setInventory] = useState(inventoryData.inventory);
-  
-  }
+
   return (
     <main>
       <Header />
@@ -439,10 +435,12 @@ function App() {
       />
     );
   }
+
   return (
     <main>
       <Header />
-      <ProductList inventory={inventory}>{promoteItem()}</ProductList> //invoking promoted item between the tags inserts the ItemCard
+      <ProductList inventory={inventory}>{promoteItem()}</ProductList>
+      {/*invoking promoted item between the tags inserts the ItemCard*/}
     </main>
   );
 }
@@ -457,7 +455,7 @@ In order for it to appear in `ProductList`, we need to include `{children}` in t
 
 import ProductCard from './ProductCard';
 
-function ProductList({inventory, children}) {
+function ProductList({ inventory, children }) {
   return (
     <ul>
       {children} //this location guarantees that this list item will be first
@@ -477,4 +475,4 @@ function ProductList({inventory, children}) {
 export default ProductList;
 ```
 
-![alt](./assets/week-03/render-priority-product-list.png)
+![alt](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-03/render-priority-product-list.png)

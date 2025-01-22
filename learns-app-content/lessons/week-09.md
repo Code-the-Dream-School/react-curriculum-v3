@@ -25,7 +25,7 @@ By the end of this lesson, we will:
 ### Limiting Network Requests
 
 > [!note]
-> The repo for this discussion topic can be found here: PLACEHOLDER
+> The repo for this discussion topic can be found here: <!--PLACEHOLDER-->
 
 Taking a step back from CTD Swag for this topic, we need to discuss how to work efficiently with an API. To work through the next several sections, we'll use [Spoonacular's API](https://spoonacular.com/food-api) to update a simple recipe finder that searches for recipes based on ingredients. The app contains a form for the user to enter a search term. When submitted, a fetch request returns a list of results containing that ingredient. These results are shown as a list below the form. Each recipe title is linked to its source page that opens in a new tab.
 
@@ -41,16 +41,24 @@ One approach to this is to store the query and its search results in a lookup ob
 //example lookup object with cached search results
 
 const searchCache = {
- "chicken": [
- {id: 123, title: 'red lentil soup with chicken and turnips', sourceUrl:'... recipe URL'},
- {id: 456, title: 'chicken enchilada quinoa cassserole', sourceUrl:'...recipe URL'}
+  chicken: [
+    {
+      id: 123,
+      title: 'red lentil soup with chicken and turnips',
+      sourceUrl: '... recipe URL',
+    },
+    {
+      id: 456,
+      title: 'chicken enchilada quinoa cassserole',
+      sourceUrl: '...recipe URL',
+    },
   ],
- "spaghetti, tomato": [
- {id: 789, title: 'spaghetti pomodoro', sourceUrl:'...recipe URL'},
- {id: 234, title: 'spaghetti carbonara', sourceUrl:'...recipe URL'},
- {id: 567, title: 'baked spaghetti', sourceUrl:'...recipe URL'}
- ]
-}
+  'spaghetti, tomato': [
+    { id: 789, title: 'spaghetti pomodoro', sourceUrl: '...recipe URL' },
+    { id: 234, title: 'spaghetti carbonara', sourceUrl: '...recipe URL' },
+    { id: 567, title: 'baked spaghetti', sourceUrl: '...recipe URL' },
+  ],
+};
 ```
 
 After visualizing the cache, we'll create an empty state object to store queries and their associated search results.
@@ -113,52 +121,52 @@ Knowing this flow of events we can then go back to the original `useEffect` to d
 // extract from App.jsx
 //...code
 useEffect(() => {
-    if (!term) {
-      return;
-    }
-    if (searchCache[term]) {
-      console.log(`term ${term} found, returning cache...`);
-      setRecipes([...searchCache[term]]);
-      setTerm('');
-      return;
-    }
-    async function getRecipes() {
-      console.log(`getRecipes()`);
-      const options = {
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': `${KEY}`,
-        },
-      };
-      try {
-        const resp = await fetch(
-          `${BASE_URL}/complexSearch?includeIngredients=${term}&addRecipeInformation=true`,
-          options
-        );
-        if (resp.ok) {
-          console.log('response okay');
-          // resp includes number, offset, totalResults
-          const recipeList = await resp.json();
-          setRecipes([...recipeList.results]);
-          console.log(`caching search for "${term}"`);
-          setSearchCache((prev) => ({
-            ...prev,
-            [term]: [...recipeList.results],
-          }));
-          setTerm('');
-        }
-      } catch (e) {
-        console.log(e);
+  if (!term) {
+    return;
+  }
+  if (searchCache[term]) {
+    console.log(`term ${term} found, returning cache...`);
+    setRecipes([...searchCache[term]]);
+    setTerm('');
+    return;
+  }
+  async function getRecipes() {
+    console.log(`getRecipes()`);
+    const options = {
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': `${KEY}`,
+      },
+    };
+    try {
+      const resp = await fetch(
+        `${BASE_URL}/complexSearch?includeIngredients=${term}&addRecipeInformation=true`,
+        options,
+      );
+      if (resp.ok) {
+        console.log('response okay');
+        // resp includes number, offset, totalResults
+        const recipeList = await resp.json();
+        setRecipes([...recipeList.results]);
+        console.log(`caching search for "${term}"`);
+        setSearchCache((prev) => ({
+          ...prev,
+          [term]: [...recipeList.results],
+        }));
+        setTerm('');
       }
+    } catch (e) {
+      console.log(e);
     }
-    getRecipes();
-  }, [term, searchCache]);
+  }
+  getRecipes();
+}, [term, searchCache]);
 //code continues...
 ```
 
 The console statements from the above statement illustrates how the caching logic prevents the request in this screen recording:
 
-![searching for chicken then beef](./assets/week-09/search-chicken-beef.gif)
+![searching for chicken then beef](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-09/search-chicken-beef.gif)
 
 #### Throttling Request Rates
 
@@ -166,7 +174,7 @@ Another type of common API requirement is that a set amount of time must elapse 
 
 We are going to look closer at pagination in [[Week-12|week 12]] but we need to know some basic details about the API response that enable us to paginate. Each API response includes a portion of the search results, an offset value(how many recipes that have been skipped), and a total number of results in a search. By updating the fetch logic and updating the UI, the app ends up with a group of buttons below the results that allow a user to page through all the search results.
 
-![paging through search results](./assets/week-09/search-chicken-pagination.gif)
+![paging through search results](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-09/search-chicken-pagination.gif)
 
 The easiest way to throttle the response is to limit the availability of the buttons. We can temporarily set state to disable the button and then use `setTimeout` to re-enable them after a certain time has elapsed. We'll look at the handler functions since they end up with the logic to perform the throttle:
 
@@ -174,36 +182,36 @@ The easiest way to throttle the response is to limit the availability of the but
 // extract from App.jsx
 //...code
 function pageForward() {
-    setIsPaginationDisabled(true);
-    const maxPages = Math.ceil(resultsCount / paginationSize);
-    const currentPage = Math.ceil(currentOffset / paginationSize) + 1;
-    if (currentPage >= maxPages) {
-      return;
-    }
-    setNextOffset(currentOffset + paginationSize);
-    setTimeout(() => setIsPaginationDisabled(false), 1000);
+  setIsPaginationDisabled(true);
+  const maxPages = Math.ceil(resultsCount / paginationSize);
+  const currentPage = Math.ceil(currentOffset / paginationSize) + 1;
+  if (currentPage >= maxPages) {
+    return;
   }
+  setNextOffset(currentOffset + paginationSize);
+  setTimeout(() => setIsPaginationDisabled(false), 1000);
+}
 
-  function pageBack() {
-    setIsPaginationDisabled(true);
-    if (currentOffset <= 0) {
-      return;
-    }
-    setNextOffset(currentOffset - paginationSize);
-    setTimeout(() => setIsPaginationDisabled(false), 1000);
+function pageBack() {
+  setIsPaginationDisabled(true);
+  if (currentOffset <= 0) {
+    return;
   }
+  setNextOffset(currentOffset - paginationSize);
+  setTimeout(() => setIsPaginationDisabled(false), 1000);
+}
 //code continues...
 ```
 
-![demo of button disabled by a timer](./assets/week-09/search-lentils.gif)
+![demo of button disabled by a timer](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-09/search-lentils.gif)
 
 That is not the sort of delay that a user would want on their application so we can refine timeout duration. We can look at the network requests in the network activity tab in our browser to figure out how long it's taking the request to process. We see in the following request, that we're waiting around 160 milliseconds for the server to respond.
 
-![response time in network tab](./assets/week-09/response-time-hilight.png)
+![response time in network tab](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-09/response-time-hilight.png)
 
 We'll send off several requests and then average out the wait times between each. For this API, the response time averages out to 350ms. We can then reduce the timeout delay by this amount, making the interface a little friendlier to use without running against the API request speed limitations.
 
-![delay timing minimized](./assets/week-09/search-spinach.gif)
+![delay timing minimized](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-09/search-spinach.gif)
 
 ### useMemo and useCallback
 
@@ -211,13 +219,13 @@ Caching and throttling are 2 approaches that increases the efficiency of API usa
 
 #### useMemo
 
-React’s `useMemo` hook uses memoization to address performance problems cause by expensive calculations and unnecessary re-rendering. `useMemo` returns the *results* of the memoized function so we reference it similar to a variable. Since it is a hook, its usage does have some constraints:
+React’s `useMemo` hook uses memoization to address performance problems cause by expensive calculations and unnecessary re-rendering. `useMemo` returns the _results_ of the memoized function so we reference it similar to a variable. Since it is a hook, its usage does have some constraints:
 
 - It must be used at the top level of the component. Stated differently, it cannot be nested into any other functions or conditional statements.
 - The function definition added to useMemo to calculate return values cannot take any arguments.
 - Any values that we need to work are added to `useMemo`'s dependency list.
 
- The first portion of the code example below implements memoization in plain JavaScript using a closure. The end portion contains the React equivalent. They do same work but `useMemo` results in much cleaner code more appropriate to a React codebase.
+The first portion of the code example below implements memoization in plain JavaScript using a closure. The end portion contains the React equivalent. They do same work but `useMemo` results in much cleaner code more appropriate to a React codebase.
 
 ```javascript
 /* plain JavaScript */
@@ -292,7 +300,7 @@ The recipe finder app is small so are no performance issues but we can employ `u
 
 ```jsx
 // extract from App.jsx
-// ... component code 
+// ... component code
 const pendingQuery = useMemo(
     () => `${term} offset ${nextOffset}`,
     [term, nextOffset]
@@ -325,17 +333,17 @@ During a re-render, a component re-defines functions found inside the component 
 We can see it in action by wrapping the handler methods the buttons use to page back and forth through the recipe list.
 
 ```js
-  const pageBack = useCallback(() => {
-    setIsPaginationDisabled(true);
-    setNextOffset((prevOffset) => Math.max(prevOffset - paginationSize, 0));
-    setTimeout(() => setIsPaginationDisabled(false), 650);
-  }, [paginationSize]);
+const pageBack = useCallback(() => {
+  setIsPaginationDisabled(true);
+  setNextOffset((prevOffset) => Math.max(prevOffset - paginationSize, 0));
+  setTimeout(() => setIsPaginationDisabled(false), 650);
+}, [paginationSize]);
 
-  const pageForward = useCallback(() => {
-    setIsPaginationDisabled(true);
-    setNextOffset((prevOffset) => prevOffset + paginationSize);// uses a setter function
-    setTimeout(() => setIsPaginationDisabled(false), 650);//
-  }, [paginationSize]);
+const pageForward = useCallback(() => {
+  setIsPaginationDisabled(true);
+  setNextOffset((prevOffset) => prevOffset + paginationSize); // uses a setter function
+  setTimeout(() => setIsPaginationDisabled(false), 650); //
+}, [paginationSize]);
 ```
 
 Recall that the state update function will provide the previous state value to its setter function. This approach allows us to keep the dependency list short.

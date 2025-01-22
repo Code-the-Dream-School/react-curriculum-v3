@@ -54,7 +54,7 @@ function App() {
 
 All of the state update functions listed above are referenced at least once somewhere in the component. Many are found in two places. `setIsAuthenticating` is called in five locations!
 
-![IDE screen shot with all instances of setIsAuthenticating highlighted](./assets/week-11/set-is-auth-hilighted.png)
+![IDE screen shot with all instances of setIsAuthenticating highlighted](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-11/set-is-auth-hilighted.png)
 
 `setIsAuthenticating` is found only in two event handlers, but but state update functions are also used in `useEffect`s and passed in props to child components. You can see how it can be easy to lose track of state!
 
@@ -71,62 +71,60 @@ This pattern consists 3 key elements that each work together to coordinate state
 A reducer function operates on a collection of data elements, such an array or object, by applying update logic to produce an output. They centralize the logic needed to manage state values. We communicate with the reducer using compact dispatch functions. A dispatch's only job is to relay details about a user action to the reducer function.
 
 ```javascript
-//example reducer and dispatches 
+//example reducer and dispatches
 
 //reducer accepts the current state and an action object
 //it outputs an updated state value for us to use
 const reducer = (state, action) => {
-    switch (action.type) {
-        case 'increment':
-            return { count: state.count + 1 };
-        case 'decrement':
-            return { count: state.count - 1 };
-        case 'add':
-            return { count: state.count + action.value }
-        case 'reset':
-         return { count: 0 };
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case 'increment':
+      return { count: state.count + 1 };
+    case 'decrement':
+      return { count: state.count - 1 };
+    case 'add':
+      return { count: state.count + action.value };
+    case 'reset':
+      return { count: 0 };
+    default:
+      return state;
+  }
 };
 //dispatch containing an action object that adds 1
-dispatch({type: "increment"})
+dispatch({ type: 'increment' });
 
 //action objects can also be written outside dispatch
 const decrement = {
- state,
- type: "decrement"
-}
+  state,
+  type: 'decrement',
+};
 dispatch(decrement);
 
 //we can provide extra data for the reducer
 //to compute the output value
 const add5 = {
- state,
- type: "add",
- value: 5,
-}
+  state,
+  type: 'add',
+  value: 5,
+};
 
-dispatch(add5)
+dispatch(add5);
 
-dispatch({type: "reset"})
-
-
+dispatch({ type: 'reset' });
 ```
 
 > [!note]
 > The code example above is non-functional. The dispatch function provided by the library or tool we adopt. The library also calls the reducer with the required inputs. For CTD-Swag, we will be using the `useReducer` hook.
 
- Up until now, we have focused on making state updates by processing events inside of event handlers and helper functions For example when a user adds a product to the cart:
+Up until now, we have focused on making state updates by processing events inside of event handlers and helper functions For example when a user adds a product to the cart:
 
 1. user clicks button "Add to Cart"
 2. the click event executes an event handler which:
-1. retrieves relevant data from state and the event
-2. transforms or creates a new value for next state
-3. calls a state update function with the state's next value
+   1. retrieves relevant data from state and the event
+   2. transforms or creates a new value for next state
+   3. calls a state update function with the state's next value
 3. the state update function starts a render cycle which:
-1. replaces old state value with the update provided
-2. re-renders interface using new value
+   1. replaces old state value with the update provided
+   2. re-renders interface using new value
 
 When working with reducers, it helps to shift perspectives from "what event just happened" to "what a user just did". This is referred to as [inversion of control](https://en.wikipedia.org/wiki/Inversion_of_control). Continuing with the example above, rather than thinking **"the user clicked on the 'Add to Cart' button on a product card representing the bucket hat"**, our new thought process would be **"the user added a bucket hat to their cart"**. This statement is much simpler than the first. It reflects that the component only needs to know that a user performed an action. The reducer function, which exists independently of the component, is responsible for adding the bucket hat to the cart state. Our event handlers' only responsibility for state updates is to communicate the details of the action to the reducer. We'll continue to explore the reducer pattern but need to learn a little about the `useReducer` hook first.
 
@@ -137,14 +135,14 @@ The `useReducer` hook adapts the reducer pattern for use in React applications. 
 `useReducer` takes a reducer function and an initial state value when called. It outputs a state value and a dispatch function which are assigned similar to `useEffect`.
 
 ```js
-const [state, dispatch] = useReducer(reducer, initialState)
+const [state, dispatch] = useReducer(reducer, initialState);
 ```
 
 Reducer functions and the initial state values tend to be more complex than the arguments than a `useState` hook. The reducer function also works independently from any component: it reads no values from inside the component directly. Because of these factors we will place these in a separate file to keep the component's size to a minimum.
 
 For this discussion, we will implement the reducer pattern on cart's state. We create a file `cart.reducer.js` and place it into a `/reducers` folder created under `/src`. It's helpful to drop the "x" from the filename's extension since it will not contain any React-specific code or JSX. This will tell us, at a glance that it is not component code without having to open the file up. After creating the new file, we when need to identify the relevant `useState`s:
 
-![ide screenshot highlighting cart state](./assets/week-11/cart-state-hilighted.png)
+![ide screenshot highlighting cart state](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-11/cart-state-hilighted.png)
 
 The `useState`s highlighted above all manage some aspect of state related to the cart. From this list, we can determine `initialState`:
 
@@ -155,7 +153,7 @@ const initialState = {
   isCartOpen: false,
   isCartSyncing: false,
   //for the sake of simplicity here, we combine cartError and cartItemError
-  error: '', 
+  error: '',
 };
 //code continues...
 ```
@@ -166,14 +164,13 @@ We then create a reducer that returns the state for now.
 // extract from cart.reducer.js
 //...code
 function reducer(state, action) {
- switch (action.type) {
-  default:
+  switch (action.type) {
+    default:
       return state;
- }
+  }
 }
 
-export {initialState, reducer}
-
+export { initialState, reducer };
 ```
 
 We will add `case` statements for each of the actions we identify to organize the state logic. `switch/case` flow control is easier to read than `if/else` statements so is usually preferred. Reducer functions tend to grow quite long.
@@ -181,23 +178,31 @@ We will add `case` statements for each of the actions we identify to organize th
 We then import the initial value and the reducer into `App.js` and add them to a `useReducer` hook:
 
 ```jsx
-{/*extract from App.jsx*/}
-{/*...code*/}
+{
+  /*extract from App.jsx*/
+}
+{
+  /*...code*/
+}
 import {
-//aliasing with `as` keeps the reducer and state easily identifiable
+  //aliasing with `as` keeps the reducer and state easily identifiable
   initialState as cartInitialState,
   reducer as cartReducer,
 } from './reducers/App/cart.reducer';
 
-{/*...unrelated code...*/}
+{
+  /*...unrelated code...*/
+}
 
 const [cartState, dispatch] = useReducer(cartReducer, cartInitialState);
-{/*code continues...*/}
+{
+  /*code continues...*/
+}
 ```
 
 Next, we'll find places where `isCartOpen` is used and determine how argument is created. In some cases, it's a direct value that is passed in. In other cases, our event handlers and helper functions calculate that value. Using VS Code's file search we can find 3 instances to `setIsCardOpen`.
 
-![ide file search result numbers for setIsCartOpen](./assets/week-11/is-cart-open-search.png)
+![ide file search result numbers for setIsCartOpen](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-11/is-cart-open-search.png)
 
 The first location is in `useState` so we do not need to worry about that for now. The second one is in a handler function that closes the cart and the final on is in the Header instance:
 
@@ -250,8 +255,8 @@ Before removing any state update function, we can place the dispatch along side 
 Recall that the dispatch function takes an `action`. This can be of any type (string, object, number, etc.) but by convention, we stick with objects containing a `type` property to identify the action and add properties as needed. The actions that our reducer will receive for the cart actions resemble:
 
 ```javascript
-const open = {value: "open"}
-const close = {value: "close"}
+const open = { value: 'open' };
+const close = { value: 'close' };
 ```
 
 When we are happy with how the `case` blocks work in the reducer, we can then update all `isCartOpen` references with `cartState.isCartOpen` to migrate to the updated state.
@@ -259,32 +264,40 @@ When we are happy with how the `case` blocks work in the reducer, we can then up
 We then update each `isCartSyncing` with `cartState.isCartSyncing` to use the state our `useReducer` returns.
 
 ```jsx
-{/*extract from */}
-{/*...code*/}
-{cartState.isCartOpen && (
- <Cart
-  cartError={cartError}
-        isCartSyncing={isCartSyncing}
-        cart={cart}
-        handleSyncCart={handleSyncCart}
-        handleCloseCart={handleCloseCart}
- />
-)}
-{/*code continues...*/}
+{
+  /*extract from */
+}
+{
+  /*...code*/
+}
+{
+  cartState.isCartOpen && (
+    <Cart
+      cartError={cartError}
+      isCartSyncing={isCartSyncing}
+      cart={cart}
+      handleSyncCart={handleSyncCart}
+      handleCloseCart={handleCloseCart}
+    />
+  );
+}
+{
+  /*code continues...*/
+}
 ```
 
 After completing these updates, our cart behaves the same but that state is now fully managed by the reducer.
 
-![animated screen capture highlighting isCartOpen as UI is manipulated](./assets/week-11/is-cart-open-state.gif)
+![animated screen capture highlighting isCartOpen as UI is manipulated](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-11/is-cart-open-state.gif)
 
 We are now left with 5 more `useStates` to refactor.
 
 ```javascript
-  const [cart, setCart] = useState([]);
-  const [isCartOpen, setIsCartOpen] = useState(false); //DONE
-  const [isCartSyncing, setIsCartSyncing] = useState(false);
-  const [cartError, setCartError] = useState('');
-  const [cartItemError, setCartItemError] = useState('');
+const [cart, setCart] = useState([]);
+const [isCartOpen, setIsCartOpen] = useState(false); //DONE
+const [isCartSyncing, setIsCartSyncing] = useState(false);
+const [cartError, setCartError] = useState('');
+const [cartItemError, setCartItemError] = useState('');
 ```
 
 Besides `cart`, each other state value update employs the same complexity as `isCartOpen`. We'll refactor these without discussion so we can then explore how we identify actions and refactor the state updating logic over to our reducer.
@@ -331,7 +344,7 @@ function CartReducer(state, action){
           ...state,
           isCartOpen: true,
       };
-  } 
+  }
 //code continues...
   case "update"
 
@@ -344,75 +357,75 @@ We can then go back to the codebase and replace the `setCart`s where we intend o
 //extract from App.jsx
 //...code
 const handleSyncCart = useCallback(
-    async (workingCart) => {
-      if (!user.id) {
-     //dispatch replaces setCart here
-        dispatch({ type: "update cart", cart: workingCart });
-        return;
-      }
-      dispatch({ type: "sync" });
-      const options = {
-        method: 'PATCH',
-        body: JSON.stringify({ cartItems: workingCart }),
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${user.token}`,
-        },
-      };
-      try {
-        const resp = await fetch(`${baseUrl}/cart`, options);
-        if (!resp.ok) {
-          console.log('resp not okay');
-          if (resp.status === 401) {
-            throw new Error('Not authorized. Please log in.');
-          }
-        }
-        const cartData = await resp.json();
-        if (cartData.error) {
-          throw new Error(cartData.error);
-        }
-        //dispatch replaces setCart here
-        dispatch({ type: "update cart", cart: cartData });
-      } catch (error) {
-        console.error(error);
-        dispatch({ type: "error" , error: error.message });
-      } finally {
-        dispatch({ type: "not syncing" });
-      }
-    },
-    [user.id, user.token, dispatch]
-  );
-//code continues...
-  async function handleAuthenticate(credentials) {
+  async (workingCart) => {
+    if (!user.id) {
+      //dispatch replaces setCart here
+      dispatch({ type: 'update cart', cart: workingCart });
+      return;
+    }
+    dispatch({ type: 'sync' });
     const options = {
-      method: 'POST',
-      body: JSON.stringify(credentials),
-      headers: { 'Content-Type': 'application/json' },
+      method: 'PATCH',
+      body: JSON.stringify({ cartItems: workingCart }),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${user.token}`,
+      },
     };
     try {
-      setIsAuthenticating(true);
-      const resp = await fetch(`${baseUrl}/auth/login`, options);
+      const resp = await fetch(`${baseUrl}/cart`, options);
       if (!resp.ok) {
+        console.log('resp not okay');
         if (resp.status === 401) {
-          setAuthError('email or password incorrect');
+          throw new Error('Not authorized. Please log in.');
         }
-        throw new Error(resp.status);
       }
-      const userData = await resp.json();
-      setUser({ ...userData.user, token: userData.token });
-      dispatch({
-        type: "update cart",
-        cart: userData.cartItems,
-      });
-      setAuthError('');
-      setIsAuthenticating(false);
-      setIsAuthDialogOpen(false);
+      const cartData = await resp.json();
+      if (cartData.error) {
+        throw new Error(cartData.error);
+      }
+      //dispatch replaces setCart here
+      dispatch({ type: 'update cart', cart: cartData });
     } catch (error) {
-      setIsAuthenticating(false);
-      console.log(error.message);
+      console.error(error);
+      dispatch({ type: 'error', error: error.message });
+    } finally {
+      dispatch({ type: 'not syncing' });
     }
+  },
+  [user.id, user.token, dispatch],
+);
+//code continues...
+async function handleAuthenticate(credentials) {
+  const options = {
+    method: 'POST',
+    body: JSON.stringify(credentials),
+    headers: { 'Content-Type': 'application/json' },
+  };
+  try {
+    setIsAuthenticating(true);
+    const resp = await fetch(`${baseUrl}/auth/login`, options);
+    if (!resp.ok) {
+      if (resp.status === 401) {
+        setAuthError('email or password incorrect');
+      }
+      throw new Error(resp.status);
+    }
+    const userData = await resp.json();
+    setUser({ ...userData.user, token: userData.token });
+    dispatch({
+      type: 'update cart',
+      cart: userData.cartItems,
+    });
+    setAuthError('');
+    setIsAuthenticating(false);
+    setIsAuthDialogOpen(false);
+  } catch (error) {
+    setIsAuthenticating(false);
+    console.log(error.message);
   }
-  //code continues...
+}
+//code continues...
 ```
 
 We then have to determine the logic for the "add item" action. The first challenge is that the logic filters through the inventory list to ensure the item exists before making a new cart item or incrementing the quantity on an existing cart item. Since our reducer exists independently from the App component, we need to include the inventory on the action object.
@@ -459,31 +472,41 @@ With this in mind, we can move over the logic and update any `inventory` referen
 Almost done! Now we have to back to the App component and change all `cart` references to `cartState.cart`. These are found as props given to the Header component and the Cart component:
 
 ```jsx
-{/*extract from App.jsx*/}
-{/*...code*/}
-      <Header
-        cart={cartState.cart}
-        handleOpenCart={() => dispatch({ type: "open" })}
-        handleOpenAuthDialog={handleOpenAuthDialog}
-        handleLogOut={handleLogOut}
-        user={user}
-      />
-       {/*...code...*/}
-        {cartState.isCartOpen && (
-          <Cart
-            cartError={cartState.error}
-            isCartSyncing={cartState.isCartSyncing}
-            cart={cartState.cart}
-            handleSyncCart={handleSyncCart}
-            handleCloseCart={handleCloseCart}
-          />
-        )}
-{/*code continues...*/}
+{
+  /*extract from App.jsx*/
+}
+{
+  /*...code*/
+}
+<Header
+  cart={cartState.cart}
+  handleOpenCart={() => dispatch({ type: 'open' })}
+  handleOpenAuthDialog={handleOpenAuthDialog}
+  handleLogOut={handleLogOut}
+  user={user}
+/>;
+{
+  /*...code...*/
+}
+{
+  cartState.isCartOpen && (
+    <Cart
+      cartError={cartState.error}
+      isCartSyncing={cartState.isCartSyncing}
+      cart={cartState.cart}
+      handleSyncCart={handleSyncCart}
+      handleCloseCart={handleCloseCart}
+    />
+  );
+}
+{
+  /*code continues...*/
+}
 ```
 
 After these changes, our cart behaves as it did previously, but all of its state is now managed by the reducer. Because the reducer, dispatch function and the action are so tightly coupled, the reducer function is probably one of the most complex things we have covered so far. While it is harder to employ, it is far easier to manage complex state this way than relying on numerous `useState`s and we also end up with a much more compact function.
 
-### Passing Data Using useContext
+### Passing Data Using useContext (WIP)
 
 Managing state and passing data between components is a fundamental aspect of building dynamic and interactive applications. React's `useContext` hook simplifies working with shared state across different parts of your application without the need for prop drilling. It allows us to centralize state logic which makes it easier to maintain and scale React applications.
 
@@ -503,6 +526,6 @@ Managing state and passing data between components is a fundamental aspect of bu
 - useContext described
   - allows us to communicate into a deeply nested component without the need to pass state and updaters down through props down the whole tree.
   - allows a top level component create a "context" (interrelated conditions in which the data exists) that any of its descendants can access. Restated:
-   1. component tells React that it has a state value and an updater that it wants to share with its descendants
-   2. React makes that data available without having requesting it up and down a chain of parent-child relationships. "prop drilling"
+  1. component tells React that it has a state value and an updater that it wants to share with its descendants
+  2. React makes that data available without having requesting it up and down a chain of parent-child relationships. "prop drilling"
 - useContext put into use
