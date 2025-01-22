@@ -1,0 +1,19 @@
+{
+  "name": "react-curriculum-v3",
+  "version": "0.0.1",
+  "description": "Intro to React v3",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"hello world\""
+  },
+  "keywords": [
+    "react",
+    "intro",
+    "curriculum"
+  ],
+  "author": "roy.e.mosby@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^3.4.2"
+  }
+}
