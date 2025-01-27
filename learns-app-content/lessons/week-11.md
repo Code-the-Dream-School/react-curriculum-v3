@@ -483,26 +483,281 @@ Almost done! Now we have to back to the App component and change all `cart` refe
 
 After these changes, our cart behaves as it did previously, but all of its state is now managed by the reducer. Because the reducer, dispatch function and the action are so tightly coupled, the reducer function is probably one of the most complex things we have covered so far. While it is harder to employ, it is far easier to manage complex state this way than relying on numerous `useState`s and we also end up with a much more compact function.
 
-### Passing Data Using useContext (WIP)
+### useContext
 
-Managing state and passing data between components is a fundamental aspect of building dynamic and interactive applications. React's `useContext` hook simplifies working with shared state across different parts of your application without the need for prop drilling. It allows us to centralize state logic which makes it easier to maintain and scale React applications.
+Managing state used by several components is a fundamental aspect of building interactive IUs. React's `useContext` hook simplifies the flow of shared state across deeply nested components. We'll refactor a demo app, named MultiCalc, to take advantage of `useContext`.
 
-- CTD-Swag doesn't have any deep state issues - we'll stick to a clean, minimal example.
-  - sibling components (li) placed in a ul component that do varying calculations (and also have a reset button) on an input provided in a form located in a parent component.
-  - Form has componentized inputs
+#### MultiCalc's State
 
-```terminal
+MultiCalc performs 4 pre-defined calculations on an operand that a user inputs:
 
-└── App
-    ├── Form
-    │   └── Input
-    └── Calculations
-  └── Calculation
+![Interface for MultiCalc](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-11/multicalc-interface.gif)
+
+Here is the app structure with state flow:
+
+```mermaid
+---
+title: MultiCalc Components With State
+---
+
+flowchart TD
+    A[App] <-- operand--> FW[FormWrapper]
+    A -- operand--> CW[CalculatorWrapper]
+    FW <-- operand--> F[Form]
+    CW -- operand--> Calc[Calculator]
+    Calc -- plus 1--> C1[Calculation 1]
+    Calc --cubed--> C2[Calculation 2]
+    Calc --times 3--> C3[Calculation 3]
+    Calc --square root--> C4[Calculation 4]
 ```
 
-- useContext described
-  - allows us to communicate into a deeply nested component without the need to pass state and updaters down through props down the whole tree.
-  - allows a top level component create a "context" (interrelated conditions in which the data exists) that any of its descendants can access. Restated:
-  1. component tells React that it has a state value and an updater that it wants to share with its descendants
-  2. React makes that data available without having requesting it up and down a chain of parent-child relationships. "prop drilling"
-- useContext put into use
+The `operand` state has been hoisted up to `App` because it needs to be available to `Form` and `Calculator`. `Form` is a controlled form so manages its working state based on `operand`. When a user hits the submit button, it calls `setOperand` and passes `Form`'s working state to update `operand`. On the other side of the component tree, the `Calculator` component consumes `operand` to calculate each of the results that are passed down to each `Calculation` component.
+
+#### The Problem
+
+We can see from the diagram above that there are two components, `FormWrapper` and `CalculatorWrapper`, that stand between `Form` and `Calculator`, and `App`. A look at these components' code reveals that `operand` and `setOperand` are being passed through without being read:
+
+```jsx
+{/*FormWrapper.jsx*/}
+import Form from './Form';
+
+function FormWrapper({ operand, setOperand }) {
+  return (
+    <>
+      <Form operand={operand} setOperand={setOperand} />
+      <hr />
+    </>
+  );
+}
+
+{/*code continues...*/}
+```
+
+```jsx
+{/*CalculatorWrapper*/}
+import Calculator from './Calculator';
+
+function CalculatorWrapper({ operand }) {
+  return (
+    <>
+      <h2>Calculations</h2>
+      <Calculator operand={operand} />
+    </>
+  );
+}
+
+export default CalculatorWrapper;
+
+{/*code continues...*/}
+```
+
+Not using props, other than to pass it to a child component, is called [props drilling](https://react.dev/learn/passing-data-deeply-with-context#the-problem-with-passing-props). Excessive prop drilling can lead to harder to write components and difficulty while troubleshooting state.
+
+#### Context to the Rescue
+
+When we employ `useContext`, we are accessing a "context" shared across a portion of the component tree. Context refers to a state that can be shared among multiple components in a React application. This allows data to be passed directly from an ancestor component through the component tree without having to explicitly pass props at every level.
+
+Like the `useReducer` hook we have some additional set up to perform before we can use this hook. Before doing so, lets look at the three items that are needed to set up and use context.
+
+1. `createContext`
+2. `context` object
+3. `useContext`
+
+#### `createContext`
+
+`createContext` must be called outside of a component to create the context object. The function takes an optional `defaultValue` that can be of any type - string, number, object, etc. This acts is a fallback value for the context where there is no matching provider (more on "Provider next...) anywhere in a component's tree. It is a best practice to call it `null` rather than leave the argument empty.
+
+Invoking `createContext` outputs a `context` object. This object is exported so it can be used in other components. We can create the context in a component's file but in larger applications, context usually created in a dedicated `/context` directory, similar to how reducers have a `/reducers` directory. The example below shows how `createContext` is used to create a context, `ExampleContext`.
+
+```jsx
+import { createContext } from 'react';
+
+export const ExampleContext = createContext(null);
+```
+
+#### `context` Object
+
+This object represents the context that will be used. This object has two properties that we work with: A `Provider` component and a `Consumer` component. The `Provider` component is used in a parent component to set the value for the context that is shared with its children. `Provider` takes a `value` prop and children. With this Provider in place, the context value is set to 42 which is "globally available" to any component nested within it regardless of how far down the tree.
+
+```JSX
+import {createContext} from 'react';
+import {ChildComponent} from './ChildComponent'
+
+export const ExampleContext = createContext(0);
+
+function App(){
+    return(
+        <ExampleContext.Provider value={42} >
+            <ChildComponent />
+        </ExampleContext.Provider>
+    )
+}
+```
+
+The context object's other component `Consumer` provides a different approach to working with `context` but is rarely ever used so we will not be covering it.
+
+#### `useContext`
+
+With `useContext`, ancestor components can access and update this shared global state. The hook takes in the the context that was created by `createContext` and returns the context's `value` when called.
+
+```jsx
+import {useContext} from `react`;
+import {ExampleContext} from `./ExampleComponent`;
+
+function GreatGrandChildComponent(){
+
+const exampleValue = useContext(ExampleContext);
+
+return(
+    <div>
+        <p>{exampleValue}</p> {/* 42 until parent updates state*/}
+    </div>
+)
+}
+```
+
+With those parts out of the way, [React's documentation suggests](https://react.dev/learn/passing-data-deeply-with-context) that we think about implementing context in three steps:
+
+1. **Create** a context object
+2. **Use** the context with `useContext` to replace props that were passed down from component managing state
+3. **Provide** context wrapping children with Provider and passing a `value` props that the parent still manages
+
+### `useContext` in Action
+
+#### Create a Context
+
+For MultiCalc, we'll create an `OperandContext` above the App component. We'll call it with `null` since the context does not have any meaningful value outside of its use to manage `operand` state.
+
+```jsx
+{/*extract from App.jsx*/}
+{/*...code*/}
+export const OperandContext = createContext(null);
+
+function App() {
+    const [operand, setOperand] = useState(0);
+{/*code continues...*/}
+```
+
+``
+If ESLint is configured, our IDE will warn us that Vite's fast-refresh doesn't work with component files that include named exports. We can ignore that yellow squiggle. This is a performance consideration that should be addressed in a real-world project but we will not worry about it here.
+
+![ESLint warning that named exports prevent hot-reload](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week11/eslint-fast-refresh-warning.png)
+
+#### Use the Context
+
+The Form component will need `operand` and `setOperand`. We start by importing `OperandContext` from App.jsx and calling `useContext` with `OperandContext` as the argument. We know we are going to place both the state and state updater function into context's value so can use destructuring when assigning our values. `const { operand, setOperand } = useContext(OperandContext)`. We can then treat these values as drop-in replacements for the props that were on the component and remove them from `Form` and `FormWrapper`.
+
+```jsx
+{/*extract from Form.jsx*/}
+import { useState, useEffect, useContext } from 'react';
+import { OperandContext } from './App';
+
+// props { operand, setOperand } have been removed
+function Form() {
+
+    const { operand, setOperand } = useContext(OperandContext);
+    const [workingOperand, setWorkingOperand] = useState(0);
+
+    useEffect(() => {
+        setWorkingOperand(operand);
+    }, [operand]);
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        if (workingOperand != '') {
+          setOperand(parseFloat(workingOperand));
+        }
+    }
+    return (
+        <form>
+            <label htmlFor="value">Calculate with: </label>
+            <input
+            type="number"
+            id="value"
+            value={workingOperand}
+            onChange={(e) => setWorkingOperand(e.target.value)}
+            />
+            <button onClick={handleSubmit} disabled={workingOperand === ''}>
+                Submit
+            </button>
+        </form>
+    );
+}
+
+export default Form;
+```
+
+We can also remove the props from `<FormWrapper />`.
+
+```jsx
+{/*extract FormWrapper.jsx*/}
+import Form from './Form';
+
+//props no longer needed!
+function FormWrapper() {
+    return (
+        <>
+            <Form />
+            <hr />
+        </>
+    );
+}
+export default FormWrapper;
+```
+
+#### Provide the Context
+
+At this point, the form will not work until we provide the context. We place an instance of `OperandContext.Provider` in App's markup then nest the children components in between its tags. We finally pass the state App is managing to the provider's `value` props. Conventions on how to form the context's value vary but be sure to keep it consistent across a codebase.
+
+```jsx
+{/*extract from App.jsx*/}
+{/*...code*/}
+function App() {
+    const [operand, setOperand] = useState(0);
+    
+    return (
+        <main>
+            <h1>MultiCalc</h1>
+            <OperandContext.Provider value={{ operand, setOperand }}>
+                <FormWrapper />
+            </OperandContext.Provider>
+            <CalculatorWrapper operand={operand} />
+        </main>
+    );
+}
+{/*code continues...*/}
+```
+
+Now that the form works again, we can go through the same steps to use context in the `Calculator` component. We import the context from App and then invoke `useContext` with it. We don't need `setOperand` so we only destructure out `operand` from the `useContext`'s return value. We can then remove the props from it and it's parent component, `CalculatorWrapper`.
+
+```jsx
+{/*extract from Calculator.jsx*/}
+{/*...code*/}
+function Calculator() {
+    const { operand } = useContext(OperandContext);
+{/*code continues...*/}
+```
+
+```jsx
+{/*CalculatorWrapper.jsx*/}
+import Calculator from './Calculator';
+
+function CalculatorWrapper() {
+return (
+    <>
+        <h2>Calculations</h2>
+        <Calculator />
+    </>
+);
+}
+
+export default CalculatorWrapper;
+```
+
+MultiCalc is now working with the context provided in App. React's developer tools reflect this change, showing `Context.Provider` in the component hierarchy.
+
+![React dev tools showing the provider, its value, and children](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week11/devtools-context-provider.png)
+
+The dev tools also show that Form and Calculator are both using the `useContext` hook.
+
+![React dev tools showing the provider, its value, and children](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week11/devtools-form-component.png)
