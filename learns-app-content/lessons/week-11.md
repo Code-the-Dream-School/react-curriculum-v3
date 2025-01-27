@@ -641,7 +641,7 @@ function App() {
 ``
 If ESLint is configured, our IDE will warn us that Vite's fast-refresh doesn't work with component files that include named exports. We can ignore that yellow squiggle. This is a performance consideration that should be addressed in a real-world project but we will not worry about it here.
 
-![ESLint warning that named exports prevent hot-reload](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week11/eslint-fast-refresh-warning.png)
+![ESLint warning that named exports prevent hot-reload](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-11/eslint-fast-refresh-warning.png)
 
 #### Use the Context
 
@@ -756,8 +756,8 @@ export default CalculatorWrapper;
 
 MultiCalc is now working with the context provided in App. React's developer tools reflect this change, showing `Context.Provider` in the component hierarchy.
 
-![React dev tools showing the provider, its value, and children](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week11/devtools-context-provider.png)
+![React dev tools showing the provider, its value, and children](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-11/devtools-context-provider.png)
 
 The dev tools also show that Form and Calculator are both using the `useContext` hook.
 
-![React dev tools showing the provider, its value, and children](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week11/devtools-form-component.png)
+![React dev tools showing the provider, its value, and children](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-11/devtools-form-component.png)
