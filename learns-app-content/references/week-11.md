@@ -10,3 +10,4 @@
 
 - [useContext (React docs)](https://react.dev/reference/react/useContext)
 - [A Guide to React Context and useContext() Hook ( Dmitri Pavlutin)](https://dmitripavlutin.com/react-context-and-usecontext/)
+- [React Architecture: The React Provider Pattern | Morten Barklund](https://mortenbarklund.com/blog/react-architecture-provider-pattern/)
