@@ -5,7 +5,6 @@
 - Weekly Lesson Structure
 - Weekly Assignments
 - Final Project
-- Practicum and CTD Learns Apprenticeship (optional)
 
 ### Lesson Objectives
 

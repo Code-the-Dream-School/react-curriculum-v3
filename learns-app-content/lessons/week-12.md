@@ -348,7 +348,9 @@ Our Phonebook app now behaves like it did previously but now we are fetching the
 
 ![Paginated data loaded from API](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-12/server-pagination-demo.gif)
 
-### Routing and SPAs
+### React Router and Routing
+
+#### Navigating SPAs vs Traditional Websites
 
 React SPAs differ from traditional websites in terms of routing and navigation. Each page of a traditional website has its own HTML file and associated URL. Navigating between pages involves making a request to the server to fetch a new HTML document. This process is managed by the browser, which updates the URL and maintains a [history stack](https://developer.mozilla.org/en-US/docs/Web/API/History_API) that users to use the back and forward buttons to navigate through their browsing history.
 

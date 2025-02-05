@@ -1,7 +1,7 @@
 ### Topics Covered
 
 - Sorting
-- Searching
+- Filtering
 
 ### Lesson Objectives
 

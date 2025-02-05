@@ -13,7 +13,7 @@ By the end of this lesson, we will:
 - implement caching on search results
 - throttle fetch requests to meet API constraints
 
-#### Objective 2: useMemo
+#### Objective 2: useMemo and useCallback
 
 - define useMemo and useCallback
 - demonstrate how each can be used to improve an app's performance

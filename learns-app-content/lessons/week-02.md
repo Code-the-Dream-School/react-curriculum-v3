@@ -216,8 +216,6 @@ To keep the transpilation process simple and performant, we must follow some rul
   - This element can contain one or more child elements.
   - React includes a special component `Fragment` or written in shorthand as `<></>` that acts as a wrapper element for sibling elements. It gets stripped out during render time.
 
-JSX
-
 ```jsx
 {
   /*React's fragment is easy to identify and saves a lot of space in the code*/
@@ -234,8 +232,6 @@ JSX
 
 - All tags must be terminated. They either have to have an accompanying closing tag (`<div></div>`) or be self-closing (`<img/>`).
 
-HTML
-
 ```html
 <!-- valid HTML but INVALID JSX -->
 <!-- prettier-ignore -->
@@ -243,8 +239,6 @@ HTML
 <!-- prettier-ignore -->
 <input val="">
 ```
-
-JSX
 
 ```jsx
 <>
@@ -261,8 +255,6 @@ JSX
   - don't use single line JS comments, eg. `//some comment`
   - if a code block has a return value, it should be a valid React element
   - code blocks can be nested in other code block return statements
-
-JSX
 
 ```jsx
 {
@@ -290,8 +282,6 @@ JSX
 ```
 
 - Don't forget to wrap objects in additional `{}`!
-
-JSX
 
 ```jsx
 {
