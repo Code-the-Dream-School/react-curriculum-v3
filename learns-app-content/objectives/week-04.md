@@ -18,7 +18,7 @@ By the end of this lesson, we will:
 - Examine the details of passing handler props between components in React.
 - Explain the purpose of the event object and how it relates to DOM events
 - Examine the properties and methods found on a React event object
-- Select the appropriate handler props to capture event data and manage event propagation
+- Manage event propagation
 
 #### Objective 3: Updating State
 

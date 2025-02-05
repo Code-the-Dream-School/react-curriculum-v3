@@ -19,12 +19,12 @@ By the end of this lesson, we will:
 - Use the CLI to create a new project using Vite.js and its React project template
 - List the dependencies and scripts in package.json.
 - Use the CLI to install Vite.js, React, and dependencies
+- Demonstrate how to run installed app on a local development server
+- Describe the development workflow using the development server
 
 #### Objective 3: Project Walk-Through
 
 - Describe the role of Vite.js as a development server for React projects.
-- Demonstrate how to run installed app on a local development server
-- Describe the development workflow using the development server
 
 #### Objective 4 (Stretch Goal): Improving the Development Environment
 
