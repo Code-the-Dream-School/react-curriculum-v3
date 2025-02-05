@@ -357,23 +357,23 @@ function App() {
 export default App;
 ```
 
-#### Common Component Props
+### Common Component Props
 
 Along with the props that we can define on our own, React's common components feature numerous [built-in props](https://react.dev/reference/react-dom/components/common) that are worth exploring. Here are a few props highlights:
 
-##### Props for All Built-in Components
+#### Props for All Built-in Components
 
 - **children**: accepts a React node. Valid React nodes include custom or built-in components, array of React nodes, empty node (null, undefined), string, number, or a portal[^portal]. We'll cover children in more detail below.
 - **ref**: takes a reference object from useRef (covered in [[Code The Dream/Intro to React V3/Curriculum/Week-04|week 4]]) or createRef, or a callback that gets called when React renders the element.
 - **style**: takes an object defining CSS styles in property name/ property value pairs. All property names must be written in camelCase. Eg. `background-color` is written as `backgroundColor`. More in [[Code The Dream/Intro to React V3/Curriculum/Week-10#|week 10]].
 
-##### Props for Standard DOM Components
+#### Props for Standard DOM Components
 
 - **className**: String. Replacement for html attribute `class`. Multiple classes can be added by using spaces between class names.
 - **htmlFor**: String. Primarily for `label` or `output` and is a replacement for html attribute `for`.
 - **on\* - (onBlur, onClick, onFocus, etc.)**: Takes a callback function. Event handler props are named after a specific event that they listen for on the element where they are used. More in [[Code The Dream/Intro to React V3/Curriculum/Week-04|week 4]]
 
-##### Props for DOM Components that Accept User Input
+#### Props for DOM Components that Accept User Input
 
 > [!note]
 > These include `<input>`,`<textarea>`, etc.
@@ -383,7 +383,7 @@ Along with the props that we can define on our own, React's common components fe
 - **value**: String: the text contents inside the element.
 - **onChange**: Accepts a callback function. Event handler function that fires when an update is made by the user to the element's value.
 
-##### Children Props - A Closer Look
+#### Children Props - A Closer Look
 
 We are able to use a `children` prop to pass React elements into our custom components. Rather than assign `children` a value (`children={someValue}`), they are placed between the opening and closing tags for the element. For example, we may be trying to promote a specific item in our store and want to appear on the top, regardless of filters or sort order. We define that item in the App component and nest it inside `<ProductList></ProductList>` tags.
 

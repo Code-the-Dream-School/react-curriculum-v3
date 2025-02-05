@@ -590,7 +590,7 @@ End-to-end (E2E) testing in React involves testing the application's flow from s
 
 Of all the testing approaches, E2E tends to be the most complex to set up and maintain. The test suite needs to replicate user behavior so often requires a custom browser to emulate user interactions and capture event details from events that fire in the UI. Many if these interactions visually play out while these tests run so take a long time for a suite of tests to complete. Even if it took only 10 seconds to complete a test, it could take 2 and a half minutes to execute a suite of 15 tests. These type of tests also need to be rewritten as features change or a UI element is updated.
 
-### Unit Tests for React Components
+#### Unit Tests for React Components
 
 Unit testing is a good place to start when introducing tests. Using Vite, it does not take long to install testing software and get started with unit testing. Integration and E2E tests are just as important but are much more complex to manage. This complexity extends to setting up each of the tests and tend to be highly tailored to the codebase where they are used. Because of time limitations in this course, we will focus only on unit testing.
 
@@ -628,7 +628,7 @@ There are a few common terms that need to be defined as they relate to our testi
 
 **Test suite** is a collection of related tests. Vitest uses the `describe` function to group test cases together. If test cases are written outside of a test suite, they are implicitly grouped together in a top-level suite. All test cases in a suite share a "context" which may include utilities and fixtures that we can define to guarantee consistent tests.
 
-### Unit and Integration Testing Put into Practice
+#### Unit and Integration Testing Put into Practice
 
 #### Installation
 

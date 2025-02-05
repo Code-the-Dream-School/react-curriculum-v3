@@ -270,7 +270,7 @@ We can then update the JSX with the new button. `fetchDog` can be passed to the 
 
 ![clicking button loads another dog image](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-07/another.gif)
 
-### Loading CTD-Swag with Product Data from an API
+#### Loading CTD-Swag with Product Data from an API
 
 Let's get back to CTD and load the product list in from the API.
 
@@ -383,9 +383,9 @@ With the the ability to save data to a server, it's important to remember that s
 4. **Local Notifications:** Displaying temporary notifications or alerts within the app for user feedback.
 5. **Client-Side Calculations:** Intermediate results or calculations performed in the UI for dynamic updates or real-time feedback.
 
-### Planning User and Cart Features in CTD-Swag
+#### Planning User and Cart Features in CTD-Swag
 
-#### Identify Development Tasks
+##### Identify Development Tasks
 
 > [!note]
 > Most of the time this sort of information is brainstormed as a team so you'll rarely have to do this on your own as a junior developer.
@@ -425,9 +425,9 @@ After learning about asynchronous operations and how to synchronize application 
   - UI rolls local state back to the previous app state before user edits (this is the same way the current cancel button works)
   - display error message
 
-#### Matching Actions to UI Updating Strategy
+##### Matching Actions to UI Updating Strategy
 
-##### Pessimistic
+###### Pessimistic
 
 - **An existing user needs to be able to sign in.**
 - **A new user needs to be able to sign up for an account.**
@@ -435,17 +435,17 @@ After learning about asynchronous operations and how to synchronize application 
 
 All of the data changes from the above tasks can be considered major operations. A user record is needed to save user info to the server so it must exist before they are able to log in. For a user to log in or resume a previous session, their user information and cart contents must be loaded on the front end before populating UI elements. The cart edits also need to be confirmed before updating the interface. Since this is done through a form, the user already expects a save confirmation from the back end before changes are finalized. For these features to behave in a desired manner where we are emphasizing data accuracy, we will take a pessimistic approach.
 
-##### Optimistic
+###### Optimistic
 
 **A logged in user's cart items should be saved to their account**
 
 We want to avoid making a user having to wait to take further actions after adding an item to their cart. Delaying a user to make sure the item has been added to the stored cart is a detriment to the shopping experience. The increased wait time a user must endure decreases the likeliness that they will add more items to their cart. This is definitely not good for the user or the store! To keep the shopping experience pleasant, an item it should immediately appear in the cart while the app is synchronizes cart information in the background. If the API fails for any reason, we will need to revert the state changes. An emphasis on user experience indicates we should adopt an optimistic strategy for this feature. Luckily, our state recovery mechanism is already implemented!
 
-### Implementing User and Cart Features
+##### Implementing User and Cart Features
 
 We are now ready to expand the functionality of CTD Swag. The discussion will focus on state updates and API synchronization using fetch and how they relate to intermediate UI state. In week 11, we'll cover some more advanced state management techniques that will help simplify UI state updates. For now, we will stick with the `useState` hook.
 
-#### Log in an Existing User
+##### Log in an Existing User
 
 For this task we need to create a form that accepts an email and password. Since we don't want to clutter the interface any further, we will add a Log In button beside the cart that toggles the visibility of a dialog containing the auth form. We will use a state variable, `isAuthFormShown` to control this dialog's visibility.
 
@@ -651,7 +651,7 @@ async function handleAuthenticate(credentials) {
 //code continues...
 ```
 
-##### Updating Button and Adding Welcome Message
+###### Updating Button and Adding Welcome Message
 
 We pass the Header additional props:
 
@@ -709,7 +709,7 @@ Here is the updated UI functionality for logging in:
 
 ![cart loads at login](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-07/login-cart-loaded2.gif)
 
-#### Sign Up New User
+##### Sign Up New User
 
 Signing up a new user uses the same pessimistic UI strategy that logging in employs. Since we already saw an example of a pessimistic approach, we'll just summarize the changes for signing up a new user. We first added a register button beside login.
 
@@ -723,7 +723,7 @@ We then create a new POST fetch request to the `/auth/register` endpoint. If all
 
 ![user registers and logs in](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-07/register-form.gif)
 
-#### Sync Cart Form Update
+###### Sync Cart Form Update
 
 Our API's `/cart` endpoint incudes a PATCH method. Our response include the auth token in the Authorization header and a stringified version of the workingCart state value. We'll adapt the handler function from the existing confirm update button to make our request. On a successful response, we then set the current `cart` value that propagates to all components dependent on that data.
 
@@ -811,7 +811,7 @@ And here is the final cart behavior!
 
 Note how pessimistic strategy of UI updates doesn't make the experience _bad_ or _slow_ as long as it's applied to major operations. In the state updates that we have done so far, making the user wait for the back end has only a part of confirmation tasks. In the last feature planned, making the user to wait while adding items to the cart would be detrimental to the shopping experience.
 
-#### Add Items (With an optimistic UI strategy)
+###### Add Items (With an optimistic UI strategy)
 
 Our final feature saves a logged in user's shopping cart items to their account. The optimistic approach applies changes to the UI and then saves the change to the backend. Depending on our needs, we either ignore successful responses back or swap out a placeholder value with the API response data. If there is an error, we will need to recover from it. For this feature, we'll ignore successful responses and, if there's an error, de-increment the cart item's quantity and then show an error message.
 

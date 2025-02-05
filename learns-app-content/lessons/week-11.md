@@ -35,7 +35,7 @@ All of the state update functions listed above are referenced at least once some
 
 `setIsAuthenticating` is found only in two event handlers, but but state update functions are also used in `useEffect`s and passed in props to child components. You can see how it can be easy to lose track of state!
 
-### The Reducer Pattern
+#### The Reducer Pattern
 
 The reducer pattern changes our approach to coordinating state updates in complex applications. In a broader software engineering context, a reducer refers to a design pattern that focuses on updating data by communicating events to a centralized function that makes all of t.
 
@@ -105,7 +105,7 @@ Up until now, we have focused on making state updates by processing events insid
 
 When working with reducers, it helps to shift perspectives from "what event just happened" to "what a user just did". This is referred to as [inversion of control](https://en.wikipedia.org/wiki/Inversion_of_control). Continuing with the example above, rather than thinking **"the user clicked on the 'Add to Cart' button on a product card representing the bucket hat"**, our new thought process would be **"the user added a bucket hat to their cart"**. This statement is much simpler than the first. It reflects that the component only needs to know that a user performed an action. The reducer function, which exists independently of the component, is responsible for adding the bucket hat to the cart state. Our event handlers' only responsibility for state updates is to communicate the details of the action to the reducer. We'll continue to explore the reducer pattern but need to learn a little about the `useReducer` hook first.
 
-### useReducer
+### Manage State with useReducer
 
 The `useReducer` hook adapts the reducer pattern for use in React applications. Just like other hooks, it must be called at the top level of the component. React attempts to batch state changes so that if several happen in succession, they are all processed during the same render cycle. React also compares the reducer's output to its previous state - if nothing changes, it does not initiate a re-render.
 
@@ -483,7 +483,7 @@ Almost done! Now we have to back to the App component and change all `cart` refe
 
 After these changes, our cart behaves as it did previously, but all of its state is now managed by the reducer. Because the reducer, dispatch function and the action are so tightly coupled, the reducer function is probably one of the most complex things we have covered so far. While it is harder to employ, it is far easier to manage complex state this way than relying on numerous `useState`s and we also end up with a much more compact function.
 
-### useContext
+### Passing Data Using useContext
 
 Managing state used by several components is a fundamental aspect of building interactive IUs. React's `useContext` hook simplifies the flow of shared state across deeply nested components. We'll refactor a demo app, named MultiCalc, to take advantage of `useContext`.
 
@@ -622,9 +622,9 @@ With those parts out of the way, [React's documentation suggests](https://react.
 2. **Use** the context with `useContext` to replace props that were passed down from component managing state
 3. **Provide** context wrapping children with Provider and passing a `value` props that the parent still manages
 
-### `useContext` in Action
+#### `useContext` in Action
 
-#### Create a Context
+##### Create a Context
 
 For MultiCalc, we'll create an `OperandContext` above the App component. We'll call it with `null` since the context does not have any meaningful value outside of its use to manage `operand` state.
 
@@ -643,7 +643,7 @@ If ESLint is configured, our IDE will warn us that Vite's fast-refresh doesn't w
 
 ![ESLint warning that named exports prevent hot-reload](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-11/eslint-fast-refresh-warning.png)
 
-#### Use the Context
+##### Use the Context
 
 The Form component will need `operand` and `setOperand`. We start by importing `OperandContext` from App.jsx and calling `useContext` with `OperandContext` as the argument. We know we are going to place both the state and state updater function into context's value so can use destructuring when assigning our values. `const { operand, setOperand } = useContext(OperandContext)`. We can then treat these values as drop-in replacements for the props that were on the component and remove them from `Form` and `FormWrapper`.
 
@@ -705,7 +705,7 @@ function FormWrapper() {
 export default FormWrapper;
 ```
 
-#### Provide the Context
+##### Provide the Context
 
 At this point, the form will not work until we provide the context. We place an instance of `OperandContext.Provider` in App's markup then nest the children components in between its tags. We finally pass the state App is managing to the provider's `value` props. Conventions on how to form the context's value vary but be sure to keep it consistent across a codebase.
 
