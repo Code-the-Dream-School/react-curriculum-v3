@@ -370,7 +370,7 @@ React provides a great deal of flexibility when it comes to composing handler pr
 function EmailInput({ setEmail }) {
   const emailInput = useRef();
 
-  function handleSubmit() {
+  function handleSubmit(event) {
     //prevents page refresh
     event.preventDefault();
     const lowerCaseEmail = emailInput.current.value.toLowerCase();
