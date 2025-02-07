@@ -553,7 +553,7 @@ Unit tests verify the behavior of a component or portion of code in isolation to
 - **Rendering Test:** Ensure that the component renders without crashing and contains the expected UI elements.
 - **Props Test:** Verify that the component correctly handles different prop values, including default props, required props, and prop changes.
 - **Conditional Rendering Test:** Test that the component correctly renders different UI elements based on conditional logic or state values.
-- **Event Handling Test:** Validate that event handlers trigger the expected actions or state changes when corresponding events occur.
+- **Event Handling Test:** Validate that event listeners trigger the expected actions or state changes when corresponding events occur.
 - **Error Boundary Test:** Test error boundary components to ensure they catch and handle errors gracefully without crashing the entire application.
 - **Accessibility Test:** Validate that components meet accessibility requirements by testing for proper keyboard navigation, ARIA attributes, and screen reader compatibility.
 

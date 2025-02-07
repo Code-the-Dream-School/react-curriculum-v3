@@ -371,7 +371,7 @@ Along with the props that we can define on our own, React's common components fe
 
 - **className**: String. Replacement for html attribute `class`. Multiple classes can be added by using spaces between class names.
 - **htmlFor**: String. Primarily for `label` or `output` and is a replacement for html attribute `for`.
-- **on\* - (onBlur, onClick, onFocus, etc.)**: Takes a callback function. Event handler props are named after a specific event that they listen for on the element where they are used. More in [[Code The Dream/Intro to React V3/Curriculum/Week-04|week 4]]
+- **on\* - (onBlur, onClick, onFocus, etc.)**: Takes a callback function. Event listener props are named after a specific event that they listen for on the element where they are used. More in [[Code The Dream/Intro to React V3/Curriculum/Week-04|week 4]]
 
 #### Props for DOM Components that Accept User Input
 
@@ -381,7 +381,7 @@ Along with the props that we can define on our own, React's common components fe
 
 - **disabled**: Boolean. Prevents a user from interacting with element when true.
 - **value**: String: the text contents inside the element.
-- **onChange**: Accepts a callback function. Event handler function that fires when an update is made by the user to the element's value.
+- **onChange**: Accepts a callback function. Event listener function that fires when an update is made by the user to the element's value.
 
 #### Children Props - A Closer Look
 

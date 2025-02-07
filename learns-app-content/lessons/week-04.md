@@ -339,7 +339,7 @@ Browsers emit objects called events that signal when things happen on a web page
 [React's documentation](https://react.dev/reference/react-dom/components/common#react-event-object) includes a full list of common properties and methods on the synthetic event. A few are worth mentioning because we will see them frequently:
 
 - properties
-  - **`currentTarget`**: DOM node where the event handler has been is attached.
+  - **`currentTarget`**: DOM node where the event listener has been is attached.
   - **`target`**: DOM node where event was triggered - this could be anywhere in the tree at or below the Component that is reading this property due to [event bubbling](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Event_bubbling).
 - methods
   - **`preventDefault()`**: Prevents the default browser action on the event. eg: preventing a page refresh from a form submission.
