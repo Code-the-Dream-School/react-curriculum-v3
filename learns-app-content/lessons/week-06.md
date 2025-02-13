@@ -245,27 +245,27 @@ Answers for each of these questions help us determine how to group aspects of th
 .
 ├── node_modules/
 ├── public/
- └── .gitkeep
+│   └── .gitkeep
 ├── src/
-    ├── assets/
-     ├── fonts/
-     ├── icons/
-     ├── catalog.json
-     └── product images
-    ├── features/
-     ├── ProductList/
-   ├── ProductList.jsx
-   └── ProductCard.jsx
-     └── Cart/
-   ├── Cart.jsx
-         └── CartItem.jsx (new component)
-    ├── services/
-     └── .gitkeep
- ├── shared/
-     └── .gitkeep
-    └── layout/
-     ├── Footer.jsx (new component)
-     └── Header.jsx
+│   ├── assets/
+│   ├── fonts/
+│   ├── icons/
+│   ├── catalog.json
+│   └── product images
+├── features/
+│   ├── ProductList/
+│   ├── ProductList.jsx
+│   └── ProductCard.jsx
+│       └── Cart/
+│           ├── Cart.jsx
+│           └── CartItem.jsx (new component)
+├── services/
+│    └── .gitkeep
+├── shared/
+│   └── .gitkeep
+│   └── layout/
+│   ├── Footer.jsx (new component)
+│   └── Header.jsx
 ├── .eslint.cjs
 ├── .gitignore
 ├── .prettierignore
