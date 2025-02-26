@@ -84,11 +84,11 @@ Take some time to look over the documentation for Airtable. As you read it over,
 ## using backslash
 
 curl "https://api.airtable.com/v0/app8c6VR6IQ26pgKP/Todos?maxRecords=3&view=Grid%20view" \
-  -H "Authorization: Bearer pat7u6w6xAjuG0TM6.a6c12a4e434e7bc00555d3d1d15543ff206a229f6a67c3ae514bb9e32b5307d5"
+  -H "Authorization: Bearer super_secret_api_key"
 
 ## without backslash and new line, it's harder to read the command
 
-curl "https://api.airtable.com/v0/app8c6VR6IQ26pgKP/Todos?maxRecords=3&view=Grid%20view" -H "Authorization: Bearer pat7u6w6xAjuG0TM6.a6c12a4e434e7bc00555d3d1d15543ff206a229f6a67c3ae514bb9e32b5307d5"
+curl "https://api.airtable.com/v0/app8c6VR6IQ26pgKP/Todos?maxRecords=3&view=Grid%20view" -H "Authorization: Bearer super_secret_api_key"
 ```
 
 ### Instructions Part 2 : Load Todos from Airtable
