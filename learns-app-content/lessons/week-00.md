@@ -1,3 +1,5 @@
+# Class Information
+
 ## Discussion Topics
 
 ### What You'll Get Out of this Course
