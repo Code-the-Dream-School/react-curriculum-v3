@@ -529,7 +529,7 @@ Here are the relevant console outputs so that we can determine how to integrate 
 Object {
  cartItems: Array [ {…}, {…} ],
  message: "Login successful",
- token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTksImlhdCI6MTczNTE1MTQ5MiwiZXhwIjoxNzM1NzU2MjkyfQ.vVSO53L3Ow8D3TwJcQByB2tGuMqkPP0j4ITFK_yqP30";
+ token: "<<secret-token-string>>";
  user: Object { id: 19, firstName: "First", lastName: "Last", … };
  // continued...
 ​}
