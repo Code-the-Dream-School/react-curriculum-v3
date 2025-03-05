@@ -2,20 +2,20 @@
 name: Curriculum Errors Report
 about: Create a report to help us improve
 title: Curriculum Error
-labels: ''
+labels: 'correction'
 assignees: ''
 
 ---
 
-## Describe the bug
+## Describe the error
 
 A clear and concise description of the error (eg: typo, incorrect information, missing link, etc.)
 
-# Location
+## Location
 
-- Week#: 
+- Week#:
 - Section(choose one): Learning Objectives, Lesson Materials/Discussion Topics, or Assignments
-- Sub-heading: 
+- Sub-heading:
 
 ## Proposed correction
 
