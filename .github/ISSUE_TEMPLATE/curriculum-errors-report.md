@@ -1,5 +1,5 @@
 ---
-name: Curriculum Error Report
+name: Curriculum Errors Report
 about: Create a report to help us improve
 title: Curriculum Error
 labels: ''
