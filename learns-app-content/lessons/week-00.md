@@ -60,15 +60,15 @@ The introduction will give you information about what you're going to learn that
 
 #### 2. Discussion
 
-In the discussion portion of each weekly lesson, we will explore each of the listed topics in depth. We will learn key techniques and best practices that developers employ while working with the topics presented. Many coding examples are from another project we'll watch come together: CTD's new eCommerce Store : CTD Swag[^1]. No coding for that project is required from you, but if you're interested, a repo for this project can be found here: <!--PLACEHOLDER-->
+In the discussion portion of each weekly lesson, we will explore each of the listed topics in depth. We will learn key techniques and best practices that developers employ while working with the topics presented. Many coding examples are from another project we'll watch come together: CTD's new eCommerce Store : CTD Swag[^1]. No coding for that project is required from you, but if you're interested, a repo for this project can be [found here](https://github.com/royemosby/ctd-swag).
 
 #### 3. Weekly Assignment Instructions
 
-Most of our weekly assignments will involve developing a to-do application. A demo of the app can be found here: <!--PLACEHOLDER-->. Each week you will apply the lesson materials to develop the to-do app until it is complete, functional, and is worthy of a place in your portfolio.
+Most of our weekly assignments will involve developing a to-do application. Each week you will apply the lesson materials to develop the to-do app until it is complete, functional, and is worthy of a place in your portfolio.
 
 The instructions will provide enough details to code out the week's assignment but you will also be given certain tasks to figure out how to accomplish on your own. Balancing written instruction with individual problem solving keeps the course reasonably challenging and a lot more interesting than a list of things to type into your code. Professional developers are expected to engage in problem solving and research while doing their work. Some tasks you will be responsible for may be challenging but are designed to be reasonable for a junior developer to undertake.
 
-Once completed with the weekly lesson instructions, you'll submit a PR of the week's code changes using an assignment submission form linked at the the "Instructions" section. A step-by-step of how to open a PR can be found here: <!--PLACEHOLDER-->. The assignment submission form also includes open-ended mindset questions that will help you start to think like a professional developers.
+Once completed with the weekly lesson instructions, you'll submit a PR of the week's code changes using an assignment submission form linked at the the "Instructions" section. A step-by-step of how to open a PR can be [found here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request). The assignment submission form also includes open-ended mindset questions that will help you start to think like a professional developers.
 
 A reviewer will look at the PR to approve it or recommend changes. You'll be expected to make any requested changes before starting the next lesson. If you have questions about the review or need any clarifications, use the conversation tools on the PR page and/or Slack to talk with your reviewer. They are there to help you out!
 
@@ -78,7 +78,7 @@ A final note: there will be a few weeks where you will work with other repos but
 
 The curriculum links to resources in each lesson but these can be difficult to find when scanning through paragraphs of text. Every weekly lesson's page ends with a section that re-lists all of these links and include other useful resources.
 
-We hope that you find the weekly lesson page layout easy to navigate. If you have any suggestions to improve your learning experience or discover useful resources you want to share with future students, please let us know! <!--PLACEHOLDER-->
+We hope that you find the weekly lesson page layout easy to navigate. If you have any suggestions to improve your learning experience or discover useful resources you want to share with future students, [please let us know](https://github.com/Code-the-Dream-School/react-curriculum-v3/issues)!
 
 ### Final Project
 
