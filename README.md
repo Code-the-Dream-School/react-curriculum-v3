@@ -32,4 +32,4 @@ We are not currently taking any contributions until the course is completed - es
 
 ## Misc notes
 
-- all images should be use a markdown link and include descriptive text ![descriptive text](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-01/eslint-disable.png)
+- all images should be use a markdown link and include descriptive text `![descriptive text](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-01/eslint-disable.png)`
