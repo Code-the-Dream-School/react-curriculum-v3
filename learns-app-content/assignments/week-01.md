@@ -1,5 +1,8 @@
 ## Weekly Assignment Instructions
 
+>[!note]
+>We are building a todo app for the weekly assignments. You are welcome to code along with CTD Swag but that project will not be turned in.
+
 ### Expected App Capabilities
 
 After completing this week's assignment, your app should:
@@ -9,11 +12,11 @@ After completing this week's assignment, your app should:
 - starts up on port 5173 with no console errors or warnings
 - render a title and an unordered list of todos
 
-### Instructions Part 1: Repo Setup
+### Instructions Part 1: Repo Setup for the Todo App
 
 #### Create new public repo on GitHub
 
-- give a name and description
+- give it the name "todo-list" or something similar and description
 - don't add a .gitignore or a license
 - clone the repo to your local environment (this differs based on if you're using HTTPS, SSH, or GitHub Desktop. See [GitHub's documentation on remote repos](https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories) for more details.)
 - don't create a new branch yet - remain on `main` branch
