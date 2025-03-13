@@ -2,7 +2,7 @@
 name: Enhancement
 about: Suggest an idea for this curriculum
 title: ''
-labels: 'enhancement'
+labels: enhancement
 assignees: ''
 
 ---
