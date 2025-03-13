@@ -11,7 +11,14 @@
 
 ### react-router
 
-- [React Router Terminology (React Router docs)](https://reactrouter.com/en/main/start/concepts#definitions)
-- [React Router Feature Overview (react-router docs)](https://reactrouter.com/en/main/start/overview)
+- [React Router](https://reactrouter.com/home)
 - [A Complete Guide to React Router: Everything You Need to Know (ui.dev)](https://ui.dev/react-router-tutorial)
 - [react-router implementation Examples (GitHub)](https://github.com/remix-run/react-router/tree/dev/examples)
+
+---
+
+### General Concepts
+
+- [history stack (MDN)](https://developer.mozilla.org/en-US/docs/Web/API/History_API)
+- [In flow and out of flow - CSS: Cascading Style Sheets (MDN)](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_display/In_flow_and_out_of_flow)
+- [JavaScript Is Weird (EXTREME EDITION) (YouTube)](https://www.youtube.com/watch?v=sRWE5tnaxlI&t=25s)

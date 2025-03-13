@@ -3,7 +3,7 @@
 ### Limiting Network Requests
 
 > [!note]
-> The repo for this discussion topic can be found here: <!--PLACEHOLDER-->
+> The repo for this discussion topic can be found here: [ctd-ingredient-recipes (GitHub repo)](https://github.com/Code-the-Dream-School/ctd-ingredient-recipes)
 
 Taking a step back from CTD Swag for this topic, we need to discuss how to work efficiently with an API. To work through the next several sections, we'll use [Spoonacular's API](https://spoonacular.com/food-api) to update a simple recipe finder that searches for recipes based on ingredients. The app contains a form for the user to enter a search term. When submitted, a fetch request returns a list of results containing that ingredient. These results are shown as a list below the form. Each recipe title is linked to its source page that opens in a new tab.
 

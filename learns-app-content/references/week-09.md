@@ -10,3 +10,8 @@
 - [useCallback (React docs)](https://react.dev/reference/react/useCallback)
 - [Understanding useMemo and useCallback (Josh Comeau)](https://www.joshwcomeau.com/react/usememo-and-usecallback/)
 - [Mastering React Memo - YouTube](https://www.youtube.com/watch?v=DEPwA3mv_R8&t=1423s)
+
+### Repos and APIs Used
+
+- [ctd-ingredient-recipes (GitHub repo)](https://github.com/Code-the-Dream-School/ctd-ingredient-recipes)
+- [spoonacular recipe and food API](https://spoonacular.com/food-api)

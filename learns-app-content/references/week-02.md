@@ -2,7 +2,7 @@
 
 ### ReactDOM
 
-- [Client React DOM APIs (React docs)](https://react.dev/reference/react-dom/client)
+- [React DOM (React docs)](https://react.dev/reference/react-dom)
 - [createRoot (React docs)](https://react.dev/reference/react-dom/client/createRoot)
 
 ### Components
@@ -26,3 +26,11 @@
   - [Chrome Extension](https://chromewebstore.google.com/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?pli=1)
   - [Firefox Add-On](https://addons.mozilla.org/en-US/firefox/addon/react-devtools/)
   - [Using React Developer Tools with Safari and other browsers without plugins](https://react.dev/learn/react-developer-tools#safari-and-other-browsers)
+
+### General Concepts
+
+[Rest parameters - JavaScript (MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters)
+[data-* - HTML: HyperText Markup Language (MDN)](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*)
+[ARIA states and properties (attributes) - ARIA (MDN)](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes)
+[Object-oriented programming (MDN)](https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Advanced_JavaScript_objects/Object-oriented_programming)
+[Functional Programming 101](https://github.com/readme/guides/functional-programming-basics)

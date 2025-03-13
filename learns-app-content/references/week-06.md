@@ -20,5 +20,21 @@
 
 ### Testing React Components
 
+- [Getting Started (Vitest docs)](https://vitest.dev/guide/)
+- [Vi | (Vitest docs)](https://vitest.dev/api/vi.html)
+- [Testing Library](https://testing-library.com/)
+- [React Testing Library (Testing Library docs)](https://testing-library.com/docs/react-testing-library/intro/)
+- [Chai](https://www.chaijs.com/)
+- [Expect API (Jest docs)](https://jestjs.io/docs/expect)
 - [React Testing Library Tutorial (Robin Wieruch)](https://www.robinwieruch.de/react-testing-library/)
 - [Vitest with React Testing Library(Robin Wieruch)](https://www.robinwieruch.de/vitest-react-testing-library/)
+
+### General Concepts
+
+- [JavaScript module syntax (MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
+- [lorem ipsum (Wikipedia)](https://en.wikipedia.org/wiki/Lorem_ipsum)
+
+#### Accessibility
+
+- [Color Blindness: Types, Causes & Treatment (Cleveland Clinic)](https://my.clevelandclinic.org/health/diseases/11604-color-blindness) (accessibility)
+- [3 Common Color Accessibility Issues One Can Easily Avoid (Deque)](https://www.deque.com/blog/3-common-color-accessibility-issues-one-can-easily-avoid/)

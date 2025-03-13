@@ -16,3 +16,7 @@
 - [Preserving and Resetting State (React docs)](https://react.dev/learn/preserving-and-resetting-state)
 - [useState (React docs)](https://react.dev/reference/react/useState)
 - [State as a Snapshot (React docs)](https://react.dev/learn/state-as-a-snapshot)
+
+### General Concepts
+
+- [Destructuring (MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring)
