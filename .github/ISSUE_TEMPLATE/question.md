@@ -2,7 +2,7 @@
 name: Question
 about: Ask a question about this curriculum
 title: Question
-labels: 'correction'
+labels: correction
 assignees: ''
 
 ---
