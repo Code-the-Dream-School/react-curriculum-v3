@@ -1,5 +1,11 @@
 ## References and Further Reading
 
+### React Styling Libraries
+
+- [CSS Modules](https://github.com/css-modules/css-modules)
+- [Vite features > CSS Modules (Vite docs)](https://vite.dev/guide/features.html#css-modules)
+- [Styled Components](https://styled-components.com)
+
 ### Styling
 
 - General CSS Education
@@ -24,6 +30,9 @@
   - [styled-components docs](https://styled-components.com/docs)
   - [Styled Components Crash Course & Project (YouTube)](https://www.youtube.com/watch?v=02zO0hZmwnw)
   - [vscode-styled-components - VS Code Extension](https://marketplace.visualstudio.com/items?itemName=styled-components.vscode-styled-components)
+- Styling Methodologies
+  - [BEM (Block, Element, Modifier)](https://en.bem.info/methodology/quick-start/)
+  - [Scalable and Modular Architecture for CSS](https://smacss.com/)
 
 ### Including Graphic Elements
 
@@ -34,3 +43,8 @@
 [Sizing items in CSS (MDN)](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Sizing_items_in_CSS)
 [Images, media, and form elements - Sizing images (MDN)](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Images_media_form_elements#sizing_images)
 [vite-plugin-svgr - npm](https://www.npmjs.com/package/vite-plugin-svgr)
+
+## Misc
+
+- [Template literals (Template strings) (MDN)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)
+- [Tooling > Babel Plugin (styled-components docs)](https://styled-components.com/docs/tooling#babel-plugin)
