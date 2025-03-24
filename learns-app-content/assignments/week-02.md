@@ -5,7 +5,7 @@
 After completing this week's assignment, your app should:
 
 - Contain a TodoList component that contains all todo code
-- Contain a AddTodoForm component with
+- Contain a TodoForm component with
   - a non-functioning form with 1 input field and a submit button
 - Display a h1 heading, a todo entry form, and the todos we added last week
 
