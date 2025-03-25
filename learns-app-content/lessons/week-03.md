@@ -66,7 +66,7 @@ We'll know when the `setTimeout` fires off because of the console statement that
 
 `useState` is a React hook that allows us to set and update a piece of data that we can then use in our SPA. We invoke `useState` with an initial state value as an argument. That initial state value can be of any type. If given a function, it would be called an "initializer function" in that context. React will run it and use the returned value to set the initial state value. Initializer functions must be pure functions and cannot take any arguments. When called, `useState` returns an array containing a state variable (a reference to the current state) and an updater function. We follow array [destructuring assignment](https://javascript.info/destructuring-assignment) convention `const [noun, setNoun] = useState(intialState)` to make use of this hook.
 
-With `useState` explained, we can now start setting up CTD Swag's storefront. Let's get some inventory on the page! We first need to put together some sample inventory data for our app to start with. We want to be able to offer differing colors or versions for some products but without each having their own product card. We will eventually make use of `base-` and `variant-` prefixes to combine related products to a single product card in [[Week-05|week 5]] when we discuss conditional rendering. Each item should include `baseName`, `variantName`, `id` `price`, `baseDescription`, `variantDescription`, `image`, and `inStock` keys. Here's an example of several inventory items:
+With `useState` explained, we can now start setting up CTD Swag's storefront. Let's get some inventory on the page! We first need to put together some sample inventory data for our app to start with. We want to be able to offer differing colors or versions for some products but without each having their own product card. We will eventually make use of `base-` and `variant-` prefixes to combine related products to a single product card in when we discuss conditional rendering in week 5. Each item should include `baseName`, `variantName`, `id` `price`, `baseDescription`, `variantDescription`, `image`, and `inStock` keys. Here's an example of several inventory items:
 
 ```json
 {
@@ -106,7 +106,7 @@ With `useState` explained, we can now start setting up CTD Swag's storefront. Le
 
 ```
 
-A JSON file that includes a full starting inventory can be found here <!--PLACEHOLDER-->. We will use Vite's JSON import feature to access the inventory. Let's get some product names and descriptions onto the page!
+A JSON file that includes a full starting inventory can be [found here](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-03/inventory.json). We will use Vite's JSON import feature to access the inventory. Let's get some product names and descriptions onto the page!
 
 > [!note]
 > Note: Screen captures of the application using an older version of this JSON file. The newest version includes product variations that will be used in later lessons.
@@ -364,20 +364,20 @@ Along with the props that we can define on our own, React's common components fe
 #### Props for All Built-in Components
 
 - **children**: accepts a React node. Valid React nodes include custom or built-in components, array of React nodes, empty node (null, undefined), string, number, or a portal[^portal]. We'll cover children in more detail below.
-- **ref**: takes a reference object from useRef (covered in [[Code The Dream/Intro to React V3/Curriculum/Week-04|week 4]]) or createRef, or a callback that gets called when React renders the element.
-- **style**: takes an object defining CSS styles in property name/ property value pairs. All property names must be written in camelCase. Eg. `background-color` is written as `backgroundColor`. More in [[Code The Dream/Intro to React V3/Curriculum/Week-10#|week 10]].
+- **ref**: takes a reference object from useRef (covered in week 4) or createRef, or a callback that gets called when React renders the element.
+- **style**: takes an object defining CSS styles in property name/ property value pairs. All property names must be written in camelCase. Eg. `background-color` is written as `backgroundColor`. More in week 10.
 
 #### Props for Standard DOM Components
 
 - **className**: String. Replacement for html attribute `class`. Multiple classes can be added by using spaces between class names.
 - **htmlFor**: String. Primarily for `label` or `output` and is a replacement for html attribute `for`.
-- **on\* - (onBlur, onClick, onFocus, etc.)**: Takes a callback function. Event listener props are named after a specific event that they listen for on the element where they are used. More in [[Code The Dream/Intro to React V3/Curriculum/Week-04|week 4]]
+- **on\* - (onBlur, onClick, onFocus, etc.)**: Takes a callback function. Event listener props are named after a specific event that they listen for on the element where they are used. More in week 4.
 
 #### Props for DOM Components that Accept User Input
 
 > [!note]
 > These include `<input>`,`<textarea>`, etc.
-> We will cover these in depth when we start working with React controlled components and forms in [[Week-05|week 5]].
+> We will cover these in depth when we start working with React controlled components and forms in week 5.
 
 - **disabled**: Boolean. Prevents a user from interacting with element when true.
 - **value**: String: the text contents inside the element.
