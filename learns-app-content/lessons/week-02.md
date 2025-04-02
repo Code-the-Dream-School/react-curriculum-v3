@@ -166,7 +166,7 @@ Although a component is just a function, there are a few rules to follow when cr
 
 There are also a few best practices to follow:
 
-- Use PascalCase if the component name is multi-worded(eg - `BackButton`.
+- Use PascalCase if the component name is multi-worded(eg - `BackButton`).
 - Named or default exports[^avoid-anonymous] are both acceptable but should be consistent across the codebase. We recommend sticking with `default export SomeComponent`.
 - Each component should have its own file.
 - The file name should match the component name. Eg - `Header` component should go in a file named `Header.jsx`.
