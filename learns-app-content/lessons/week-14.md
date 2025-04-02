@@ -290,7 +290,7 @@ Transient state for the todo app includes:
 
 After establishing the data needed for the app, we need to start thinking about the visual layout. Sketching out pages and how they are broken down into components is often called wireframing. If you are comfortable with digital tools like [Figma](https://www.figma.com/) or [PenPot](https://penpot.app/), you can use them. If not, a pencil and some paper works fairly well. We'll start with the biggest elements which are each of the feature pages, and then divide them down into regions, grouping related elements together.
 
-![[Pasted image 20250311132346.png|700]]
+![Wire-frames of each todo list app page](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-14/wireframe.png)
 
  We can already identify 2 common components that are shared between features - the header and the navigation menu. Beyond that, each todo list tab and each todo are reusable components. The button to submit a new todo could potentially be re-used in the auth/login panel and a form to update user information. Account information will most likely consist of a form where a user can update their details. The about page will include descriptive text about todo app.
 
