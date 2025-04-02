@@ -11,14 +11,14 @@ The existing hooks can be broken down into several categories. We'll highlight t
 
 - **state** - stores information like user input that is used to help render components
   - `useState`: keeps track of a single, updatable value
-  - `useReducer`: used when there are a lot of values to track and update in a component - covered in [[Code The Dream/Intro to React V3/Curriculum/Week-11|Week-11]]
+  - `useReducer`: used when there are a lot of values to track and update in a component - covered in week 11
 - **context** - refers to a way to share data between components without having to pass props
-  - `useContext` allows a component to read and subscribe to a defined context - covered in [[Week-11]]
+  - `useContext` allows a component to read and subscribe to a defined context - covered in week 11
 - **effects**
-  - `useEffect`: allows us to run side effects like loading data or working with non-React page code - more in [[Code The Dream/Intro to React V3/Curriculum/Week-07|Week-07]]
+  - `useEffect`: allows us to run side effects like loading data or working with non-React page code - more in week 7.
 - **refs** - short for "reference" - they allow us to save and work with values that persist across renders but are not used for rendering
   - `useRef`: creates a `ref` that can hold a value or commonly to access a DOM node
-- **performance**: optimizes re-render performance by allowing unnecessary re-rendering to be skipped - more in [[Code The Dream/Intro to React V3/Curriculum/Week-09|Week-09]]
+- **performance**: optimizes re-render performance by allowing unnecessary re-rendering to be skipped - more in week 9.
   - `useMemo`: caches result of an expensive calculation
   - `useCallback`: caches a function definition between re-renders
 - **custom**: hooks created by the developer or imported from a 3rd party library to encapsulate re-usable logic - advanced topic not covered in this course
@@ -90,8 +90,8 @@ function TacoBuilder() {
         <button type="button" onClick={() => addOption('beef')}>
           Beef
         </button>
-        <button type="button" onClick={() => addOption('vegitarian')}>
-          Vegitarian
+        <button type="button" onClick={() => addOption('vegetarian')}>
+          Vegetarian
         </button>
       </div>
       <div className="cheeses">
@@ -118,7 +118,7 @@ function TacoBuilder() {
 }
 ```
 
-Object-based state value takes a similar approach. In the example below, the `CreatUserForm` component contains two input fields that are wired to listen to changes. Each time their contents change, they call `updateFirstName` or `updateLastName`. These functions use the `value` from the event object to determine the new value.
+Object-based state value takes a similar approach. In the example below, the `CreateUserForm` component contains two input fields that are wired to listen to changes. Each time their contents change, they call `updateFirstName` or `updateLastName`. These functions use the `value` from the event object to determine the new value.
 
 ```jsx
 //useState with an object
@@ -363,7 +363,7 @@ React includes an [exhaustive list](https://react.dev/reference/react-dom/compon
 
 #### Handler Composition Options
 
-React provides a great deal of flexibility when it comes to composing handler props and handler/callback functions in our applications. Creating a custom callback in the parent or the child are equally acceptable. To help with readability, it is common to prefix a custom function's name with "handle", as in `handleClick`, `handleUpdatePassword`, or `handleAddItemToCart`. This approach lets us know that data related to an event is being _handled_. The example below transforms a email address to all lowercase letters before it is passed to `setEmail`. It also prevents the default form behavior which is to trigger a page refresh.
+React provides a great deal of flexibility when it comes to composing handler props and handler/callback functions in our applications. Creating a custom callback in the parent or the child are equally acceptable. To help with readability, it is common to prefix a custom function's name with "handle", as in `handleClick`, `handleUpdatePassword`, or `handleAddItemToCart`. This approach lets us know that data related to an event is being handled. The example below transforms a email address to all lowercase letters before it is passed to `setEmail`. It also prevents the default form behavior which is to trigger a page refresh.
 
 ```jsx
 //setEmail is a state update function provided as a callback by the parent component
@@ -476,7 +476,7 @@ function removeItemFromCart(id) {
 
 There's a problem with this implementation… what if a user adds the same item to their cart twice? That would mean there is more than one item in the cart with the same `id`. As it's implemented, the `id` that's used would filter out all the inventory items with a matching `id`. That's not a desired behavior so we need to come up with a unique cart item identifier.
 
-We might employ `Math.random()` to generate a random number but this is not a great idea. [`Math.random`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random) only generates _pseudo-random_ numbers and we may end up with the identical id every once in a while. A better option would be the `Date.now()` method. This returns a number, in milliseconds from January 1, 1970, UTC. In production, we would probably use a UUID library but this works for our purposes. As we add an item into the cart, we'll assign it a `cartItemId` with the timestamp so we are better able to manage the cart.
+We might employ `Math.random()` to generate a random number but this is not a great idea. [`Math.random`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random) only generates pseudo-random numbers and we may end up with the identical id every once in a while. A better option would be the `Date.now()` method. This returns a number, in milliseconds from January 1, 1970, UTC. In production, we would probably use a UUID library but this works for our purposes. As we add an item into the cart, we'll assign it a `cartItemId` with the timestamp so we are better able to manage the cart.
 
 ```jsx
 //App.jsx

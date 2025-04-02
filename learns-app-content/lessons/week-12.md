@@ -24,7 +24,7 @@ This is the simpler of the two to work with since we implement the pagination ou
 - Page 3: items 41-60, offset = 40
 - ...and so on...
 
-To continue on with the discussion, we'll build out a phonebook. An SPA phonebook can have hundreds of entries stored locally, especially when we can take advantage of localStorage in the browser. For such an app, it's beneficial to implement data pagination with pagination controls in the UI. Here's an animated screen capture of the final interface in action:
+To continue on with the discussion, we'll build out a phonebook, Here is a link to the [completed demo app](https://github.com/Code-the-Dream-School/phonebook). An SPA phonebook can have hundreds of entries stored locally, especially when we can take advantage of localStorage in the browser. For such an app, it's beneficial to implement data pagination with pagination controls in the UI. Here's an animated screen capture of the final interface in action:
 
 ![Phonebook demo](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-12/phonebook-pagination.gif)
 
