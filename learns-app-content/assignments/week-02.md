@@ -67,7 +67,7 @@ Errors like list are common during development and help us out quite a bit. Make
   - a text input with an id of `todoTitle`
   - a button with the text "Add Todo"
 - Import the `TodoForm` into `App`
-- Place an instance of `AddTodoForm` between the heading and `TodoList`
+- Place an instance of `TodoForm` between the heading and `TodoList`
 
  The app should now look like:
 

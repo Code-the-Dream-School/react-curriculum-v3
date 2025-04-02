@@ -36,7 +36,7 @@ Go to the `TodoForm` and make the following changes:
 This is how `handleAddTodo` should look so far:
 
 ```jsx
-{/*extract from AddTodoForm.jsx*/}
+{/*extract from TodoForm.jsx*/}
 {/*...code*/}
 function handleAddTodo(event){
     event.preventDefault()
