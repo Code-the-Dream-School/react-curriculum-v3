@@ -363,8 +363,8 @@ Along with the props that we can define on our own, React's common components fe
 
 #### Props for All Built-in Components
 
-- **children**: accepts a React node. Valid React nodes include custom or built-in components, array of React nodes, empty node (null, undefined), string, number, or a portal[^portal]. We'll cover children in more detail below.
-- **ref**: takes a reference object from useRef (covered in week 4) or createRef, or a callback that gets called when React renders the element.
+- **children**: accepts a React node. Valid React nodes include custom or built-in components, array of React nodes, empty node (null, undefined), string, number, or a [portal](https://react.dev/reference/react-dom/createPortal). We'll cover children in more detail below.
+- **ref**: takes a reference object from `useRef` (covered in week 4) or `createRef`, or a callback that gets called when React renders the element.
 - **style**: takes an object defining CSS styles in property name/ property value pairs. All property names must be written in camelCase. Eg. `background-color` is written as `backgroundColor`. More in week 10.
 
 #### Props for Standard DOM Components
