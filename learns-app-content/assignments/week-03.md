@@ -35,7 +35,7 @@ At this point, the todo list in the browser should appear identical. However, if
 const [exampleStateValue, setExampleStateValue] = useState(42)
 ```
 
-- Between the `AddTodoForm` and the `TodoList`, add a paragraph and place the state value between its opening and closing tags.
+- Between the `TodoForm` and the `TodoList`, add a paragraph and place the state value between its opening and closing tags.
 
 The browser should render that `initialValue` between the form and the todo list.
 
