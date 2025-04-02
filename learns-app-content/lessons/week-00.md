@@ -19,7 +19,7 @@ The Intro to React v3 course consists of 13 weekly lessons and 2 project weeks f
 - **Week 13** introduces common tools and libraries that a React developer will need to know about
 - **Week 14-15** project time!
 
-One of the main requirements[^2] for graduation is that all weekly assignments must include a link to a [pull request (PR)](https://github.blog/developer-skills/github/beginners-guide-to-github-creating-a-pull-request/) that has been reviewed and approved by your assigned reviewer.
+One of the main requirements for graduation is that all weekly assignments must include a link to a [pull request (PR)](https://github.blog/developer-skills/github/beginners-guide-to-github-creating-a-pull-request/) that has been reviewed and approved by your assigned reviewer.
 
 The materials for the course is further broken down into a full list of topics covered each week. Every section is titled with their topics so that they double as useful search terms when looking for external resources.
 
@@ -60,7 +60,7 @@ The introduction will give you information about what you're going to learn that
 
 #### 2. Discussion
 
-In the discussion portion of each weekly lesson, we will explore each of the listed topics in depth. We will learn key techniques and best practices that developers employ while working with the topics presented. Many coding examples are from another project we'll watch come together: CTD's new eCommerce Store : CTD Swag[^1]. No coding for that project is required from you, but if you're interested, a repo for this project can be [found here](https://github.com/royemosby/ctd-swag).
+In the discussion portion of each weekly lesson, we will explore each of the listed topics in depth. We will learn key techniques and best practices that developers employ while working with the topics presented. Many coding examples are from another project we'll watch come together: CTD's new eCommerce Store : CTD Swag. No coding for that project is required from you, but if you're interested, a repo for this project can be [found here](https://github.com/royemosby/ctd-swag).
 
 #### 3. Weekly Assignment Instructions
 

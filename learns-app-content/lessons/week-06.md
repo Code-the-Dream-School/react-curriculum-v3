@@ -217,7 +217,7 @@ function App() {
 
 ### Organizing Files in a React Project
 
-We inevitably add more components and sometimes refactor out non-React code into its own file as a project grows. If we maintain a flat file structure - _everything is in `src/` and `src/assets/` in our case_ - the project becomes increasingly disorganized which makes it to be harder to find things or figure out how components relate to each other. In this section, we will discuss some considerations that go into determining the directory structure and organizing files for CTD Swag so we can continue to add functionality.
+We inevitably add more components and refactor out non-React code into separate files as a project grows. If we maintain a flat file structure as the file count increases, it become challenging to navigate codebase or to see how files relate. In this section, we will discuss some considerations that go into determining the directory structure and organizing files for CTD Swag so we can continue to add functionality.
 
 > [!note]
 > The internet hosts many discussions and even more opinions about how to structure software projects. What we provide is a sensible approach that works well with small to medium React projects. Some larger projects require structures tailored to the problems that they solve and features they implement. Other React projects using frameworks such as Next.js, Astro, Remix must adhere to rules prescribed by the framework since they tend to use specific directories for features such as page routing or asset management.
@@ -415,6 +415,9 @@ Our next task is to extract the cart's product item into `ProductItemCard`. We c
 
 We have a lot more code to work with than with the Footer component so we need to take an inventory if the details we need to account for during the conversion. Using a decision tree is an invaluable analytic technique that helps you recall everything that needs to be considered while extracting components. We start with the multi-step decision tree below as we look over each passage in the code. The end of each branch of the following decision tree includes a conclusion we can make about that portion of code.
 
+>[!note]
+>The flowchart below may have a sideways scroll bar, depending on your screen size.
+
 ```mermaid
 flowchart TD
     entry{is an element \nor contains props?}
@@ -596,7 +599,7 @@ Unit testing is a good place to start when introducing tests. Using Vite, it doe
 
 #### Introduction to Libraries Used
 
-We will be installing [Vitest](https://vitest.dev/guide/), [React Testing Library (abbreviated as RTL)](<https://testing-library.com/docs/react-testing-library/intro>. Vitest runs the codebase's tests and provides some handy, non-React specific tools to author tests including [Chai](https://www.chaijs.com/) and a few helper libraries. Vitest is a test runner library that also includes [Chai](https://www.chaijs.com/) assertions built in and assertions that are compatible with Jest's [expect API](https://jestjs.io/docs/expect). RTL provides APIs to work with React Components. It is built on top of the core [DOM Testing Library](https://testing-library.com/) which helps with querying and interacting with DOM nodes in an application.
+We will be installing [Vitest](https://vitest.dev/guide/), [React Testing Library (RTL)](https://testing-library.com/docs/react-testing-library/intro). Vitest runs the codebase's tests and provides some handy, non-React specific tools to author tests including [Chai](https://www.chaijs.com/) and a few helper libraries. Vitest is a test runner library that also includes [Chai](https://www.chaijs.com/) assertions built in and assertions that are compatible with Jest's [expect API](https://jestjs.io/docs/expect). RTL provides APIs to work with React Components. It is built on top of the core [DOM Testing Library](https://testing-library.com/) which helps with querying and interacting with DOM nodes in an application.
 
 There are a few common terms that need to be defined as they relate to our testing software:
 

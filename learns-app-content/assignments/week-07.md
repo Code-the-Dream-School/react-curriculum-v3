@@ -34,29 +34,29 @@ As you go through the setup and documentation, you'll save those values for the 
 - Your first steps is to [sign up for an Airtable account](https://airtable.com/signup). Once completed, follow the screenshots to set up your todo's base.
 - Choose the Create button at the bottom left and choose to start from scratch.
 
-![choose start from scratch[https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-07/start-scratch.png)
+![choose start from scratch](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-07/start-scratch.png)
 
 - Rename the table's default name of "Table 1" to "Todos" by clicking on the down arrow on Table 1's tab.
 - Save the table name to your environment file under the variable `VITE_TABLE_NAME`
 - Update the first field name so that it reads "title".
 - Delete the other fields.
 
-![hit down arrow and select edit field[https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-07/update-fields.png)
+![hit down arrow and select edit field](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-07/update-fields.png)
 
 - Create a new checkbox field named "isCompleted". This type of field acts a boolean.
 
-![add isCompleted field[https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-07/add-is-complete.png)
+![add isCompleted field](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-07/add-is-complete.png)
 
 #### Generate Connection Credentials
 
 - Click on profile picture to open menu.
 - Select "Builder hub"
 
-![navigate to builder hub[https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-07/builder-hub.png)
+![navigate to builder hub](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-07/builder-hub.png)
 
 - Select "Create new token".
 
-![create a new personal access token[https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-07/new-pat.png)
+![create a new personal access token](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-07/new-pat.png)
 
 - Give the token a name that you'll remember.
 - Add the scopes `data.records:read` and `data.records.write`
@@ -64,15 +64,15 @@ As you go through the setup and documentation, you'll save those values for the 
 - Hit "Save changes" Copy the token value that shows on the next screen
 - Save it to `VITE_PAT` in your environment file.
 
-![configure access token[https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-07/config-pat.png)
+![configure access token](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-07/config-pat.png)
 
 - We next have to find the base's id - one approach is to use the API documentation accessed from the base's help menu.
 
-![navigate to customized api documentation[https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-07/find-api-docs.png)
+![navigate to customized api documentation](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-07/find-api-docs.png)
 
 - After the introduction paragraphs, the documentation includes your personal base's id. Save that to `VITE_BASE_ID` in the environmental file.
 
-![documentation is customized to match base config[https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-07/custom-base-docs.png)
+![documentation is customized to match base config](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-07/custom-base-docs.png)
 
 Take some time to look over the documentation for Airtable. As you read it over, keep in mind that we will **not** be using Airtable's JavaScript API client. It does not provide anything useful for us in React so it's better to look at the `curl` examples. That'll let you see how the urls and payloads look. Some of the things you can do with the API are pretty cool! Go take a look!
 
@@ -244,7 +244,7 @@ After this, it's time to move on to the `catch` and `finally` blocks.
 
 At this point, the todo list should display a message while the API is loading the todos. Once the fetch resolves, it re-renders with the todo list (Or the original paragraph if 0 todos are loaded).
 
-![todo list displays loading message[https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-07/loading-message.gif)
+![todo list displays loading message](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-07/loading-message.gif)
 
 #### Display Error
 
@@ -324,7 +324,7 @@ const addTodo = async (newTodo) => {
 
 The updates you've made should flash a brief message on the button while the response processes:
 
-![saving message shows briefly on submit button[https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-07/saving-message.gif)
+![saving message shows briefly on submit button](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-07/saving-message.gif)
 
 ### Instructions Part 4: Update Functionality of Update and Complete Todo
 
@@ -398,7 +398,7 @@ At this point, the todo app should:
 3. Allow users to edit todos which will then update in Airtable.
 4. Display errors messages to the user if there are any fetch issues.
 
-![error displayed to user at bottom of screen[https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-07/error-message.png)
+![error displayed to user at bottom of screen](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-07/error-message.png)
 
 #### Update Functionality to Complete Todos
 

@@ -17,7 +17,7 @@ After completing this week's assignment, your app should:
 - Use the same timezones for everyone and set the timezone to GMT/UTC.
 - Set a default value of "Current date".
 
-![configure createTime field[https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-08/created-time-config.png)
+![configure createTime field](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-08/created-time-config.png)
 
 In App.jsx
 
@@ -79,7 +79,7 @@ const encodeUrl = ({ sortField, sortDirection }) => {
 
  If you are using ESLint, you should see a warning appear on your `useEffect:`
 
-![missing sortDirection and sortField dependencies[https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-08/missing-deps.png)
+![missing sortDirection and sortField dependencies](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-08/missing-deps.png)
 
 - Update the `useEffect`'s dependency array to include the state values, `sortDirection` and `sortField`. The `useEffect will now fire` each time a user sets the `sortDirection` and `sortField`.
 
@@ -98,7 +98,7 @@ You now need to provide the user with a way to update the params.
 - In `App`, import it and place a horizontal rule between TodoList instance and the div containing the error message display.
 - Below the `hr`, add an instance of `TodosViewForm`. The `hr` and `form` will show below the todos now:
 
-![sort form on bottom of todos[https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-08/todos-hr-sort-form.png)
+![sort form on bottom of todos](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-08/todos-hr-sort-form.png)
 
 - Into `TodosViewForm` instance, pass in the props `sortDirection`, `setSortDirection`, `sortField`, and `setSortField`.
 
@@ -118,7 +118,7 @@ Back over in `TodosViewForm` you'll wire up the form so that each time the user 
 
 At this point, the form should allow you to select either "Title" or "Time Added" and the API will automatically return the sorted todos and update the UI.
 
-![Time Added can be sorted ascending or descending[https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-08/time-sort.png)
+![Time Added can be sorted ascending or descending](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-08/time-sort.png)
 
 ### Instructions Part 3: Search Todo Titles
 
@@ -154,7 +154,7 @@ In this part, you'll add a search field an button to the form that was just crea
 
 Your user is now able to filter the todos based on an input that they then can also reset.
 
-![demo of todo list functionality[https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-08/search-demo.gif)
+![demo of todo list functionality](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-08/search-demo.gif)
 
 ### Closing Notes
 

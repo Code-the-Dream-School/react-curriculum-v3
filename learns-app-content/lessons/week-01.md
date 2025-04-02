@@ -30,7 +30,7 @@ Another key aspect of React is its use of a [Virtual DOM](https://legacy.reactjs
 ### App Installation
 
 > [!remember]
-> As mentioned during lesson 00, we will be working on two projects through this course. During the lessons, all coding examples are from CTD Swag, an eCommerce store. This is an optional code-along project that will not be turned in. The repo for [CTD Swag can be found here](https://github.com/royemosby/ctd-swag)
+> As mentioned during lesson 00, we will be working on two projects through this course. During the lessons, all coding examples are from CTD Swag, an eCommerce store. This is an optional code-along project that will not be turned in. The repo for [CTD Swag can be found here](https://github.com/Code-the-Dream-School/ctd-swag)
 
 To work with a React project, we must choose a build tool and server. One of the easiest ways to get started is using [Vite](https://vitejs.dev/guide/why.html) with a [React template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react). Vite is a modern build tool for frontend development that focuses on speed and simplicity. It is designed to provide a fast development experience and has a strong plugin ecosystem that has made it a popular tool in the JavaScript community. We'll look closer into Vite later after installing our app.
 
@@ -200,5 +200,5 @@ SPAs revolutionized web development by optimizing performance and user experienc
 
 With a library, we are in control of how its code is called. Libraries provide a toolset that we use by calling application programming interfaces (APIs) that they provide. Conversely, a framework defines how the application works then calls our code to configure its behavior and to determine what to include. They tend to be larger in scope and provide more programming tools for us to use.
 
-**Example UI libraries**: jQuery, Knockout, Preact, and React.
-**Example UI frameworks**: Angular, Astro, Ember, Next.js, Remix, and Vue.
+**Example UI libraries**: [jQuery](https://jquery.com/), [Knockout](https://knockoutjs.com/), [Preact](https://preactjs.com/), and [React](https://react.dev/).
+**Example UI frameworks**: [Angular](https://angular.dev/), [Astro](https://astro.build/), [Ember](https://emberjs.com/), [Next.js](https://nextjs.org/), [Remix](https://remix.run/), and [Vue](https://vuejs.org/).

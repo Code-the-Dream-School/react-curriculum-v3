@@ -1,27 +1,3 @@
 ## Weekly Assignment Instructions
 
-### Expected App Capabilities
-
-After completing this week's assignment, the app should be able to:
-
-- capability 1
-- capability 2
-- capability n
-
-### Instructions Part 1
-
-1. [ ] step 1
-2. [ ] step 2
-3. [ ] step n
-
-### Instructions Part 2
-
-1. [ ] step 1
-2. [ ] step 2
-3. [ ] step n
-
-### Instructions Part n
-
-1. [ ] step 1
-2. [ ] step 2
-3. [ ] step n
+This assignment is a work in progress with an estimated completion of April 14th. Please reach out to [Roy Mosby via Slack](https://codethedream.slack.com/team/U03KDBGK5M5) for details.

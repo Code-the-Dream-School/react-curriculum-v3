@@ -24,7 +24,7 @@ const encodeUrl = useCallback(()=>{},[])
 - Delete the utility function from the top of the file.
 - If you're using ESLint, it should be giving you the following warning about `useCallback` dependencies:
 
-![missing dependencies shown in eslint[https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-09/missing-deps.png)
+![missing dependencies shown in eslint](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-09/missing-deps.png)
 
 - Add these dependencies to the `useCallback` dependency array.
 - Search your App.jsx for all instances of `encodeUrl` then remove the arguments wherever the function is called. All calls to `encodeUrl` should look like: `encodeUrl()` since the `useCallback` handles all the dependencies now.
@@ -33,7 +33,7 @@ const encodeUrl = useCallback(()=>{},[])
 
 Sending a network request for every character typed can use up API and network resources.
 
-![each keypress sends a network request[https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-09/undebounced.gif)
+![each keypress sends a network request](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-09/undebounced.gif)
 
 Earlier the lesson, we covered throttling as a means to control how rapid an event fires. Another approach to controlling network requests, especially well-suited for keyboard events is debouncing. This prevents any events from being processed until they go below a certain rate. In the case of the todo list, you'll prevent keyboard events from updating the query string until they stop typing for a half a second (500ms).
 
@@ -60,7 +60,7 @@ In TodoListView.jsx:
     - Give it a delay of 500ms.
   - In `useEffect`'s return statement, add an anonymous function that calls `clearTimeout` that takes in `debounce`.
 
-![keystrokes debounced to 500 milliseconds[https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-09/debounced.gif)
+![keystrokes debounced to 500 milliseconds](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-09/debounced.gif)
 
 ### Closing Notes
 
