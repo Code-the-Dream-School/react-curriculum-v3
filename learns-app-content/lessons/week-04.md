@@ -374,14 +374,14 @@ function EmailInput({ setEmail }) {
     //prevents page refresh
     event.preventDefault();
     const lowerCaseEmail = emailInput.current.value.toLowerCase();
-    updateEmail(lowerCaseEmail);
+    setEmail(lowerCaseEmail);
   }
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        User Name:
+        Email:
         {/*assigning ref selects the element on the page*/}
-        <input type="text" ref={userNameInput} />
+        <input type="text" ref={emailInput} />
       </label>
       <button />
     </form>
