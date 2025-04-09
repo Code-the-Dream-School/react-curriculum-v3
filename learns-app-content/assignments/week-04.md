@@ -19,7 +19,7 @@ Refactor App with the following changes:
 - Change the `useState`'s `initialValue` to an empty array.
 - Between the `useState` and the return statement, create a handler function named `addTodo`
   - It takes an argument `title`
-  - Create a const `newTodo` with and object that uses `title`, and `id` as keys.
+  - Create a const `newTodo` with an object that uses `title`, and `id` as keys.
     - Set the `id` using `Date.now()`.
   - The handler then calls `setTodoList` passing in an array containing the destructured `todoList` and `newTodo`. It should look like: `setTodoList([...todoList, newTodo])`
 - Pass the function to an `onAddTodo` props on the `TodoForm` instance.
