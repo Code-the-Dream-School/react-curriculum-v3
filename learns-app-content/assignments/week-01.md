@@ -127,7 +127,7 @@ In the browser, you should have a list of 3 todos under the app's title:
 
 *Skip to **Instructions Part 4** if you are not interested in ESLint or Prettier.*
 
-#### Install ESLint into IDE (Stretch goal 1 of 2)
+#### Enable ESLint to Highlight Code Problems  (Stretch goal 1 of 2)
 
 - in VS Code, click on the extensions icon in the left-hand sidebar
 
@@ -137,16 +137,25 @@ In the browser, you should have a list of 3 todos under the app's title:
 
 ![screen capture of the VS Code extension search results for ESLint](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-01/eslint.png)
 
-- ESLint is already included in the project so the plugin should work without any configuration.
-- Take some time to review the `eslint.config.js` file already in the project. Documentation for the [ESLint plugin](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) and [ESLint library](https://eslint.org/) can explain most of the contents.
-- We recommend adding the following entries to the `rules` object:
+- You need to add another plugin package, eslint-plugin-react, for additional usefulReact linting rules:
+  - In the terminal, install it using `npm install eslint-plugin-react --save-dev`
+  - Go to `eslint.config.js` add the import statement `import react from 'eslint-plugin-react';` above the `reactHooks` import.
+  - In the second object in the exported array:
+    - Add a `settings` object: `settings: { react: { version: 'detect' } },`.
+    - This should be placed just above the `plugins` object.
+  - Add `react` to the `plugins` object, above `react-hooks: reactHooks`. *tip: You don't need to include a key/value pair like the other plugins.*
+  - Add the following to the `rules` below `...js.configs.recommended.rules,`
+    - `...react.configs.recommended.rules,`
+    - `...react.configs['jsx-runtime'].rules,`
+- Take some time to review the `eslint.config.js` file you just updated. Documentation for the [ESLint plugin](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) and [ESLint library](https://eslint.org/) can explain most of the contents.
+- Finally, we recommend adding the following entries to the `rules` object:
 
 ```js
 rules: {
         //...other rules
         'no-unused-vars': 'warn', //this changes the error to a warning
         'react/prop-types': 'off', //this suppresses warnings about not using prop-types
-        //other rultes...
+        //other rules...
 }
 ```
 
