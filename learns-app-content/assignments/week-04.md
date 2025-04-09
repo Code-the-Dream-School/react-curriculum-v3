@@ -15,22 +15,23 @@ After completing this week's assignment, your app should:
 Refactor App with the following changes:
 
 - Remove the paragraph tag and its contents from the return statement.
-- update the existing state value assignment to `todoList`, its updater function to `setTodoList`.
-- Change the `initialValue` passed to `useState` to an empty array.
-- Between the `useState` and the return statement, create a handler function named `handleAddTodo`
-  - It takes an argument `newTodo`
-  - It calls `setTodoList` containing an array containing the destructured `todoList` and `newTodo`
-  - The state update invocation should look like: `setTodoList([...todoList, newTodo])`
+- Rename the existing state value, `newTodo`, to `todoList` and the update function, `setNewTodo`, to `setTodoList`.
+- Change the `useState`'s `initialValue` to an empty array.
+- Between the `useState` and the return statement, create a handler function named `addTodo`
+  - It takes an argument `title`
+  - Create a const `newTodo` with and object that uses `title`, and `id` as keys.
+    - Set the `id` using `Date.now()`.
+  - The handler then calls `setTodoList` passing in an array containing the destructured `todoList` and `newTodo`. It should look like: `setTodoList([...todoList, newTodo])`
 - Pass the function to an `onAddTodo` props on the `TodoForm` instance.
 
 #### Adding an Event Handler to the Form
 
 Go to the `TodoForm` and make the following changes:
 
-- Add a `name` props with the value of "title" to the input tag.
+- On the `input` tag, add a `name` props with the value of "title".
 - Define a `handleAddTodo`function above the return statement:
-  - it takes an event object
-  - Call the event's `.preventDefault()` method in the first line of the function. This prevents the page from refreshing when a user clicks the Add Todo button.
+  - The function takes an `event` object
+  - Call the `event.preventDefault()` in the first line of the function to prevent the page from refreshing when a user clicks the Add Todo button.
 - Add a `console.dir(event.target)` - *we will use this console statement to figure out how to access the input value from the form*.
 
 This is how `handleAddTodo` should look so far:
@@ -40,7 +41,7 @@ This is how `handleAddTodo` should look so far:
 {/*...code*/}
 function handleAddTodo(event){
     event.preventDefault()
- console.dir(event.target)
+    console.dir(event.target)
 }
 {/*code continues...*/}
 ```
@@ -63,10 +64,10 @@ Since we added `name="title"` to the input's props, we can reference the input w
 
 ![object containing data about the todoTitle input](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-04/todoTitle-data.png)
 
-- Now that we know that we can access the input's value with `event.target.title.value`.
-- Back in the `handleAddTodo`, we remove the console statement and then create a new `const title = event.target.title.value`.
-- We can then invoke the state update function we got from the component's props and pass it the variable we just created.
-- To help the user out, we can then clear out the input by setting the input's value to an empty string. `event.target.title.value = ""`
+- The console statement shows that you can access the input's value with `event.target.title.value`.
+- Back in the `handleAddTodo`, remove the console and create a new `const title` and assign it the event target's title value.
+- Invoke `onAddTodo` that you get from the component's props and pass the `title` into the function's params.
+- To help the user out, you then clear out the input by setting the input's value to an empty string. `event.target.title.value = ""`
 
 #### Re-focus Input After Submit
 
