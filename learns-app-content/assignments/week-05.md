@@ -25,10 +25,6 @@ Your app should show the paragraph if the list is empty or the todos if the `tod
 
 Rather than deleting a todo item outright, we want to indicate it has been completed. We'll update the schema that the todos use and create a helper function that toggles the value when the user clicks a checkbox on the todo.
 
-<!-- ISSUE starts here -->
-
--
-
 - In `App`, update `newTodo` in the `addTodo` event handler with a new property called `isCompleted` and set it to `false`. Each todo should now consist of 3 properties: `title`, `id`, and `isCompleted`.
 - Create a helper function `completeTodo`. It:
   - takes an `id`
