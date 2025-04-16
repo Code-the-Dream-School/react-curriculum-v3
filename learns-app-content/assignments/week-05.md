@@ -97,14 +97,26 @@ Now, when a user clicks on the checkbox beside an item, that todo disappears fro
 
 ## Instructions Part 3: Convert Form to Controlled Component
 
+### Create Local State
+
 - import `useState` into `TodoForm`
-- create a `workingTodo` state variable with the accompanying state update function.
+- create a `workingTodoTitle` state variable with the accompanying state update function.
 - give the `useState` an initial value of an empty string.
-- update `handleAddTodo`
-  - remove the lines that reference the title's value from the event object
-    - hint: there's one that sets a `const title =` to its value and one line that sets it to an empty string
-  - update `newTodo` so that the `title` property references `workingTodo` instead of `title`
-  - after `onAddTodo`, call the working todo's state update function so that it sets it to an empty string. This will clear out the field where we were previously using `event.target.title.value`
+
+### Connect Form Input to Component State
+
+- to the `input` element in the form, add a `value` props set to `workingTodoTitle`.
+- add an `onChange` listener to the `input`.
+  - it should call an anonymous arrow function that takes in the event object.
+  - the anonymous function should call `setWorkingTodo` and pass in the event's target value.
+
+### Update `handleAddTodo`
+
+- change the function's `event` argument to `title`.
+- remove the lines that access the title's value from the event object
+  - hint: there's one that retrieves the value and one that sets the target's title `value` back to `""`
+- update `onAddTodo` so that it gets passed `workingTodoTitle` instead of `title`.
+- after `onAddTodo`, call the `setWorkingTodo` state update function with an empty string to reset the form input.
 
 ## Instructions Part 4: Disable Form Button when Input is Empty
 
@@ -112,8 +124,6 @@ We are pretty close to being complete for this week but there is one minor probl
 
 ![user is able to hit add todo even when input is empty](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-05/submit-enabled.gif)
 
- In `TodoForm`:
-
-- in the button element, add a `disabled` prop that evaluates to true when `workingTodo` is an empty string.
+- In `TodoForm`'s button element, add a `disabled` prop that evaluates to true when `workingTodo` is an empty string.
 
 ![submission button disabled when input is empty](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-05/submit-disabled.gif)
