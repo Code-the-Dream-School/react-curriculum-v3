@@ -34,8 +34,8 @@ Committing periodically allows us to set up a safe recovery point that we can ge
 
 You will be refactoring out the label and the input from the `TodoForm` so that we can re-use it to allow users to edit existing todos.
 
-- Inside of `src/shared` create a new file, `InputWithLabel.jsx`
-- Create a component `InputWithLabel`
+- Inside of `src/shared` create a new file, `TextInputWithLabel.jsx`
+- Create a component `TextInputWithLabel`
   - Add a label and an input that are wrapped in a React fragment to the return statement. Their props don't matter for now.
   - Add a default export to the bottom of the file.
 
@@ -60,7 +60,7 @@ We can reduce this list of props by combining `htmlFor` and `id` since they used
 - Assign the destructured props to the matching label props and input props. You will end up with a component that looks like:
 
 ```jsx
-{/*extract from TextInputWithTable.jsx*/}
+{/*extract from TextInputWithLabel.jsx*/}
 function TextInputWithLabel({
   elementId,
   label,
@@ -143,6 +143,7 @@ At this point, when you click on the todo in the list, it will toggle between be
 
 ![editing a todo](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-06/edit-todo.gif)
 
+- Create a new state variable, `workingTitle` and its associated state update function. Set the `initialValue` to `todo.title`
 - Create a `handleCancel` event helper that:
   - resets the `workingTitle` to `todo.tile`
   - sets `isEditing` state value to `false`
@@ -154,7 +155,6 @@ At this point, when you click on the todo in the list, it will toggle between be
 
 ##### Create Local State and Controlled Form
 
-- Add another state variable, `workingTitle` and its associated state update function. Set the `initialValue` to `todo.title`
 - Create a `handleEdit` event helper that:
   - takes an `event` argument
   - uses the `event.target.value` to update the `workingTitle` state value
