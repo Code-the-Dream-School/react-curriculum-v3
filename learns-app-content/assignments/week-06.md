@@ -202,7 +202,14 @@ Also, don't forget that this week contains 2 coding assignments. Continue on dow
 
 ### Submission #2 - Diagnose Failed Tests
 
-This second submission deals with testing. You will clone a CTD repo that has several failing tests. Your task will be to update the code so that the tests pass. The repo can be found here: [Code-the-Dream-School/multicalc-tests: RTL and Vitest testing for Intro to React v3](https://github.com/Code-the-Dream-School/multicalc-tests). The instructions to install the repo and run the tests can be found in the repo's readme. Once all tests pass, commit your code.
+This second submission deals with testing. You will clone a CTD repo that has several failing tests. Your task will be to update the code so that the tests pass. The repo can be found here: [Code-the-Dream-School/multicalc-tests: RTL and Vitest testing for Intro to React v3](https://github.com/Code-the-Dream-School/multicalc-tests). The instructions to install the repo and run the tests can be found in the repo's readme.
+
+#### Submitting the Assignment
+
+1. Work through the tests, fixing the code so that the tests fail. Don’t make any changes to the test files - !!
+2. Once all your tests pass, publish your working branch to GitHub.
+3. Open a PR as you would normally.
+4. DM a link to the PR to your reviewer AND the React CIL.
 
 #### Stretch Goal for Testing (optional)
 
