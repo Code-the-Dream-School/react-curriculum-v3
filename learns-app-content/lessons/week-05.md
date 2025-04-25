@@ -669,7 +669,7 @@ function ControlledComponent({ formState, setFormState }) {
   const [input2, setInput2] = useState('');
   useEffect(() => {
     setInput1(formState.input1);
-    setInput(formState.input2);
+    setInput2(formState.input2);
   }, [formData]);
   function handleSubmit(event) {
     event.preventDefault();
