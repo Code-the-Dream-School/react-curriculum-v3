@@ -88,7 +88,7 @@ Each todo should now have a checkbox. When the checkbox is clicked, the helper f
 
 In `TodoList`, we need to filter out the completed todos before we map the todos to `TodoListItem` instances.
 
-- create a constant `filteredTodoList` that contains `todoList` that has been filtered to remove any whose `.isCompleted` property is not `true`
+- create a constant `filteredTodoList` that contains the `todoList` that has been filtered to remove any todo whose `.isCompleted` property is `true`
 - replace the `todoList` references in the JSX with the `filteredTodoList`
 
 Now, when a user clicks on the checkbox beside an item, that todo disappears from the list.
@@ -112,7 +112,6 @@ Now, when a user clicks on the checkbox beside an item, that todo disappears fro
 
 ### Update `handleAddTodo`
 
-- change the function's `event` argument to `title`.
 - remove the lines that access the title's value from the event object
   - hint: there's one that retrieves the value and one that sets the target's title `value` back to `""`
 - update `onAddTodo` so that it gets passed `workingTodoTitle` instead of `title`.
