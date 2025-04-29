@@ -115,15 +115,16 @@ While still in App.jsx:
   - Give it an empty dependency array.
   - In the body of the function in `useEffect`'s first argument do the following:
     - Define an async anonymous arrow function that takes no arguments and save it to `fetchTodos`
+    - Make sure to call `fetchTodos()` before closing out the `useEffect`'s first argument.
 
 So far, it should look like:
 
 ```jsx
 {/*extract from App.jsx*/}
 {/*...code*/}
-useEffect((
-    const fetchTodos = async () => {}
-) => {
+useEffect(() => {
+    const fetchTodos = async () => {};
+    fetchTodos();
 }, [])
 {/*code continues...*/}
 ```
