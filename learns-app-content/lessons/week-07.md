@@ -274,7 +274,7 @@ We can then update the JSX with the new button. `fetchDog` can be passed to the 
 
 Let's get back to CTD and load the product list in from the API.
 
-A copy of the backend API can be found in <!--PLACEHOLDER-->. Instructions on how to set up and run the server are found in the project's readme. You will need to have a postgres database running locally - plenty of guides to set this up can be found online - choose one for your specific operating system.
+A copy of the backend API can be found in here: [Code-the-Dream-School/ctd-swag-backend](https://github.com/Code-the-Dream-School/ctd-swag-backend). Instructions on how to set up and run the server are found in the project's readme. You will need to have a postgres database running locally - plenty of guides to set this up can be found online - choose one for your specific operating system.
 
 > [!warning]
 > Avoid putting API or authentication data directly into an application. These values, referred to as environmental variables, change between environments (local, staging, production, etc.) and some information such as credentials or API tokens are sensitive information that we do not want to publish with our repo. It's very difficult to remove these values out of version control history if accidentally committed!
