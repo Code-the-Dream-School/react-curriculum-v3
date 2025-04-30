@@ -38,7 +38,7 @@ As you go through the setup and documentation, you'll save those values for the 
 
 - Rename the table's default name of "Table 1" to "Todos" by clicking on the down arrow on Table 1's tab.
 - Save the table name to your environment file under the variable `VITE_TABLE_NAME`
-- Update the first field name so that it reads "title".
+- Update the first field name so that it reads "title" instead of "Title".
 - Delete the other fields.
 
 ![hit down arrow and select edit field](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/assignments/assets/week-07/update-fields.png)
