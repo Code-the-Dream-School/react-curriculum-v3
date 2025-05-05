@@ -715,7 +715,7 @@ const paramsObj = {
 }
 ```
 
-Don't forget to coerce the text into numbers if they are meant to be used in any calculations. JavaScript does this for us but it's a convenience that is falling out of favor because of TypeScript's growing popularity and a few bizarre [coercion rules](https://www.youtube.com/watch?v=sRWE5tnaxlI&t=25s) that can cause bugs.
+Don't forget to coerce the text into numbers if they are meant to be used in any calculations. JavaScript does this for us but it's a convenience that is falling out of favor because of TypeScript's growing popularity and a few bizarre coercion rules that can cause bugs.
 
 Returning to CTD-Swag's products route, we can see that if a browser's URL bar contains the following: `http://localhost:5173/products/3e41a7cb-63d3-4e4f-a576-a27cc9953e3a`. Our Route's path props takes `"/products/:id"` . We can tell that when using `useParams` will result in an object that looks something like:
 
