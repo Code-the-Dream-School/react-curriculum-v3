@@ -266,6 +266,19 @@ In part 3, you'll use an pessimistic state update approach for adding todos. You
 In App:
 
 - Create state value`isSaving` with a `defaultValue` of false. You will need its update function too.
+- In the add todo button
+  - Replace the button text with a ternary block that evaluates `isSaving`.
+    - If true, display "Saving..."
+    - If `false`, display "Add Todo" or the text value you were already using.
+
+It should now look like:
+
+```jsx
+<button disabled={isButtonDisabled}>
+    {isSaving ? 'Saving...' : 'Add Todo'}
+</button>
+```
+
 - Update `addTodo(newTodo)`:
   - Convert it to an async function.
   - Inside the function body...
