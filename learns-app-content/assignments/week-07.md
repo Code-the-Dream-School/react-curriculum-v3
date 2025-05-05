@@ -378,7 +378,7 @@ const payload = {
       - Update state with `setTodoList([...updatedTodos]);`
   - `catch` block:
     - Log the error to console.
-    - Update `errorMesage` using the ``setErrorMessage(`${error.message}. Reverting todo...`);``
+    - Update `errorMessage` using the ``setErrorMessage(`${error.message}. Reverting todo...`);``
     - Create a `revertedTodos` using the `originalTodo` to reset that todo's value to a previous state.
     - Update state with `setTodoList([...revertedTodos]);`
   - `finally` block:
