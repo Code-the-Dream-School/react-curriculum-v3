@@ -1,9 +1,5 @@
 ## Discussion Topics
 
-### Deploying an App
-
-*Work in progress...*
-
 ### Snapshot of the React Ecosystem
 
 #### Frameworks that Use React
