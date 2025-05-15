@@ -435,7 +435,7 @@ Our shopping cart looks pretty good but there are a few improvements that can be
 
 ![updating cart at mechanicalkeyboards.com](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-05/keyboard-switch.gif)
 ![updating cart at louisianapantry.com](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-05/lousiana-pantry.gif)
-Currently, the state value, `cart`, is just an array that lists the cart's contents. We want to update `cart` so it creates only one list item for each unique product. The product, in turn, contains data about how times it's been added to the cart using `itemCount`. We can remove `cartItemId` property and then resume using the item's id as a key in the cart's list. An example cart item now looks like:
+Currently, the state value, `cart`, is just an array that lists the cart's contents. We want to update `cart` so it creates only one list item for each unique product. The product, in turn, contains data about how many times it's been added to the cart using `itemCount`. We can remove `cartItemId` property and then resume using the item's id as a key in the cart's list. An example cart item now looks like:
 
 ```js
 //typical `cart` item
