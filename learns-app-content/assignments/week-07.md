@@ -231,7 +231,7 @@ After this, it's time to move on to the `catch` and `finally` blocks.
 
 - The `catch` block:
   - Takes in an error parameter.
-  - Use `setIsErrorMessage` with `error.message` to set an error message that we will display to the user shortly.
+  - Use `setErrorMessage` with `error.message` to set an error message that we will display to the user shortly.
 - The `finally` bock:
   - Set the `isLoading` state value back to false.
 
