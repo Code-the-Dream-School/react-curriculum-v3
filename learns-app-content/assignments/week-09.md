@@ -49,7 +49,7 @@ The best way to balance UI performance and keeping API calls down is to prevent 
 
 You'll combine the use of a useEffect and a setTimeout with a 500ms delay. Remember that a useEffect's return value is used to clean up after the previous useEffect as the component re-renders. To take advantage of React's re-render process you can use the cleanup function to delete the previous timeout each time there's a change. When a user pauses typing long enough, the last called setTimeout will finally get a chance to execute it's callback function. That callback function will pass the locally managed state back up to the App component which finally kicks off a fetch request with updated query params.
 
-In TodoListView.jsx:
+In TodosViewForm.jsx:
 
 - Define a local state for the search input and set its `defaultValue` to `queryString`: `const [localQueryString, setLocalQueryString] = useState(queryString);`
 - Refactor the search input and the Clear button to use the local state instead of the `queryString` and `setQueryString,` from App.
