@@ -1,7 +1,7 @@
 ## Weekly Assignment Instructions
 
-1. submission #1 - code updates to refactor project
-2. submission #2 - diagnose 3-4 failed tests, stretch goal: write a test for a component
+1. submission URL #1 - code updates to refactor project
+2. submission URL #2 - diagnose 3-4 failed tests, stretch goal: write a test for a component
 
 ### Submission #1 - Todo App
 
@@ -208,8 +208,8 @@ This second submission deals with testing. You will clone a CTD repo that has se
 
 1. Work through the tests, fixing the code so that the tests fail. Don’t make any changes to the test files - !!
 2. Once all your tests pass, publish your working branch to GitHub.
-3. Open a PR as you would normally.
-4. DM a link to the PR to your reviewer AND the React CIL.
+3. Open a PR on your own cloned repo, not CTD's.
+4. Include the PR link as the *second URL* on the assignment submission form.
 
 #### Stretch Goal for Testing (optional)
 
