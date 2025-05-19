@@ -92,8 +92,12 @@ You now need to provide the user with a way to update the params.
   - Add a `label` containing the text "Sort by".
   - Add a `select` element that is associated with that label
   - Give the `select` element 2 `option` elements:
-  - 1st: value="title" and includes the text, "Title"
-  - 2nd: value="createdTime and includes the text "Time added"
+    - 1st: value="title" and includes the text, "Title"
+    - 2nd: value="createdTime and includes the text "Time added"
+  - Add another `label` containing "Direction" just after the previous label and select.
+  - Add another `select` with `option` elements for:
+    - "Ascending" using "asc" for the value
+    - "Descending" using "desc" for the value
 - Default export the component.
 - In `App`, import it and place a horizontal rule between TodoList instance and the div containing the error message display.
 - Below the `hr`, add an instance of `TodosViewForm`. The `hr` and `form` will show below the todos now:
@@ -105,16 +109,19 @@ You now need to provide the user with a way to update the params.
 Back over in `TodosViewForm` you'll wire up the form so that each time the user updates the options, the state updates will cause the `useEffect` to automatically fetch from Airtable.
 
 - Destructure `sortDirection`, `setSortDirection`, `sortField`, and `setSortField` out of the component's props.
-- On the `select`element:
+- On `select`element for the sort by:
   - Add an `onChange`handler:
     - Its callback is an anonymous function that:
       - Takes the event object
       - Calls `setSortField` with the event target's value.
   - Add a `value` props and assign it to `sortField`.
   - Ensure that each `option`'s value matches the target field names.
-- To prevent the page from refreshing if the user hits enter, define a function `preventRefresh`:
-  - It only prevents the default behavior on an event object.
-  - pass it to an `onSubmit` props on the `form` element.
+- On the `select` element for the sort direction:
+  - Add an `onChange` handler that uses an anonymous function that:
+    - Takes the event object
+    - Calls `setSortDirection` with the event target's value.
+- To define a function `preventRefresh` whose only job is to prevent the page from refreshing if a user accidentally hits enter while working with this form.
+- pass it to an `onSubmit` props on the `form` element.
 
 At this point, the form should allow you to select either "Title" or "Time Added" and the API will automatically return the sorted todos and update the UI.
 
