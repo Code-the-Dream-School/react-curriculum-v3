@@ -37,15 +37,11 @@ All of the state update functions listed above are referenced at least once some
 
 #### The Reducer Pattern
 
-The reducer pattern changes our approach to coordinating state updates in complex applications. In a broader software engineering context, a reducer refers to a design pattern that focuses on updating data by communicating events to a centralized function that makes all of t.
+The reducer pattern changes our approach to coordinating state updates in complex applications. In a broader software engineering context, a "reducer" is a design pattern that communicates events to a centralized function that performs all of the state updates in an app. It consists 3 key elements that work in concert to make state updates.
 
-This pattern consists 3 key elements that each work together to coordinate state updates.
-
-- a **reducer** function
-- **dispatch** functions
-- **actions** (can be of any type but conventionally an object)
-
-A reducer function operates on a collection of data elements, such an array or object, by applying update logic to produce an output. They centralize the logic needed to manage state values. We communicate with the reducer using compact dispatch functions. A dispatch's only job is to relay details about a user action to the reducer function.
+- **reducer function**: centralizes the logic needed to return updated state based on an `action` passed to it
+- **action**: data that contains details that reducer uses to make state updates. It can of any data type, but it's most commonly an object containing a `type` and an optional `value` property.
+- **dispatch function**: used to dispatch(as in _send_, not _kill_) an action to the reducer function.
 
 ```javascript
 //example reducer and dispatches
@@ -90,7 +86,9 @@ dispatch({ type: 'reset' });
 ```
 
 > [!note]
-> The code example above is non-functional. The dispatch function provided by the library or tool we adopt. The library also calls the reducer with the required inputs. For CTD-Swag, we will be using the `useReducer` hook.
+> The code example above is non-functional but illustrates how those 3 elements work together. For CTD-Swag, we will be using the `useReducer` hook to help wire these to our app's state.
+
+#### Inversion of Control
 
 Up until now, we have focused on making state updates by processing events inside of event handlers and helper functions For example when a user adds a product to the cart:
 
