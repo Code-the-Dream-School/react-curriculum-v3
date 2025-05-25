@@ -152,7 +152,7 @@ In this part, you'll add a search field an button to the form that was just crea
   - A label containing the text "Search todos:"
   - An input with props:
   - `type="text"`
-  - `value={valueString}`
+  - `value={queryString}`
   - `onChange((e)=> {setQueryString(e.target.value)`
   - A button:
   - Set to the type of button.
