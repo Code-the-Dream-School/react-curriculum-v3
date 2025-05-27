@@ -25,7 +25,7 @@ All of the migration work will be from the App component since that is where all
 - Declare an `initialState` constant and assign it an object.
   - Add a property in this new object for each of the states you are going to combine.
   - Assign them the values that were passed into `useState` for their initial value. (eg: `todoList: [],`).
-- Export `intialState` using a named export at the bottom of the file.
+- Export `initialState` using a named export at the bottom of the file.
 
 #### Actions
 
@@ -71,16 +71,22 @@ const actions = {
 - Add a `case` clause for each action in the actions object. Fore each clause:
   - Return an object that contains the destructured `state`
 
-Each case should just return state unchanged. There is also no need to add a `break` statement since the clause returns a new state.
+Each case should just return state unchanged. There is also no need to add a `break` statement since the clause returns a new state. Your reducer should look similar to the code below:
 
 ```js
 // extract from todos.reducer.js
 //...code
+
+function reducer(state = initialState, action) {
   switch (action.type) {
     case actions.fetchTodos:
       return {
         ...state,
       };
+    case actions.loadTodos:
+      return {
+        ...state,
+      };****
 //code continues...
 ```
 
@@ -93,35 +99,48 @@ Each case should just return state unchanged. There is also no need to add a `br
 
 Related actions: `fetchTodos`, `loadTodos`, `setLoadError`.
 
-- In the reducer, update the `case` clause `actions.fetchTodos` so that it sets the `isLoading` property on the new state to `true`.
+- In the reducer, update the `case` clause `actions.fetchTodos`
+  - Add the `isLoading` property to returned state object and set it to `true`.
 - Update `actions.loadTodos` clause:
   - Move the logic that maps each record from `records` into a todo.
-  - Update the `...records.map` from the moved over code to use `...action.records.map`
+  - Update the `...records.map` to use `...action.records.map`
   - Update the returned state object:
-    - Set `todoList` property to the resulting mapped array
-    - Set `isLoading` state property back to false.
+    - Add a `todoList` property and assign the resulting mapped array
+    - Add `isLoading` and set it to false.
 - Update the `actions.setLoadError` clause's state object:
-  - set `errorMessage` to `action.error.message`
-  - set `isLoading` to `false`
+  - Add `errorMessage` using `action.error.message`
+  - Add `isLoading` set to `false`
 
 #### addTodo (Pessimistic UI)
 
 Related actions: `startRequest`, `addTodo`, `endRequest`, `setLoadError`
 
-- Update the `actions.startRequest` clause's state object to set `isSaving` to `true`.
+- Update the `actions.startRequest` clause's state object so that `isSaving` is `true`.
 - Update `actions.addTodo` clause:
-  - Move the logic that creates `savedTodo` and adds the `isCompleted` property when Airtable omits it from the record.
-  - Update the state object:
-    - Use a new array containing the destructured `state.todoList` and `savedTodo` to update the `todoList` property.
-    - Set `isSaving` to `false`
-- Update the `actions.endRequest` state to update `isLoading` and `isSaving` to `false`.
-- Update the `actions.setLoadError` state:
+  - Copy over the logic that creates `savedTodo` and adds the `isCompleted` property when Airtable omits it from the record.
+  - Update the returned state object:
+    - Add a `todoList` property containing a new array destructuring `state.todoList` and `savedTodo`.
+    - Add `isSaving` set to `false`
+- Update the `actions.endRequest` clause's state to set `isLoading` and `isSaving` to `false`.
+- Update the `actions.setLoadError` clause's state:
   - `errorMessage: action.error.message`
   - `isLoading: false`
 
 #### updateTodo, completeTodo (Optimistic UI)
 
 Related actions: `updateTodo`, `completeTodo`, `revertTodo`
+
+- Copy the logic that updates the todo to the `actions.updateTodo` clause.
+  - Use `action.editedTodo` wherever you used `updateTodo`'s argument.
+  - Create a `const updatedState = {}` and destructure `state` and `updatedTodos` into it.
+  - If there is an `error` property on the `action` object, add an `errorMessage` property onto `updatedTodos` set to `action.error.message`.
+  - At the end of the clause, return the updated state.
+- Copy the logic that completes a todo into `completeTodo` clause.
+  - Replace `id` with `action.id` wherever the original `completeTodo` uses its argument.
+  - Return the state with the `updatedTodos` destructured into the `todoList` property.
+- The logic for `revertTodo` should be the same as `updateTodo.
+  - If yes: make sure that the `revertTodo` case is written directly above `updateTodo` and remove the return statement. This will cause the action to fall through to the `updateTodo` case.
+  - If they differ, copy the logic over and apply the same update patterns that we have gone through several times.
 
 #### Dismiss Error Button
 
@@ -142,12 +161,12 @@ import {
 //code continues...
 ```
 
-- Call `useReducer` using `todosReducer` and `intialTodoState`.
+- Call `useReducer` using `todosReducer` and `initialTodoState`.
   - Assign the state variable to `todoState` and the dispatch function to `dispatch`
 
 ### Instructions Part 5: Replace State and Logic with Action Dispatches
 
-For each action that was defined, you need to replace the state update logic in App with a dispatch.
+For each action that was defined, you need to replace the state update logic in App with a dispatch. If you ended up with differing actions, make sure that you take that into account as you are making the shift over to dispatched actions.
 
 #### useEffect
 
@@ -174,7 +193,7 @@ Related actions: `startRequest`, `addTodo`, `endRequest`, `setLoadError`
 
 Related actions: `updateTodo`, `completeTodo`, `revertTodo`
 
-- Replace `upodatedTodos` and `setTodoList` with a dispatch to update the todo. Include the `editedTodo` on the action object.
+- Replace `updatedTodos` and `setTodoList` with a dispatch to update the todo. Include the `editedTodo` on the action object.
 - Remove the unneeded logic that updates the todo list with the updated todo. Hint: since updating a todo is an optimistic process, you do not have to do anything with the API response unless it includes an error.
 - In the `catch block` dispatch a `revertTodo` that includes the `originalTodo`.
 - Swap out state logic in `completeTodo` on your own.
