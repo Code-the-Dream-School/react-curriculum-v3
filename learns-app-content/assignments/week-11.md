@@ -164,8 +164,6 @@ import {
 - Call `useReducer` using `todosReducer` and `initialTodoState`.
   - Assign the state variable to `todoState` and the dispatch function to `dispatch`
 
-<!-- FIXME matches part 3 -->
-
 ### Instructions Part 5: Replace State and Logic with Action Dispatches
 
 For each action that was defined, you need to replace the state update logic in App with a dispatch. If you ended up with differing actions, make sure that you take that into account as you are making the shift over to dispatched actions.
