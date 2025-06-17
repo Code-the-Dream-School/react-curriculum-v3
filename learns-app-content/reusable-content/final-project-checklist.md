@@ -29,11 +29,11 @@
     - [ ] `node_modules`
     - [ ] `dist`
     - [ ] `*.local` (this covers the `.env.local` file you use for secrets)
-    - [ ] `.DS_Store`
+    - [ ] `.DS_Store` (invisible file for folder attributes used by macOS)
   - [ ] index.html - the only changes permitted are in the `<head></head>`
     - [ ] 3rd-party stylesheets are permitted if used in conjunction with an installed library. All other styling should be in src/
   - [ ] package.json
-  - [ ] package-lock.json`
+  - [ ] package-lock.json
   - [ ] vite.config.js
   - [ ] README.md which includes:
     - [ ] Project title and description
@@ -44,7 +44,7 @@
 - [ ] Root should NOT contain:
   - [ ] node_modules/
   - [ ] .env.local or any other file with sensitive information
-  - [ ] Any component files other than App.jsx and main.jsx
+  - [ ] Any component files
   - [ ] any Yarn artifacts
 - [ ] `public/` - the favicon can be changed but this directory should not be used
 - [ ] `src/` directory contains at minimum:
