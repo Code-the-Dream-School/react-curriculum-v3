@@ -12,7 +12,7 @@ After completing this week's assignment, your app should:
 
 - Install React-Router into the project using the terminal: `npm install react-router@~7.2.0`
   - Note: It's important to include the tilde and the version number with React Router since it gets updated frequently.
-- In main.jsx, wrap the App instance with BrowserWrapper imported from react-router.
+- In main.jsx, wrap the App instance with BrowserRouter imported from react-router.
 
 #### Refactor App
 
@@ -115,8 +115,8 @@ Example of how the buttons and span may look:
 
 #### Protect against Invalid URL Parameters
 
-- Disable the Previous button if the `currentPage` is the first page using the `disabled` props: `disabled={currentPage === totalPages}`
-- Disable the Next button when the last page is reached.
+- Disable the Previous button if the `currentPage` is the first page using the `disabled` props: `disabled={currentPage === 1}`
+- Disable the Next button when the last page is reached: `disabled={currentPage === totalPages}`
 - Create a `useEffect` that examines the `currentPage`:
   - If it is not a valid number (eg: "moose"), less than 1, or greater than `totalPages`, programmatically navigate to `"/"`
   - Add `currentPage`, `totalPages`, and `navigate` to the dependency array.
