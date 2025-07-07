@@ -51,13 +51,13 @@ The reducer pattern changes our approach to coordinating state updates in comple
 const reducer = (state, action) => {
   switch (action.type) {
     case 'increment':
-      return { count: state.count + 1 };
+      return { ...state, count: state.count + 1 };
     case 'decrement':
-      return { count: state.count - 1 };
+      return { ...state, count: state.count - 1 };
     case 'add':
-      return { count: state.count + action.value };
+      return { ...state, count: state.count + action.value };
     case 'reset':
-      return { count: 0 };
+      return { ...state, count: 0 };
     default:
       return state;
   }
