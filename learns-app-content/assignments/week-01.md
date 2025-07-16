@@ -9,7 +9,7 @@ After completing this week's assignment, your app should:
 
 - be in a version controlled directory linked to a GitHub repo
 - use Vite's React template using JavaScript (no TS or SWC)
-- starts up on port 5173 with no console errors or warnings
+- start with no console errors or warnings
 - render a title and an unordered list of todos
 
 ### Instructions Part 1: Repo Setup for the Todo App
