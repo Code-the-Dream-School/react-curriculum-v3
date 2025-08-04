@@ -31,6 +31,8 @@ After completing this week's assignment, the student's app should:
 - [ ] TodoList:
   - [ ] destructures the todo list from props
   - [ ] removes the statically defined todos list and updates the map to use the version from props
+- [ ] TodoForm:
+  - [ ] useRef used inside the submit handler function to refocus on input after user submits todo
 
 ## Details to Watch For
 
