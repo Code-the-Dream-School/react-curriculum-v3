@@ -1,9 +1,9 @@
 ## Weekly Assignment Instructions
 
-1. submission URL #1 - code updates to refactor project
-2. submission URL #2 - diagnose 3-4 failed tests, stretch goal: write a test for a component
+1. assignment URL #1 - code updates to refactor project
+2. assignment URL #2 - diagnose 3-4 failed tests, stretch goal: write a test for a component
 
-### Submission #1 - Todo App
+### Assignment #1 - Todo App
 
 #### Expected App Capabilities
 
@@ -200,16 +200,18 @@ At this point, we've created a solid [MVP](https://www.geeksforgeeks.org/minimum
 
 Also, don't forget that this week contains 2 coding assignments. Continue on down below to work with testing!
 
-### Submission #2 - Diagnose Failed Tests
+### Assignment #2 - Diagnose Failed Tests
 
-This second submission deals with testing. You will clone a CTD repo that has several failing tests. Your task will be to update the code so that the tests pass. The repo can be found here: [Code-the-Dream-School/multicalc-tests: RTL and Vitest testing for Intro to React v3](https://github.com/Code-the-Dream-School/multicalc-tests). The instructions to install the repo and run the tests can be found in the repo's readme.
+For the second assignment, you'll fork a repo containing several failing tests. Your task will be to update the code so that the tests pass. The repo can be found here: [Code-the-Dream-School/multicalc-tests: RTL and Vitest testing for Intro to React v3](https://github.com/Code-the-Dream-School/multicalc-tests). The instructions to install the repo and run the tests can be found in the repo's readme file.
 
 #### Submitting the Assignment
 
-1. Work through the tests, fixing the code so that the tests fail. Don’t make any changes to the test files - !!
+*Make sure that both the PR for your todo app and the testing assignment before submitting.*
+
+1. Work through the tests, fixing the code so that the tests fail. *Don’t make any changes to the test files!*
 2. Once all your tests pass, publish your working branch to GitHub.
 3. Open a PR on your own cloned repo, not CTD's.
-4. Include the PR link as the *second URL* on the assignment submission form.
+4. Include the PR link for the tests as the second URL on the assignment submission form.
 
 #### Stretch Goal for Testing (optional)
 
