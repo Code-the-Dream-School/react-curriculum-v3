@@ -145,7 +145,7 @@ At this point, when you click on the todo in the list, it will toggle between be
 
 - Create a new state variable, `workingTitle` and its associated state update function. Set the `initialValue` to `todo.title`
 - Create a `handleCancel` event helper that:
-  - resets the `workingTitle` to `todo.tile`
+  - resets the `workingTitle` to `todo.title`
   - sets `isEditing` state value to `false`
   - there is no need to include an argument
 - Add a button below the `TextInputWithLabel` component:
