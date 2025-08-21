@@ -274,7 +274,7 @@ In App:
 It should now look like:
 
 ```jsx
-<button disabled={isButtonDisabled}>
+<button disabled={workingTodoTitle.trim() === ''}>
     {isSaving ? 'Saving...' : 'Add Todo'}
 </button>
 ```
