@@ -4,9 +4,9 @@
 
 After completing this week's assignment, the student's app should:
 
-- now contain 5 component files (main, App, TodoForm, TodoList, TodoListItem)
-- render each static todo in a TodoListItem component
-- contain a paragraph that uses a value controlled by state
+- [ ] now contain 5 component files (main, App, TodoForm, TodoList, TodoListItem)
+- [ ] render each static todo in a TodoListItem component
+- [ ] contain a paragraph that uses a value controlled by state
 
 ## Technical Details
 

@@ -4,9 +4,9 @@
 
 After completing this week's assignment, the student's app should:
 
-- allow users add a todo
-- retain the `input`'s focus when a todo is submitted with the button or enter key
-- render entered todos in a list
+- [ ] allow users add a todo
+- [ ] retain the `input`'s focus when a todo is submitted with the button or enter key
+- [ ] render entered todos in a list
 
 ## Technical Details
 
