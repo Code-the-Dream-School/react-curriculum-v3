@@ -38,7 +38,7 @@ After completing this week's assignment, the student's app should:
     - [ ] manages `isSaving`
   - [ ] `completeTodo` behaves similar to `updateTodo` but only sets `isCompleted` to true
 - [ ] TodoList
-  - [ ] should use the `isLoading` props to conditionally render a paragraph or a loading message.
+  - [ ] should use the `isLoading` prop to conditionally render a paragraph or a loading message.
 - [ ] TodoListItem
   - [ ] includes a `useEffect`
     - [ ] includes `todo` in deps array.
