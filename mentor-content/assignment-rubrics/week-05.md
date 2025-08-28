@@ -4,10 +4,10 @@
 
 After completing this week's assignment, the student's app should:
 
-- conditionally render a message when the todo list is empty
-- disable the Add Todo button when the input is empty
-- allow users to complete a todo
-- utilize a controlled form
+- [ ] conditionally render a message when the todo list is empty
+- [ ] disable the Add Todo button when the input is empty
+- [ ] allow users to complete a todo
+- [ ] utilize a controlled form
 
 ## Technical Details
 

@@ -7,9 +7,9 @@
 
 After completing this week's assignment, the student's app should:
 
-- be organized by feature and shared components
-- use the same label and input on new todo form and edit todo
-- allow the user to edit their todo's title
+- [ ] be organized by feature and shared components
+- [ ] use the same label and input on new todo form and edit todo
+- [ ] allow the user to edit their todo's title
 
 ## Technical Details
 
