@@ -93,7 +93,7 @@ curl "https://api.airtable.com/v0/app8c6VR6IQ26pgKP/Todos?maxRecords=3&view=Grid
 
 ### Instructions Part 2 : Load Todos from Airtable
 
-Your app be updated to load the todos from Airtable and update the UI using a pessimistic update approach. While the todos are loading, you'll display a wait message to the user.
+You will be updating your app to load the todos from Airtable and adopting a pessimistic update approach. While the todos are loading, you'll display a wait message to the user.
 
 In App.jsx:
 
