@@ -41,7 +41,7 @@ After completing this week's assignment, the student's app should:
   - [ ] should use the `isLoading` props to conditionally render a paragraph or a loading message.
 - [ ] TodoListItem
   - [ ] includes a `useEffect`
-    - [ ] includes  `todo` in deps array.
+    - [ ] includes `todo` in deps array.
     - [ ] that resets the `workingTitle` back to the original value derived from `title` props.
 
 ## Details to Watch For
