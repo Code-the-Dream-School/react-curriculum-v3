@@ -1,4 +1,4 @@
-# Assignment Rubric, Week 7
+# Assignment Rubric, Week 07
 
 >[!note]
 >Students are using Airtable as an API. Don't ask to borrow the student's credentials! You should set up an Airtable base that matches the specs of the lesson and then use your own credentials in an .env.local file.

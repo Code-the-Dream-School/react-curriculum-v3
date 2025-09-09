@@ -1,4 +1,4 @@
-# Assignment Rubric, Week 6
+# Assignment Rubric, Week 06
 
 >[!note]
 >This week includes 2 student assignments. This rubric is only for the todo list.
