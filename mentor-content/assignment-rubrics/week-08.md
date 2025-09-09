@@ -9,11 +9,17 @@ After completing this week's assignment, the student's app should:
 
 ## Technical Details
 
-- [ ] detail 1
+- [ ] Fetch todos from the API and display them in the app.
+- [ ] Implement sorting functionality for todos by `title` and `createdTime` using the API.
+- [ ] Implement search functionality to filter todos by title using the API.
+- [ ] Ensure API requests handle loading and error states gracefully.
+- [ ] Update the UI based on sorting and search results.
 
 ## Details to Watch For
 
-- [ ] detail 1
+- [ ] Sorting and search are both accessible via the UI (e.g., dropdowns, input fields)
+- [ ] No duplicate todos displayed after API operations
+- [ ] Edge cases (e.g., empty search results, API errors) are handled gracefully
 
 ## Code Hygiene Recommendations
 
