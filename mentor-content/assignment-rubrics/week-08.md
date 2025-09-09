@@ -1,4 +1,4 @@
-# Assignment Rubric, Week nn
+# Assignment Rubric, Week 08
 
 ## Expected App Capabilities
 
