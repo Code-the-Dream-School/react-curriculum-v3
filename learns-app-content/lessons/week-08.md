@@ -46,10 +46,7 @@ useEffect(() => {
         throw new Error(resp.status);
       }
       const products = await resp.json();
-      const sortedProducts = sortByBaseName({
-        productItems: products,
-        isSortAscending: true,
-      });
+      const sortedProducts = sortByBaseName(products);
       setInventory([...sortedProducts]);
     } catch (error) {
       console.error(error);
