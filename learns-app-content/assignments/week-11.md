@@ -214,11 +214,11 @@ Related actions: `updateTodo`, `completeTodo`, `revertTodo`
   - [ ] If you introduce a misspelling to the API's URL, do you get the expected errors from each user action?
   - [ ] If you misspell your personal access token (restart the app every time you change your environment file) do you get the expected errors?
 
-### Stretch Goal: Refactor Remaining App-maintained State
+### Stretch Goal(optional): Refactor Remaining App-maintained State
 
 The remaining state in App deals with the URL's query params. For additional practice, migrate the remaining state to the reducer that you've already created.
 
-```
+```jsx
 //remaining state in App:
 const [sortDirection, setSortDirection] = useState('desc');
 const [sortField, setSortField] = useState('createdTime');
