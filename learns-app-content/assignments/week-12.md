@@ -10,8 +10,7 @@ After completing this week's assignment, your app should:
 
 ### Instructions Part 1: Implement React-Router
 
-- Install React-Router into the project using the terminal: `npm install react-router@~7.2.0`
-  - Note: It's important to include the tilde and the version number with React Router since it gets updated frequently.
+- Install React-Router into the project using the terminal: `npm install react-router`
 - In main.jsx, wrap the App instance with BrowserRouter imported from react-router.
 
 #### Refactor App
