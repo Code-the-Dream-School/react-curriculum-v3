@@ -1,5 +1,6 @@
-
 # Final Project Checklist
+
+> **⚠️ Important:** Your final project must be an application of your own creation. **A todo list application is not an acceptable final project**, as it closely resembles the practice exercises from the curriculum. Choose a unique project idea that demonstrates your understanding of React concepts.
 
 ## General
 
@@ -102,7 +103,7 @@
 - [ ] Application starts without errors.
 - [ ] On loading, application performs a network request or interacts a browser storage mechanism to retrieve data used in app.
   - [ ] Loading status is displayed to user in UI.
-  - [ ] *Reviewers need to be able to access whatever resource is used with minimal setup!*
+  - [ ] _Reviewers need to be able to access whatever resource is used with minimal setup!_
     - [ ] Any publicly accessible APIs used must be open for anonymous use or free to sign up for.
     - [ ] If a local server is used:
       - [ ] **Warning: mentors will not be able to assist with troubleshooting any server issues** so this option is best for those with adequate experience!
