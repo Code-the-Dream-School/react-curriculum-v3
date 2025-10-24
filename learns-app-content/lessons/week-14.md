@@ -108,7 +108,7 @@ Over the past 13 weeks, we've discussed React's major features and techniques to
 - [ ] Application starts without errors.
 - [ ] On loading, application performs a network request or interacts a browser storage mechanism to retrieve data used in app.
   - [ ] Loading status is displayed to user in UI.
-  - [ ] *Reviewers need to be able to access whatever resource is used with minimal setup!*
+  - [ ] _Reviewers need to be able to access whatever resource is used with minimal setup!_
     - [ ] Any publicly accessible APIs used must be open for anonymous use or free to sign up for.
     - [ ] If a local server is used:
       - [ ] **Warning: mentors will not be able to assist with troubleshooting any server issues** so this option is best for those with adequate experience!
@@ -146,7 +146,7 @@ Over the past 13 weeks, we've discussed React's major features and techniques to
 
 #### Finding an Idea
 
-During the final 2 weeks of this course, you will create a React app from scratch! **This must be a project of your own creation** - not a replica or enhancement of the todo list we've been using for practice. This project will demonstrate that you understand all the basic concepts of working with React to build an SPA. 
+During the final 2 weeks of this course, you will create a React app from scratch! **This must be a project of your own creation** - not a replica or enhancement of the todo list we've been using for practice. This project will demonstrate that you understand all the basic concepts of working with React to build an SPA.
 
 **Important:** The todo list application we've been working on throughout the course is **NOT an acceptable final project**. It was used as a teaching tool, and your final project should showcase your ability to apply React concepts to a unique application idea.
 
@@ -204,7 +204,7 @@ Going back to the enhanced todo list, we can identify several relations between 
 - **One** user can have **many** todo lists, but a list can only be owned by one user: one to many
 - **One** todo list can have **many** todos, but a todo can only belongs one todo list. one to many
 - **Many** users can have **many** todo lists. Since users don't interact or share todo lists the app does not need to address a "many users" relation. This relationship commonly employs a "join" table that does nothing more than connect a `userId` to a `todoListId`. This sort of relation often appears in social apps or where there are many users using a single platform collaboratively.
-- **Many** todos can have only **one** todo list. And **many** todo lists can have only **one** user. This is just an awkward way of saying a todo (no matter how *many* of them are in the system) can only belong to a single todo list and that a todo list can only belong to a single user. Just like the many to many relationship, these relations often appear in social apps.
+- **Many** todos can have only **one** todo list. And **many** todo lists can have only **one** user. This is just an awkward way of saying a todo (no matter how _many_ of them are in the system) can only belong to a single todo list and that a todo list can only belong to a single user. Just like the many to many relationship, these relations often appear in social apps.
 - A **one** to **one** relation doesn't exist in the todo app.
 
 The relationships found in the todo list app can be expressed in the form of an [ER](https://www.geeksforgeeks.org/introduction-of-er-model/) (entity relation) diagram:
@@ -296,7 +296,7 @@ After establishing the data needed for the app, we need to start thinking about 
 
 ![Wire-frames of each todo list app page](https://raw.githubusercontent.com/Code-the-Dream-School/react-curriculum-v3/refs/heads/main/learns-app-content/lessons/assets/week-14/wireframe.png)
 
- We can already identify 2 common components that are shared between features - the header and the navigation menu. Beyond that, each todo list tab and each todo are reusable components. The button to submit a new todo could potentially be re-used in the auth/login panel and a form to update user information. Account information will most likely consist of a form where a user can update their details. The about page will include descriptive text about todo app.
+We can already identify 2 common components that are shared between features - the header and the navigation menu. Beyond that, each todo list tab and each todo are reusable components. The button to submit a new todo could potentially be re-used in the auth/login panel and a form to update user information. Account information will most likely consist of a form where a user can update their details. The about page will include descriptive text about todo app.
 
 It's very tempting to go in to minute detail when building a wireframe but only expend the time necessary to better understand how the interface can be broken down into components. You can refine this into a full design prior to starting active work on the app but it will be up to you how detailed it is.
 
