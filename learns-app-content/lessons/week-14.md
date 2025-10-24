@@ -146,7 +146,11 @@ Over the past 13 weeks, we've discussed React's major features and techniques to
 
 #### Finding an Idea
 
-During the final 2 weeks of this course, you will create a React app from scratch! This project will demonstrate that you understand all the basic concepts of working with React to build an SPA. While coming up with idea for your project, make sure that it is complex enough to meet all of the project requirements but small enough to complete in 2 weeks. For reference, the todo list that we have been working is on easy side but the CTD-Swag storefront is much more complex.
+During the final 2 weeks of this course, you will create a React app from scratch! **This must be a project of your own creation** - not a replica or enhancement of the todo list we've been using for practice. This project will demonstrate that you understand all the basic concepts of working with React to build an SPA. 
+
+**Important:** The todo list application we've been working on throughout the course is **NOT an acceptable final project**. It was used as a teaching tool, and your final project should showcase your ability to apply React concepts to a unique application idea.
+
+While coming up with an idea for your project, make sure that it is complex enough to meet all of the project requirements but small enough to complete in 2 weeks. For reference, the todo list that we have been working on is on the easy side but the CTD-Swag storefront is much more complex.
 
 If you don't have any app ideas yet, doing an internet search for "React application ideas", "front end projects" or anything along those lines will land numerous lists of app ideas to consider. However, some of the best ideas come from your personal experience though. It could help with some hobby or occupation, be entertaining like a game or puzzle, or solve some other challenge that you are interested in.
 

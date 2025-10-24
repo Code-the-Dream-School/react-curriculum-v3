@@ -1,6 +1,8 @@
 
 # Final Project Checklist
 
+> **⚠️ Important:** Your final project must be an application of your own creation. **A todo list application is not an acceptable final project**, as it closely resembles the practice exercises from the curriculum. Choose a unique project idea that demonstrates your understanding of React concepts.
+
 ## General
 
 - [ ] Uses a public Github repo.
