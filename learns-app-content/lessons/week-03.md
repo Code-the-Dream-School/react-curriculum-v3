@@ -300,9 +300,9 @@ function ProductList({inventory}) {
     <ul>
       {inventory.map((item) => {
         return (
-          <ItemCard
+          <ProductCard
             key={item.id}
-            name={item.baseName
+            name={item.baseName}
             description={item.baseDescription}
           />
         );
@@ -317,12 +317,12 @@ export default ProductList;
 ```jsx
 /*ProductCard.jsx*/
 
-function ProductCard({ baseName, baseDescription }) {
+function ProductCard({ name, description }) {
   return (
     <li>
       <div className="itemCard">
-        <h2>{props.baseName}</h2>
-        <p>{props.baseDescription}</p>
+        <h2>{name}</h2>
+        <p>{description}</p>
       </div>
     </li>
   );
